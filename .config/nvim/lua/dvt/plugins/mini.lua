@@ -415,13 +415,20 @@ return { -- Collection of various small independent plugins/modules
 ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 ]]
+    local mini_pick = {
+      { name = 'Browser', action = require('mini.files').open, section = 'Mini' },
+      { name = 'Files', action = 'Pick files', section = 'Mini' },
+      { name = 'Help', action = 'Pick help', section = 'Mini' },
+      { name = 'Grep', action = 'Pick grep_live', section = 'Mini' },
+      { name = 'Old Files', action = require('mini.extra').pickers.oldfiles, section = 'Mini' },
+    }
     local starter = require 'mini.starter'
     starter.setup {
       header = days[os.date '%w'],
       footer = footer,
       items = {
         starter.sections.recent_files(10, false, false),
-        starter.sections.telescope(),
+        mini_pick,
         starter.sections.builtin_actions(),
       },
       content_hooks = {
