@@ -38,7 +38,7 @@ return { -- Collection of various small independent plugins/modules
     {
       '<leader>/',
       function()
-        require('mini.extra').pickers.buf_lines { scope = 'current' }
+        require('mini.pick').registry.buf_lines { scope = 'current' }
       end,
       desc = '[/] Fuzzily search in current buffer',
     },
@@ -80,7 +80,7 @@ return { -- Collection of various small independent plugins/modules
     {
       '<leader>sh',
       function()
-        require('mini.pick').builtin.help()
+        require('mini.pick').builtin.help { default_split = 'vertical' }
       end,
       desc = '[S]earch [H]elp',
     },
@@ -593,8 +593,119 @@ return { -- Collection of various small independent plugins/modules
       delay = {
         busy = 1,
       },
-      mappings = {},
+
+      mappings = {
+        caret_left = '<Left>',
+        caret_right = '<Right>',
+
+        choose = '<CR>',
+        choose_in_split = '<C-h>',
+        choose_in_vsplit = '<C-v>',
+        choose_in_tabpage = '<C-t>',
+        choose_marked = '<C-CR>',
+
+        delete_char = '<BS>',
+        delete_char_right = '<Del>',
+        delete_left = '',
+        delete_word = '',
+
+        mark = '',
+        mark_all = '<C-a>',
+
+        move_down = '<Down>',
+        move_start = '<C-g>',
+        move_up = '<Up>',
+
+        paste = '<C-p>',
+
+        scroll_down = '<C-d>',
+        scroll_left = '<C-Left>',
+        scroll_right = '<C-Right>',
+        scroll_up = '<C-u>',
+
+        stop = '<Esc>',
+
+        toggle_info = '<Tab>',
+        toggle_preview = '',
+
+        send_to_quickfix = {
+          char = '<C-q>',
+          func = function()
+            local mappings = MiniPick.get_picker_opts().mappings
+            vim.api.nvim_input(mappings.mark_all .. mappings.choose_marked)
+          end,
+        },
+      },
+
+      options = {
+        use_cache = true,
+      },
+
+      window = {
+        config = function()
+          local height = math.floor(0.618 * vim.o.lines)
+          local width = math.floor(0.618 * vim.o.columns)
+          return {
+            anchor = 'NW',
+            height = height,
+            width = width,
+            row = math.floor(0.5 * (vim.o.lines - height)),
+            col = math.floor(0.5 * (vim.o.columns - width)),
+          }
+        end,
+        prompt_prefix = '󰁔 ',
+        prompt_cursor = ' 󰁍',
+      },
     }
+
+    -- Setup mini.pick highlight groups
+    local dracula = require('dracula').colors()
+    vim.api.nvim_set_hl(0, 'MiniPickBorder', { fg = dracula.purple, bg = 'bg' })
+    vim.api.nvim_set_hl(0, 'MiniPickBorderText', { fg = 'fg', bg = 'bg' })
+    vim.api.nvim_set_hl(0, 'MiniPickPrompt', { fg = dracula.purple, bg = 'bg' })
+    vim.api.nvim_set_hl(0, 'MiniPickMatchRanges', { fg = dracula.green, bg = 'bg' })
+
+    -- Show highlight in buf_lines picker
+    -- See https://github.com/echasnovski/mini.nvim/discussions/988#discussioncomment-10398788
+    local ns_digit_prefix = vim.api.nvim_create_namespace 'cur-buf-pick-show'
+    local show_cur_buf_lines = function(buf_id, items, query, opts)
+      if items == nil or #items == 0 then
+        return
+      end
+
+      -- Show as usual
+      MiniPick.default_show(buf_id, items, query, opts)
+
+      -- Move prefix line numbers into inline extmarks
+      local lines = vim.api.nvim_buf_get_lines(buf_id, 0, -1, false)
+      local digit_prefixes = {}
+      for i, l in ipairs(lines) do
+        local _, prefix_end, prefix = l:find '^(%s*%d+│)'
+        if prefix_end ~= nil then
+          digit_prefixes[i], lines[i] = prefix, l:sub(prefix_end + 1)
+        end
+      end
+
+      vim.api.nvim_buf_set_lines(buf_id, 0, -1, false, lines)
+      for i, pref in pairs(digit_prefixes) do
+        local opts = { virt_text = { { pref, 'MiniPickNormal' } }, virt_text_pos = 'inline' }
+        vim.api.nvim_buf_set_extmark(buf_id, ns_digit_prefix, i - 1, 0, opts)
+      end
+
+      -- Set highlighting based on the curent filetype
+      local ft = vim.bo[items[1].bufnr].filetype
+      local has_lang, lang = pcall(vim.treesitter.language.get_lang, ft)
+      local has_ts, _ = pcall(vim.treesitter.start, buf_id, has_lang and lang or ft)
+      if not has_ts and ft then
+        vim.bo[buf_id].syntax = ft
+      end
+    end
+
+    MiniPick.registry.buf_lines = function()
+      local local_opts = { scope = 'current', preserve_order = true } -- use preserve_order
+      -- local local_opts = { scope = 'current' }
+      MiniExtra.pickers.buf_lines(local_opts, { source = { show = show_cur_buf_lines } })
+    end
 
     -- Open LSP picker for the given scope
     ---@param scope "declaration" | "definition" | "document_symbol" | "implementation" | "references" | "type_definition" | "workspace_symbol"
@@ -623,10 +734,23 @@ return { -- Collection of various small independent plugins/modules
         if #opts.items == 1 then
           vim.cmd.cfirst()
         else
-          require('mini.extra').pickers.list(
-            { scope = 'quickfix' },
-            { source = { name = opts.title } }
-          )
+          require('mini.extra').pickers.list({ scope = 'quickfix' }, {
+            source = { name = opts.title },
+            window = {
+              config = function()
+                local height = math.floor(0.618 * vim.o.lines)
+                local width = math.floor(0.618 * vim.o.columns)
+                return {
+                  relative = 'cursor',
+                  anchor = 'NW',
+                  height = height,
+                  width = width,
+                  row = 0,
+                  col = 0,
+                }
+              end,
+            },
+          })
         end
       end
 
