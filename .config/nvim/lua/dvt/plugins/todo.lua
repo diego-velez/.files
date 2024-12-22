@@ -18,11 +18,6 @@ return {
       end,
       desc = 'Next [t]odo comment',
     },
-    {
-      '<leader>st',
-      ':TodoTelescope<CR>',
-      desc = 'Search [T]odo',
-    },
   },
   opts = { signs = true },
 }
