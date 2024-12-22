@@ -83,7 +83,7 @@ alias config 'git --git-dir=$HOME/.files/ --work-tree=$HOME'
 alias rumad "ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=ssh-rsa estudiante@rumad.uprm.edu"
 
 # PATH
-set -U fish_user_paths $(go env GOPATH)/bin $HOME/.local/bin
+set -U fish_user_paths $(go env GOPATH)/bin $HOME/.local/bin $HOME/.cargo/bin
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
