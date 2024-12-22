@@ -71,6 +71,17 @@ return { -- Collection of various small independent plugins/modules
       desc = '[S]earch [F]iles',
     },
     {
+      '<leader>sc',
+      function()
+        require('mini.pick').builtin.files(nil, {
+          source = {
+            cwd = vim.fn.stdpath 'config',
+          },
+        })
+      end,
+      desc = '[S]earch [C]onfig',
+    },
+    {
       '<leader>sk',
       function()
         require('mini.extra').pickers.keymaps()
