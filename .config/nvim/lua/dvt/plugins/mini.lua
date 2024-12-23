@@ -897,5 +897,9 @@ return { -- Collection of various small independent plugins/modules
         delay = 0,
       },
     }
+
+    -- NOTE: Start mini.cursorword configuration
+    require('mini.cursorword').setup()
+    vim.api.nvim_set_hl(0, 'MiniCursorword', { link = 'LspReferenceText' })
   end,
 }
