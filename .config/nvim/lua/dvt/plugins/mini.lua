@@ -104,6 +104,8 @@ return { -- Collection of various small independent plugins/modules
     },
   },
   config = function()
+    local dracula = require('dracula').colors()
+
     -- NOTE: Start mini.icons configuration
     require('mini.icons').setup()
 
@@ -236,7 +238,7 @@ return { -- Collection of various small independent plugins/modules
       local lsp = MiniStatusline.section_lsp { trunc_width = 75 }
       local filename = MiniStatusline.section_filename { trunc_width = 140 }
 
-      local fileinfo, fileinfo_hl = section_fileinfo { trunc_width = 75 }
+      local fileinfo, icon_hl = section_fileinfo { trunc_width = 75 }
       local location = '%2l:%-2v'
       local search = MiniStatusline.section_searchcount { trunc_width = 75 }
 
@@ -289,21 +291,30 @@ return { -- Collection of various small independent plugins/modules
       local mode_hl_colors = vim.api.nvim_get_hl(0, { name = mode_hl, link = false })
       local mode_hl_invert = invertHighlightGroup(mode_hl, mode_hl_colors)
 
-      -- Apparently, my default Statusline highlight group colors -> guifg=#abb2bf guibg=#191a21
-      vim.api.nvim_set_hl(0, 'MiniStatuslineDevinfo', { fg = '#ABB2BF', bg = '#191A21' })
-      local dev_hl_colors = vim.api.nvim_get_hl(0, { name = 'MiniStatuslineDevinfo', link = false })
-      local dev_hl_invert = invertHighlightGroup('MiniStatuslineDevinfo', dev_hl_colors)
-
-      -- Setup fileinfo section colors
-      if fileinfo_hl ~= nil then
-        vim.api.nvim_set_hl(0, 'MiniStatuslineFileinfo', { fg = '#ABB2BF', bg = '#191A21' })
-        local fileinfo_hl_colors = vim.api.nvim_get_hl(0, { name = fileinfo_hl, link = false })
-        local mini_hl = vim.api.nvim_get_hl(0, { name = 'MiniStatuslineFileinfo', link = false })
+      -- Setup devinfo and fileinfo section colors
+      local dev_hl_invert = ''
+      if icon_hl ~= nil then
+        local icon_hl_colors = vim.api.nvim_get_hl(0, { name = icon_hl, link = false })
         vim.api.nvim_set_hl(
           0,
           'MiniStatuslineFileinfo',
-          { fg = fileinfo_hl_colors.fg, bg = mini_hl.bg }
+          { fg = icon_hl_colors.fg, bg = dracula.menu }
         )
+
+        vim.api.nvim_set_hl(
+          0,
+          'MiniStatuslineDevinfo',
+          { fg = icon_hl_colors.fg, bg = dracula.menu }
+        )
+        local dev_hl_colors =
+          vim.api.nvim_get_hl(0, { name = 'MiniStatuslineDevinfo', link = false })
+        dev_hl_invert = invertHighlightGroup('MiniStatuslineDevinfo', dev_hl_colors)
+      else
+        vim.api.nvim_set_hl(0, 'MiniStatuslineDevinfo', { fg = dracula.white, bg = dracula.menu })
+        local dev_hl_colors =
+          vim.api.nvim_get_hl(0, { name = 'MiniStatuslineDevinfo', link = false })
+        dev_hl_invert = invertHighlightGroup('MiniStatuslineDevinfo', dev_hl_colors)
+        vim.api.nvim_set_hl(0, 'MiniStatuslineFileinfo', { fg = dracula.white, bg = dracula.menu })
       end
 
       -- Setup filename section colors
@@ -484,7 +495,6 @@ return { -- Collection of various small independent plugins/modules
     }
 
     -- Setup mini.pick highlight groups
-    local dracula = require('dracula').colors()
     vim.api.nvim_set_hl(0, 'MiniFilesBorder', { fg = dracula.purple, bg = dracula.menu })
     vim.api.nvim_set_hl(0, 'MiniFilesBorderModified', { fg = dracula.yellow, bg = dracula.menu })
     vim.api.nvim_set_hl(0, 'MiniFilesCursorLine', { fg = dracula.white, bg = dracula.bg })
