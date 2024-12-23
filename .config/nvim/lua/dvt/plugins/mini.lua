@@ -483,18 +483,24 @@ return { -- Collection of various small independent plugins/modules
       },
     }
 
-    local mini_files_toggle = function()
+    --- @param open_current_file boolean If true, will open mini.files in the current file, otherwise opents on cwd.
+    local mini_files_toggle = function(open_current_file)
       if not mini_files.close() then
         local current_file = vim.api.nvim_buf_get_name(0)
         -- Needed for starter dashboard
-        if vim.fn.filereadable(current_file) == 0 then
+        if vim.fn.filereadable(current_file) == 0 or not open_current_file then
           mini_files.open()
         else
           mini_files.open(current_file, true)
         end
       end
     end
-    vim.keymap.set('n', '<leader>e', mini_files_toggle, { desc = 'Toggle [e]xplorer' })
+    vim.keymap.set('n', '<leader>e', function()
+      mini_files_toggle(true)
+    end, { desc = 'Toggle [e]xplorer on current file' })
+    vim.keymap.set('n', '<leader>E', function()
+      mini_files_toggle(false)
+    end, { desc = 'Toggle [E]xplorer on cwd' })
 
     local map_split = function(buf_id, lhs, direction)
       local rhs = function()
