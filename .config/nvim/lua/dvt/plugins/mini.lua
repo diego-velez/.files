@@ -846,5 +846,65 @@ return { -- Collection of various small independent plugins/modules
 
       vim.lsp.buf[scope] { on_list = on_list }
     end
+
+    -- NOTE: Start mini.clue configuration
+    local miniclue = require 'mini.clue'
+    miniclue.setup {
+      triggers = {
+        -- Leader triggers
+        { mode = 'n', keys = '<Leader>' },
+        { mode = 'x', keys = '<Leader>' },
+
+        -- Built-in completion
+        { mode = 'i', keys = '<C-x>' },
+
+        -- `g` key
+        { mode = 'n', keys = 'g' },
+        { mode = 'x', keys = 'g' },
+
+        -- Marks
+        { mode = 'n', keys = "'" },
+        { mode = 'n', keys = '`' },
+        { mode = 'x', keys = "'" },
+        { mode = 'x', keys = '`' },
+
+        -- Registers
+        { mode = 'n', keys = '"' },
+        { mode = 'x', keys = '"' },
+        { mode = 'i', keys = '<C-r>' },
+        { mode = 'c', keys = '<C-r>' },
+
+        -- Window commands
+        { mode = 'n', keys = '<C-w>' },
+
+        -- `z` key
+        { mode = 'n', keys = 'z' },
+        { mode = 'x', keys = 'z' },
+      },
+
+      clues = {
+        {
+          { mode = 'n', keys = '<leader>r', desc = '[R]ename' },
+          { mode = 'n', keys = '<leader>s', desc = '[S]earch' },
+          { mode = 'n', keys = '<leader>t', desc = '[T]oggle' },
+          { mode = 'n', keys = '<leader>h', desc = '[H]arpoon' },
+          { mode = 'n', keys = '<leader>g', desc = '[G]it' },
+          { mode = 'x', keys = '<leader>g', desc = '[G]it' },
+        },
+        miniclue.gen_clues.builtin_completion(),
+        miniclue.gen_clues.g(),
+        miniclue.gen_clues.marks(),
+        miniclue.gen_clues.registers(),
+        miniclue.gen_clues.windows(),
+        miniclue.gen_clues.z(),
+      },
+
+      window = {
+        config = {
+          width = 50,
+        },
+        delay = 0,
+      },
+    }
   end,
 }
