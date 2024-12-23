@@ -64,6 +64,17 @@ return { -- Collection of various small independent plugins/modules
       desc = '[S]earch [G]rep',
     },
     {
+      '<leader>sw',
+      function()
+        local cword = vim.fn.expand '<cword>'
+        vim.defer_fn(function()
+          vim.api.nvim_input(cword)
+        end, 25)
+        require('mini.pick').builtin.grep_live()
+      end,
+      desc = '[S]earch [W]ord',
+    },
+    {
       '<leader>sf',
       function()
         require('mini.pick').builtin.files()
