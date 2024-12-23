@@ -109,6 +109,9 @@ return { -- Collection of various small independent plugins/modules
     -- NOTE: Start mini.icons configuration
     require('mini.icons').setup()
 
+    -- NOTE: Start mini.git configuration
+    require('mini.git').setup()
+
     -- NOTE: Start mini.hipatterns configuration
     local patterns = require 'mini.hipatterns'
     patterns.setup {
@@ -318,7 +321,7 @@ return { -- Collection of various small independent plugins/modules
       end
 
       -- Setup filename section colors
-      vim.api.nvim_set_hl(0, 'MiniStatuslineFilename', { fg = 'fg', bg = 'bg' })
+      vim.api.nvim_set_hl(0, 'MiniStatuslineFilename', { fg = dracula.white, bg = 'bg' })
 
       return combine_groups {
         { hl = mode_hl_invert, strings = { '' } },
@@ -479,9 +482,6 @@ return { -- Collection of various small independent plugins/modules
         terminal = false,
       },
     }
-
-    -- NOTE: Start mini.git configuration
-    require('mini.git').setup()
 
     -- NOTE: Start mini.files configuration
     local mini_files = require 'mini.files'
