@@ -598,6 +598,9 @@ return { -- Collection of various small independent plugins/modules
 
     -- NOTE: Start mini.indentscope configuration
     require('mini.indentscope').setup {
+      draw = {
+        animation = require('mini.indentscope').gen_animation.cubic { duration = 10 },
+      },
       options = {
         indent_at_cursor = false,
         try_as_border = true,
