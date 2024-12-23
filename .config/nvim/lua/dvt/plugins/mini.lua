@@ -457,6 +457,13 @@ return { -- Collection of various small independent plugins/modules
       },
     }
 
+    vim.api.nvim_set_hl(0, 'MiniStarterCurrent', { fg = dracula.fg, bg = 'bg' })
+    vim.api.nvim_set_hl(0, 'MiniStarterHeader', { fg = dracula.green, bg = 'bg' })
+    vim.api.nvim_set_hl(0, 'MiniStarterFooter', { fg = dracula.green, bg = 'bg' })
+    vim.api.nvim_set_hl(0, 'MiniStarterItem', { fg = dracula.white, bg = 'bg' })
+    vim.api.nvim_set_hl(0, 'MiniStarterItemBullet', { fg = dracula.cyan, bg = 'bg' })
+    vim.api.nvim_set_hl(0, 'MiniStarterSection', { fg = dracula.cyan, bg = 'bg' })
+
     -- NOTE: Start mini.jump configuration
     require('mini.jump').setup {
       delay = {
