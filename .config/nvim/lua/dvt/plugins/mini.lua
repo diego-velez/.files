@@ -342,16 +342,7 @@ return { -- Collection of various small independent plugins/modules
     vim.api.nvim_set_hl(0, 'Statusline', { bg = 'bg' })
 
     -- NOTE: Start mini.comment configuration
-    --
-    -- Comment out lines using Ctrl-/ since I'm used to it from Jetbrains
-    require('mini.comment').setup {
-      mappings = {
-        comment = '',
-        comment_line = '<C-/>',
-        comment_visual = '<C-/>',
-        textobject = '<C-/>',
-      },
-    }
+    require('mini.comment').setup {}
 
     -- NOTE: Start mini.starter configuration
     local days = {
