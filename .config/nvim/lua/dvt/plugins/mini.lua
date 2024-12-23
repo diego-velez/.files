@@ -719,24 +719,26 @@ return { -- Collection of various small independent plugins/modules
       MiniExtra.pickers.buf_lines(local_opts, { source = { show = show_cur_buf_lines } })
     end
 
-    MiniPick.registry.todo = function()
-      local show_todo = function(buf_id, entries, query, opts)
-        MiniPick.default_show(buf_id, entries, query, opts)
+    -- todo-comments picker section
+    local show_todo = function(buf_id, entries, query, opts)
+      MiniPick.default_show(buf_id, entries, query, opts)
 
-        -- Add highlighting to every line in the buffer
-        for line, entry in ipairs(entries) do
-          for _, hl in ipairs(entry.hl) do
-            vim.api.nvim_buf_add_highlight(
-              buf_id,
-              ns_digit_prefix,
-              hl[2],
-              line - 1,
-              hl[1][1],
-              hl[1][2]
-            )
-          end
+      -- Add highlighting to every line in the buffer
+      for line, entry in ipairs(entries) do
+        for _, hl in ipairs(entry.hl) do
+          vim.api.nvim_buf_add_highlight(
+            buf_id,
+            ns_digit_prefix,
+            hl[2],
+            line - 1,
+            hl[1][1],
+            hl[1][2]
+          )
         end
       end
+    end
+
+    MiniPick.registry.todo = function()
       require('todo-comments.search').search(function(results)
         local Config = require 'todo-comments.config'
         local Highlight = require 'todo-comments.highlight'
@@ -756,8 +758,8 @@ return { -- Collection of various small independent plugins/modules
           if start then
             kw = Config.keywords[kw] or kw
             local icon = Config.options.keywords[kw].icon or ' '
-            display = icon .. ' ' .. display
-            table.insert(entry.hl, { { 0, #icon + 1 }, 'TodoFg' .. kw })
+            display = icon .. display
+            table.insert(entry.hl, { { 0, #icon }, 'TodoFg' .. kw })
             text = vim.trim(text:sub(start))
 
             table.insert(entry.hl, {
@@ -775,7 +777,7 @@ return { -- Collection of various small independent plugins/modules
         end
 
         MiniPick.start { source = { name = 'Find Todo', show = show_todo, items = results } }
-      end, nil)
+      end)
     end
 
     -- Open LSP picker for the given scope
