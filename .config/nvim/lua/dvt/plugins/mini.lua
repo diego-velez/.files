@@ -123,6 +123,9 @@ return { -- Collection of various small independent plugins/modules
     -- NOTE: Start mini.git configuration
     require('mini.git').setup()
 
+    -- NOTE: Start mini.extra configuration
+    require('mini.extra').setup()
+
     -- NOTE: Start mini.hipatterns configuration
     local patterns = require 'mini.hipatterns'
     patterns.setup {
@@ -152,21 +155,15 @@ return { -- Collection of various small independent plugins/modules
     --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
     --  - ci'  - [C]hange [I]nside [']quote
     local ai = require 'mini.ai'
-    require('mini.ai').setup {
+    local gen_ai_spec = require('mini.extra').gen_ai_spec
+    ai.setup {
       n_lines = 500,
       custom_textobjects = {
         -- [F]unction
         f = ai.gen_spec.treesitter { a = '@function.outer', i = '@function.inner' },
 
-        -- Entire [B]uffer
-        b = function()
-          local from = { line = 1, col = 1 }
-          local to = {
-            line = vim.fn.line '$',
-            col = math.max(vim.fn.getline('$'):len(), 1),
-          }
-          return { from = from, to = to }
-        end,
+        -- [B]uffer
+        b = gen_ai_spec.buffer(),
 
         -- [C]ode
         c = ai.gen_spec.treesitter {
@@ -178,7 +175,7 @@ return { -- Collection of various small independent plugins/modules
         i = ai.gen_spec.function_call(),
 
         -- [D]igits
-        d = { '%f[%d]%d+' },
+        d = gen_ai_spec.number(),
       },
     }
 
@@ -642,8 +639,7 @@ return { -- Collection of various small independent plugins/modules
       symbol = '│',
     }
 
-    -- NOTE: Start mini.pick configuration with mini.extra pickers
-    require('mini.extra').setup()
+    -- NOTE: Start mini.pick configuration
     require('mini.pick').setup {
       delay = {
         busy = 1,
