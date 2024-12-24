@@ -2,30 +2,52 @@ return {
   'ThePrimeagen/harpoon',
   branch = 'harpoon2',
   dependencies = { 'nvim-lua/plenary.nvim' },
+  keys = {
+    {
+      '<leader>ha',
+      function()
+        require('harpoon'):list():add()
+      end,
+      desc = 'Harpoon [a]ppend',
+    },
+
+    {
+      '<leader>hu',
+      function()
+        local harpoon = require 'harpoon'
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end,
+      desc = 'Harpoon [U]I',
+    },
+
+    {
+      '<A-n>',
+      function()
+        require('harpoon'):list():select(1)
+      end,
+    },
+    {
+      '<A-e>',
+      function()
+        require('harpoon'):list():select(2)
+      end,
+    },
+    {
+      '<A-i>',
+      function()
+        require('harpoon'):list():select(3)
+      end,
+    },
+    {
+      '<A-o>',
+      function()
+        require('harpoon'):list():select(4)
+      end,
+    },
+  },
   config = function()
     local harpoon = require 'harpoon'
     harpoon:setup()
-
-    vim.keymap.set('n', '<leader>ha', function()
-      harpoon:list():add()
-    end, { desc = 'Harpoon [a]ppend' })
-
-    vim.keymap.set('n', '<leader>hu', function()
-      harpoon.ui:toggle_quick_menu(harpoon:list())
-    end, { desc = 'Harpoon [U]I' })
-
-    vim.keymap.set('n', '<A-n>', function()
-      harpoon:list():select(1)
-    end)
-    vim.keymap.set('n', '<A-e>', function()
-      harpoon:list():select(2)
-    end)
-    vim.keymap.set('n', '<A-i>', function()
-      harpoon:list():select(3)
-    end)
-    vim.keymap.set('n', '<A-o>', function()
-      harpoon:list():select(4)
-    end)
 
     -- NOTE: Setup harpoon window highlight groups
     local dracula = require('dracula').colors()
