@@ -20,17 +20,9 @@ return { -- Collection of various small independent plugins/modules
         vim.g.highlighting_enabled = not vim.g.highlighting_enabled
 
         if vim.g.highlighting_enabled then
-          require('fidget').notify(
-            'Highlighting enabled',
-            nil,
-            { key = 'toggle_highlight', annote = 'toggle' }
-          )
+          vim.notify('Highlighting enabled', vim.log.levels.INFO)
         else
-          require('fidget').notify(
-            'Highlighting disabled',
-            nil,
-            { key = 'toggle_highlight', annote = 'toggle' }
-          )
+          vim.notify('Highlighting disabled', vim.log.levels.INFO)
         end
       end,
       desc = 'Toggle [H]ighlighting',
