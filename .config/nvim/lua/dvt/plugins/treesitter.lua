@@ -3,6 +3,8 @@ return { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     version = false,
     build = ':TSUpdate',
+    event = 'VeryLazy',
+    cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
     init = function(plugin)
       -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
@@ -49,21 +51,11 @@ return { -- Highlight, edit, and navigate code
             [']c'] = '@class.outer',
             [']a'] = '@parameter.inner',
           },
-          -- goto_next_end = {
-          --   [']F'] = '@function.outer',
-          --   [']C'] = '@class.outer',
-          --   [']A'] = '@parameter.inner',
-          -- },
           goto_previous_start = {
             ['[f'] = '@function.outer',
             ['[c'] = '@class.outer',
             ['[a'] = '@parameter.inner',
           },
-          -- goto_previous_end = {
-          --   ['[F'] = '@function.outer',
-          --   ['[C'] = '@class.outer',
-          --   ['[A'] = '@parameter.inner',
-          -- },
         },
       },
     },
