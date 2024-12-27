@@ -85,21 +85,6 @@ return {
     dependencies = {
       'Mofiqul/dracula.nvim',
     },
-    init = function()
-      local colors = require('dracula').colors()
-      vim.api.nvim_set_hl(
-        0,
-        'GitConflictIncomingLabel',
-        { fg = colors.bg, bg = colors.bright_green, bold = true, italic = true }
-      )
-      vim.api.nvim_set_hl(0, 'GitConflictIncoming', { fg = colors.green })
-      vim.api.nvim_set_hl(0, 'GitConflictCurrent', { fg = colors.red })
-      vim.api.nvim_set_hl(
-        0,
-        'GitConflictCurrentLabel',
-        { fg = colors.bg, bg = colors.bright_red, bold = true, italic = true }
-      )
-    end,
     opts = true,
   },
 }

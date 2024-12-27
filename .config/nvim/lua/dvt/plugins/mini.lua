@@ -460,13 +460,6 @@ return { -- Collection of various small independent plugins/modules
       },
     }
 
-    vim.api.nvim_set_hl(0, 'MiniStarterCurrent', { fg = dracula.fg, bg = 'bg' })
-    vim.api.nvim_set_hl(0, 'MiniStarterHeader', { fg = dracula.green, bg = 'bg' })
-    vim.api.nvim_set_hl(0, 'MiniStarterFooter', { fg = dracula.green, bg = 'bg' })
-    vim.api.nvim_set_hl(0, 'MiniStarterItem', { fg = dracula.white, bg = 'bg' })
-    vim.api.nvim_set_hl(0, 'MiniStarterItemBullet', { fg = dracula.cyan, bg = 'bg' })
-    vim.api.nvim_set_hl(0, 'MiniStarterSection', { fg = dracula.cyan, bg = 'bg' })
-
     -- NOTE: Start mini.jump configuration
     require('mini.jump').setup {
       delay = {
@@ -500,14 +493,6 @@ return { -- Collection of various small independent plugins/modules
         max_number = 3,
       },
     }
-
-    -- Setup mini.pick highlight groups
-    vim.api.nvim_set_hl(0, 'MiniFilesBorder', { fg = dracula.purple, bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'MiniFilesBorderModified', { fg = dracula.yellow, bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'MiniFilesCursorLine', { fg = dracula.white, bg = dracula.bg })
-    vim.api.nvim_set_hl(0, 'MiniFilesNormal', { fg = 'fg', bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'MiniFilesTitle', { fg = dracula.white, bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'MiniFilesTitleFocused', { fg = 'fg', bg = dracula.menu })
 
     --- @param open_current_file boolean If true, will open mini.files in the current file, otherwise opents on cwd.
     local mini_files_toggle = function(open_current_file)
@@ -689,14 +674,6 @@ return { -- Collection of various small independent plugins/modules
         prompt_cursor = ' 󰁍',
       },
     }
-
-    -- Setup mini.pick highlight groups
-    vim.api.nvim_set_hl(0, 'MiniPickBorder', { fg = dracula.purple, bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'MiniPickBorderText', { fg = dracula.white, bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'MiniPickPrompt', { fg = dracula.purple, bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'MiniPickMatchCurrent', { fg = dracula.white, bg = dracula.bg })
-    vim.api.nvim_set_hl(0, 'MiniPickMatchRanges', { fg = dracula.green, bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'MiniPickNormal', { fg = 'fg', bg = dracula.menu })
 
     -- Show highlight in buf_lines picker
     -- See https://github.com/echasnovski/mini.nvim/discussions/988#discussioncomment-10398788
@@ -921,17 +898,7 @@ return { -- Collection of various small independent plugins/modules
       },
     }
 
-    -- Setup mini.clue highlight groups
-    vim.api.nvim_set_hl(0, 'MiniClueBorder', { fg = dracula.purple, bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'MiniClueDescGroup', { fg = dracula.green, bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'MiniClueDescSingle', { fg = 'fg', bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'MiniClueNextKey', { fg = dracula.cyan, bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'MiniClueNextKeyWithPostkeys', { fg = dracula.cyan, bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'MiniClueSeparator', { fg = dracula.cyan, bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'MiniClueTitle', { fg = dracula.white, bg = dracula.menu })
-
     -- NOTE: Start mini.cursorword configuration
     require('mini.cursorword').setup()
-    vim.api.nvim_set_hl(0, 'MiniCursorword', { link = 'LspReferenceText' })
   end,
 }

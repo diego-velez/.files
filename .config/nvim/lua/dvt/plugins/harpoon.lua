@@ -49,12 +49,6 @@ return {
     local harpoon = require 'harpoon'
     harpoon:setup()
 
-    -- NOTE: Setup harpoon window highlight groups
-    local dracula = require('dracula').colors()
-    vim.api.nvim_set_hl(0, 'HarpoonNormal', { fg = dracula.fg, bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'HarpoonBorder', { fg = dracula.purple, bg = dracula.menu })
-    vim.api.nvim_set_hl(0, 'HarpoonTitle', { fg = dracula.white, bg = dracula.menu })
-
     -- This was taken from mini.pick :)
     local win_update_hl = function(win_id, new_from, new_to)
       local new_entry = new_from .. ':' .. new_to
