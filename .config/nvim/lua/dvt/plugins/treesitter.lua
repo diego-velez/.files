@@ -83,9 +83,17 @@ return { -- Highlight, edit, and navigate code
           local tsc = require 'treesitter-context'
           tsc.toggle()
           if tsc.enabled() then
-            vim.notify('Context enabled', vim.log.levels.INFO)
+            vim.notify(
+              'Context enabled',
+              vim.log.levels.INFO,
+              { key = 'toggle_context', annote = 'toggle' }
+            )
           else
-            vim.notify('Context disabled', vim.log.levels.INFO)
+            vim.notify(
+              'Context disabled',
+              vim.log.levels.INFO,
+              { key = 'toggle_context', annote = 'toggle' }
+            )
           end
         end,
         desc = 'Toggle [c]ontext',

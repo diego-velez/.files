@@ -20,9 +20,17 @@ return { -- Collection of various small independent plugins/modules
         vim.g.highlighting_enabled = not vim.g.highlighting_enabled
 
         if vim.g.highlighting_enabled then
-          vim.notify('Highlighting enabled', vim.log.levels.INFO)
+          vim.notify(
+            'Highlighting enabled',
+            vim.log.levels.INFO,
+            { key = 'toggle_highlight', annote = 'toggle' }
+          )
         else
-          vim.notify('Highlighting disabled', vim.log.levels.INFO)
+          vim.notify(
+            'Highlighting disabled',
+            vim.log.levels.INFO,
+            { key = 'toggle_highlight', annote = 'toggle' }
+          )
         end
       end,
       desc = 'Toggle [H]ighlighting',

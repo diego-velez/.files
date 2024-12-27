@@ -12,6 +12,7 @@ return {
       'j-hui/fidget.nvim',
       opts = {
         notification = {
+          override_vim_notify = true,
           view = {
             stack_upwards = false,
           },
@@ -111,9 +112,17 @@ return {
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
 
             if vim.lsp.inlay_hint.is_enabled { bufnr = event.buf } then
-              vim.notify('Inlay hints enabled', vim.log.levels.INFO)
+              vim.notify(
+                'Inlay hints enabled',
+                vim.log.levels.INFO,
+                { key = 'toggle_inlay', annote = 'toggle' }
+              )
             else
-              vim.notify('Inlay hints disabled', vim.log.levels.INFO)
+              vim.notify(
+                'Inlay hints disabled',
+                vim.log.levels.INFO,
+                { key = 'toggle_inlay', annote = 'toggle' }
+              )
             end
           end, '[T]oggle [I]nlay Hints')
         end
