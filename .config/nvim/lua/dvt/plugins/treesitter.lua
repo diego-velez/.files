@@ -105,4 +105,9 @@ return { -- Highlight, edit, and navigate code
       trim_scope = 'inner',
     },
   },
+  {
+    'folke/ts-comments.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
 }
