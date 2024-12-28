@@ -3,6 +3,13 @@ return { -- Collection of various small independent plugins/modules
   lazy = false,
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
+    {
+      'JoosepAlviste/nvim-ts-context-commentstring',
+      lazy = true,
+      opts = {
+        enable_autocmd = false,
+      },
+    },
   },
   init = function()
     vim.g.highlighting_enabled = true
@@ -364,7 +371,14 @@ return { -- Collection of various small independent plugins/modules
     vim.api.nvim_set_hl(0, 'Statusline', { bg = 'bg' })
 
     -- NOTE: Start mini.comment configuration
-    require('mini.comment').setup {}
+    require('mini.comment').setup {
+      options = {
+        custom_commentstring = function()
+          return require('ts_context_commentstring.internal').calculate_commentstring()
+            or vim.bo.commentstring
+        end,
+      },
+    }
 
     -- NOTE: Start mini.starter configuration
     local days = {
