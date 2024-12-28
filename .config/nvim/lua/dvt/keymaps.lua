@@ -66,3 +66,7 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'VimResized' }, {
 
 vim.keymap.set('n', 'h', vim.lsp.buf.hover)
 vim.keymap.set('n', 'K', '<nop>')
+
+-- Quickfix keymaps
+vim.keymap.set('n', '<S-up>', ':cprevious<cr>')
+vim.keymap.set('n', '<S-down>', ':cnext<cr>')
