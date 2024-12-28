@@ -166,20 +166,23 @@ return { -- Collection of various small independent plugins/modules
     ai.setup {
       n_lines = 500,
       custom_textobjects = {
+        -- Code Block
+        o = ai.gen_spec.treesitter {
+          a = { '@block.outer', '@conditional.outer', '@loop.outer' },
+          i = { '@block.inner', '@conditional.inner', '@loop.inner' },
+        },
+
+        -- [C]lass
+        c = ai.gen_spec.treesitter { a = '@class.outer', i = '@class.inner' },
+
         -- [F]unction
         f = ai.gen_spec.treesitter { a = '@function.outer', i = '@function.inner' },
 
         -- [B]uffer
         b = gen_ai_spec.buffer(),
 
-        -- [C]ode
-        c = ai.gen_spec.treesitter {
-          a = { '@block.outer', '@conditional.outer', '@loop.outer' },
-          i = { '@block.inner', '@conditional.inner', '@loop.inner' },
-        },
-
-        -- [I]nvokation
-        i = ai.gen_spec.function_call(),
+        -- [U]sage
+        u = ai.gen_spec.function_call(),
 
         -- [D]igits
         d = gen_ai_spec.number(),
@@ -496,6 +499,15 @@ return { -- Collection of various small independent plugins/modules
         command = true,
         terminal = false,
       },
+      -- skip autopair when next character is one of these
+      skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+      -- skip autopair when the cursor is inside these treesitter nodes
+      skip_ts = { 'string' },
+      -- skip autopair when next character is closing pair
+      -- and there are more closing pairs than opening pairs
+      skip_unbalanced = true,
+      -- better deal with markdown code blocks
+      markdown = true,
     }
 
     -- NOTE: Start mini.files configuration
@@ -630,10 +642,6 @@ return { -- Collection of various small independent plugins/modules
     require('mini.indentscope').setup {
       draw = {
         animation = require('mini.indentscope').gen_animation.cubic { duration = 10 },
-      },
-      mappings = {
-        object_scope = '',
-        object_scope_with_border = '',
       },
       options = {
         indent_at_cursor = false,
@@ -926,5 +934,36 @@ return { -- Collection of various small independent plugins/modules
 
     -- NOTE: Start mini.cursorword configuration
     require('mini.cursorword').setup()
+
+    -- NOTE: Start mini.animate configuration
+    --
+    -- don't use animate when scrolling with the mouse
+    local mouse_scrolled = false
+    for _, scroll in ipairs { 'Up', 'Down' } do
+      local key = '<ScrollWheel' .. scroll .. '>'
+      vim.keymap.set({ '', 'i' }, key, function()
+        mouse_scrolled = true
+        return key
+      end, { expr = true })
+    end
+
+    local animate = require 'mini.animate'
+    animate.setup {
+      resize = {
+        timing = animate.gen_timing.linear { duration = 50, unit = 'total' },
+      },
+      scroll = {
+        timing = animate.gen_timing.linear { duration = 150, unit = 'total' },
+        subscroll = animate.gen_subscroll.equal {
+          predicate = function(total_scroll)
+            if mouse_scrolled then
+              mouse_scrolled = false
+              return false
+            end
+            return total_scroll > 1
+          end,
+        },
+      },
+    }
   end,
 }
