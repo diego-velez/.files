@@ -25,6 +25,7 @@ $docker_context\
 [](fg:pink bg:yellow)\
 $time\
 [ ](fg:yellow)\
+$fill\
 $line_break$character"""
 
 palette = 'dracula'
@@ -145,3 +146,6 @@ vimcmd_symbol = ' [󱞥](bold fg:yellow)'
 vimcmd_replace_one_symbol = ' [󱞥](bold fg:purple)'
 vimcmd_replace_symbol = ' [󱞥](bold fg:purple)'
 vimcmd_visual_symbol = ' [󱞥](bold fg:pink)'
+
+[fill]
+symbol = ''
