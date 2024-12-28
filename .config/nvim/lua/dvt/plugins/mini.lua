@@ -617,6 +617,10 @@ return { -- Collection of various small independent plugins/modules
       draw = {
         animation = require('mini.indentscope').gen_animation.cubic { duration = 10 },
       },
+      mappings = {
+        object_scope = '',
+        object_scope_with_border = '',
+      },
       options = {
         indent_at_cursor = false,
         try_as_border = true,

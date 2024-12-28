@@ -28,8 +28,8 @@ return {
     ---@type blink.cmp.Config
     opts = {
       keymap = {
-        ['<C-CR>'] = { 'show', 'select_and_accept', 'show_documentation', 'hide_documentation' },
-        ['<C-e>'] = { 'hide' },
+        ['<C-CR>'] = { 'show', 'select_and_accept', 'show_documentation' },
+        ['<C-e>'] = { 'hide_documentation', 'hide' },
         ['<UP>'] = { 'select_prev', 'snippet_backward', 'fallback' },
         ['<DOWN>'] = { 'select_next', 'snippet_forward', 'fallback' },
         ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
