@@ -590,6 +590,7 @@ return { -- Collection of various small independent plugins/modules
     end
 
     vim.api.nvim_create_autocmd('User', {
+      group = vim.api.nvim_create_augroup('DVT MiniFilesBufferCreate', { clear = true }),
       pattern = 'MiniFilesBufferCreate',
       callback = function(args)
         local buf_id = args.data.buf_id
@@ -620,6 +621,7 @@ return { -- Collection of various small independent plugins/modules
     })
 
     vim.api.nvim_create_autocmd('User', {
+      group = vim.api.nvim_create_augroup('DVT MiniFilesWindowUpdate', { clear = true }),
       pattern = 'MiniFilesWindowUpdate',
       callback = function(args)
         vim.wo[args.data.win_id].number = true
@@ -629,6 +631,7 @@ return { -- Collection of various small independent plugins/modules
 
     -- Use to try and automatically detect
     vim.api.nvim_create_autocmd('User', {
+      group = vim.api.nvim_create_augroup('DVT Git MiniFilesAction', { clear = true }),
       pattern = { 'MiniFilesActionRename', 'MiniFilesActionMove' },
       callback = function(args)
         local from = args.data.from

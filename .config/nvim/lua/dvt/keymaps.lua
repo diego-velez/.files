@@ -68,6 +68,7 @@ vim.keymap.set('n', '<leader>rs', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left>
 
 -- Show hover with window
 vim.api.nvim_create_autocmd({ 'VimEnter', 'VimResized' }, {
+  group = vim.api.nvim_create_augroup('DVT Hover', { clear = true }),
   desc = 'Setup LSP hover window',
   callback = function()
     local width = math.floor(vim.o.columns * 0.8)
