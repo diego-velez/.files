@@ -709,6 +709,10 @@ return { -- Collection of various small independent plugins/modules
       },
     }
 
+    -- Using primarily for code action
+    -- See https://github.com/echasnovski/mini.nvim/discussions/1437
+    vim.ui.select = MiniPick.ui_select
+
     -- Show highlight in buf_lines picker
     -- See https://github.com/echasnovski/mini.nvim/discussions/988#discussioncomment-10398788
     local ns_digit_prefix = vim.api.nvim_create_namespace 'cur-buf-pick-show'
