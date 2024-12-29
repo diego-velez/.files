@@ -20,15 +20,32 @@ vim.keymap.set('n', '<ESC>', ':nohlsearch<CR>')
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 ------ DVT's keymaps -------
--- Open explorer
--- vim.keymap.set('n', '<leader>e', vim.cmd.Explore, { desc = 'File [e]xplorer' })
-
 -- Keep cursor centered
-vim.keymap.set('n', '<C-d>', '<C-d>zz')
-vim.keymap.set('n', '<C-u>', '<C-u>zz')
-vim.keymap.set('n', 'n', 'nzzzv')
-vim.keymap.set('n', 'N', 'Nzzzv')
-vim.keymap.set('n', 'G', 'Gzz')
+vim.keymap.set(
+  'n',
+  '<C-d>',
+  '<Cmd>lua vim.cmd("normal! \4"); ' .. 'MiniAnimate.execute_after("scroll", "normal! zz")<CR>'
+)
+vim.keymap.set(
+  'n',
+  '<C-u>',
+  '<Cmd>lua vim.cmd("normal! \21"); ' .. 'MiniAnimate.execute_after("scroll", "normal! zz")<CR>'
+)
+vim.keymap.set(
+  'n',
+  'n',
+  '<Cmd>lua vim.cmd("normal! n"); ' .. 'MiniAnimate.execute_after("scroll", "normal! zzzv")<CR>'
+)
+vim.keymap.set(
+  'n',
+  'N',
+  '<Cmd>lua vim.cmd("normal! N"); ' .. 'MiniAnimate.execute_after("scroll", "normal! zzzv")<CR>'
+)
+vim.keymap.set(
+  'n',
+  'G',
+  '<Cmd>lua vim.cmd("normal! G"); ' .. 'MiniAnimate.execute_after("scroll", "normal! zz")<CR>'
+)
 
 -- Move line up or down
 vim.keymap.set('n', 'j', "v:move '<-2<CR>gv=gv<ESC>")
