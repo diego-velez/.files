@@ -48,7 +48,7 @@ return { -- Highlight, edit, and navigate code
         move = {
           enable = true,
           goto_next_start = {
-            [']f'] = '@function.outer',
+            [']]'] = '@function.outer',
             [']c'] = '@class.outer',
             -- [N]ote aka comment
             [']n'] = '@comment.outer',
@@ -56,7 +56,7 @@ return { -- Highlight, edit, and navigate code
             [']a'] = '@parameter.inner',
           },
           goto_previous_start = {
-            ['[f'] = '@function.outer',
+            ['[['] = '@function.outer',
             ['[c'] = '@class.outer',
             -- [N]ote aka comment
             ['[n'] = '@comment.outer',

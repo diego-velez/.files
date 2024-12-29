@@ -17,21 +17,13 @@ return {
         end
 
         -- Hunk Navigation
-        map('n', '[c', function()
-          if vim.wo.diff then
-            vim.cmd.normal { '[c', bang = true }
-          else
-            gitsigns.nav_hunk 'prev'
-          end
-        end, 'Previous Git [c]hange')
+        map('n', '[g', function()
+          gitsigns.nav_hunk 'prev'
+        end, 'Previous [G]it Change')
 
-        map('n', ']c', function()
-          if vim.wo.diff then
-            vim.cmd.normal { ']c', bang = true }
-          else
-            gitsigns.nav_hunk 'next'
-          end
-        end, 'Next Git [c]hange')
+        map('n', ']g', function()
+          gitsigns.nav_hunk 'next'
+        end, 'Next [G]it Change')
 
         -- Hunk Actions
         map('n', '<leader>gs', gitsigns.stage_hunk, '[S]tage hunk')
