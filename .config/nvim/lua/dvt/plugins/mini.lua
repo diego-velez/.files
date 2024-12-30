@@ -120,6 +120,48 @@ return { -- Collection of various small independent plugins/modules
       end,
       desc = '[S]earch [T]odo',
     },
+    {
+      '<leader>ss',
+      function()
+        MiniExtra.pickers.lsp { scope = 'document_symbol' }
+      end,
+      desc = '[S]earch [S]ymbols',
+    },
+    {
+      '<leader>sH',
+      function()
+        MiniExtra.pickers.history()
+      end,
+      desc = '[S]earch [H]istory',
+    },
+    {
+      '<leader>sd',
+      function()
+        MiniExtra.pickers.diagnostic()
+      end,
+      desc = '[S]earch [D]iagnostic',
+    },
+    {
+      '<leader>sb',
+      function()
+        MiniExtra.pickers.git_branches()
+      end,
+      desc = '[S]earch Git [B]ranches',
+    },
+    {
+      '<leader>sC',
+      function()
+        MiniExtra.pickers.git_commits()
+      end,
+      desc = '[S]earch Git [C]ommits',
+    },
+    {
+      '<leader>sD',
+      function()
+        MiniExtra.pickers.git_hunks()
+      end,
+      desc = '[S]earch Git [D]ifferences (Hunks)',
+    },
   },
   config = function()
     local dracula = require('dracula').colors()
@@ -690,8 +732,8 @@ return { -- Collection of various small independent plugins/modules
 
         stop = '<Esc>',
 
-        toggle_info = '<Tab>',
-        toggle_preview = '',
+        toggle_info = '<S-Tab>',
+        toggle_preview = '<Tab>',
 
         send_to_quickfix = {
           char = '<C-q>',
