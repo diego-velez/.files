@@ -21,31 +21,26 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 
 ------ DVT's keymaps -------
 -- Keep cursor centered
-vim.keymap.set(
-  'n',
-  '<C-d>',
-  '<Cmd>lua vim.cmd("normal! \4"); ' .. 'MiniAnimate.execute_after("scroll", "normal! zz")<CR>'
-)
-vim.keymap.set(
-  'n',
-  '<C-u>',
-  '<Cmd>lua vim.cmd("normal! \21"); ' .. 'MiniAnimate.execute_after("scroll", "normal! zz")<CR>'
-)
-vim.keymap.set(
-  'n',
-  'n',
-  '<Cmd>lua vim.cmd("normal! n"); ' .. 'MiniAnimate.execute_after("scroll", "normal! zzzv")<CR>'
-)
-vim.keymap.set(
-  'n',
-  'N',
-  '<Cmd>lua vim.cmd("normal! N"); ' .. 'MiniAnimate.execute_after("scroll", "normal! zzzv")<CR>'
-)
-vim.keymap.set(
-  'n',
-  'G',
-  '<Cmd>lua vim.cmd("normal! G"); ' .. 'MiniAnimate.execute_after("scroll", "normal! zz")<CR>'
-)
+vim.keymap.set('n', '<C-d>', function()
+  vim.cmd.normal { '\4', bang = true }
+  MiniAnimate.execute_after('scroll', 'normal! zz')
+end)
+vim.keymap.set('n', '<C-u>', function()
+  vim.cmd.normal { '\21', bang = true }
+  MiniAnimate.execute_after('scroll', 'normal! zz')
+end)
+vim.keymap.set('n', 'n', function()
+  vim.cmd.normal { 'n', bang = true }
+  MiniAnimate.execute_after('scroll', 'normal! zzzv')
+end)
+vim.keymap.set('n', 'N', function()
+  vim.cmd.normal { 'N', bang = true }
+  MiniAnimate.execute_after('scroll', 'normal! zzzv')
+end)
+vim.keymap.set('n', 'G', function()
+  vim.cmd.normal { 'G', bang = true }
+  MiniAnimate.execute_after('scroll', 'normal! zz')
+end)
 
 -- Move line up or down
 vim.keymap.set('n', 'j', "v:move '<-2<CR>gv=gv<ESC>")
