@@ -28,6 +28,7 @@ return {
     ---@type blink.cmp.Config
     opts = {
       keymap = {
+        preset = 'none',
         ['<C-CR>'] = { 'show', 'select_and_accept' },
         ['<C-e>'] = { 'hide_documentation', 'hide' },
 
