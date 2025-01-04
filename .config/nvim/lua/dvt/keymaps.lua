@@ -83,3 +83,8 @@ vim.keymap.set('n', 'K', '<nop>')
 -- Quickfix keymaps
 vim.keymap.set('n', '<S-up>', ':cprevious<cr>')
 vim.keymap.set('n', '<S-down>', ':cnext<cr>')
+
+-- Remap the completion keymaps in cmdline mode
+vim.keymap.set('c', '<Up>', '<C-p>')
+vim.keymap.set('c', '<Down>', '<C-n>')
+vim.keymap.set('c', '<C-CR>', '<C-y>')
