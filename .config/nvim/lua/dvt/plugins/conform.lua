@@ -60,6 +60,7 @@ return { -- Autoformat
       html = { 'prettier' },
       markdown = { 'prettier' },
       typescriptreact = { 'prettier' },
+      sql = { 'sqlfmt' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --

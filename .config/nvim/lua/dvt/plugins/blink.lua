@@ -46,40 +46,21 @@ return {
       },
 
       completion = {
+        accept = {
+          auto_brackets = {
+            enabled = true,
+          },
+        },
         menu = {
           draw = {
-            treesitter = {
-              'lsp',
-            },
+            columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 } },
             components = {
               label = {
-                width = { fill = true, max = 60 },
                 text = function(ctx)
-                  local highlights_info =
-                    require('colorful-menu').highlights(ctx.item, vim.bo.filetype)
-                  if highlights_info ~= nil then
-                    return highlights_info.text
-                  else
-                    return ctx.label
-                  end
+                  return require('colorful-menu').blink_components_text(ctx)
                 end,
                 highlight = function(ctx)
-                  local highlights_info =
-                    require('colorful-menu').highlights(ctx.item, vim.bo.filetype)
-                  local highlights = {}
-                  if highlights_info ~= nil then
-                    for _, info in ipairs(highlights_info.highlights) do
-                      table.insert(highlights, {
-                        info.range[1],
-                        info.range[2],
-                        group = ctx.deprecated and 'BlinkCmpLabelDeprecated' or info[1],
-                      })
-                    end
-                  end
-                  for _, idx in ipairs(ctx.label_matched_indices) do
-                    table.insert(highlights, { idx, idx + 1, group = 'BlinkCmpLabelMatch' })
-                  end
-                  return highlights
+                  return require('colorful-menu').blink_components_highlight(ctx)
                 end,
               },
             },
@@ -91,7 +72,7 @@ return {
           update_delay_ms = 0,
         },
         ghost_text = {
-          enabled = true,
+          enabled = false,
         },
       },
 
@@ -119,9 +100,6 @@ return {
           },
         },
       },
-
-      -- experimental auto-brackets support
-      -- completion = { accept = { auto_brackets = { enabled = true } } }
 
       -- experimental signature help support
       signature = {
