@@ -144,23 +144,9 @@ return { -- Collection of various small independent plugins/modules
     {
       '<leader>sb',
       function()
-        MiniExtra.pickers.git_branches()
+        MiniPick.builtin.buffers()
       end,
       desc = '[S]earch Git [B]ranches',
-    },
-    {
-      '<leader>sC',
-      function()
-        MiniExtra.pickers.git_commits()
-      end,
-      desc = '[S]earch Git [C]ommits',
-    },
-    {
-      '<leader>sD',
-      function()
-        MiniExtra.pickers.git_hunks()
-      end,
-      desc = '[S]earch Git [D]ifferences (Hunks)',
     },
   },
   config = function()
