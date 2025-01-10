@@ -33,13 +33,13 @@ return {
       keymap = {
         preset = 'none',
         ['<C-CR>'] = { 'show', 'select_and_accept' },
-        ['<C-e>'] = { 'hide_documentation', 'hide' },
+        ['<C-e>'] = { 'cancel', 'fallback' },
 
         ['<Up>'] = { 'select_prev', 'fallback' },
         ['<Down>'] = { 'select_next', 'fallback' },
 
         ['<Tab>'] = { 'snippet_forward', 'show_documentation', 'fallback' },
-        ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+        ['<S-Tab>'] = { 'snippet_backward', 'hide_documentation', 'fallback' },
 
         ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
         ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
