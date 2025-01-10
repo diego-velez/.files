@@ -71,12 +71,4 @@ return {
       { '<leader>gl', ':LazyGit<cr>', desc = 'LazyGit' },
     },
   },
-  {
-    'akinsho/git-conflict.nvim',
-    version = '*',
-    dependencies = {
-      'Mofiqul/dracula.nvim',
-    },
-    opts = true,
-  },
 }
