@@ -6,22 +6,6 @@ return {
     { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-
-    -- Useful status updates for LSP.
-    {
-      'j-hui/fidget.nvim',
-      opts = {
-        notification = {
-          override_vim_notify = true,
-          view = {
-            stack_upwards = false,
-          },
-          window = {
-            align = 'top',
-          },
-        },
-      },
-    },
   },
   config = function()
     vim.lsp.set_log_level 'off'
@@ -112,17 +96,9 @@ return {
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
 
             if vim.lsp.inlay_hint.is_enabled { bufnr = event.buf } then
-              vim.notify(
-                'Inlay hints enabled',
-                vim.log.levels.INFO,
-                { key = 'toggle_inlay', annote = 'toggle' }
-              )
+              vim.notify('Inlay hints enabled', vim.log.levels.INFO)
             else
-              vim.notify(
-                'Inlay hints disabled',
-                vim.log.levels.INFO,
-                { key = 'toggle_inlay', annote = 'toggle' }
-              )
+              vim.notify('Inlay hints disabled', vim.log.levels.INFO)
             end
           end, '[T]oggle [I]nlay Hints')
         end

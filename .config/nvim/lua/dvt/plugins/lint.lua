@@ -46,10 +46,10 @@ return {
       vim.g.lint_enabled = not vim.g.lint_enabled
       if vim.g.lint_enabled then
         vim.diagnostic.show(nil, 0)
-        vim.notify('Lint enabled', vim.log.levels.INFO, { key = 'toggle_lint', annote = 'toggle' })
+        vim.notify('Lint enabled', vim.log.levels.INFO)
       else
         vim.diagnostic.hide(nil, 0)
-        vim.notify('Lint disabled', vim.log.levels.INFO, { key = 'toggle_lint', annote = 'toggle' })
+        vim.notify('Lint disabled', vim.log.levels.INFO)
       end
     end
 

@@ -21,17 +21,9 @@ return { -- Autoformat
         vim.g.enable_autoformat = not vim.g.enable_autoformat
 
         if vim.g.enable_autoformat then
-          vim.notify(
-            'Autoformatting enabled',
-            vim.log.levels.INFO,
-            { key = 'toggle_formatting', annote = 'toggle' }
-          )
+          vim.notify('Autoformatting enabled', vim.log.levels.INFO)
         else
-          vim.notify(
-            'Autoformatting disabled',
-            vim.log.levels.INFO,
-            { key = 'toggle_formatting', annote = 'toggle' }
-          )
+          vim.notify('Autoformatting disabled', vim.log.levels.INFO)
         end
       end,
       desc = 'Toggle auto formatting',

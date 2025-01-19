@@ -44,6 +44,11 @@ return {
         -- Setup mini.cursorword
         MiniCursorword = { link = 'LspReferenceText' },
 
+        -- Setup mini.notify
+        MiniNotifyNormal = { fg = 'fg', bg = colors.menu },
+        MiniNotifyBorder = { fg = colors.purple, bg = colors.menu },
+        MiniNotifyTitle = { fg = colors.white, bg = colors.menu },
+
         -- Setup harpoon window highlight groups
         HarpoonNormal = { fg = colors.fg, bg = colors.menu },
         HarpoonBorder = { fg = colors.purple, bg = colors.menu },

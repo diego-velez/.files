@@ -23,21 +23,13 @@ return { -- Collection of various small independent plugins/modules
     {
       '<leader>th',
       function()
-        require('mini.hipatterns').toggle(0)
+        MiniHipatterns.toggle(0)
         vim.g.highlighting_enabled = not vim.g.highlighting_enabled
 
         if vim.g.highlighting_enabled then
-          vim.notify(
-            'Highlighting enabled',
-            vim.log.levels.INFO,
-            { key = 'toggle_highlight', annote = 'toggle' }
-          )
+          vim.notify('Highlighting enabled', vim.log.levels.INFO)
         else
-          vim.notify(
-            'Highlighting disabled',
-            vim.log.levels.INFO,
-            { key = 'toggle_highlight', annote = 'toggle' }
-          )
+          vim.notify('Highlighting disabled', vim.log.levels.INFO)
         end
       end,
       desc = 'Toggle [H]ighlighting',
@@ -1000,5 +992,13 @@ return { -- Collection of various small independent plugins/modules
         },
       },
     }
+
+    -- NOTE: Start mini.notify configuration
+    require('mini.notify').setup {
+      window = {
+        winblend = 0,
+      },
+    }
+    vim.notify = MiniNotify.make_notify()
   end,
 }
