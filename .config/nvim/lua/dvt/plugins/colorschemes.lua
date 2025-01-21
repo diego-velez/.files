@@ -105,4 +105,13 @@ return {
       require('monoglow').setup(opts)
     end,
   },
+  {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {},
+    config = function(_, opts)
+      require('tokyonight').setup(opts)
+    end,
+  },
 }
