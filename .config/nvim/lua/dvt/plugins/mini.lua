@@ -995,6 +995,15 @@ return { -- Collection of various small independent plugins/modules
 
     -- NOTE: Start mini.notify configuration
     require('mini.notify').setup {
+      content = {
+        -- Add notifications to the bottom
+        sort = function(notif_arr)
+          table.sort(notif_arr, function(a, b)
+            return a.ts_update < b.ts_update
+          end)
+          return notif_arr
+        end,
+      },
       window = {
         winblend = 0,
       },
