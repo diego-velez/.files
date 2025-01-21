@@ -99,9 +99,8 @@ return { -- Highlight, edit, and navigate code
       },
     },
     opts = {
-      max_lines = 2,
+      max_lines = 1,
       multiline_threshold = 1,
-      trim_scope = 'inner',
     },
   },
   {
