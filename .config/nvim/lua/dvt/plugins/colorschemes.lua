@@ -82,6 +82,27 @@ return {
     'wnkz/monoglow.nvim',
     lazy = false,
     priority = 1000,
-    opts = {},
+    opts = {
+      on_highlights = function(highlights, colors)
+        -- Setup mini.statusline
+        vim.api.nvim_set_hl(
+          0,
+          'MiniStatuslineModeNormal',
+          { fg = colors.gray8, bg = colors.bg_statusline }
+        )
+        vim.api.nvim_set_hl(0, 'MiniStatuslineModeInsert', { fg = colors.black, bg = colors.glow })
+        vim.api.nvim_set_hl(0, 'MiniStatuslineModeVisual', { fg = colors.black, bg = colors.gray9 })
+        vim.api.nvim_set_hl(
+          0,
+          'MiniStatuslineModeReplace',
+          { fg = colors.black, bg = colors.gray9 }
+        )
+        vim.api.nvim_set_hl(0, 'MiniStatuslineModeCommand', { fg = colors.black, bg = colors.glow })
+        vim.api.nvim_set_hl(0, 'MiniStatuslineInactive', { fg = colors.bg, bg = colors.bg })
+      end,
+    },
+    config = function(_, opts)
+      require('monoglow').setup(opts)
+    end,
   },
 }
