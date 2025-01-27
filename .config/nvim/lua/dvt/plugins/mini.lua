@@ -799,6 +799,11 @@ return { -- Collection of various small independent plugins/modules
 
     MiniPick.registry.todo = function()
       require('todo-comments.search').search(function(results)
+        -- Don't do anything if there are no todos in the project
+        if #results == 0 then
+          return
+        end
+
         local Config = require 'todo-comments.config'
         local Highlight = require 'todo-comments.highlight'
 
