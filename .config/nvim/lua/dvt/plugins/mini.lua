@@ -361,14 +361,20 @@ return { -- Collection of various small independent plugins/modules
       -- Setup filename section colors
       vim.api.nvim_set_hl(0, 'MiniStatuslineFilename', { fg = dracula.white, bg = 'bg' })
 
+      -- Do not show rounded corners for the dev section
+      local devLeftOuter, devRightOuter = '', ''
+      if #git + #diff + #diagnostics + #lsp == 0 then
+        devLeftOuter, devRightOuter = '', ''
+      end
+
       return combine_groups {
         { hl = mode_hl_invert, strings = { '' } },
         { hl = mode_hl, strings = { mode } },
         { hl = mode_hl_invert, strings = { '' } },
         ' ',
-        { hl = dev_hl_invert, strings = { '' } },
+        { hl = dev_hl_invert, strings = { devLeftOuter } },
         { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
-        { hl = dev_hl_invert, strings = { '' } },
+        { hl = dev_hl_invert, strings = { devRightOuter } },
         '%<', -- Mark general truncate point
         ' ',
         { hl = 'MiniStatuslineFilename', strings = { filename } },
