@@ -138,7 +138,7 @@ return { -- Collection of various small independent plugins/modules
       function()
         MiniPick.builtin.buffers()
       end,
-      desc = '[S]earch Git [B]ranches',
+      desc = '[S]earch [B]uffers',
     },
   },
   config = function()
