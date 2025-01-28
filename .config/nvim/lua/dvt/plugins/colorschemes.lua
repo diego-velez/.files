@@ -114,4 +114,14 @@ return {
       require('tokyonight').setup(opts)
     end,
   },
+  {
+    'navarasu/onedark.nvim',
+    opts = {
+      style = 'deep',
+    },
+  },
+  {
+    'rose-pine/neovim',
+    name = 'rose-pine',
+  },
 }
