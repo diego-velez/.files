@@ -1020,5 +1020,8 @@ return { -- Collection of various small independent plugins/modules
       },
     }
     vim.notify = MiniNotify.make_notify()
+
+    -- NOTE: Start mini.splitjoin configuration
+    require('mini.splitjoin').setup()
   end,
 }
