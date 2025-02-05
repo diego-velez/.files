@@ -24,9 +24,26 @@ return {
       'xzbdmw/colorful-menu.nvim',
     },
     event = 'InsertEnter',
-    -- allows extending the enabled_providers array elsewhere in your config
-    -- without having to redefine it
-    opts_extend = { 'sources.completion.enabled_providers' },
+    keys = {
+      {
+        '<leader>tC',
+        function()
+          -- Initialize variable if it isn't
+          if vim.b.completion == nil then
+            vim.b.completion = true
+          end
+
+          vim.b.completion = not vim.b.completion
+
+          if vim.b.completion then
+            vim.notify('Completion enabled', vim.log.levels.INFO)
+          else
+            vim.notify('Completion disabled', vim.log.levels.INFO)
+          end
+        end,
+        desc = 'Toggle [C]ompletion',
+      },
+    },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
