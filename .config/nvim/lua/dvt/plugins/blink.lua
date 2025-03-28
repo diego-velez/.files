@@ -73,7 +73,7 @@ return {
         },
         menu = {
           draw = {
-            columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 } },
+            columns = { { 'kind_icon' }, { 'label', gap = 1 } },
             components = {
               label = {
                 text = function(ctx)
@@ -89,7 +89,6 @@ return {
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 0,
-          update_delay_ms = 0,
         },
         ghost_text = {
           enabled = false,
@@ -111,7 +110,6 @@ return {
       sources = {
         -- add lazydev to your completion providers
         default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
-        cmdline = {},
         providers = {
           lazydev = {
             name = 'LazyDev',
@@ -119,6 +117,10 @@ return {
             score_offset = 100,
           },
         },
+      },
+
+      cmdline = {
+        enabled = false,
       },
 
       -- experimental signature help support

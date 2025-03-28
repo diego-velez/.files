@@ -175,6 +175,9 @@ return {
           'templ',
         },
       },
+      asm_lsp = {
+        single_file_support = true,
+      },
     }
 
     -- Ensure the servers and tools above are installed
