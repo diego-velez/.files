@@ -779,8 +779,8 @@ return { -- Collection of various small independent plugins/modules
     end
 
     MiniPick.registry.buf_lines = function()
-      local local_opts = { scope = 'current', preserve_order = true } -- use preserve_order
-      -- local local_opts = { scope = 'current' }
+      -- local local_opts = { scope = 'current', preserve_order = true } -- use preserve_order
+      local local_opts = { scope = 'current' }
       MiniExtra.pickers.buf_lines(local_opts, { source = { show = show_cur_buf_lines } })
     end
 
@@ -1023,5 +1023,9 @@ return { -- Collection of various small independent plugins/modules
 
     -- NOTE: Start mini.splitjoin configuration
     require('mini.splitjoin').setup()
+
+    -- NOTE: Start mini.trailspace configuration
+    require('mini.trailspace').setup()
+    vim.api.nvim_set_hl(0, 'MiniTrailspace', { bg = dracula.bright_red })
   end,
 }
