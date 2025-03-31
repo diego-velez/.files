@@ -1026,6 +1026,5 @@ return { -- Collection of various small independent plugins/modules
 
     -- NOTE: Start mini.trailspace configuration
     require('mini.trailspace').setup()
-    vim.api.nvim_set_hl(0, 'MiniTrailspace', { bg = dracula.bright_red })
   end,
 }
