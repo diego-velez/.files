@@ -171,6 +171,21 @@ config.keys = {
 		mods = "SHIFT|CTRL",
 		action = act.PasteFrom("Clipboard"),
 	},
+	{ -- [I]ncrease font size
+		key = "i",
+		mods = "SHIFT|CTRL|ALT",
+		action = act.IncreaseFontSize,
+	},
+	{ -- [D]ecrease font size
+		key = "d",
+		mods = "SHIFT|CTRL|ALT",
+		action = act.DecreaseFontSize,
+	},
+	{ -- [R]eset font size
+		key = "r",
+		mods = "SHIFT|CTRL|ALT",
+		action = act.ResetFontSize,
+	},
 	setKeymap("u", "CTRL", act.ScrollByPage(-0.5)),
 	setKeymap("d", "CTRL", act.ScrollByPage(0.5)),
 	setKeymap("e", "CTRL", act.ScrollByLine(1)),
