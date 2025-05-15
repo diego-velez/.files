@@ -37,9 +37,10 @@ set fish_cursor_default block
 set fish_cursor_insert line
 
 # Environment variables
-set -x EDITOR nvim
-set -x FZF_DEFAULT_OPTS "--layout=reverse"
-set -x RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/ripgrep.conf"
+set -gx EDITOR nvim
+set -gx FZF_DEFAULT_OPTS "--layout=reverse"
+set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/ripgrep.conf"
+set -gx TERMINAL wezterm
 
 # Prefered optons for common programs
 alias df 'df --total -h -T'
