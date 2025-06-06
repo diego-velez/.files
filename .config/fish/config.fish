@@ -109,18 +109,22 @@ else
     set -U fish_user_paths $(go env GOPATH)/bin $HOME/.local/bin $HOME/.cargo/bin
 end
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if not set -q is_glinux
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+end
 
-# Display a lil something when starting the shell
-set random_num (math (random) % 2)
-switch $random_num
-    case 0
-        # https://gitlab.com/dwt1/shell-color-scripts
-        colorscript random
-    case 1
-        fortune ascii-art
-    case 2
-        fortune wisdom | cowsay
+if not set -q is_glinux
+    # Display a lil something when starting the shell
+    set random_num (math (random) % 2)
+    switch $random_num
+        case 0
+            # https://gitlab.com/dwt1/shell-color-scripts
+            colorscript random
+        case 1
+            fortune ascii-art
+        case 2
+            fortune wisdom | cowsay
+    end
 end
 
 zoxide init fish | source
