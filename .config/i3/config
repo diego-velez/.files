@@ -9,8 +9,11 @@ set $menu rofi -show drun
 # Font
 font pango:JetBrainsMono Nerd Font Mono 11
 
+# Settings
 default_border pixel 5
 default_floating_border pixel 5
+focus_follows_mouse no
+mouse_warping none
 
 # Colors (Dracula theme)
 client.focused          #BD93F9 #44475A #F8F8F2 #BD93F9
