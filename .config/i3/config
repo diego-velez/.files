@@ -1,6 +1,10 @@
 # Set mod key to super
 set $mod Mod4
 
+# Start XDG autostart .desktop files using dex. See also
+# https://wiki.archlinux.org/index.php/XDG_Autostart
+exec --no-startup-id dex --autostart --environment i3
+
 # Programs
 set $terminal wezterm
 set $explorer pcmanfm
@@ -14,6 +18,7 @@ default_border pixel 5
 default_floating_border pixel 5
 focus_follows_mouse no
 mouse_warping none
+floating_modifier $mod
 
 # Colors (Dracula theme)
 client.focused          #BD93F9 #44475A #F8F8F2 #BD93F9
@@ -37,11 +42,10 @@ bindsym $mod+p focus prev
 
 bindsym $mod+c reload
 
-# Resize without entering mode
-bindsym $mod+Ctrl+Left  resize shrink width 5 ppt
-bindsym $mod+Ctrl+Right resize grow   width 5 ppt
-bindsym $mod+Ctrl+Down  resize shrink height 5 ppt
-bindsym $mod+Ctrl+Up    resize grow   height 5 ppt
+bindsym $mod+Ctrl+n resize shrink width 5 px or 5 ppt
+bindsym $mod+Ctrl+o resize grow   width 5 px or 5 ppt
+bindsym $mod+Ctrl+e resize shrink height 5 px or 5 ppt
+bindsym $mod+Ctrl+i resize grow   height 5 px or 5 ppt
 
 # Workspace keybinds
 set $ws1 "1"
