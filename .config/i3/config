@@ -1,0 +1,77 @@
+# Set mod key to super
+set $mod Mod4
+
+# Programs
+set $terminal wezterm
+set $explorer pcmanfm
+set $menu rofi -show drun
+
+# Font
+font pango:JetBrainsMono Nerd Font Mono 11
+
+default_border pixel 5
+default_floating_border pixel 5
+
+# Colors (Dracula theme)
+client.focused          #BD93F9 #44475A #F8F8F2 #BD93F9
+client.focused_inactive #44475A #282A36 #888888 #44475A
+client.unfocused        #44475A #282A36 #888888 #44475A
+client.urgent           #FF5555 #282A36 #FFFFFF #FF5555
+
+### Keybinds ###
+
+bindsym $mod+t exec $terminal
+bindsym $mod+e exec $explorer
+bindsym $mod+r exec $menu
+bindsym $mod+w kill
+
+bindsym $mod+Ctrl+f fullscreen toggle
+
+bindsym $mod+f floating toggle; move position center
+
+bindsym $mod+n focus next
+bindsym $mod+p focus prev
+
+bindsym $mod+c reload
+
+# Resize without entering mode
+bindsym $mod+Ctrl+Left  resize shrink width 5 ppt
+bindsym $mod+Ctrl+Right resize grow   width 5 ppt
+bindsym $mod+Ctrl+Down  resize shrink height 5 ppt
+bindsym $mod+Ctrl+Up    resize grow   height 5 ppt
+
+# Workspace keybinds
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+
+bindsym $mod+Ctrl+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5; workspace $ws5
+
+# Status bar
+bar {
+    status_command i3blocks -c ~/.config/i3blocks/config
+    tray_output primary
+    font pango:JetBrainsMono Nerd Font Mono 11
+    height 20
+    position top
+
+    colors {
+        background #282A36
+        statusline #F8F8F2
+        focused_workspace  #BD93F9 #44475A #F8F8F2
+        inactive_workspace #44475A #282A36 #888888
+        urgent_workspace   #FF5555 #282A36 #FFFFFF
+    }
+}
