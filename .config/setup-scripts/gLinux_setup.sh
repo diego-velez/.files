@@ -58,6 +58,9 @@ DOTFILES="$HOME/Downloads/DVT_.files"
 
 git clone https://github.com/diego-velez/.files.git $DOTFILES
 
+rm -rf ~/.config
+rm -rf ~/.fonts
+
 cp -r $DOTFILES/.fonts ~/.fonts
 cp $DOTFILES/.vimrc ~/.vimrc
 cp $DOTFILES/.ideavimrc ~/.ideavimrc
