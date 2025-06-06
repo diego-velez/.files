@@ -4,7 +4,7 @@
 
 echo "Installing programs"
 
-sudo apt install -y git vim fzf fish rofi ripgrep fd-find eza bat i3 i3blocks zoxide starship ninja-build gettext cmake curl build-essential
+sudo apt install -y git vim fzf fish rofi ripgrep fd-find eza bat i3 i3blocks zoxide starship ninja-build gettext cmake curl build-essential npm cargo python3-venv
 
 ### Follow go/i3#setting-up-chrome-remote-desktop ###
 
