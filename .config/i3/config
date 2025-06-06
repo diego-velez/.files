@@ -61,7 +61,7 @@ bindsym $mod+Ctrl+5 move container to workspace $ws5; workspace $ws5
 
 # Status bar
 bar {
-    status_command i3blocks -c ~/.config/i3blocks/config
+    status_command i3blocks -c ~/.config/i3/i3blocks/config
     tray_output primary
     font pango:JetBrainsMono Nerd Font Mono 11
     height 20
