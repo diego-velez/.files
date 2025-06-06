@@ -1,5 +1,6 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
+set os (lsb_release --id --short)
+if string match -q 'Debian' $os
+    set is_glinux true
 end
 
 # Change title based on the last command ran
@@ -48,19 +49,24 @@ alias free 'free -h'
 alias nano 'nano -E -S -i -l -q'
 alias more less
 alias open xdg-open
-alias fd 'fd --hidden --no-ignore'
+
+if set -q is_glinux
+    alias fd 'fdfind --hidden --no-ignore'
+else
+    alias fd 'fd --hidden --no-ignore'
+end
 
 # Change ls for exa
 alias ls 'eza --color=always --group-directories-first -a --icons'
 alias ll 'eza --color=always --group-directories-first -a -l -h -G --icons'
 alias lt 'eza --color=always --group-directories-first -a -T --icons'
 
-# Change cat for bat and other implementations
-alias cat 'bat --theme Dracula'
-# usage: help <command>
-# help() {
-#     "$@" 2>&1 | cat --paging=never --language=help
-# }
+# Change cat for bat
+if set -q is_glinux
+    alias cat 'batcat --theme Dracula'
+else
+    alias cat 'bat --theme Dracula'
+end
 
 # Colorized grep
 alias grep 'grep --colour=always'
@@ -72,11 +78,19 @@ alias cp "cp -i"
 alias mv "mv -i"
 alias rm "rm -I"
 
-# dnf
-alias update "sudo dnf update"
-alias search "dnf search"
-alias install "sudo dnf install"
-alias remove "sudo dnf remove"
+if set -q is_glinux
+    # apt
+    alias update "sudo apt update"
+    alias search "apt search"
+    alias install "sudo apt install"
+    alias remove "sudo apt remove"
+else
+    # dnf
+    alias update "sudo dnf update"
+    alias search "dnf search"
+    alias install "sudo dnf install"
+    alias remove "sudo dnf remove"
+end
 
 # Used for config-files repo
 alias config 'git --git-dir=$HOME/.files/ --work-tree=$HOME'
@@ -85,7 +99,15 @@ alias config 'git --git-dir=$HOME/.files/ --work-tree=$HOME'
 alias rumad "ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=ssh-rsa estudiante@rumad.uprm.edu"
 
 # PATH
-set -U fish_user_paths $(go env GOPATH)/bin $HOME/.local/bin $HOME/.cargo/bin
+if set -g is_glinux
+    set -U fish_user_paths $HOME/.local/bin
+
+    if test -f $HOME/google-cloud-sdk/path.fish.inc
+        source ~/google-cloud-sdk/path.fish.inc
+    end
+else
+    set -U fish_user_paths $(go env GOPATH)/bin $HOME/.local/bin $HOME/.cargo/bin
+end
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
