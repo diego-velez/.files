@@ -1,0 +1,9 @@
+[clock_time]
+command=date '+󱑂 %H:%M'
+interval=60
+color=#F8F8F2
+
+[clock_date]
+command=date '+󱨴 %d %b'
+interval=60
+color=#F8F8F2
