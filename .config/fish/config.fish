@@ -1,4 +1,5 @@
 set os (lsb_release --id --short)
+set is_glinux false
 if string match -q 'Debian' $os
     set is_glinux true
 end
@@ -50,7 +51,7 @@ alias nano 'nano -E -S -i -l -q'
 alias more less
 alias open xdg-open
 
-if set -q is_glinux
+if test $is_glinux = true
     alias fd 'fdfind --hidden --no-ignore'
 else
     alias fd 'fd --hidden --no-ignore'
@@ -62,7 +63,7 @@ alias ll 'eza --color=always --group-directories-first -a -l -h -G --icons'
 alias lt 'eza --color=always --group-directories-first -a -T --icons'
 
 # Change cat for bat
-if set -q is_glinux
+if test $is_glinux = true
     alias cat 'batcat --theme Dracula'
 else
     alias cat 'bat --theme Dracula'
@@ -78,7 +79,7 @@ alias cp "cp -i"
 alias mv "mv -i"
 alias rm "rm -I"
 
-if set -q is_glinux
+if test $is_glinux = true
     # apt
     alias update "sudo apt update"
     alias search "apt search"
@@ -99,7 +100,7 @@ alias config 'git --git-dir=$HOME/.files/ --work-tree=$HOME'
 alias rumad "ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=ssh-rsa estudiante@rumad.uprm.edu"
 
 # PATH
-if set -g is_glinux
+if test $is_glinux = true
     set -U fish_user_paths $HOME/.local/bin
 
     if test -f $HOME/google-cloud-sdk/path.fish.inc
@@ -109,11 +110,11 @@ else
     set -U fish_user_paths $(go env GOPATH)/bin $HOME/.local/bin $HOME/.cargo/bin
 end
 
-if not set -q is_glinux
+if test $is_glinux = false
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 end
 
-if not set -q is_glinux
+if test $is_glinux = false
     # Display a lil something when starting the shell
     set random_num (math (random) % 2)
     switch $random_num
