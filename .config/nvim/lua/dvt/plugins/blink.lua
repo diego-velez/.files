@@ -123,6 +123,10 @@ return {
         enabled = false,
       },
 
+      fuzzy = {
+        implementation = 'prefer_rust_with_warning',
+      },
+
       -- experimental signature help support
       signature = {
         enabled = true,

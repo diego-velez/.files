@@ -19,6 +19,7 @@ return {
     },
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
+    'saghen/blink.cmp',
   },
   config = function()
     vim.lsp.set_log_level 'off'
@@ -122,7 +123,8 @@ return {
     --  By default, Neovim doesn't support everything that is in the LSP specification.
     --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
     --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
+    -- local capabilities = vim.lsp.protocol.make_client_capabilities()
     -- capabilities =
     --   vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
@@ -214,6 +216,8 @@ return {
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     require('mason-lspconfig').setup {
+      ensure_installed = {},
+      automatic_installation = false,
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
@@ -222,7 +226,6 @@ return {
           -- certain features of an LSP (for example, turning off formatting for ts_ls)
           server.capabilities =
             vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          server.capabilities = require('blink.cmp').get_lsp_capabilities(server.capabilities)
           require('lspconfig')[server_name].setup(server)
         end,
       },
