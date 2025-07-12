@@ -18,7 +18,7 @@ return {
   },
   {
     'saghen/blink.cmp',
-    version = 'v0.*',
+    version = '1.*',
     dependencies = {
       'rafamadriz/friendly-snippets',
       'xzbdmw/colorful-menu.nvim',

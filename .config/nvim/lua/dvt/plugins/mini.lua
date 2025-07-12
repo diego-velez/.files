@@ -734,7 +734,7 @@ return { -- Collection of various small independent plugins/modules
 
       window = {
         prompt_prefix = '󰁔 ',
-        prompt_cursor = ' 󰁍',
+        prompt_caret = ' 󰁍',
       },
     }
 
