@@ -4,7 +4,7 @@ return { -- Highlight, edit, and navigate code
     version = false,
     build = ':TSUpdate',
     dependencies = 'nvim-treesitter/nvim-treesitter-textobjects',
-    event = { 'LazyFile', 'VeryLazy' },
+    event = 'VeryLazy',
     cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
     init = function(plugin)
