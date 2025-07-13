@@ -6,6 +6,10 @@ return {
     -- Mason must be loaded before its dependents so we need to set it up here.
     {
       'mason-org/mason.nvim',
+
+      -- WARN: Using version 1 due to nvim-java
+      -- See https://github.com/nvim-java/nvim-java/issues/384
+      version = '^1.0.0',
       ---@class MasonSettings
       opts = {
         ui = {
@@ -17,9 +21,10 @@ return {
         },
       },
     },
-    'mason-org/mason-lspconfig.nvim',
+    { 'mason-org/mason-lspconfig.nvim', version = '^1.0.0' },
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     'saghen/blink.cmp',
+    'nvim-java/nvim-java',
   },
   config = function()
     vim.lsp.set_log_level 'off'
@@ -214,6 +219,8 @@ return {
       'json-lsp',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+
+    require('java').setup()
 
     require('mason-lspconfig').setup {
       ensure_installed = {},
