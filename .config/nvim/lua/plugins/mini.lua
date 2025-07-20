@@ -1,3 +1,34 @@
+-- Use proper slash depending on OS
+local parent_dir_pattern = vim.fn.has 'win32' == 1 and '([^\\/]+)([\\/])' or '([^/]+)(/)'
+
+-- Shorten a folder's name
+local shorten_dirname = function(name, path_sep)
+  local first = vim.fn.strcharpart(name, 0, 1)
+  first = first == '.' and vim.fn.strcharpart(name, 0, 2) or first
+  return first .. path_sep
+end
+
+-- Shorten one path
+-- WARN: This can only be called for MiniPick
+local make_short_path = function(path)
+  local win_id = MiniPick.get_picker_state().windows.main
+  local buf_width = vim.api.nvim_win_get_width(win_id)
+  local char_count = vim.fn.strchars(path)
+  -- Do not shorten the path if it is not needed
+  if char_count < buf_width then
+    return path
+  end
+
+  local shortened_path = path:gsub(parent_dir_pattern, shorten_dirname)
+  char_count = vim.fn.strchars(shortened_path)
+  -- Return only the filename when the shorten path still overflows
+  if char_count >= buf_width then
+    return shortened_path:match(parent_dir_pattern)
+  end
+
+  return shortened_path
+end
+
 return { -- Collection of various small independent plugins/modules
   'echasnovski/mini.nvim',
   lazy = false,
@@ -75,8 +106,18 @@ return { -- Collection of various small independent plugins/modules
     },
     {
       '<leader>sf',
+      -- See https://github.com/echasnovski/mini.nvim/discussions/1873
       function()
-        require('mini.pick').builtin.files()
+        -- Show function to shorten all entries
+        local show_short_files = function(buf_id, items_to_show, query)
+          local short_items_to_show = vim.tbl_map(make_short_path, items_to_show)
+          -- TODO: Instead of using default show, replace in order to highlight proper folder and add icons back
+          MiniPick.default_show(buf_id, short_items_to_show, query)
+        end
+
+        require('mini.pick').builtin.files({}, {
+          source = { show = show_short_files },
+        })
       end,
       desc = '[S]earch [F]iles',
     },
@@ -139,6 +180,32 @@ return { -- Collection of various small independent plugins/modules
         MiniPick.builtin.buffers()
       end,
       desc = '[S]earch [B]uffers',
+    },
+    {
+      '<leader>n',
+      function()
+        MiniNotify.show_history()
+
+        local buf_id
+        for _, id in ipairs(vim.api.nvim_list_bufs()) do
+          if vim.bo[id].filetype == 'mininotify-history' then
+            buf_id = id
+          end
+        end
+        if buf_id == nil then
+          return
+        end
+
+        -- idk how else to exit than by deleting it lmao
+        -- :q from this buffer just exits Neovim for some reason
+        local exit_buffer = function()
+          vim.api.nvim_buf_delete(buf_id, {})
+        end
+
+        vim.keymap.set('n', '<ESC>', exit_buffer, { buffer = buf_id })
+        vim.keymap.set('n', 'q', exit_buffer, { buffer = buf_id })
+      end,
+      desc = '[N]otification History',
     },
   },
   config = function()
@@ -217,7 +284,6 @@ return { -- Collection of various small independent plugins/modules
     -- - sd'   - [S]urround [D]elete [']quotes
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup {
-      -- Use Ctrl-s for all things surround
       mappings = {
         add = 'ys',
         delete = 'ds',
@@ -540,11 +606,19 @@ return { -- Collection of various small independent plugins/modules
     local mini_files = require 'mini.files'
     mini_files.setup {
       mappings = {
+        close = 'q',
         go_in = '',
-        go_in_plus = '<right>',
+        go_in_plus = '',
         go_out = '<left>',
         go_out_plus = '',
+        mark_set = 'm',
+        mark_goto = "'",
+        reset = '<BS>',
+        reveal_cwd = '@',
+        show_help = '?',
         synchronize = '<CR>',
+        trim_left = '<',
+        trim_right = '>',
       },
       options = {
         permanent_delete = false,
@@ -553,6 +627,38 @@ return { -- Collection of various small independent plugins/modules
         max_number = 3,
       },
     }
+
+    -- Auto-expand empty & nested dirs
+    -- See https://github.com/echasnovski/mini.nvim/discussions/1184
+    local expand_single_dir
+    expand_single_dir = vim.schedule_wrap(function()
+      local is_one_dir = vim.api.nvim_buf_line_count(0) == 1
+        and (MiniFiles.get_fs_entry() or {}).fs_type == 'directory'
+      if not is_one_dir then
+        return
+      end
+      MiniFiles.go_in { close_on_file = true }
+      expand_single_dir()
+    end)
+
+    local go_in_and_expand = function()
+      local fs_entry = MiniFiles.get_fs_entry()
+      local should_expand = fs_entry ~= nil and fs_entry.fs_type == 'file'
+
+      MiniFiles.go_in { close_on_file = true }
+
+      -- Need to check otherwise it will throw error because the mini.files window was closed
+      if not should_expand then
+        expand_single_dir()
+      end
+    end
+
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'MiniFilesBufferCreate',
+      callback = function(args)
+        vim.keymap.set('n', '<right>', go_in_and_expand, { buffer = args.data.buf_id })
+      end,
+    })
 
     --- @param open_current_file boolean If true, will open mini.files in the current file, otherwise opents on cwd.
     local mini_files_toggle = function(open_current_file)
@@ -660,6 +766,18 @@ return { -- Collection of various small independent plugins/modules
       group = vim.api.nvim_create_augroup('DVT Git MiniFilesAction', { clear = true }),
       pattern = { 'MiniFilesActionRename', 'MiniFilesActionMove' },
       callback = function(args)
+        -- We check because if the git add command runs it'll notify the error
+        local is_inside_git_repo = vim
+          .system({
+            'git',
+            'rev-parse',
+            '--is-inside-work-tree',
+          }, { text = true })
+          :wait()
+        if is_inside_git_repo.code ~= 0 then
+          return
+        end
+
         local from = args.data.from
         local to = args.data.to
 
@@ -700,14 +818,17 @@ return { -- Collection of various small independent plugins/modules
         delete_left = '',
         delete_word = '',
 
-        mark = '',
+        mark = '<C-x>',
         mark_all = '<C-a>',
 
-        move_down = '<Down>',
+        move_down = '<C-n>',
         move_start = '<C-g>',
-        move_up = '<Up>',
+        move_up = '<C-p>',
 
-        paste = '<C-p>',
+        paste = '<C-S-v>',
+
+        refine = '<C-r>',
+        refine_marked = '',
 
         scroll_down = '<C-d>',
         scroll_left = '<C-Left>',
@@ -729,12 +850,12 @@ return { -- Collection of various small independent plugins/modules
       },
 
       options = {
-        use_cache = true,
+        use_cache = false,
       },
 
       window = {
         prompt_prefix = '󰁔 ',
-        prompt_caret = ' 󰁍',
+        prompt_caret = ' ',
       },
     }
 
@@ -943,6 +1064,13 @@ return { -- Collection of various small independent plugins/modules
         -- `z` key
         { mode = 'n', keys = 'z' },
         { mode = 'x', keys = 'z' },
+
+        -- Tabs
+        { mode = 'n', keys = '<tab>' },
+
+        -- Brackets
+        { mode = 'n', keys = '[' },
+        { mode = 'n', keys = ']' },
       },
 
       clues = {
@@ -950,7 +1078,9 @@ return { -- Collection of various small independent plugins/modules
           { mode = 'n', keys = '<leader>r', desc = '[R]ename' },
           { mode = 'n', keys = '<leader>s', desc = '[S]earch' },
           { mode = 'n', keys = '<leader>t', desc = '[T]oggle' },
-          { mode = 'n', keys = '<leader>h', desc = '[H]arpoon' },
+          { mode = 'n', keys = '<leader>l', desc = '[L]ist' },
+          { mode = 'n', keys = '<leader>u', desc = '[U]I' },
+          { mode = 'n', keys = '<leader>c', desc = '[C]ode' },
           { mode = 'n', keys = '<leader>g', desc = '[G]it' },
           { mode = 'x', keys = '<leader>g', desc = '[G]it' },
         },

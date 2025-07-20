@@ -1,1 +1,1 @@
-require 'dvt'
+require 'config.lazy'
