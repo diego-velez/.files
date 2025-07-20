@@ -17,6 +17,7 @@ return {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     'saghen/blink.cmp',
     'nvim-java/nvim-java',
+    'saecki/live-rename.nvim',
   },
   config = function()
     -- vim.lsp.set_log_level 'off' WARN: this might be needed if getting lsp log too big ah type shi
@@ -49,6 +50,10 @@ return {
         end, '[G]oto [D]eclaration')
 
         map('<leader>ca', vim.lsp.buf.code_action, 'Code [A]ction')
+
+        map('<leader>cr', function()
+          require('live-rename').rename { insert = true }
+        end, '[R]ename')
 
         -- Show hover with window
         vim.api.nvim_create_autocmd({ 'VimEnter', 'VimResized' }, {
