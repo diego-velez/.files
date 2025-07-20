@@ -36,7 +36,7 @@
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "render-markdown.nvim": { "branch": "main", "commit": "7620d4e96eb5cf8d12e76c6fcaf1267628564ba9" },
   "rose-pine": { "branch": "main", "commit": "72befaffeac38db7bdd49e0549eaa2c4806dd878" },
-  "spear.nvim": { "branch": "main", "commit": "42fdd7f4bfc8c03d1b01475e42ac858e2900cb2d" },
+  "spear.nvim": { "branch": "main", "commit": "0e07b763f5bc48db5a10ebe611ec2a99ac116db6" },
   "spring-boot.nvim": { "branch": "main", "commit": "218c0c26c14d99feca778e4d13f5ec3e8b1b60f0" },
   "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "7dcf8542059fb15c978de845fc8665428ae13a04" },
   "todo-comments.nvim": { "branch": "main", "commit": "304a8d204ee787d2544d8bc23cd38d2f929e7cc5" },
@@ -46,5 +46,6 @@
   "typescript-tools.nvim": { "branch": "master", "commit": "3c501d7c7f79457932a8750a2a1476a004c5c1a9" },
   "undotree": { "branch": "master", "commit": "28f2f54a34baff90ea6f4a735ef1813ad875c743" },
   "vim-suda": { "branch": "master", "commit": "9adda7d195222d4e2854efb2a88005a120296c47" },
-  "wezterm-types": { "branch": "main", "commit": "bbbf317e9bfcd8632d24af1fee3182856d9c98e1" }
+  "wezterm-types": { "branch": "main", "commit": "bbbf317e9bfcd8632d24af1fee3182856d9c98e1" },
+  "yanky.nvim": { "branch": "main", "commit": "04775cc6e10ef038c397c407bc17f00a2f52b378" }
 }
