@@ -763,9 +763,44 @@ return { -- Collection of various small independent plugins/modules
 
     -- Use to try and automatically detect
     vim.api.nvim_create_autocmd('User', {
-      group = vim.api.nvim_create_augroup('DVT Git MiniFilesAction', { clear = true }),
+      group = vim.api.nvim_create_augroup(
+        'DVT MiniFilesAction Git/LSP integration',
+        { clear = true }
+      ),
       pattern = { 'MiniFilesActionRename', 'MiniFilesActionMove' },
       callback = function(args)
+        local from = args.data.from
+        local to = args.data.to
+        local lsp_changes = {
+          files = {
+            {
+              oldUri = vim.uri_from_fname(from),
+              newUri = vim.uri_from_fname(to),
+            },
+          },
+        }
+
+        -- LSP integation
+        -- See https://github.com/folke/snacks.nvim/blob/bc0630e43be5699bb94dadc302c0d21615421d93/lua/snacks/rename.lua#L85
+        local clients = vim.lsp.get_clients()
+        for _, client in ipairs(clients) do
+          local lsp_rename_files_method = vim.lsp.protocol.Methods.workspace_willRenameFiles
+          if client:supports_method(lsp_rename_files_method) then
+            local resp = client:request_sync(lsp_rename_files_method, lsp_changes, 1000, 0)
+            if resp and resp.result ~= nil then
+              vim.lsp.util.apply_workspace_edit(resp.result, client.offset_encoding)
+            end
+          end
+        end
+
+        for _, client in ipairs(clients) do
+          local lsp_rename_files_method = vim.lsp.protocol.Methods.workspace_didRenameFiles
+          if client:supports_method(lsp_rename_files_method) then
+            client:notify(lsp_rename_files_method, lsp_changes)
+          end
+        end
+
+        -- Auto file to Git in order for it to detect file was renamed or moved
         -- We check because if the git add command runs it'll notify the error
         local is_inside_git_repo = vim
           .system({
@@ -777,9 +812,6 @@ return { -- Collection of various small independent plugins/modules
         if is_inside_git_repo.code ~= 0 then
           return
         end
-
-        local from = args.data.from
-        local to = args.data.to
 
         pcall(vim.cmd, 'Git add ' .. from .. ' ' .. to)
       end,
