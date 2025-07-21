@@ -864,7 +864,7 @@ return { -- Collection of various small independent plugins/modules
         caret_left = '<Left>',
         caret_right = '<Right>',
 
-        choose = '<CR>',
+        choose = '<C-y>',
         choose_in_split = '<C-h>',
         choose_in_vsplit = '<C-v>',
         choose_in_tabpage = '<C-t>',
@@ -872,8 +872,8 @@ return { -- Collection of various small independent plugins/modules
 
         delete_char = '<BS>',
         delete_char_right = '<Del>',
-        delete_left = '',
-        delete_word = '',
+        delete_left = '<C-u>',
+        delete_word = '<C-w>',
 
         mark = '<C-x>',
         mark_all = '<C-a>',
@@ -887,10 +887,10 @@ return { -- Collection of various small independent plugins/modules
         refine = '<C-r>',
         refine_marked = '',
 
-        scroll_down = '<C-d>',
+        scroll_down = '<C-f>',
         scroll_left = '<C-Left>',
         scroll_right = '<C-Right>',
-        scroll_up = '<C-u>',
+        scroll_up = '<C-b>',
 
         stop = '<Esc>',
 
@@ -902,6 +902,13 @@ return { -- Collection of various small independent plugins/modules
           func = function()
             local mappings = MiniPick.get_picker_opts().mappings
             vim.api.nvim_input(mappings.mark_all .. mappings.choose_marked)
+          end,
+        },
+        another_choose = {
+          char = '<CR>',
+          func = function()
+            local choose_mapping = MiniPick.get_picker_opts().mappings.choose
+            vim.api.nvim_input(choose_mapping)
           end,
         },
       },
@@ -1154,6 +1161,7 @@ return { -- Collection of various small independent plugins/modules
           { mode = 'n', keys = '<leader>c', desc = '[C]ode' },
           { mode = 'n', keys = '<leader>g', desc = '[G]it' },
           { mode = 'x', keys = '<leader>g', desc = '[G]it' },
+          { mode = 'n', keys = '<leader><tab>', desc = '[T]ab' },
         },
         miniclue.gen_clues.builtin_completion(),
         miniclue.gen_clues.g(),
