@@ -868,7 +868,7 @@ return { -- Collection of various small independent plugins/modules
         choose_in_split = '<C-h>',
         choose_in_vsplit = '<C-v>',
         choose_in_tabpage = '<C-t>',
-        choose_marked = '<C-CR>',
+        choose_marked = '<C-q>',
 
         delete_char = '<BS>',
         delete_char_right = '<Del>',
@@ -882,9 +882,9 @@ return { -- Collection of various small independent plugins/modules
         move_start = '<C-g>',
         move_up = '<C-p>',
 
-        paste = '<C-S-v>',
+        paste = '',
 
-        refine = '<C-r>',
+        refine = '<C-CR>',
         refine_marked = '',
 
         scroll_down = '<C-f>',
@@ -897,18 +897,22 @@ return { -- Collection of various small independent plugins/modules
         toggle_info = '<S-Tab>',
         toggle_preview = '<Tab>',
 
-        send_to_quickfix = {
-          char = '<C-q>',
-          func = function()
-            local mappings = MiniPick.get_picker_opts().mappings
-            vim.api.nvim_input(mappings.mark_all .. mappings.choose_marked)
-          end,
-        },
         another_choose = {
           char = '<CR>',
           func = function()
             local choose_mapping = MiniPick.get_picker_opts().mappings.choose
             vim.api.nvim_input(choose_mapping)
+          end,
+        },
+        actual_paste = {
+          char = '<C-r>',
+          func = function()
+            local content = vim.fn.getreg '+'
+            if content ~= '' then
+              local current_query = MiniPick.get_picker_query() or {}
+              table.insert(current_query, content)
+              MiniPick.set_picker_query(current_query)
+            end
           end,
         },
       },
