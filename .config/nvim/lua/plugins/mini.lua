@@ -224,7 +224,7 @@ return { -- Collection of various small independent plugins/modules
         -- idk how else to exit than by deleting it lmao
         -- :q from this buffer just exits Neovim for some reason
         local exit_buffer = function()
-          vim.api.nvim_buf_delete(buf_id, {})
+          MiniBufremove.delete(buf_id, true)
         end
 
         vim.keymap.set('n', '<ESC>', exit_buffer, { buffer = buf_id })
@@ -1240,5 +1240,8 @@ return { -- Collection of various small independent plugins/modules
 
     -- NOTE: Start mini.trailspace configuration
     require('mini.trailspace').setup()
+
+    -- NOTE: Start mini.bufremove configuration
+    require('mini.bufremove').setup()
   end,
 }
