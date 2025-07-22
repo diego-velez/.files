@@ -149,6 +149,9 @@ return {
           return defacto
         end,
         providers = {
+          lsp = {
+            fallbacks = {},
+          },
           path = {
             opts = {
               get_cwd = function(_)
