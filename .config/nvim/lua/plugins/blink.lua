@@ -118,7 +118,7 @@ return {
           then
             return { 'path', 'buffer', 'dictionary', 'thesaurus', 'ripgrep' }
           end
-          return { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' }
+          return { 'lsp', 'path', 'snippets', 'buffer', 'ripgrep' }
         end,
         providers = {
           path = {
@@ -186,6 +186,7 @@ return {
         per_filetype = {
           text = { 'dictionary' },
           markdown = { 'thesaurus' },
+          lua = { 'lazydev', inherit_defaults = true },
         },
       },
 
