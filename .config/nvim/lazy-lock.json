@@ -1,4 +1,5 @@
 {
+  "blink-ripgrep.nvim": { "branch": "main", "commit": "95ef910133d115dae4aafb7b0c30713cf3deb43a" },
   "blink.cmp": { "branch": "main", "commit": "586ee87534f5bf65f1c8dea2d1da2a57e8cddd36" },
   "colorful-menu.nvim": { "branch": "master", "commit": "bc3e82609f2fcf7dad7ca87c20e65e51d5d9d87c" },
   "conform.nvim": { "branch": "master", "commit": "973f3cb73887d510321653044791d7937c7ec0fa" },

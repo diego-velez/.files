@@ -22,6 +22,7 @@ return {
     dependencies = {
       'rafamadriz/friendly-snippets',
       'xzbdmw/colorful-menu.nvim',
+      'mikavilpas/blink-ripgrep.nvim',
     },
     event = 'InsertEnter',
     keys = {
@@ -73,7 +74,7 @@ return {
         },
         menu = {
           draw = {
-            columns = { { 'kind_icon' }, { 'label', gap = 1 } },
+            columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 } },
             components = {
               label = {
                 text = function(ctx)
@@ -115,6 +116,21 @@ return {
             name = 'LazyDev',
             module = 'lazydev.integrations.blink',
             score_offset = 100,
+          },
+          ripgrep = {
+            module = 'blink-ripgrep',
+            name = 'Ripgrep',
+            ---@module "blink-ripgrep"
+            ---@type blink-ripgrep.Options
+            opts = {},
+            transform_items = function(_, items)
+              for _, item in ipairs(items) do
+                item.labelDetails = {
+                  description = '(rg)',
+                }
+              end
+              return items
+            end,
           },
         },
       },
