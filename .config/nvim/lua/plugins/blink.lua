@@ -23,6 +23,7 @@ return {
       'rafamadriz/friendly-snippets',
       'xzbdmw/colorful-menu.nvim',
       'mikavilpas/blink-ripgrep.nvim',
+      'archie-judd/blink-cmp-words',
     },
     event = 'InsertEnter',
     keys = {
@@ -106,12 +107,26 @@ return {
         nerd_font_variant = 'mono',
       },
 
-      -- default list of enabled providers defined so that you can extend it
-      -- elsewhere in your config, without redefining it, via `opts_extend`
       sources = {
-        -- add lazydev to your completion providers
-        default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
+        default = function()
+          local success, node = pcall(vim.treesitter.get_node)
+          if
+            success
+            and node
+            and vim.tbl_contains({ 'comment', 'line_comment', 'block_comment' }, node:type())
+          then
+            return { 'path', 'buffer', 'dictionary', 'thesaurus', 'ripgrep' }
+          end
+          return { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' }
+        end,
         providers = {
+          path = {
+            opts = {
+              get_cwd = function(_)
+                return vim.uv.cwd()
+              end,
+            },
+          },
           lazydev = {
             name = 'LazyDev',
             module = 'lazydev.integrations.blink',
@@ -132,6 +147,44 @@ return {
               return items
             end,
           },
+          -- Use the thesaurus source
+          thesaurus = {
+            name = 'blink-cmp-words',
+            module = 'blink-cmp-words.thesaurus',
+            -- All available options
+            opts = {
+              -- A score offset applied to returned items.
+              -- By default the highest score is 0 (item 1 has a score of -1, item 2 of -2 etc..).
+              score_offset = 0,
+
+              -- Default pointers define the lexical relations listed under each definition,
+              -- see Pointer Symbols below.
+              -- Default is as below ("antonyms", "similar to" and "also see").
+              pointer_symbols = { '!', '&', '^' },
+            },
+          },
+
+          -- Use the dictionary source
+          dictionary = {
+            name = 'blink-cmp-words',
+            module = 'blink-cmp-words.dictionary',
+            -- All available options
+            opts = {
+              -- The number of characters required to trigger completion.
+              -- Set this higher if completion is slow, 3 is default.
+              dictionary_search_threshold = 3,
+
+              -- See above
+              score_offset = 0,
+
+              -- See above
+              pointer_symbols = { '!', '&', '^' },
+            },
+          },
+        },
+        per_filetype = {
+          text = { 'dictionary' },
+          markdown = { 'thesaurus' },
         },
       },
 

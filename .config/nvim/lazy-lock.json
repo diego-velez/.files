@@ -1,4 +1,5 @@
 {
+  "blink-cmp-words": { "branch": "main", "commit": "81224ec2eb72115c84bb19ae566ef25083dbfed2" },
   "blink-ripgrep.nvim": { "branch": "main", "commit": "95ef910133d115dae4aafb7b0c30713cf3deb43a" },
   "blink.cmp": { "branch": "main", "commit": "586ee87534f5bf65f1c8dea2d1da2a57e8cddd36" },
   "colorful-menu.nvim": { "branch": "master", "commit": "bc3e82609f2fcf7dad7ca87c20e65e51d5d9d87c" },
