@@ -363,12 +363,33 @@ return { -- Collection of various small independent plugins/modules
         return string.format('%s %s', filetype, size), highlight
       end
 
+      ---@class FilenameArgs
+      ---@field trunc_width number Decides when to trunc to relative path
+      ---@field trunc_width_further number Decides when to trunc to filename only
+
+      ---@param args FilenameArgs
+      local section_filename = function(args)
+        -- In terminal always use plain name
+        if vim.bo.buftype == 'terminal' then
+          return '%t'
+        elseif MiniStatusline.is_truncated(args.trunc_width_further) then
+          return '%t%m%r'
+        elseif MiniStatusline.is_truncated(args.trunc_width) then
+          -- File name with 'truncate', 'modified', 'readonly' flags
+          -- Use relative path if truncated
+          return '%f%m%r'
+        else
+          -- Use fullpath if not truncated
+          return '%F%m%r'
+        end
+      end
+
       local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 120 }
       local git = MiniStatusline.section_git { trunc_width = 40 }
       local diff = MiniStatusline.section_diff { trunc_width = 75 }
       local diagnostics = MiniStatusline.section_diagnostics { trunc_width = 75 }
       local lsp = MiniStatusline.section_lsp { trunc_width = 75 }
-      local filename = MiniStatusline.section_filename { trunc_width = 140 }
+      local filename = section_filename { trunc_width = 140, trunc_width_further = 120 }
 
       local fileinfo, icon_hl = section_fileinfo { trunc_width = 75 }
       local location = '%2l:%-2v'
