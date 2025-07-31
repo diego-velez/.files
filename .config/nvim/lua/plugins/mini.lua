@@ -1142,6 +1142,64 @@ return { -- Collection of various small independent plugins/modules
     end
 
     -- NOTE: Start mini.clue configuration
+
+    -- See MiniClue.gen_clues.z()
+    local z_clues = function()
+      return {
+        { mode = 'n', keys = 'zA', desc = 'Toggle folds recursively' },
+        { mode = 'n', keys = 'za', desc = 'Toggle fold' },
+        { mode = 'n', keys = 'zb', desc = 'Redraw at bottom' },
+        { mode = 'n', keys = 'zC', desc = 'Close folds recursively' },
+        { mode = 'n', keys = 'zc', desc = 'Close fold' },
+        { mode = 'n', keys = 'zD', desc = 'Delete folds recursively' },
+        { mode = 'n', keys = 'zd', desc = 'Delete fold' },
+        { mode = 'n', keys = 'zE', desc = 'Eliminate all folds' },
+        { mode = 'n', keys = 'ze', desc = 'Scroll to cursor on right screen side' },
+        { mode = 'n', keys = 'zF', desc = 'Create fold' },
+        { mode = 'n', keys = 'zf', desc = 'Create fold (operator)' },
+        { mode = 'n', keys = 'zG', desc = 'Temporarily mark as correctly spelled' },
+        { mode = 'n', keys = 'zg', desc = 'Permanently mark as correctly spelled' },
+        { mode = 'n', keys = 'zH', desc = 'Scroll left half screen' },
+        { mode = 'n', keys = 'z<left>', desc = 'Scroll left', postkeys = 'z' },
+        { mode = 'n', keys = 'zi', desc = "Toggle 'foldenable'" },
+        { mode = 'n', keys = 'zj', desc = 'Move to start of next fold' },
+        { mode = 'n', keys = 'zk', desc = 'Move to end of previous fold' },
+        { mode = 'n', keys = 'zL', desc = 'Scroll right half screen' },
+        { mode = 'n', keys = 'z<right>', desc = 'Scroll right', postkeys = 'z' },
+        { mode = 'n', keys = 'zM', desc = 'Close all folds' },
+        { mode = 'n', keys = 'zm', desc = 'Fold more' },
+        { mode = 'n', keys = 'zN', desc = "Set 'foldenable'" },
+        { mode = 'n', keys = 'zn', desc = "Reset 'foldenable'" },
+        { mode = 'n', keys = 'zO', desc = 'Open folds recursively' },
+        { mode = 'n', keys = 'zo', desc = 'Open fold' },
+        { mode = 'n', keys = 'zP', desc = 'Paste without trailspace' },
+        { mode = 'n', keys = 'zp', desc = 'Paste without trailspace' },
+        { mode = 'n', keys = 'zR', desc = 'Open all folds' },
+        { mode = 'n', keys = 'zr', desc = 'Fold less' },
+        { mode = 'n', keys = 'zs', desc = 'Scroll to cursor on left screen side' },
+        { mode = 'n', keys = 'zt', desc = 'Redraw at top' },
+        { mode = 'n', keys = 'zu', desc = '+Undo spelling commands' },
+        { mode = 'n', keys = 'zug', desc = 'Undo `zg`' },
+        { mode = 'n', keys = 'zuG', desc = 'Undo `zG`' },
+        { mode = 'n', keys = 'zuw', desc = 'Undo `zw`' },
+        { mode = 'n', keys = 'zuW', desc = 'Undo `zW`' },
+        { mode = 'n', keys = 'zv', desc = 'Open enough folds' },
+        { mode = 'n', keys = 'zW', desc = 'Temporarily mark as incorrectly spelled' },
+        { mode = 'n', keys = 'zw', desc = 'Permanently mark as incorrectly spelled' },
+        { mode = 'n', keys = 'zX', desc = 'Update folds' },
+        { mode = 'n', keys = 'zx', desc = 'Update folds + open enough folds' },
+        { mode = 'n', keys = 'zy', desc = 'Yank without trailing spaces (operator)' },
+        { mode = 'n', keys = 'zz', desc = 'Redraw at center' },
+        { mode = 'n', keys = 'z+', desc = 'Redraw under bottom at top' },
+        { mode = 'n', keys = 'z-', desc = 'Redraw at bottom + cursor on first non-blank' },
+        { mode = 'n', keys = 'z.', desc = 'Redraw at center + cursor on first non-blank' },
+        { mode = 'n', keys = 'z=', desc = 'Show spelling suggestions' },
+        { mode = 'n', keys = 'z^', desc = 'Redraw above top at bottom' },
+
+        { mode = 'x', keys = 'zf', desc = 'Create fold from selection' },
+      }
+    end
+
     local miniclue = require 'mini.clue'
     miniclue.setup {
       triggers = {
@@ -1199,7 +1257,7 @@ return { -- Collection of various small independent plugins/modules
         miniclue.gen_clues.marks(),
         miniclue.gen_clues.registers(),
         miniclue.gen_clues.windows { submode_resize = true },
-        miniclue.gen_clues.z(),
+        z_clues(),
       },
 
       window = {
