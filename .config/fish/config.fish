@@ -128,5 +128,16 @@ if test $is_glinux = false
     end
 end
 
+# Config sdkman for fish
+# See https://github.com/sdkman/sdkman-cli/issues/671#issuecomment-1130004319
+function sdk
+    bash -c "source '$HOME/.sdkman/bin/sdkman-init.sh'; sdk $argv[1..]"
+end
+
+fish_add_path (find $HOME/.sdkman/candidates/*/current/bin -maxdepth 0)
+
+alias mdi "mvn -N wrapper:wrapper && ./mvnw clean install -X -U"
+alias skaf "skaffold run --profile dev --kube-context=gke_diveto-louhi-test_us-central1_louhi --skip-tests --default-repo=\"us-central1-docker.pkg.dev/diveto-louhi-test/microservices\""
+
 zoxide init fish | source
 starship init fish | source
