@@ -121,7 +121,11 @@ return {
 
       cmdline = {
         enabled = true,
-        keymap = { preset = 'inherit' },
+        keymap = {
+          preset = 'inherit',
+          ['<tab>'] = { 'show_and_insert', 'select_next' },
+          ['<S-tab>'] = { 'show_and_insert', 'select_prev' },
+        },
       },
 
       fuzzy = {
