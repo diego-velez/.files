@@ -634,7 +634,7 @@ return { -- Collection of various small independent plugins/modules
         close = 'q',
         go_in = '',
         go_in_plus = '',
-        go_out = '<left>',
+        go_out = '<C-e>',
         go_out_plus = '',
         mark_set = 'm',
         mark_goto = "'",
@@ -681,7 +681,9 @@ return { -- Collection of various small independent plugins/modules
     vim.api.nvim_create_autocmd('User', {
       pattern = 'MiniFilesBufferCreate',
       callback = function(args)
-        vim.keymap.set('n', '<right>', go_in_and_expand, { buffer = args.data.buf_id })
+        vim.keymap.set('n', '<C-y>', go_in_and_expand, { buffer = args.data.buf_id })
+        vim.keymap.set('n', '<C-p>', '<up>', { buffer = args.data.buf_id })
+        vim.keymap.set('n', '<C-n>', '<down>', { buffer = args.data.buf_id })
       end,
     })
 
