@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazySpec
 return {
   {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -45,6 +47,23 @@ return {
           end
         end,
         desc = 'Toggle [C]ompletion',
+      },
+      {
+        '<leader>tg',
+        function()
+          if vim.b.grep_completion == nil then
+            vim.b.grep_completion = false
+          end
+
+          vim.b.grep_completion = not vim.b.grep_completion
+
+          if vim.b.grep_completion then
+            vim.notify('Grep completion enabled', vim.log.levels.INFO)
+          else
+            vim.notify('Grep completion disabled', vim.log.levels.INFO)
+          end
+        end,
+        desc = '[T]oggle [G]rep in autocompletion',
       },
     },
     ---@module 'blink.cmp'
@@ -119,7 +138,15 @@ return {
           then
             return { 'path', 'buffer', 'dictionary', 'thesaurus', 'ripgrep' }
           end
-          return { 'lsp', 'path', 'snippets', 'buffer', 'ripgrep' }
+
+          local defacto = { 'lsp', 'path', 'snippets', 'buffer' }
+
+          -- Only show ripgrep if we have it on for the buffer
+          if vim.b.grep_completion then
+            table.insert(defacto, 'ripgrep')
+          end
+
+          return defacto
         end,
         providers = {
           path = {
