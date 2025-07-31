@@ -82,3 +82,6 @@ vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 -- vim.opt.foldmethod = 'indent'
 vim.opt.foldenable = false
+
+-- Set rounded borders the default
+vim.o.winborder = 'rounded'
