@@ -85,3 +85,5 @@ vim.opt.foldenable = false
 
 -- Set rounded borders the default
 vim.o.winborder = 'rounded'
+
+vim.o.shell = '/bin/fish'
