@@ -115,9 +115,9 @@ return { -- Collection of various small independent plugins/modules
       function()
         local cword = vim.fn.expand '<cword>'
         vim.defer_fn(function()
-          vim.api.nvim_input(cword)
+          MiniPick.set_picker_query { cword }
         end, 25)
-        require('mini.pick').builtin.grep_live()
+        MiniPick.builtin.grep_live()
       end,
       desc = '[S]earch [W]ord',
     },
