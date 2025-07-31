@@ -87,6 +87,7 @@ return {
               },
             },
           },
+          border = 'none',
         },
         documentation = {
           auto_show = true,
