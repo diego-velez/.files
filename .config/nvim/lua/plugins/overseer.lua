@@ -26,14 +26,34 @@ return {
     { '<leader>ot', '<cmd>OverseerTaskAction<cr>', desc = 'Task action' },
     { '<leader>oc', '<cmd>OverseerClearCache<cr>', desc = 'Clear cache' },
   },
+  ---@module 'overseer'
+  ---@type overseer.Config
   opts = {
     dap = false,
     task_list = {
+      direction = 'right',
       bindings = {
-        ['<C-h>'] = false,
-        ['<C-j>'] = false,
-        ['<C-k>'] = false,
-        ['<C-l>'] = false,
+        ['?'] = 'ShowHelp',
+        ['g?'] = 'ShowHelp',
+        ['<CR>'] = 'RunAction',
+        ['<C-e>'] = 'Edit',
+        ['o'] = 'Open',
+        ['<C-v>'] = 'OpenVsplit!',
+        ['<C-h>'] = 'OpenSplit',
+        ['<C-f>'] = 'OpenFloat',
+        ['<C-q>'] = 'OpenQuickFix',
+        ['p'] = 'TogglePreview',
+        ['<C-right>'] = false,
+        ['<C-left>'] = false,
+        ['<C-down>'] = 'IncreaseAllDetail',
+        ['<C-up>'] = 'DecreaseAllDetail',
+        ['{'] = 'DecreaseWidth',
+        ['}'] = 'IncreaseWidth',
+        ['['] = 'PrevTask',
+        [']'] = 'NextTask',
+        ['<C-u>'] = 'ScrollOutputUp',
+        ['<C-d>'] = 'ScrollOutputDown',
+        ['q'] = 'Close',
       },
     },
     form = {

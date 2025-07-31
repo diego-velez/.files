@@ -508,6 +508,14 @@ return { -- Collection of various small independent plugins/modules
       }
     end
 
+    vim.api.nvim_create_autocmd('FileType', {
+      desc = 'Disable mini.statusline for certain file types',
+      pattern = 'OverseerList',
+      callback = function()
+        vim.b.ministatusline_disable = true
+      end,
+    })
+
     -- Simple and easy statusline.
     --  You could remove this setup call if you don't like it,
     --  and try some other statusline plugin
@@ -1256,7 +1264,12 @@ return { -- Collection of various small independent plugins/modules
         miniclue.gen_clues.g(),
         miniclue.gen_clues.marks(),
         miniclue.gen_clues.registers(),
-        miniclue.gen_clues.windows { submode_resize = true },
+        vim.tbl_extend('force', miniclue.gen_clues.windows { submode_resize = true }, {
+          { mode = 'n', keys = '<C-w><left>', desc = 'Focus left', postkeys = '<C-w>' },
+          { mode = 'n', keys = '<C-w><right>', desc = 'Focus right', postkeys = '<C-w>' },
+          { mode = 'n', keys = '<C-w><up>', desc = 'Focus top', postkeys = '<C-w>' },
+          { mode = 'n', keys = '<C-w><down>', desc = 'Focus bottom', postkeys = '<C-w>' },
+        }),
         z_clues(),
       },
 
