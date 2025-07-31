@@ -10,6 +10,20 @@ return {
       desc = '[A]dd file to list',
     },
     {
+      '<leader>ld',
+      function()
+        require('spear').remove()
+      end,
+      desc = '[D]elete file from list',
+    },
+    {
+      '<leader>lD',
+      function()
+        require('spear').delete()
+      end,
+      desc = '[D]elete list',
+    },
+    {
       '<leader>lc',
       function()
         require('spear').create()
