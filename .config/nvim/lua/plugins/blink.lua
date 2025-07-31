@@ -54,7 +54,7 @@ return {
         preset = 'none',
         ['<C-CR>'] = { 'show', 'show_documentation', 'hide_documentation' },
         ['<C-y>'] = { 'select_and_accept' },
-        ['<C-e>'] = { 'hide' },
+        ['<C-e>'] = { 'cancel' },
 
         ['<C-p>'] = { 'select_prev', 'fallback' },
         ['<C-n>'] = { 'select_next', 'fallback' },
@@ -71,7 +71,7 @@ return {
       completion = {
         accept = {
           auto_brackets = {
-            enabled = true,
+            enabled = false,
           },
         },
         menu = {
