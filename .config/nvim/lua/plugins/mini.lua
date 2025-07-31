@@ -1198,7 +1198,7 @@ return { -- Collection of various small independent plugins/modules
         miniclue.gen_clues.g(),
         miniclue.gen_clues.marks(),
         miniclue.gen_clues.registers(),
-        miniclue.gen_clues.windows(),
+        miniclue.gen_clues.windows { submode_resize = true },
         miniclue.gen_clues.z(),
       },
 
