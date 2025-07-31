@@ -49,6 +49,11 @@ return { -- Autoformat
         lsp_format = 'fallback',
       }
     end,
+    formatters = {
+      hclfmt = {
+        command = '/google/data/ro/teams/terraform/bin/hclfmt',
+      },
+    },
     formatters_by_ft = {
       lua = { 'stylua' },
       templ = { 'templ' },
@@ -58,6 +63,7 @@ return { -- Autoformat
       typescript = { 'prettier' },
       sql = { 'sqlfmt' },
       java = { 'google-java-format' },
+      terraform = { 'hclfmt' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
