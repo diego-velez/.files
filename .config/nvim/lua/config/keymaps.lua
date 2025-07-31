@@ -91,13 +91,13 @@ vim.keymap.set(
 )
 
 -- Tabs
-vim.keymap.set('n', '<tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
-vim.keymap.set('n', '<tab>w', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
-vim.keymap.set('n', '<tab>o', '<cmd>tabonly<cr>', { desc = 'Close [O]ther Tabs' })
-vim.keymap.set('n', '<tab>n', '<cmd>tabnext<cr>', { desc = '[N]ext Tab' })
-vim.keymap.set('n', '<tab>p', '<cmd>tabprevious<cr>', { desc = '[P]revious Tab' })
-vim.keymap.set('n', '<tab>f', '<cmd>tabfirst<cr>', { desc = '[F]irst Tab' })
-vim.keymap.set('n', '<tab>l', '<cmd>tablast<cr>', { desc = '[L]ast Tab' })
+vim.keymap.set('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
+vim.keymap.set('n', '<leader><tab>w', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
+vim.keymap.set('n', '<leader><tab>o', '<cmd>tabonly<cr>', { desc = 'Close [O]ther Tabs' })
+vim.keymap.set('n', '<leader><tab>n', '<cmd>tabnext<cr>', { desc = '[N]ext Tab' })
+vim.keymap.set('n', '<leader><tab>p', '<cmd>tabprevious<cr>', { desc = '[P]revious Tab' })
+vim.keymap.set('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = '[F]irst Tab' })
+vim.keymap.set('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = '[L]ast Tab' })
 
 -- [U]I keymaps
 vim.keymap.set('n', '<leader>ui', vim.show_pos, { desc = 'Inspect Pos' })
