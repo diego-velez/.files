@@ -232,6 +232,13 @@ return { -- Collection of various small independent plugins/modules
       end,
       desc = '[N]otification History',
     },
+    {
+      '<leader>sC',
+      function()
+        MiniExtra.pickers.colorschemes(nil, nil)
+      end,
+      desc = '[S]earch [C]olorscheme',
+    },
   },
   config = function()
     local dracula = require('dracula').colors()
