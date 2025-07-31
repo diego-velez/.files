@@ -20,3 +20,11 @@ vim.api.nvim_create_autocmd('InsertLeave', {
 vim.api.nvim_create_autocmd('InsertEnter', {
   command = 'set nocursorline',
 })
+
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Disable new line comment',
+  pattern = '*',
+  callback = function()
+    vim.opt.formatoptions:remove { 'c', 'r', 'o' }
+  end,
+})
