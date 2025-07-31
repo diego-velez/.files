@@ -30,11 +30,17 @@ vim.keymap.set('n', '<C-u>', function()
   MiniAnimate.execute_after('scroll', 'normal! zz')
 end)
 vim.keymap.set('n', 'n', function()
-  vim.cmd.normal { 'n', bang = true }
+  local succeeded = pcall(vim.cmd.normal, { 'n', bang = true })
+  if not succeeded then
+    return
+  end
   MiniAnimate.execute_after('scroll', 'normal! zzzv')
 end)
 vim.keymap.set('n', 'N', function()
-  vim.cmd.normal { 'N', bang = true }
+  local succeeded = pcall(vim.cmd.normal, { 'N', bang = true })
+  if not succeeded then
+    return
+  end
   MiniAnimate.execute_after('scroll', 'normal! zzzv')
 end)
 vim.keymap.set('n', 'G', function()
@@ -61,30 +67,64 @@ vim.keymap.set('n', 'Q', '<nop>')
 -- Rename the word my cursor is on using vim's substitute thing
 vim.keymap.set(
   'n',
-  '<leader>rs',
+  '<leader>cs',
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = '[R]ename [S]ubstitute' }
+  { desc = "Rename using Vim's [S]ubstitution" }
 )
-
--- Show hover with window
-vim.api.nvim_create_autocmd({ 'VimEnter', 'VimResized' }, {
-  group = vim.api.nvim_create_augroup('DVT Hover', { clear = true }),
-  desc = 'Setup LSP hover window',
-  callback = function()
-    local width = math.floor(vim.o.columns * 0.8)
-    local height = math.floor(vim.o.lines * 0.3)
-
-    vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-      border = 'rounded',
-      max_width = width,
-      max_height = height,
-    })
-  end,
-})
-
-vim.keymap.set('n', 'h', vim.lsp.buf.hover)
-vim.keymap.set('n', 'K', '<nop>')
 
 -- Quickfix keymaps
 vim.keymap.set('n', '<S-up>', ':cprevious<cr>')
 vim.keymap.set('n', '<S-down>', ':cnext<cr>')
+
+-- Commenting
+vim.keymap.set(
+  'n',
+  'gco',
+  'o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>',
+  { desc = 'Add Comment Below' }
+)
+vim.keymap.set(
+  'n',
+  'gcO',
+  'O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>',
+  { desc = 'Add Comment Above' }
+)
+
+-- Tabs
+vim.keymap.set('n', '<tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
+vim.keymap.set('n', '<tab>w', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
+vim.keymap.set('n', '<tab>o', '<cmd>tabonly<cr>', { desc = 'Close [O]ther Tabs' })
+vim.keymap.set('n', '<tab>n', '<cmd>tabnext<cr>', { desc = '[N]ext Tab' })
+vim.keymap.set('n', '<tab>p', '<cmd>tabprevious<cr>', { desc = '[P]revious Tab' })
+vim.keymap.set('n', '<tab>f', '<cmd>tabfirst<cr>', { desc = '[F]irst Tab' })
+vim.keymap.set('n', '<tab>l', '<cmd>tablast<cr>', { desc = '[L]ast Tab' })
+
+-- [U]I keymaps
+vim.keymap.set('n', '<leader>ui', vim.show_pos, { desc = 'Inspect Pos' })
+vim.keymap.set('n', '<leader>uI', function()
+  vim.treesitter.inspect_tree()
+  vim.api.nvim_input 'I'
+end, { desc = 'Inspect Tree' })
+vim.keymap.set(
+  'n',
+  '<leader>ur',
+  '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>',
+  { desc = '[R]edraw' }
+)
+
+-- Add undo break-points
+vim.keymap.set('i', ',', ',<c-g>u')
+vim.keymap.set('i', '.', '.<c-g>u')
+vim.keymap.set('i', ';', ';<c-g>u')
+
+-- Edit macros
+vim.keymap.set(
+  'n',
+  '<leader>m',
+  ":<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>",
+  { desc = 'Edit [M]acros' }
+)
+
+-- Shift lines without losing selection
+vim.keymap.set('x', '<', '<gv')
+vim.keymap.set('x', '>', '>gv')

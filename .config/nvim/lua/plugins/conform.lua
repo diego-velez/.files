@@ -43,12 +43,11 @@ return { -- Autoformat
       local disable_filetypes = { c = true, cpp = true }
       if disable_filetypes[vim.bo[bufnr].filetype] then
         return nil
-      else
-        return {
-          timeout_ms = 500,
-          lsp_format = 'fallback',
-        }
       end
+      return {
+        timeout_ms = 500,
+        lsp_format = 'fallback',
+      }
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
@@ -56,7 +55,9 @@ return { -- Autoformat
       html = { 'prettier' },
       markdown = { 'prettier' },
       typescriptreact = { 'prettier' },
+      typescript = { 'prettier' },
       sql = { 'sqlfmt' },
+      java = { 'google-java-format' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --

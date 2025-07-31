@@ -2,7 +2,7 @@ return {
   'saecki/live-rename.nvim',
   keys = {
     {
-      '<leader>rl',
+      '<leader>cr',
       function()
         require('live-rename').rename { insert = true }
       end,
