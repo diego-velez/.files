@@ -1153,7 +1153,6 @@ return { -- Collection of various small independent plugins/modules
 
       clues = {
         {
-          { mode = 'n', keys = '<leader>r', desc = '[R]ename' },
           { mode = 'n', keys = '<leader>s', desc = '[S]earch' },
           { mode = 'n', keys = '<leader>t', desc = '[T]oggle' },
           { mode = 'n', keys = '<leader>l', desc = '[L]ist' },
