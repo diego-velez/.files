@@ -94,6 +94,23 @@ return { -- Collection of various small independent plugins/modules
       desc = '[S]earch [G]rep',
     },
     {
+      '<leader>sG',
+      function()
+        vim.ui.input({
+          prompt = 'What directory do you want to search in? ',
+          default = vim.uv.cwd(),
+          completion = 'dir',
+        }, function(input)
+          if not input or input == '' then
+            return
+          end
+
+          MiniPick.builtin.grep_live({}, { source = { cwd = input } })
+        end)
+      end,
+      desc = '[S]earch [G]rep in specific directory',
+    },
+    {
       '<leader>sw',
       function()
         local cword = vim.fn.expand '<cword>'
@@ -108,18 +125,26 @@ return { -- Collection of various small independent plugins/modules
       '<leader>sf',
       -- See https://github.com/echasnovski/mini.nvim/discussions/1873
       function()
-        -- Show function to shorten all entries
-        local show_short_files = function(buf_id, items_to_show, query)
-          local short_items_to_show = vim.tbl_map(make_short_path, items_to_show)
-          -- TODO: Instead of using default show, replace in order to highlight proper folder and add icons back
-          MiniPick.default_show(buf_id, short_items_to_show, query)
-        end
-
-        require('mini.pick').builtin.files({}, {
-          source = { show = show_short_files },
-        })
+        MiniPick.registry.files()
       end,
       desc = '[S]earch [F]iles',
+    },
+    {
+      '<leader>sF',
+      function()
+        vim.ui.input({
+          prompt = 'What directory do you want to search in? ',
+          default = vim.uv.cwd(),
+          completion = 'dir',
+        }, function(input)
+          if not input or input == '' then
+            return
+          end
+
+          MiniPick.registry.files({}, { source = { cwd = input } })
+        end)
+      end,
+      desc = '[S]earch [F]iles in specific directory',
     },
     {
       '<leader>sc',
@@ -894,6 +919,20 @@ return { -- Collection of various small independent plugins/modules
     -- Using primarily for code action
     -- See https://github.com/echasnovski/mini.nvim/discussions/1437
     vim.ui.select = MiniPick.ui_select
+
+    -- Shorten file paths by default
+    local show_short_files = function(buf_id, items_to_show, query)
+      local short_items_to_show = vim.tbl_map(make_short_path, items_to_show)
+      -- TODO: Instead of using default show, replace in order to highlight proper folder and add icons back
+      MiniPick.default_show(buf_id, short_items_to_show, query)
+    end
+
+    MiniPick.registry.files = function(local_opts, opts)
+      opts = opts or {
+        source = { show = show_short_files },
+      }
+      MiniPick.builtin.files(local_opts, opts)
+    end
 
     -- Show highlight in buf_lines picker
     -- See https://github.com/echasnovski/mini.nvim/discussions/988#discussioncomment-10398788
