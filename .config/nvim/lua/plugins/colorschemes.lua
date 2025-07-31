@@ -9,6 +9,7 @@ return {
       italic_comment = true,
       overrides = function(colors)
         return {
+          -- Setup mini.statusline
           MiniStatuslineInactive = { fg = colors.white, bg = colors.menu, bold = true },
 
           -- Setup mini.pick
@@ -43,9 +44,6 @@ return {
           MiniClueNextKeyWithPostkeys = { fg = colors.cyan, bg = colors.menu },
           MiniClueSeparator = { fg = colors.cyan, bg = colors.menu },
           MiniClueTitle = { fg = colors.white, bg = colors.menu },
-
-          -- Setup mini.cursorword
-          MiniCursorword = { link = 'LspReferenceText' },
 
           -- Setup mini.notify
           MiniNotifyNormal = { fg = 'fg', bg = colors.menu },
