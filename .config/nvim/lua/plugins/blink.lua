@@ -24,6 +24,7 @@ return {
       'xzbdmw/colorful-menu.nvim',
       'mikavilpas/blink-ripgrep.nvim',
       'archie-judd/blink-cmp-words',
+      'disrupted/blink-cmp-conventional-commits',
     },
     event = 'InsertEnter',
     keys = {
@@ -182,11 +183,16 @@ return {
               pointer_symbols = { '!', '&', '^' },
             },
           },
+          conventional_commits = {
+            name = 'Conventional Commits',
+            module = 'blink-cmp-conventional-commits',
+          },
         },
         per_filetype = {
           text = { 'dictionary' },
           markdown = { 'thesaurus' },
           lua = { 'lazydev', inherit_defaults = true },
+          gitcommit = { 'conventional_commits', 'buffer', 'thesaurus', 'dictionary', 'ripgrep' },
         },
       },
 
