@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazyPluginSpec[]
 return { -- Highlight, edit, and navigate code
   {
     'nvim-treesitter/nvim-treesitter',
@@ -25,14 +27,26 @@ return { -- Highlight, edit, and navigate code
         'diff',
         'go',
         'html',
+        'javascript',
+        'jsdoc',
+        'json',
+        'jsonc',
         'lua',
         'luadoc',
+        'luap',
         'markdown',
         'markdown_inline',
+        'printf',
         'python',
         'query',
+        'regex',
+        'toml',
+        'tsx',
+        'typescript',
         'vim',
         'vimdoc',
+        'xml',
+        'yaml',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
@@ -69,7 +83,6 @@ return { -- Highlight, edit, and navigate code
     config = function(_, opts)
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 
-      ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
 
       -- There are additional nvim-treesitter modules that you can use to interact
