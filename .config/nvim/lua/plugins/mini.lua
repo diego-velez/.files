@@ -1319,6 +1319,9 @@ return { -- Collection of various small independent plugins/modules
 
     local animate = require 'mini.animate'
     animate.setup {
+      cursor = {
+        enable = false,
+      },
       resize = {
         timing = animate.gen_timing.linear { duration = 50, unit = 'total' },
       },

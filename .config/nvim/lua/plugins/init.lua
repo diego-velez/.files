@@ -8,4 +8,8 @@ return {
     'lambdalisue/vim-suda',
     cmd = { 'SudaRead', 'SudaWrite' },
   },
+  {
+    'sphamba/smear-cursor.nvim',
+    opts = {},
+  },
 }
