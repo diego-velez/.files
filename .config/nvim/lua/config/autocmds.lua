@@ -31,3 +31,12 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.spell = true
   end,
 })
+
+vim.api.nvim_create_autocmd('BufReadPre', {
+  desc = 'Clear the last used search pattern when opening a new buffer',
+  pattern = '*',
+  callback = function()
+    vim.fn.setreg('/', '') -- Clears the search register
+    vim.cmd 'let @/ = ""' -- Clear the search register using Vim command
+  end,
+})
