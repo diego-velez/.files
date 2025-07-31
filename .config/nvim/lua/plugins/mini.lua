@@ -130,6 +130,13 @@ return { -- Collection of various small independent plugins/modules
       desc = '[S]earch [F]iles',
     },
     {
+      '<leader><space>',
+      function()
+        MiniPick.registry.files()
+      end,
+      desc = 'Search Files',
+    },
+    {
       '<leader>sF',
       function()
         vim.ui.input({
@@ -1283,6 +1290,12 @@ return { -- Collection of various small independent plugins/modules
 
     -- NOTE: Start mini.cursorword configuration
     require('mini.cursorword').setup()
+    local lspRefTextHl = vim.api.nvim_get_hl(0, { name = 'LspReferenceText', link = false })
+    vim.api.nvim_set_hl(
+      0,
+      'MiniCursorword',
+      { fg = lspRefTextHl.fg, bg = lspRefTextHl.bg, underline = true }
+    )
 
     -- NOTE: Start mini.animate configuration
     --
