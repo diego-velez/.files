@@ -1,9 +1,10 @@
+---@module "lazy"
+---@type LazyPluginSpec
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
     {
       'mason-org/mason.nvim',
-      version = '^1.0.0',
       ---@class MasonSettings
       opts = {
         ui = {
@@ -13,10 +14,12 @@ return {
         },
       },
     },
-    { 'mason-org/mason-lspconfig.nvim', version = '^1.0.0' },
+    'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     'saghen/blink.cmp',
-    'nvim-java/nvim-java',
+    -- See https://github.com/nvim-java/nvim-java/pull/402
+    { 'logrusx/nvim-java', branch = 'use-latest-versions-available-in-mason-registry' },
+    { 'logrusx/nvim-java-core', branch = 'migrate-to-official-mason-repo' },
     'saecki/live-rename.nvim',
     {
       'andrewferrier/debugprint.nvim',
@@ -96,6 +99,7 @@ return {
           client
           and client:supports_method(vim.lsp.protocol.Methods.textDocument_codeLens, event.buf)
         then
+          vim.notify 'Codelens Supported'
           map('<leader>cc', vim.lsp.codelens.run, 'LSP: [C]odelens')
           map('<leader>cC', vim.lsp.codelens.refresh, 'LSP: Refresh [C]odelens')
         end
@@ -104,6 +108,7 @@ return {
           client
           and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf)
         then
+          vim.notify 'Inlay Hints Supported'
           map('<leader>ti', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
 
@@ -218,6 +223,42 @@ return {
       },
     }
 
+    require('java').setup {
+      -- Your custom jdtls settings goes here
+      jdk = { auto_install = false },
+      jdtls = {
+        version = '*',
+      },
+      java_test = {
+        enable = false,
+        version = '*',
+      },
+      java_debug_adapter = {
+        enable = false,
+        version = '*',
+      },
+      spring_boot_tools = {
+        enable = true,
+        version = '*',
+      },
+      mason = {
+        registries = {
+          -- "github:mason-org/mason-registry",
+          -- "github:nvim-java/mason-registry",
+        },
+      },
+    }
+
+    -- See https://github.com/nvim-lua/kickstart.nvim/pull/1663/files
+    -- The following loop will configure each server with the capabilities we defined above.
+    -- This will ensure that all servers have the same base configuration, but also
+    -- allow for server-specific overrides.
+    for server_name, server_config in pairs(servers) do
+      server_config.capabilities =
+        vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
+      require('lspconfig')[server_name].setup(server_config)
+    end
+
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       'stylua', -- Used to format Lua code
@@ -228,20 +269,5 @@ return {
       'json-lsp',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-    require('java').setup()
-
-    require('mason-lspconfig').setup {
-      ensure_installed = {},
-      automatic_installation = false,
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          server.capabilities =
-            vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          require('lspconfig')[server_name].setup(server)
-        end,
-      },
-    }
   end,
 }
