@@ -1225,6 +1225,14 @@ return { -- Collection of various small independent plugins/modules
       end, { expr = true })
     end
 
+    vim.api.nvim_create_autocmd('FileType', {
+      desc = 'Disable mini.animate for Grug-Far',
+      pattern = 'grug-far',
+      callback = function()
+        vim.b.minianimate_disable = true
+      end,
+    })
+
     local animate = require 'mini.animate'
     animate.setup {
       resize = {
