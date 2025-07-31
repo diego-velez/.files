@@ -134,7 +134,10 @@ return {
           if
             success
             and node
-            and vim.tbl_contains({ 'comment', 'line_comment', 'block_comment' }, node:type())
+            and vim.tbl_contains(
+              { 'comment', 'comment_content', 'line_comment', 'block_comment' },
+              node:type()
+            )
           then
             return { 'path', 'buffer', 'dictionary', 'thesaurus', 'ripgrep' }
           end
@@ -194,6 +197,14 @@ return {
               -- Default is as below ("antonyms", "similar to" and "also see").
               pointer_symbols = { '!', '&', '^' },
             },
+            transform_items = function(_, items)
+              for _, item in ipairs(items) do
+                item.labelDetails = {
+                  description = '(thesaurus)',
+                }
+              end
+              return items
+            end,
           },
 
           -- Use the dictionary source
@@ -212,6 +223,14 @@ return {
               -- See above
               pointer_symbols = { '!', '&', '^' },
             },
+            transform_items = function(_, items)
+              for _, item in ipairs(items) do
+                item.labelDetails = {
+                  description = '(dictionary)',
+                }
+              end
+              return items
+            end,
           },
           conventional_commits = {
             name = 'Conventional Commits',
@@ -219,8 +238,8 @@ return {
           },
         },
         per_filetype = {
-          text = { 'dictionary' },
-          markdown = { 'thesaurus' },
+          text = { 'dictionary', 'ripgrep' },
+          markdown = { 'thesaurus', 'ripgrep' },
           lua = { 'lazydev', inherit_defaults = true },
           gitcommit = { 'conventional_commits', 'buffer', 'thesaurus', 'dictionary', 'ripgrep' },
         },
