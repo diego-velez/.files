@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazySpec[]
 return {
   {
     'Mofiqul/dracula.nvim',
@@ -129,6 +131,11 @@ return {
   },
   {
     'dgox16/oldworld.nvim',
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    'mcauley-penney/techbase.nvim',
     lazy = false,
     priority = 1000,
   },
