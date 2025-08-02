@@ -204,8 +204,8 @@ config.keys = {
 	setKeymap("o", "CTRL", act.SendString("~/.config/wezterm/open_project\n")),
 }
 
--- Bind moving to tab index by ALT+1 to 5
-for i = 1, 5 do
+-- Bind moving to tab index by ALT+1 to 9
+for i = 1, 9 do
 	table.insert(config.keys, {
 		key = tostring(i),
 		mods = "ALT",
