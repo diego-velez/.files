@@ -150,9 +150,22 @@ config.keys = {
 	{
 		key = "t",
 		mods = "ALT",
-		action = act.ActivateKeyTable({
-			name = "tab_shit",
-		}),
+		action = act.SpawnTab("CurrentPaneDomain"),
+	},
+	{
+		key = "w",
+		mods = "ALT",
+		action = act.CloseCurrentTab({ confirm = false }),
+	},
+	{
+		key = "f", -- [F]orward
+		mods = "ALT",
+		action = act.ActivateTabRelative(1),
+	},
+	{
+		key = "b", -- [B]ackward
+		mods = "ALT",
+		action = act.ActivateTabRelative(-1),
 	},
 	{
 		key = "c",
@@ -199,31 +212,6 @@ for i = 1, 5 do
 		action = act.ActivateTab(i - 1),
 	})
 end
-
-config.key_tables = {
-	tab_shit = {
-		{
-			key = "Enter",
-			mods = "",
-			action = act.SpawnTab("CurrentPaneDomain"),
-		},
-		{
-			key = "w",
-			mods = "",
-			action = act.CloseCurrentTab({ confirm = false }),
-		},
-		{
-			key = "n",
-			mods = "",
-			action = act.ActivateTabRelative(1),
-		},
-		{
-			key = "p",
-			mods = "",
-			action = act.ActivateTabRelative(-1),
-		},
-	},
-}
 
 config.default_cursor_style = "SteadyBar"
 
