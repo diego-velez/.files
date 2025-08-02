@@ -134,7 +134,9 @@ function sdk
     bash -c "source '$HOME/.sdkman/bin/sdkman-init.sh'; sdk $argv[1..]"
 end
 
-fish_add_path (find $HOME/.sdkman/candidates/*/current/bin -maxdepth 0)
+if test $is_glinux = true
+    fish_add_path (find $HOME/.sdkman/candidates/*/current/bin -maxdepth 0)
+end
 
 alias mdi "mvn -N wrapper:wrapper && ./mvnw clean install -X -U"
 alias skaf "skaffold run --profile dev --kube-context=gke_diveto-louhi-test_us-central1_louhi --skip-tests --default-repo=\"us-central1-docker.pkg.dev/diveto-louhi-test/microservices\""

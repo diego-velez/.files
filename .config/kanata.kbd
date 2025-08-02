@@ -28,7 +28,7 @@
     chs (chord escape-combo ;)
 )
 
-(defchords escape-combo 100
+(defchords escape-combo 35
     (a  ) a
     (  ;) ;
     (a ;) esc
