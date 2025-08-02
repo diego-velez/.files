@@ -196,8 +196,8 @@ config.keys = {
 	setKeymap("d", "CTRL", act.ScrollByPage(0.5)),
 	setKeymap("e", "CTRL", act.ScrollByLine(1)),
 	setKeymap("y", "CTRL", act.ScrollByLine(-1)),
-	setKeymap("Home", "", act.ScrollToTop),
-	setKeymap("End", "", act.ScrollToBottom),
+	setKeymap("Home", "CTRL", act.ScrollToTop),
+	setKeymap("End", "CTRL", act.ScrollToBottom),
 	-- Enter copy [m]ode
 	setKeymap("m", "CTRL", act.ActivateCopyMode),
 	-- [O]pen project
