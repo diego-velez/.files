@@ -155,13 +155,6 @@ config.keys = {
 		}),
 	},
 	{
-		key = "w",
-		mods = "ALT",
-		action = act.ActivateKeyTable({
-			name = "window_shit",
-		}),
-	},
-	{
 		key = "c",
 		mods = "SHIFT|CTRL",
 		action = act.CopyTo("Clipboard"),
@@ -228,31 +221,6 @@ config.key_tables = {
 			key = "p",
 			mods = "",
 			action = act.ActivateTabRelative(-1),
-		},
-	},
-	window_shit = {
-		{
-			key = "Enter",
-			mods = "",
-			action = act.SplitPane({
-				direction = "Right",
-				-- top_level = true,
-			}),
-		},
-		{
-			key = "w",
-			mods = "",
-			action = act.CloseCurrentPane({ confirm = false }),
-		},
-		{
-			key = "n",
-			mods = "",
-			action = act.ActivatePaneDirection("Next"),
-		},
-		{
-			key = "p",
-			mods = "",
-			action = act.ActivatePaneDirection("Prev"),
 		},
 	},
 }
