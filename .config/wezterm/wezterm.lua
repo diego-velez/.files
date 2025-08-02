@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local config = {}
 
+config.term = "wezterm"
 config.default_prog = { "fish", "-l" }
 
 config.window_close_confirmation = "NeverPrompt"
