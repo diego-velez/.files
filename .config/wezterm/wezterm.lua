@@ -7,7 +7,7 @@ config.default_prog = { "fish", "-l" }
 config.window_close_confirmation = "NeverPrompt"
 
 config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
-config.font_size = 12.5
+config.font_size = 11
 
 local dracula = {
 	foreground = "#F8F8F2",
