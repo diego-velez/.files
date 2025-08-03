@@ -1,6 +1,8 @@
+---@type Wezterm
 local wezterm = require("wezterm")
+---@type Config
+local config = wezterm.config_builder()
 local act = wezterm.action
-local config = {}
 
 config.term = "wezterm"
 config.default_prog = { "fish", "-l" }
