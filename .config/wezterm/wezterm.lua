@@ -89,18 +89,15 @@ config.keys = {
 		action = act.PasteFrom("Clipboard"),
 	},
 	{ -- [I]ncrease font size
-		key = "i",
-		mods = "SHIFT|CTRL|ALT",
+		key = "F11",
 		action = act.IncreaseFontSize,
 	},
 	{ -- [D]ecrease font size
-		key = "d",
-		mods = "SHIFT|CTRL|ALT",
+		key = "F12",
 		action = act.DecreaseFontSize,
 	},
 	{ -- [R]eset font size
-		key = "r",
-		mods = "SHIFT|CTRL|ALT",
+		key = "F10",
 		action = act.ResetFontSize,
 	},
 	setKeymap("u", "CTRL", act.ScrollByPage(-0.5)),
