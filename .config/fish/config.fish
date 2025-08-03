@@ -141,6 +141,7 @@ if test $is_glinux = true
 end
 
 bind -M insert \ce 'nvim'
+bind -M insert \co '$HOME/.config/fish/open_project'
 
 zoxide init fish | source
 starship init fish | source

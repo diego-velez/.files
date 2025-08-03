@@ -137,8 +137,6 @@ config.keys = {
 	setKeymap("End", "CTRL", act.ScrollToBottom),
 	-- Enter copy [m]ode
 	setKeymap("m", "CTRL", act.ActivateCopyMode),
-	-- [O]pen project
-	setKeymap("o", "CTRL", act.SendString(wezterm.home_dir .. "/.config/wezterm/open_project\n")),
 }
 
 -- Bind moving to tab index by ALT+1 to 9
