@@ -1,0 +1,8 @@
+{
+    "name": "DVT Snippets :)",
+    "contributes": {
+        "snippets": [
+            {"language": "all", "path": "./global.json"}
+        ]
+    }
+}
