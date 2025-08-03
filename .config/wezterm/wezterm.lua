@@ -60,32 +60,32 @@ config.disable_default_key_bindings = true
 config.keys = {
 	{
 		key = "t",
-		mods = "ALT",
+		mods = "CTRL|SHIFT",
 		action = act.SpawnTab("CurrentPaneDomain"),
 	},
 	{
 		key = "w",
-		mods = "ALT",
+		mods = "CTRL|SHIFT",
 		action = act.CloseCurrentTab({ confirm = false }),
 	},
 	{
-		key = "f", -- [F]orward
-		mods = "ALT",
+		key = "n",
+		mods = "CTRL|SHIFT",
 		action = act.ActivateTabRelative(1),
 	},
 	{
-		key = "b", -- [B]ackward
-		mods = "ALT",
+		key = "p",
+		mods = "CTRL|SHIFT",
 		action = act.ActivateTabRelative(-1),
 	},
 	{
 		key = "c",
-		mods = "SHIFT|CTRL",
+		mods = "CTRL|SHIFT",
 		action = act.CopyTo("Clipboard"),
 	},
 	{
 		key = "v",
-		mods = "SHIFT|CTRL",
+		mods = "CTRL|SHIFT",
 		action = act.PasteFrom("Clipboard"),
 	},
 	{ -- [I]ncrease font size
@@ -99,6 +99,35 @@ config.keys = {
 	{ -- [R]eset font size
 		key = "F10",
 		action = act.ResetFontSize,
+	},
+	-- NOTE: This is useful when you need to debug
+	-- {
+	-- 	key = "l",
+	-- 	mods = "CTRL",
+	-- 	action = act.ShowDebugOverlay,
+	-- },
+	{
+		key = "o", -- Close [O]ther tabs
+		mods = "CTRL|SHIFT",
+		action = wezterm.action_callback(function(win, _)
+			local mux_window = win:mux_window()
+			local current_tab = mux_window:active_tab()
+
+			local tabs_to_close = #mux_window:tabs() - 1
+			for _, tab in ipairs(mux_window:tabs()) do
+				if tab:tab_id() ~= current_tab:tab_id() then
+					tab:activate()
+					win:perform_action(act.CloseCurrentTab({ confirm = false }), win:active_pane())
+				end
+			end
+
+			win:toast_notification(
+				"Closed Other Tabs",
+				"Closed " .. tabs_to_close .. " tabs in the current Wezterm session",
+				nil,
+				4000
+			)
+		end),
 	},
 	setKeymap("u", "CTRL", act.ScrollByPage(-0.5)),
 	setKeymap("d", "CTRL", act.ScrollByPage(0.5)),
