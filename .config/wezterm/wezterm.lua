@@ -131,8 +131,8 @@ config.keys = {
 	},
 	setKeymap("u", "CTRL", act.ScrollByPage(-0.5)),
 	setKeymap("d", "CTRL", act.ScrollByPage(0.5)),
-	setKeymap("e", "CTRL", act.ScrollByLine(1)),
-	setKeymap("y", "CTRL", act.ScrollByLine(-1)),
+	setKeymap("e", "CTRL|SHIFT", act.ScrollByLine(1)),
+	setKeymap("y", "CTRL|SHIFT", act.ScrollByLine(-1)),
 	setKeymap("Home", "CTRL", act.ScrollToTop),
 	setKeymap("End", "CTRL", act.ScrollToBottom),
 	-- Enter copy [m]ode

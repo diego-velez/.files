@@ -140,5 +140,7 @@ if test $is_glinux = true
     abbr skaf "skaffold run --profile dev --kube-context=gke_diveto-louhi-test_us-central1_louhi --skip-tests --default-repo=\"us-central1-docker.pkg.dev/diveto-louhi-test/microservices\""
 end
 
+bind -M insert \ce 'nvim'
+
 zoxide init fish | source
 starship init fish | source
