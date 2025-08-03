@@ -68,28 +68,28 @@ return { -- Collection of various small independent plugins/modules
     {
       '<leader>/',
       function()
-        require('mini.pick').registry.buf_lines { scope = 'current' }
+        MiniPick.registry.buf_lines { scope = 'current' }
       end,
       desc = '[/] Fuzzily search in current buffer',
     },
     {
       '<leader>so',
       function()
-        require('mini.extra').pickers.oldfiles()
+        MiniExtra.pickers.oldfiles()
       end,
       desc = '[S]earch [O]ld Files',
     },
     {
       '<leader>sr',
       function()
-        require('mini.pick').builtin.resume()
+        MiniPick.builtin.resume()
       end,
       desc = '[S]earch [R]esume',
     },
     {
       '<leader>sg',
       function()
-        require('mini.pick').builtin.grep_live()
+        MiniPick.builtin.grep_live()
       end,
       desc = '[S]earch [G]rep',
     },
@@ -156,7 +156,7 @@ return { -- Collection of various small independent plugins/modules
     {
       '<leader>sc',
       function()
-        require('mini.pick').builtin.files(nil, {
+        MiniPick.builtin.files(nil, {
           source = {
             cwd = vim.fn.stdpath 'config',
           },
@@ -167,21 +167,21 @@ return { -- Collection of various small independent plugins/modules
     {
       '<leader>sk',
       function()
-        require('mini.extra').pickers.keymaps()
+        MiniExtra.pickers.keymaps()
       end,
       desc = '[S]earch [K]eymaps',
     },
     {
       '<leader>sh',
       function()
-        require('mini.pick').builtin.help { default_split = 'vertical' }
+        MiniPick.builtin.help { default_split = 'vertical' }
       end,
       desc = '[S]earch [H]elp',
     },
     {
       '<leader>st',
       function()
-        require('mini.pick').registry.todo()
+        MiniPick.registry.todo()
       end,
       desc = '[S]earch [T]odo',
     },
@@ -288,7 +288,7 @@ return { -- Collection of various small independent plugins/modules
     --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
     --  - ci'  - [C]hange [I]nside [']quote
     local ai = require 'mini.ai'
-    local gen_ai_spec = require('mini.extra').gen_ai_spec
+    local gen_ai_spec = MiniExtra.gen_ai_spec
     ai.setup {
       n_lines = 500,
       custom_textobjects = {
@@ -628,7 +628,7 @@ return { -- Collection of various small independent plugins/modules
       { name = 'Files', action = 'Pick files', section = 'Mini' },
       { name = 'Help', action = 'Pick help', section = 'Mini' },
       { name = 'Grep', action = 'Pick grep_live', section = 'Mini' },
-      { name = 'Old Files', action = require('mini.extra').pickers.oldfiles, section = 'Mini' },
+      { name = 'Old Files', action = MiniExtra.pickers.oldfiles, section = 'Mini' },
     }
     local starter = require 'mini.starter'
     starter.setup {
@@ -671,8 +671,7 @@ return { -- Collection of various small independent plugins/modules
     }
 
     -- NOTE: Start mini.files configuration
-    local mini_files = require 'mini.files'
-    mini_files.setup {
+    require('mini.files').setup {
       mappings = {
         close = 'q',
         go_in = '',
@@ -730,13 +729,13 @@ return { -- Collection of various small independent plugins/modules
 
     --- @param open_current_file boolean If true, will open mini.files in the current file, otherwise opents on cwd.
     local mini_files_toggle = function(open_current_file)
-      if not mini_files.close() then
+      if not MiniFiles.close() then
         local current_file = vim.api.nvim_buf_get_name(0)
         -- Needed for starter dashboard
         if vim.fn.filereadable(current_file) == 0 or not open_current_file then
-          mini_files.open()
+          MiniFiles.open()
         else
-          mini_files.open(current_file, true)
+          MiniFiles.open(current_file, true)
         end
       end
     end
@@ -749,7 +748,7 @@ return { -- Collection of various small independent plugins/modules
 
     local map_split = function(buf_id, lhs, direction)
       local rhs = function()
-        local get_entry = mini_files.get_fs_entry()
+        local get_entry = MiniFiles.get_fs_entry()
 
         -- Don't do anything if dealing with directory
         if get_entry == nil or get_entry.fs_type == 'directory' then
@@ -757,14 +756,14 @@ return { -- Collection of various small independent plugins/modules
         end
 
         -- Make new window
-        local cur_target = mini_files.get_explorer_state().target_window
+        local cur_target = MiniFiles.get_explorer_state().target_window
         local new_target = vim.api.nvim_win_call(cur_target, function()
           vim.cmd(direction .. ' split')
           return vim.api.nvim_get_current_win()
         end)
 
         pcall(vim.fn.win_execute, new_target, 'edit ' .. get_entry.path)
-        mini_files.close()
+        MiniFiles.close()
         pcall(vim.api.nvim_set_current_win, new_target)
       end
 
@@ -808,13 +807,13 @@ return { -- Collection of various small independent plugins/modules
         vim.keymap.set(
           'n',
           '<ESC>',
-          mini_files.close,
+          MiniFiles.close,
           { buffer = buf_id, desc = 'Close Mini Files' }
         )
         vim.keymap.set(
           'i',
           '<C-c>',
-          mini_files.close,
+          MiniFiles.close,
           { buffer = buf_id, desc = 'Close Mini Files' }
         )
       end,
@@ -1112,7 +1111,7 @@ return { -- Collection of various small independent plugins/modules
           opts.symbol_query = get_symbol_query()
         end
 
-        require('mini.extra').pickers.lsp(opts)
+        MiniExtra.pickers.lsp(opts)
         return
       end
 
@@ -1123,7 +1122,7 @@ return { -- Collection of various small independent plugins/modules
         if #opts.items == 1 then
           vim.cmd.cfirst()
         else
-          require('mini.extra').pickers.list({ scope = 'quickfix' }, {
+          MiniExtra.pickers.list({ scope = 'quickfix' }, {
             source = { name = opts.title },
             window = {
               config = function()
