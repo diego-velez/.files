@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd('FocusGained', {
 
 vim.api.nvim_create_autocmd('FileType', {
   desc = 'Enable wrap in these filetypes',
-  pattern = { 'gitcommit', 'markdown', 'text', 'log' },
+  pattern = { 'gitcommit', 'markdown', 'text', 'log', 'typst' },
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
@@ -70,4 +70,20 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.w.focus_disable = vim.tbl_contains(ignore_filetypes, vim.bo.filetype)
   end,
   desc = 'Disable focus autoresize for FileType',
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Typst specific options',
+  pattern = 'typst',
+  callback = function(args)
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+
+    vim.keymap.set(
+      'n',
+      '<leader>r',
+      '<cmd>TypstPreview<cr>',
+      { buffer = args.buf, desc = '[R]un Preview in Browser' }
+    )
+  end,
 })
