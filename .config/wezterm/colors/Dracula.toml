@@ -1,0 +1,61 @@
+[colors]
+foreground = "#F8F8F2"
+background = "#282A36"
+cursor_bg = "#F8F8F2"
+cursor_fg = "#282A36"
+cursor_border = "#F8F8F2"
+selection_bg = "#F8F8F2"
+selection_fg = "#282A36"
+scrollbar_thumb = "#BD93F9"
+split = "#BD93F9"
+
+ansi = [
+  "#21222C", # black
+  "#FF5555", # red
+  "#50FA7B", # green
+  "#F1FA8C", # yellow
+  "#BD93F9", # blue
+  "#FF79C6", # magenta
+  "#8BE9FD", # cyan
+  "#F8F8F2", # white
+]
+
+brights = [
+  "#6272A4", # bright black
+  "#FF6E6E", # bright red
+  "#69FF94", # bright green
+  "#FFFFA5", # bright yellow
+  "#D6ACFF", # bright blue
+  "#FF92DF", # bright magenta
+  "#A4FFFF", # bright cyan
+  "#FFFFFF", # bright white
+]
+
+[colors.tab_bar]
+background = "rgba(40, 42, 54, 85%)"
+
+[colors.tab_bar.active_tab]
+bg_color = "#282A36"
+fg_color = "#F8F8F2"
+intensity = "Bold"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "rgba(40, 42, 54, 85%)"
+fg_color = "#F8F8F2"
+intensity = "Half"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "rgba(40, 42, 54, 85%)"
+fg_color = "#F8F8F2"
+intensity = "Half"
+italic = true
+underline = "Single"
+
+[colors.tab_bar.new_tab]
+bg_color = "rgba(40, 42, 54, 85%)"
+fg_color = "#F8F8F2"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "rgba(40, 42, 54, 85%)"
+fg_color = "#F8F8F2"
+intensity = "Bold"
