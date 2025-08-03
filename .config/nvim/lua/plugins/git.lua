@@ -64,12 +64,20 @@ return {
     lazy = true,
     cmd = {
       'LazyGit',
+      'LazyGitConfig',
+      'LazyGitCurrentFile',
+      'LazyGitFilter',
+      'LazyGitFilterCurrentFile',
     },
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
+    --stylua: ignore
     keys = {
-      { '<leader>gl', ':LazyGit<cr>', desc = 'LazyGit' },
+      { '<leader>gL', '<cmd>LazyGit<cr>', desc = 'LazyGit (Project cwd)' },
+      { '<leader>gl', '<cmd>LazyGitCurrentFile<cr>', desc = 'LazyGit (current file)' },
+      { '<leader>gh', '<cmd>LazyGitFilterCurrentFile<cr>', desc = 'Commit [H]istory (current file)' },
+      { '<leader>gH', '<cmd>LazyGitFilter<cr>', desc = 'Commit [H]istory (Project cwd)' },
     },
   },
 }
