@@ -720,13 +720,6 @@ return { -- Collection of various small independent plugins/modules
       end
     end
 
-    vim.api.nvim_create_autocmd('User', {
-      pattern = 'MiniFilesBufferCreate',
-      callback = function(args)
-        vim.keymap.set('n', '<right>', go_in_and_expand, { buffer = args.data.buf_id })
-      end,
-    })
-
     --- @param open_current_file boolean If true, will open mini.files in the current file, otherwise opents on cwd.
     local mini_files_toggle = function(open_current_file)
       if not MiniFiles.close() then
@@ -788,11 +781,36 @@ return { -- Collection of various small independent plugins/modules
       MiniFiles.refresh { content = { filter = new_filter } }
     end
 
+    local files_grug_far = function(_)
+      local cur_entry_path = MiniFiles.get_fs_entry().path
+      local prefills = { paths = vim.fs.dirname(cur_entry_path) }
+
+      local grug_far = require 'grug-far'
+
+      if not grug_far.has_instance 'explorer' then
+        grug_far.open {
+          instanceName = 'explorer',
+          prefills = prefills,
+          staticTitle = 'Find and Replace from Explorer',
+        }
+      else
+        grug_far.get_instance('explorer'):open()
+        grug_far.get_instance('explorer'):update_input_values(prefills, false)
+      end
+    end
+
     vim.api.nvim_create_autocmd('User', {
       group = vim.api.nvim_create_augroup('DVT MiniFilesBufferCreate', { clear = true }),
       pattern = 'MiniFilesBufferCreate',
       callback = function(args)
         local buf_id = args.data.buf_id
+
+        vim.keymap.set(
+          'n',
+          '<right>',
+          go_in_and_expand,
+          { buffer = buf_id, desc = 'Go in and expand' }
+        )
 
         map_split(buf_id, '<C-h>', 'belowright horizontal')
         map_split(buf_id, '<C-v>', 'belowright vertical')
@@ -816,6 +834,33 @@ return { -- Collection of various small independent plugins/modules
           MiniFiles.close,
           { buffer = buf_id, desc = 'Close Mini Files' }
         )
+
+        vim.keymap.set(
+          'n',
+          '<leader>sR',
+          files_grug_far,
+          { buffer = buf_id, desc = 'Search and Replace in directory' }
+        )
+        vim.keymap.set('n', '<leader>sg', function()
+          local cur_entry_path = MiniFiles.get_fs_entry().path
+          local path = vim.fs.dirname(cur_entry_path)
+
+          MiniPick.builtin.grep_live({}, {
+            source = {
+              cwd = path,
+            },
+          })
+        end, { buffer = buf_id, desc = 'Grep in directory' })
+        vim.keymap.set('n', '<leader>sf', function()
+          local cur_entry_path = MiniFiles.get_fs_entry().path
+          local path = vim.fs.dirname(cur_entry_path)
+
+          MiniPick.builtin.files({}, {
+            source = {
+              cwd = path,
+            },
+          })
+        end, { buffer = buf_id, desc = 'Find files in directory' })
       end,
     })
 
