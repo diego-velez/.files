@@ -29,6 +29,11 @@ config.window_padding = {
 	bottom = 0,
 }
 
+config.adjust_window_size_when_changing_font_size = false
+config.window_decorations = "RESIZE"
+config.scrollback_lines = 10000
+config.use_dead_keys = false
+
 --- Set a keymap for an action that only works when in Fish shell, otherwise send the keymap to
 --- whatever program is running.
 --- See https://wezfurlong.org/wezterm/config/keys.html
