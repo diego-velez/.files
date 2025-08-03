@@ -81,23 +81,23 @@ alias rm "rm -I"
 
 if test $is_glinux = true
     # apt
-    alias update "sudo apt update"
-    alias search "apt search"
-    alias install "sudo apt install"
-    alias remove "sudo apt remove"
+    abbr update "sudo apt update"
+    abbr search "apt search"
+    abbr install "sudo apt install"
+    abbr remove "sudo apt remove"
 else
     # dnf
-    alias update "sudo dnf update"
-    alias search "dnf search"
-    alias install "sudo dnf install"
-    alias remove "sudo dnf remove"
+    abbr update "sudo dnf update"
+    abbr search "dnf search"
+    abbr install "sudo dnf install"
+    abbr remove "sudo dnf remove"
 end
 
 # Used for config-files repo
-alias config 'git --git-dir=$HOME/.files/ --work-tree=$HOME'
+abbr config 'git --git-dir=$HOME/.files/ --work-tree=$HOME'
 
 # University
-alias rumad "ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=ssh-rsa estudiante@rumad.uprm.edu"
+abbr rumad "ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=ssh-rsa estudiante@rumad.uprm.edu"
 
 # PATH
 if test $is_glinux = true
@@ -136,10 +136,9 @@ end
 
 if test $is_glinux = true
     fish_add_path (find $HOME/.sdkman/candidates/*/current/bin -maxdepth 0)
+    abbr mdi "mvn -N wrapper:wrapper && ./mvnw clean install -X -U"
+    abbr skaf "skaffold run --profile dev --kube-context=gke_diveto-louhi-test_us-central1_louhi --skip-tests --default-repo=\"us-central1-docker.pkg.dev/diveto-louhi-test/microservices\""
 end
-
-alias mdi "mvn -N wrapper:wrapper && ./mvnw clean install -X -U"
-alias skaf "skaffold run --profile dev --kube-context=gke_diveto-louhi-test_us-central1_louhi --skip-tests --default-repo=\"us-central1-docker.pkg.dev/diveto-louhi-test/microservices\""
 
 zoxide init fish | source
 starship init fish | source
