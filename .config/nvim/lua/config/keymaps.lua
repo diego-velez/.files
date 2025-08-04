@@ -72,10 +72,6 @@ vim.keymap.set(
   { desc = "Rename using Vim's [S]ubstitution" }
 )
 
--- Quickfix keymaps
-vim.keymap.set('n', '<S-up>', ':cprevious<cr>')
-vim.keymap.set('n', '<S-down>', ':cnext<cr>')
-
 -- Commenting
 vim.keymap.set(
   'n',
