@@ -138,6 +138,25 @@ if test $is_glinux = true
     fish_add_path (find $HOME/.sdkman/candidates/*/current/bin -maxdepth 0)
     abbr mdi "mvn -N wrapper:wrapper && ./mvnw clean install -X -U"
     abbr skaf "skaffold run --profile dev --kube-context=gke_diveto-louhi-test_us-central1_louhi --skip-tests --default-repo=\"us-central1-docker.pkg.dev/diveto-louhi-test/microservices\""
+
+    # Set up fish completion
+    # See go/fish-shell
+    source_google_fish_package acid
+    source_google_fish_package autogcert
+    source_google_fish_package banshee
+    source_google_fish_package benchy
+    source_google_fish_package buildfix
+    source_google_fish_package citc_prompt
+    source_google_fish_package cogd
+    source_google_fish_package crow
+    source_google_fish_package fst
+    source_google_fish_package graphviz
+    source_google_fish_package hb
+    source_google_fish_package hi
+    source_google_fish_package pastebin
+    source_google_fish_package perfgate
+    source_google_fish_package spool
+    source_google_fish_package sut
 end
 
 bind -M insert \ce 'nvim'
