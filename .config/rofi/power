@@ -2,15 +2,16 @@
 
 dir="$HOME/.config/rofi/power.rasi"
 
-shutdown=" Shutdown"
-reboot=" Reboot"
-suspend=" Suspend"
-lock=" Lock"
-logout=" Logout"
+shutdown=" Shutdown"
+reboot="󰜉 Reboot"
+suspend="⏾ Suspend"
+lock="󰌾 Lock"
+logout="󰍃 Logout"
 
-option=$(echo -e "$shutdown\n$reboot\n$logout\n$lock\n$suspend" | rofi -dmenu -theme "$dir" -lines 5)
+options="$shutdown\n$reboot\n$suspend\n$lock\n$logout"
 
-case "$option" in
+choice=$(echo -e "$options" | rofi -dmenu -theme "$dir" -no-custom -lines 5)
+case "$choice" in
     "$shutdown")
         systemctl poweroff
         ;;
