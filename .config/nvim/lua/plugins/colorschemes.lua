@@ -73,6 +73,9 @@ return {
             bold = true,
             italic = true,
           },
+
+          -- Setup treesitter context
+          TreesitterContextBottom = { bg = colors.menu },
         }
       end,
     },
