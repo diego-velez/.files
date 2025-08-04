@@ -1081,13 +1081,15 @@ return { -- Collection of various small independent plugins/modules
       -- Add highlighting to every line in the buffer
       for line, entry in ipairs(entries) do
         for _, hl in ipairs(entry.hl) do
-          vim.api.nvim_buf_add_highlight(
+          local start = { line - 1, hl[1][1] }
+          local finish = { line - 1, hl[1][2] }
+          vim.hl.range(
             buf_id,
             ns_digit_prefix,
             hl[2],
-            line - 1,
-            hl[1][1],
-            hl[1][2]
+            start,
+            finish,
+            { priority = vim.hl.priorities.user + 1 }
           )
         end
       end
