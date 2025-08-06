@@ -10,7 +10,17 @@ return {
   opts = {
     bottom = {
       'Trouble',
-      { ft = 'qf', title = 'QuickFix', open = 'copen' },
+      { ft = 'qf', title = 'QuickFix' },
+      {
+        title = 'Overseer Output',
+        ft = 'OverseerListOutput',
+      },
+      { title = 'Neotest Output', ft = 'neotest-output-panel', size = { height = 15 } },
+      { title = 'Undo Tree Diff', ft = 'diff', size = { height = 15 } },
+    },
+    left = {
+      { title = 'Neotest Summary', ft = 'neotest-summary' },
+      { title = 'Undo Tree', ft = 'undotree' },
     },
     right = {
       {
@@ -22,6 +32,20 @@ return {
         title = 'Overseer',
         ft = 'OverseerList',
       },
+    },
+    keys = {
+      ['q'] = false,
+      ['<c-q>'] = false,
+      ['Q'] = false,
+      [']w'] = false,
+      ['[w'] = false,
+      [']W'] = false,
+      ['[W'] = false,
+      ['<c-w>>'] = false,
+      ['<c-w><lt>'] = false,
+      ['<c-w>+'] = false,
+      ['<c-w>-'] = false,
+      ['<c-w>='] = false,
     },
   },
 }
