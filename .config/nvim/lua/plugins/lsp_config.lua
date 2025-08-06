@@ -17,9 +17,7 @@ return {
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     'saghen/blink.cmp',
-    -- See https://github.com/nvim-java/nvim-java/pull/402
-    { 'logrusx/nvim-java', branch = 'use-latest-versions-available-in-mason-registry' },
-    { 'logrusx/nvim-java-core', branch = 'migrate-to-official-mason-repo' },
+    'nvim-java/nvim-java',
     'saecki/live-rename.nvim',
     {
       'andrewferrier/debugprint.nvim',
@@ -223,31 +221,7 @@ return {
       },
     }
 
-    require('java').setup {
-      -- Your custom jdtls settings goes here
-      jdk = { auto_install = false },
-      jdtls = {
-        version = '*',
-      },
-      java_test = {
-        enable = false,
-        version = '*',
-      },
-      java_debug_adapter = {
-        enable = false,
-        version = '*',
-      },
-      spring_boot_tools = {
-        enable = true,
-        version = '*',
-      },
-      mason = {
-        registries = {
-          -- "github:mason-org/mason-registry",
-          -- "github:nvim-java/mason-registry",
-        },
-      },
-    }
+    require('java').setup {}
 
     -- See https://github.com/nvim-lua/kickstart.nvim/pull/1663/files
     -- The following loop will configure each server with the capabilities we defined above.
