@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazyPluginSpec
 return {
   'nvim-focus/focus.nvim',
   lazy = false,
@@ -7,7 +9,7 @@ return {
       enable = true, -- Enable or disable auto-resizing of splits
       width = 100, -- Force width for the focused window
       height = 0, -- Force height for the focused window
-      minwidth = 80, -- Force minimum width for the unfocused window
+      minwidth = 0, -- Force minimum width for the unfocused window
       minheight = 0, -- Force minimum height for the unfocused window
       focusedwindow_minwidth = 0, -- Force minimum width for the focused window
       focusedwindow_minheight = 0, -- Force minimum height for the focused window
