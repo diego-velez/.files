@@ -241,6 +241,7 @@ return {
       'htmx-lsp',
       'css-lsp',
       'json-lsp',
+      'jq',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
   end,

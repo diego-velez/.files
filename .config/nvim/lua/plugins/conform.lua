@@ -64,6 +64,7 @@ return { -- Autoformat
       sql = { 'sqlfmt' },
       java = { 'google-java-format' },
       terraform = { 'hclfmt' },
+      json = { 'jq' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
