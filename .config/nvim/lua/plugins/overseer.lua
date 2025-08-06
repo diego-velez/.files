@@ -1,7 +1,9 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
-  'stevearc/overseer.nvim',
+  -- See https://github.com/stevearc/overseer.nvim/pull/439
+  'diego-velez/overseer.nvim',
+  branch = 'task_output_filetype',
   cmd = {
     'OverseerOpen',
     'OverseerClose',
