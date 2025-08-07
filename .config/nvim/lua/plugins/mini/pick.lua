@@ -96,6 +96,18 @@ require('mini.pick').setup {
   },
 
   window = {
+    config = function()
+      local height = math.floor(0.5 * vim.o.lines)
+      local width = vim.o.columns
+      return {
+        relative = 'laststatus',
+        anchor = 'NW',
+        height = height,
+        width = width,
+        row = 0,
+        col = 0,
+      }
+    end,
     prompt_prefix = '󰁔 ',
     prompt_caret = ' ',
   },
