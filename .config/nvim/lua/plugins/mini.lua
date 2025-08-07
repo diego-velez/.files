@@ -480,5 +480,23 @@ return { -- Collection of various small independent plugins/modules
 
     -- NOTE: Start mini.bufremove configuration
     require('mini.bufremove').setup()
+
+    -- NOTE: Start mini.bracketed configuration
+    require('mini.bracketed').setup {
+      buffer = { suffix = '', options = {} },
+      comment = { suffix = '', options = {} },
+      conflict = { suffix = '', options = {} },
+      diagnostic = { suffix = '', options = {} },
+      file = { suffix = 'f', options = {} },
+      indent = { suffix = '', options = {} },
+      jump = { suffix = 'j', options = {} },
+      location = { suffix = '', options = {} },
+      oldfile = { suffix = 'o', options = {} },
+      quickfix = { suffix = '', options = {} },
+      treesitter = { suffix = '', options = {} },
+      undo = { suffix = '', options = {} },
+      window = { suffix = '', options = {} },
+      yank = { suffix = '', options = {} },
+    }
   end,
 }
