@@ -42,4 +42,23 @@ return {
       kulala_keymaps_prefix = '',
     },
   },
+  {
+    'folke/zen-mode.nvim',
+    keys = {
+      {
+        '<leader>tz',
+        function()
+          require('zen-mode').toggle()
+        end,
+        desc = 'Toggle [Z]en',
+      },
+    },
+    opts = {
+      plugins = {
+        wezterm = {
+          enabled = true,
+        },
+      },
+    },
+  },
 }
