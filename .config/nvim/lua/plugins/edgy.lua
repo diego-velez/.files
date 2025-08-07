@@ -17,6 +17,14 @@ return {
       },
       { title = 'Neotest Output', ft = 'neotest-output-panel', size = { height = 15 } },
       { title = 'Undo Tree Diff', ft = 'diff', size = { height = 15 } },
+      {
+        title = 'Kulala',
+        ft = 'json.kulala_ui',
+      },
+      {
+        title = 'Kulala',
+        ft = 'text.kulala_ui',
+      },
     },
     left = {
       { title = 'Neotest Summary', ft = 'neotest-summary' },
