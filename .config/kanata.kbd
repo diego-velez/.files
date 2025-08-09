@@ -3,18 +3,17 @@
 )
 
 (defsrc
-    tab     p
-    caps    '
-    spc
-    a ;
+    q w e r t y u i o p
+    a s d f g h j k l ; '
+    z x c v b n m
+    tab caps spc
 )
 
 (deflayer base
-    caps    '
-    tab     p
-    @nav
-    @cha
-    @chs
+    q w f p b j l u y '
+    @cha r s t g m n e i @cho ;
+    x c d v z k h
+    caps tab @nav
 )
 
 (deflayermap (nav-layer)
@@ -25,11 +24,11 @@
 (defalias
     nav (tap-hold 200 200 spc (layer-while-held nav-layer))
     cha (chord escape-combo a)
-    chs (chord escape-combo ;)
+    cho (chord escape-combo o)
 )
 
 (defchords escape-combo 35
     (a  ) a
-    (  ;) ;
-    (a ;) esc
+    (  o) o
+    (a o) esc
 )
