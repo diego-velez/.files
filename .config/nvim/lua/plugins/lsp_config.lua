@@ -200,19 +200,6 @@ return {
         single_file_support = true,
       },
       jdtls = {
-        settings = {
-          java = {
-            configuration = {
-              runtimes = {
-                {
-                  name = 'JavaSE-21',
-                  path = '/usr/local/google/home/diveto/.sdkman/candidates/java/21.0.1-tem/bin',
-                  default = true,
-                },
-              },
-            },
-          },
-        },
         handlers = {
           -- By assigning an empty function, you can remove the notifications
           -- printed to the cmd
