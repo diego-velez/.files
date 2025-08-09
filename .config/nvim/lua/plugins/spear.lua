@@ -45,6 +45,13 @@ return {
       desc = '[S]witch list',
     },
     {
+      '<leader>lu',
+      function()
+        require('spear.ui').open()
+      end,
+      desc = 'Spear UI',
+    },
+    {
       '<A-n>',
       function()
         require('spear').select(1)

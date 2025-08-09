@@ -47,7 +47,7 @@
   "render-markdown.nvim": { "branch": "main", "commit": "9e51b7711c6159511e966dc42fafd58a9db9ad1d" },
   "rose-pine": { "branch": "main", "commit": "72befaffeac38db7bdd49e0549eaa2c4806dd878" },
   "smear-cursor.nvim": { "branch": "main", "commit": "1a3df9af4ed017fafecd93c6837956914f269472" },
-  "spear.nvim": { "branch": "main", "commit": "d75f4ed1b7962c35b914e8ed0b914334b8a29e69" },
+  "spear.nvim": { "branch": "main", "commit": "17d2418f37eb753314db58eeb42b9e9e6fa5165d" },
   "spring-boot.nvim": { "branch": "main", "commit": "218c0c26c14d99feca778e4d13f5ec3e8b1b60f0" },
   "techbase.nvim": { "branch": "main", "commit": "81e59af3992c50825fe1badf33ee08bd41a7d050" },
   "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "7dcf8542059fb15c978de845fc8665428ae13a04" },
