@@ -97,7 +97,6 @@ return { -- Collection of various small independent plugins/modules
       end,
       desc = '[S]earch [C]onfig',
     },
-    { '<leader>sk', function() MiniExtra.pickers.keymaps() end, desc = '[S]earch [K]eymaps', },
     { '<leader>sh', function() MiniPick.builtin.help { default_split = 'vertical' } end, desc = '[S]earch [H]elp', },
     { '<leader>st', function() MiniPick.registry.todo() end, desc = '[S]earch [T]odo', },
     { '<leader>ss', function() MiniExtra.pickers.lsp { scope = 'document_symbol' } end, desc = '[S]earch [S]ymbols', },
@@ -133,8 +132,6 @@ return { -- Collection of various small independent plugins/modules
     { '<leader>sC', function() MiniExtra.pickers.colorschemes(nil, nil) end, desc = '[S]earch [C]olorscheme', },
   },
   config = function()
-    local dracula = require('dracula').colors()
-
     -- NOTE: Start mini.icons configuration
     require('mini.icons').setup()
 
