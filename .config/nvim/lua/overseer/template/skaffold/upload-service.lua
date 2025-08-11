@@ -5,7 +5,6 @@ return {
       { 'skaffold.yaml' },
       { upward = true, limit = math.huge, type = 'file', path = vim.fn.expand '%:p' }
     )
-    vim.print(vim.inspect(files))
     local cwd = vim.fs.dirname(files[1]) or vim.uv.cwd()
     local rel_cwd = vim.fs.basename(cwd)
     ---@type overseer.TaskDefinition
