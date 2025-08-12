@@ -61,6 +61,12 @@ local keys = {
 			local current_tab = mux_window:active_tab()
 
 			local tabs_to_close = #mux_window:tabs() - 1
+
+			-- End early if there are no other tabs
+			if tabs_to_close == 0 then
+				return
+			end
+
 			for _, tab in ipairs(mux_window:tabs()) do
 				if tab:tab_id() ~= current_tab:tab_id() then
 					tab:activate()
