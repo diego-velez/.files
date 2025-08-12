@@ -1,4 +1,5 @@
 {
+  "LuaSnip": { "branch": "master", "commit": "458560534a73f7f8d7a11a146c801db00b081df0" },
   "blink-cmp-conventional-commits": { "branch": "main", "commit": "e7ce3ddcc6d4044067d6d77ab41d480202e814ad" },
   "blink-cmp-words": { "branch": "main", "commit": "81224ec2eb72115c84bb19ae566ef25083dbfed2" },
   "blink-ripgrep.nvim": { "branch": "main", "commit": "1d467aa090044b65781f81dee7564fb5d3cfd96b" },
@@ -10,7 +11,6 @@
   "edgy.nvim": { "branch": "main", "commit": "7e8dedc39abebe40c289b8012cc89b11c69aa7a0" },
   "floaterm": { "branch": "main", "commit": "ae3de018d20dccd9372bbff7137e8a6d6030f69e" },
   "focus.nvim": { "branch": "master", "commit": "5500e1a9e926eec5a361d910679282fd723c0a96" },
-  "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
   "gitsigns.nvim": { "branch": "main", "commit": "b01433169be710d6c69f7b4ee264d9670698b831" },
   "grug-far.nvim": { "branch": "main", "commit": "482517700eef8579b289a20995f017a0775a6ec4" },
   "guess-indent.nvim": { "branch": "main", "commit": "84a4987ff36798c2fc1169cbaff67960aed9776f" },

@@ -1,7 +1,9 @@
 {
-    "date-DVT": {
-        "prefix": "date-DVT",
-        "body": ["${CURRENT_DAY_NAME}: ${CURRENT_DATE} ${CURRENT_MONTH_NAME} ${CURRENT_YEAR}"],
-        "description": "Put the date in DVT format :)"
-    }
+  "date": {
+    "prefix": "date",
+    "body": [
+      "${CURRENT_DAY_NAME}: ${CURRENT_DATE} ${CURRENT_MONTH_NAME} ${CURRENT_YEAR}"
+    ],
+    "description": "Add the current date"
+  }
 }

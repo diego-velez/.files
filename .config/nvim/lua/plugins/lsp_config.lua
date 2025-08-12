@@ -155,7 +155,9 @@ return {
       end,
     })
 
-    local capabilities = require('blink.cmp').get_lsp_capabilities()
+    local capabilities = require('blink.cmp').get_lsp_capabilities {
+      textDocument = { completion = { completionItem = { snippetSupport = false } } },
+    }
 
     local servers = {
       -- clangd = {},
@@ -181,7 +183,8 @@ return {
         settings = {
           Lua = {
             completion = {
-              callSnippet = 'Replace',
+              callSnippet = 'Disable',
+              keywordSnippet = 'Disable',
             },
           },
         },

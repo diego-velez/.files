@@ -22,7 +22,17 @@ return {
     'saghen/blink.cmp',
     version = '1.*',
     dependencies = {
-      'rafamadriz/friendly-snippets',
+      {
+        'L3MON4D3/LuaSnip',
+        version = 'v2.*',
+        -- install jsregexp (optional!).
+        build = 'make install_jsregexp',
+        config = function()
+          require('luasnip.loaders.from_vscode').lazy_load {
+            paths = vim.fn.stdpath 'config' .. '/snippets',
+          }
+        end,
+      },
       'xzbdmw/colorful-menu.nvim',
       'mikavilpas/blink-ripgrep.nvim',
       'archie-judd/blink-cmp-words',
@@ -81,8 +91,32 @@ return {
         ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
         ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
 
-        ['<Tab>'] = { 'snippet_forward', 'fallback' },
-        ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+        ['<Tab>'] = {
+          function(_)
+            local luasnip = require 'luasnip'
+            if luasnip.expand_or_jumpable() then
+              vim.schedule(function()
+                luasnip.expand_or_jump()
+              end)
+              return true
+            end
+            return false
+          end,
+          'fallback',
+        },
+        ['<S-Tab>'] = {
+          function()
+            local luasnip = require 'luasnip'
+            if luasnip.jumpable(-1) then
+              vim.schedule(function()
+                luasnip.jump(-1)
+              end)
+              return true
+            end
+            return false
+          end,
+          'fallback',
+        },
 
         ['<C-h>'] = { 'show_signature', 'hide_signature', 'fallback' },
       },
@@ -142,7 +176,7 @@ return {
             return { 'path', 'buffer', 'dictionary', 'thesaurus', 'ripgrep' }
           end
 
-          local defacto = { 'lsp', 'path', 'snippets', 'buffer' }
+          local defacto = { 'lsp', 'path', 'buffer' }
 
           -- Only show ripgrep if we have it on for the buffer
           if vim.b.grep_completion then
