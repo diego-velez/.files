@@ -209,6 +209,7 @@ return {
           ['$/progress'] = function(_, result, ctx) end,
         },
       },
+      clangd = {},
     }
 
     require('java').setup {}
