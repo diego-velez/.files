@@ -30,7 +30,6 @@ config.window_padding = {
 }
 
 config.adjust_window_size_when_changing_font_size = false
-config.window_decorations = "RESIZE"
 config.scrollback_lines = 10000
 config.use_dead_keys = false
 
