@@ -124,10 +124,21 @@ local show_short_files = function(buf_id, items_to_show, query)
   MiniPick.default_show(buf_id, short_items_to_show, query)
 end
 
+---@class DVTMiniFiles
+---@field shorten_dirname boolean
+---@param local_opts DVTMiniFiles | nil
+---@param opts table | nil
 MiniPick.registry.files = function(local_opts, opts)
-  opts = opts or {
-    source = { show = show_short_files },
-  }
+  local_opts = local_opts or {}
+  local_opts = vim.tbl_extend('force', local_opts, { shorten_dirname = false })
+  if local_opts.shorten_dirname then
+    opts = opts or {
+      source = { show = show_short_files },
+    }
+  else
+    opts = opts or {}
+  end
+
   MiniPick.builtin.files(local_opts, opts)
 end
 
@@ -244,7 +255,7 @@ end
 -- Open LSP picker for the given scope
 ---@param scope "declaration" | "definition" | "document_symbol" | "implementation" | "references" | "type_definition" | "workspace_symbol"
 ---@param autojump boolean? If there is only one result it will jump to it.
-function MiniPick.LspPicker(scope, autojump)
+MiniPick.registry.LspPicker = function(scope, autojump)
   ---@return string
   local function get_symbol_query()
     return vim.fn.input 'Symbol: '

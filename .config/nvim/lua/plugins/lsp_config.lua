@@ -65,23 +65,23 @@ return {
         local client = vim.lsp.get_client_by_id(event.data.client_id)
 
         map('gd', function()
-          MiniPick.LspPicker('definition', true)
+          MiniPick.registry.LspPicker('definition', true)
         end, 'LSP: [G]oto [D]efinition')
 
         map('gr', function()
-          MiniPick.LspPicker('references', true)
+          MiniPick.registry.LspPicker('references', true)
         end, 'LSP: [G]oto [R]eferences')
 
         map('gI', function()
-          MiniPick.LspPicker('implementation', true)
+          MiniPick.registry.LspPicker('implementation', true)
         end, 'LSP: [G]oto [I]mplementation')
 
         map('gy', function()
-          MiniPick.LspPicker('type_definition', true)
+          MiniPick.registry.LspPicker('type_definition', true)
         end, 'LSP: [G]oto T[y]pe Definition')
 
         map('gD', function()
-          MiniPick.LspPicker('declaration', true)
+          MiniPick.registry.LspPicker('declaration', true)
         end, 'LSP: [G]oto [D]eclaration')
 
         map('<leader>ca', vim.lsp.buf.code_action, 'LSP: Code [A]ction')
