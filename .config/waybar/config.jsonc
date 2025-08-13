@@ -31,8 +31,6 @@
         "clock#date",
         "custom/right4",
         "network",
-        //"custom/wi",
-        //"custom/wifi",
         "custom/right5"
     ],
     "modules-right": [
@@ -133,22 +131,18 @@
         "min-length": 8,
         "max-length": 8
     },
-    "custom/wi": { // TODO: Signal strength
-        "format": "󰤥 ",
-        "tooltip": false
-    },
-    "custom/wifi": {
-        "exec": "nmcli -t -f active,ssid dev wifi | awk -F: '/^yes/ {print $2}'",
-        "interval": 30,
-        "format": "{}", // use "{}" to display network name
-        "tooltip": true,
-        "tooltip-format": "{}",
-        "on-click": "~/.config/waybar/network-menu.sh",
-        "min-length": 7,
-        "max-length": 7
-    },
+    // WARN: If iwmenu does not work you need to enable DHCP
+    // See https://wiki.archlinux.org/title/Iwd#No_DHCP_in_AP_mode
     "network": {
-        "format-wifi": " Wifi",
+        "format-wifi": "{icon} Wifi",
+        "format-ethernet": "󰈁 Cable",
+        "format-disconnected": "󰤮 Error",
+        "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
+        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) {icon}",
+        "tooltip-format-ethernet": "{ifname} 󰈁",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "~/.local/bin/iwmenu --launcher rofi",
         "min-length": 7,
         "max-length": 7
     },
@@ -191,7 +185,8 @@
     "bluetooth": {
         // Hides the module when it is disabled
         "format-disabled": "Off",
-        "on-click": "blueman-manager"
+        // See https://github.com/e-tho/bzmenu
+        "on-click": "~/.local/bin/bzmenu --launcher rofi"
     },
     "tray": {
         "spacing": 10,
