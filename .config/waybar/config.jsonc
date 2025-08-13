@@ -135,9 +135,14 @@
     // See https://wiki.archlinux.org/title/Iwd#No_DHCP_in_AP_mode
     "network": {
         "format-wifi": "{icon} Wifi",
-        "format-ethernet": "󰈁 Cable",
-        "format-disconnected": "󰤮 Error",
-        "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
+        "format-ethernet": "<span color='#50FA7B'>󰈁</span> Cable",
+        "format-disconnected": "<span color='#FF5555'>󰤮</span> Error",
+        "format-icons": [
+            "<span color='#F1FA8C'>󰤟</span>",
+            "<span color='#F1FA8C'>󰤢</span>",
+            "<span color='#50FA7B'>󰤥</span>",
+            "<span color='#50FA7B'>󰤨</span>"
+        ],
         "tooltip-format": "{ifname} via {gwaddr} 󰊗",
         "tooltip-format-wifi": "{essid} ({signalStrength}%) {icon}",
         "tooltip-format-ethernet": "{ifname} 󰈁",
@@ -171,14 +176,8 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": [
-                "",
-                "",
-                ""
-            ],
-            "default-muted": [
-                "󰝟"
-            ]
+            "default": ["", "", ""],
+            "default-muted": ["󰝟"]
         },
         "on-click": "pavucontrol"
     },
