@@ -61,6 +61,8 @@ return {
       },
       on_open = function(win)
         vim.schedule(function()
+          vim.g.og_scrolloff = vim.o.scrolloff
+          vim.o.scrolloff = math.floor(vim.o.scrolloff / 2)
           vim.g.mininotify_disable = true
           MiniClue.disable_all_triggers()
           MiniPick.config.window.old_config = MiniPick.config.window.config
@@ -80,6 +82,8 @@ return {
       end,
       on_close = function()
         vim.schedule(function()
+          vim.o.scrolloff = vim.g.og_scrolloff
+          vim.g.og_scrolloff = nil
           vim.g.mininotify_disable = false
           MiniClue.enable_all_triggers()
           MiniPick.config.window.config = MiniPick.config.window.old_config
