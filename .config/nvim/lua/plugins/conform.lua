@@ -65,6 +65,7 @@ return { -- Autoformat
       java = { 'google-java-format' },
       terraform = { 'hclfmt' },
       json = { 'jq' },
+      jsonc = { 'biome' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
