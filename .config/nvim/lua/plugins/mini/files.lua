@@ -1,3 +1,5 @@
+local augroup = vim.api.nvim_create_augroup('DVT MiniFiles', { clear = true })
+
 require('mini.files').setup {
   mappings = {
     close = 'q',
@@ -127,7 +129,7 @@ local files_grug_far = function(_)
 end
 
 vim.api.nvim_create_autocmd('User', {
-  group = vim.api.nvim_create_augroup('DVT MiniFilesBufferCreate', { clear = true }),
+  group = augroup,
   pattern = 'MiniFilesBufferCreate',
   callback = function(args)
     local buf_id = args.data.buf_id
@@ -178,7 +180,7 @@ vim.api.nvim_create_autocmd('User', {
 })
 
 vim.api.nvim_create_autocmd('User', {
-  group = vim.api.nvim_create_augroup('DVT MiniFilesWindowUpdate', { clear = true }),
+  group = augroup,
   pattern = 'MiniFilesWindowUpdate',
   callback = function(args)
     -- Only show number column in the current directory
@@ -190,7 +192,7 @@ vim.api.nvim_create_autocmd('User', {
 
 -- Use to try and automatically detect
 vim.api.nvim_create_autocmd('User', {
-  group = vim.api.nvim_create_augroup('DVT MiniFilesAction Git/LSP integration', { clear = true }),
+  group = augroup,
   pattern = { 'MiniFilesActionRename', 'MiniFilesActionMove' },
   callback = function(args)
     local from = args.data.from
