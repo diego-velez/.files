@@ -1,3 +1,5 @@
+local ns = vim.api.nvim_create_namespace 'DVT MiniPickRanges'
+
 return { -- Collection of various small independent plugins/modules
   'echasnovski/mini.nvim',
   lazy = false,
@@ -38,7 +40,78 @@ return { -- Collection of various small independent plugins/modules
     { '<leader>/', function() MiniPick.registry.buf_lines() end, desc = '[/] Fuzzily search in current buffer', },
     { '<leader>so', function() MiniExtra.pickers.oldfiles() end, desc = '[S]earch [O]ld Files', },
     { '<leader>sr', function() MiniPick.builtin.resume() end, desc = '[S]earch [R]esume', },
-    { '<leader>sg', function() MiniPick.builtin.grep_live() end, desc = '[S]earch [G]rep', },
+    {
+      '<leader>sg',
+      function()
+        local show = function(buf_id, items, query)
+          local hl_groups = {}
+          items = vim.tbl_map(function(item)
+            -- Get all items as returned by ripgrep
+            local path,row,column,str = string.match(item, "^([^|]*)|([^|]*)|([^|]*)|(.*)$")
+
+            path = vim.fs.basename(path)
+
+            -- Trim text found
+            str = string.gsub(str, "^%s*(.-)%s*$", "%1")
+
+            local icon, hl =  MiniIcons.get('file', path)
+            table.insert(hl_groups, hl)
+
+            return string.format("%s %s|%s|%s| %s", icon, path, row, column, str)
+          end, items)
+
+          -- See https://github.com/echasnovski/mini.nvim/discussions/1192
+          items = require('mini.align').align_strings(items, {
+            justify_side = "left",
+            merge_delimiter = "",
+            split_pattern = "|",
+          })
+
+          MiniPick.default_show(buf_id, items, query, {show_icons = false})
+
+          -- Add color to icons
+          local icon_extmark_opts = {hl_mode = 'combine', priority = 210}
+          for i = 1, #hl_groups do
+            icon_extmark_opts.hl_group = hl_groups[i]
+            icon_extmark_opts.end_row, icon_extmark_opts.end_col = i - 1, 1
+            vim.api.nvim_buf_set_extmark(buf_id, ns, i - 1, 0, icon_extmark_opts)
+          end
+        end
+
+        local set_items_opts = {do_match = false, querytick = 0}
+        local process
+        local match = function(_, _, query)
+          pcall(vim.loop.process_kill, process)
+          if #query == 0 then
+            return MiniPick.set_picker_items({}, set_items_opts)
+          end
+
+          local command = {
+            'rg',
+            '--column',
+            '--line-number',
+            '--no-heading',
+            '--field-match-separator',
+            '|',
+            '--no-follow',
+            '--color=never',
+            '--',
+            table.concat(query)
+          }
+          process = MiniPick.set_picker_items_from_cli(command, {set_items_opts = set_items_opts, spawn_opts = {cwd = vim.uv.cwd()}})
+        end
+
+          MiniPick.start({
+            source = {
+              name = "Live Grep",
+              items = {},
+              match = match,
+              show = show
+            }
+          })
+      end,
+      desc = '[S]earch [G]rep',
+    },
     {
       '<leader>sG',
       function()
