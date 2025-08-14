@@ -132,6 +132,12 @@ vim.api.nvim_create_autocmd('User', {
   callback = function(args)
     local buf_id = args.data.buf_id
 
+    vim.b[buf_id].minianimate_disable = true
+
+    vim.keymap.set('n', 'G', 'G', { buffer = buf_id })
+    vim.keymap.set('n', '<C-u>', '<C-u>', { buffer = buf_id })
+    vim.keymap.set('n', '<C-d>', '<C-d>', { buffer = buf_id })
+
     vim.keymap.set('n', '<right>', go_in_and_expand, { buffer = buf_id, desc = 'Go in and expand' })
 
     map_split(buf_id, '<C-h>', 'belowright horizontal')
@@ -175,8 +181,10 @@ vim.api.nvim_create_autocmd('User', {
   group = vim.api.nvim_create_augroup('DVT MiniFilesWindowUpdate', { clear = true }),
   pattern = 'MiniFilesWindowUpdate',
   callback = function(args)
-    vim.wo[args.data.win_id].number = true
-    vim.wo[args.data.win_id].relativenumber = true
+    -- Only show number column in the current directory
+    local current_buf = args.buf == args.data.buf_id
+    vim.wo[args.data.win_id].number = current_buf
+    vim.wo[args.data.win_id].relativenumber = current_buf
   end,
 })
 
