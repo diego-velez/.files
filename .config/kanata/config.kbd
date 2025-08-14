@@ -16,9 +16,11 @@
     caps tab @nav
 )
 
+;; This is mapped using Qwerty
 (deflayermap (nav-layer)
     a lmeta s lalt d lshift f lctrl
     j left k down l up ; right
+    m home , end
 )
 
 (defalias
