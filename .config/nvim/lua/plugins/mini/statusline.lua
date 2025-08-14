@@ -271,21 +271,17 @@ local footer = [[
 ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 ]]
-local mini_pick = {
-  { name = 'Browser', action = require('mini.files').open, section = 'Mini' },
-  { name = 'Files', action = 'Pick files', section = 'Mini' },
-  { name = 'Help', action = 'Pick help', section = 'Mini' },
-  { name = 'Grep', action = 'Pick grep_live', section = 'Mini' },
-  { name = 'Old Files', action = MiniExtra.pickers.oldfiles, section = 'Mini' },
-}
 local starter = require 'mini.starter'
 starter.setup {
   header = days[os.date '%w'],
   footer = footer,
   items = {
+    starter.sections.recent_files(5, true, false),
     starter.sections.recent_files(10, false, false),
-    mini_pick,
-    starter.sections.builtin_actions(),
+    {
+      { name = 'New buffer', action = 'enew', section = 'Builtin actions' },
+      { name = 'Quit Neovim', action = 'qall', section = 'Builtin actions' },
+    },
   },
   content_hooks = {
     starter.gen_hook.adding_bullet '┃ ',
