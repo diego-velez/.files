@@ -342,6 +342,19 @@ return { -- Collection of various small independent plugins/modules
     -- NOTE: Start mini.pick configuration
     require 'plugins.mini.pick'
 
+    -- NOTE: Start mini.starter configuration
+    require 'plugins.mini.starter'
+
+    -- NOTE: Start mini.comment configuration
+    require('mini.comment').setup {
+      options = {
+        custom_commentstring = function()
+          return require('ts_context_commentstring.internal').calculate_commentstring()
+            or vim.bo.commentstring
+        end,
+      },
+    }
+
     -- NOTE: Start mini.clue configuration
 
     -- See MiniClue.gen_clues.z()
