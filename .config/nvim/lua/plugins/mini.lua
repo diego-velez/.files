@@ -60,13 +60,6 @@ return { -- Collection of various small independent plugins/modules
             return string.format("%s %s|%s|%s| %s", icon, path, row, column, str)
           end, items)
 
-          -- See https://github.com/echasnovski/mini.nvim/discussions/1192
-          items = require('mini.align').align_strings(items, {
-            justify_side = "left",
-            merge_delimiter = "",
-            split_pattern = "|",
-          })
-
           MiniPick.default_show(buf_id, items, query, {show_icons = false})
 
           -- Add color to icons
