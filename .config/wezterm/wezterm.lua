@@ -2,7 +2,6 @@
 local wezterm = require("wezterm")
 ---@type Config
 local config = wezterm.config_builder()
-local act = wezterm.action
 
 config.term = "wezterm"
 config.default_prog = { "fish", "-l" }
@@ -37,6 +36,7 @@ config.disable_default_key_bindings = true
 config.keys = require("keymaps")
 
 config.default_cursor_style = "SteadyBar"
+config.quick_select_alphabet = "tnseriaohdlpufywqcxmgjbz"
 
 -- Enabled zen.nvim integration with Wezterm
 -- See https://github.com/folke/zen-mode.nvim?tab=readme-ov-file#wezterm

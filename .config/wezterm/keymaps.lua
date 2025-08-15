@@ -117,6 +117,16 @@ local keys = {
 		mods = leader,
 		action = act.ActivateCopyMode,
 	},
+	{
+		key = "f",
+		mods = leader,
+		action = act.Search({ CaseInSensitiveString = "" }),
+	},
+	{
+		key = "s",
+		mods = leader,
+		action = act.QuickSelect,
+	},
 }
 
 -- Bind moving to tab index by Alt+1 to 9
