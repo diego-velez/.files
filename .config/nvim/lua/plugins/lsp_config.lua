@@ -160,7 +160,6 @@ return {
     }
 
     local servers = {
-      -- clangd = {},
       gopls = {
         settings = {
           gopls = {
@@ -176,9 +175,7 @@ return {
           },
         },
       },
-      -- TODO: Figure out if I should be using pyright instead
-      pylsp = {},
-
+      basedpyright = {},
       lua_ls = {
         settings = {
           Lua = {
@@ -233,6 +230,7 @@ return {
 
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
+      'ruff',
       'stylua', -- Used to format Lua code
       'bash-language-server',
       'html-lsp',
