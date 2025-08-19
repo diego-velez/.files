@@ -210,6 +210,7 @@ return {
         },
       },
       clangd = {},
+      tinymist = {},
     }
 
     require('java').setup {}
