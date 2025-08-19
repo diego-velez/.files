@@ -210,7 +210,13 @@ return {
         },
       },
       clangd = {},
-      tinymist = {},
+      tinymist = {
+        settings = {
+          formatterMode = 'typstyle',
+          exportPdf = 'onType',
+          semanticTokens = 'disable',
+        },
+      },
     }
 
     require('java').setup {}

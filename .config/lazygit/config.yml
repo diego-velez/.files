@@ -45,3 +45,6 @@ git:
 
 # If true, don't display introductory popups upon opening Lazygit.
 disableStartupPopups: true
+
+# If true, do not allow force pushes
+disableForcePushing: true
