@@ -4,7 +4,7 @@
     "height": 20,
     // This is equal to 40% of the my monitor, which should be the default mfact in Hyprland
     // This also accounts for a 2px border size and a 5px gaps in
-    "width": 2034,
+    "width": 1920,
     "reload_style_on_change": true,
     "spacing": 0,
     // Choose the order of the modules
@@ -35,6 +35,7 @@
     ],
     "modules-right": [
         "mpris",
+        "battery",
         "custom/left6",
         "pulseaudio",
         "custom/left7",
@@ -160,6 +161,37 @@
             "paused": "<span color='#FF5555'>󰎊</span>"
         },
         "tooltip-format": "{player} ({status}): {artist} - {album} - {title}"
+    },
+    "battery": {
+        "interval": 5,
+        "states": {
+            "empty": 5,
+            "critical": 20,
+            "twenties": 29,
+            "thirties": 39,
+            "fourties": 49,
+            "fifties": 59,
+            "sixeties": 69,
+            "seventies": 79,
+            "eighties": 89,
+            "nineties": 95,
+            "full": 100
+        },
+        "format-icons": {
+            "empty": "<span color='#FF5555'>󱟩</span>",
+            "critical": "<span color='#FF5555'>󰂃</span>",
+            "twenties": "<span color='#FF5555'>󰁻</span>",
+            "thirties": "<span color='#F1FA8C'>󰁼</span>",
+            "fourties": "<span color='#F1FA8C'>󰁽</span>",
+            "fifties": "<span color='#F1FA8C'>󰁾</span>",
+            "sixeties": "<span color='#F1FA8C'>󰁿</span>",
+            "seventies": "<span color='#50FA7B'>󰂀</span>",
+            "eighties": "<span color='#50FA7B'>󰂁</span>",
+            "nineties": "<span color='#50FA7B'>󰂂</span>",
+            "full": "<span color='#50FA7B'>󰁹</span>"
+        },
+        "format-discharging": "{icon} {capacity}% ",
+        "format-charging": "<span color='#50FA7B'>{icon}󱐋</span> {capacity}% "
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
