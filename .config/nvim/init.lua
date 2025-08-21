@@ -37,5 +37,3 @@ end
 require('mini.deps').setup { path = { package = path_package } }
 
 require 'plugins'
-
-require 'config.check_dotfile_cwd'
