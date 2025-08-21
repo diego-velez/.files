@@ -18,23 +18,22 @@ screensavers = [
 def run_screensaver(screensaver):
     # We want different font size for certain screensavers
     if screensaver == screensavers[3]:
-        subprocess.Popen(
-            ["wezterm-gui", "--config", "font_size=16", "start", "--", "sh", "-c", f"sleep 0.4 && {screensaver}"])
+        # fmt: off
+        _ = subprocess.Popen(["wezterm-gui", "--config", "font_size=16", "start", "--", "sh", "-c", f"sleep 0.4 && {screensaver}"])
     elif screensaver == screensavers[5]:
-        subprocess.Popen(
-            ["wezterm-gui", "--config", "font_size=24", "start", "--", "sh", "-c", f"sleep 0.4 && {screensaver}"])
+        # fmt: off
+        _ = subprocess.Popen(["wezterm-gui", "--config", "font_size=24", "start", "--", "sh", "-c", f"sleep 0.4 && {screensaver}"])
     else:
-        subprocess.Popen(
-            ["wezterm-gui", "--config", "font_size=8", "start", "--", "sh", "-c", f"sleep 0.4 && {screensaver}"])
-    time.sleep(0.4)
+        # fmt: off
+        _ = subprocess.Popen(["wezterm-gui", "--config", "font_size=8", "start", "--", "sh", "-c", f"sleep 0.4 && {screensaver}"])
 
-    subprocess.Popen(["hyprctl", "dispatch fullscreen 2"]).wait()
+    time.sleep(0.4)
+    _ = subprocess.Popen(["hyprctl", "dispatch fullscreen 2"]).wait()
 
 
 def can_run():
     # We use activewindow because I think activeworkspace does not show special workspace
-    active_window = subprocess.run(
-        ["hyprctl", "activewindow"], capture_output=True)
+    active_window = subprocess.run(["hyprctl", "activewindow"], capture_output=True)
     active_window_output = active_window.stdout.decode("utf-8")
 
     # Occurs when there is no active window (empty workspace)
@@ -42,6 +41,7 @@ def can_run():
         return True
 
     # Get active workspace
+    is_fullscreen = False
     for line in active_window_output.split("\n"):
         if line.startswith("\tfullscreen: "):
             is_fullscreen = line.split(": ")[1] == "2"
@@ -50,12 +50,12 @@ def can_run():
     return not is_fullscreen
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     if not can_run():
         print("Will not run when current window is in fullscreen")
         sys.exit(1)
 
-    screensaver_index = random.randint(0, len(screensavers)-1)
+    screensaver_index = random.randint(0, len(screensavers) - 1)
     screensaver = screensavers[screensaver_index]
     print(f"Running {screensaver}")
     run_screensaver(screensaver)

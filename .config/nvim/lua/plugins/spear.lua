@@ -1,80 +1,25 @@
-return {
-  'diego-velez/spear.nvim',
-  dependencies = { 'nvim-lua/plenary.nvim' },
-  keys = {
-    {
-      '<leader>la',
-      function()
-        require('spear').add()
-      end,
-      desc = '[A]dd file to list',
-    },
-    {
-      '<leader>ld',
-      function()
-        require('spear').remove()
-      end,
-      desc = '[D]elete file from list',
-    },
-    {
-      '<leader>lD',
-      function()
-        require('spear').delete()
-      end,
-      desc = '[D]elete list',
-    },
-    {
-      '<leader>lc',
-      function()
-        require('spear').create()
-      end,
-      desc = '[C]reate list',
-    },
-    {
-      '<leader>lr',
-      function()
-        require('spear').rename()
-      end,
-      desc = '[R]ename list',
-    },
-    {
-      '<leader>ls',
-      function()
-        require('spear').switch()
-      end,
-      desc = '[S]witch list',
-    },
-    {
-      '<leader>lu',
-      function()
-        require('spear.ui').open()
-      end,
-      desc = 'Spear UI',
-    },
-    {
-      '<A-n>',
-      function()
-        require('spear').select(1)
-      end,
-    },
-    {
-      '<A-e>',
-      function()
-        require('spear').select(2)
-      end,
-    },
-    {
-      '<A-i>',
-      function()
-        require('spear').select(3)
-      end,
-    },
-    {
-      '<A-o>',
-      function()
-        require('spear').select(4)
-      end,
-    },
-  },
-  opts = {},
-}
+local spear = require 'spear'
+spear.setup()
+
+-- stylua: ignore
+vim.keymap.set('n', '<leader>l', '', { desc = '[L]ist' })
+vim.keymap.set('n', '<leader>la', spear.add, { desc = '[A]dd file to list' })
+vim.keymap.set('n', '<leader>ld', spear.remove, { desc = '[D]elete file from list' })
+vim.keymap.set('n', '<leader>lD', spear.delete, { desc = '[D]elete list' })
+vim.keymap.set('n', '<leader>lc', spear.create, { desc = '[C]reate list' })
+vim.keymap.set('n', '<leader>lr', spear.rename, { desc = '[R]ename list' })
+vim.keymap.set('n', '<leader>ls', spear.switch, { desc = '[S]witch list' })
+vim.keymap.set('n', '<leader>lu', require('spear.ui').open, { desc = 'Spear UI' })
+
+vim.keymap.set('n', '<A-n>', function()
+  require('spear').select(1)
+end)
+vim.keymap.set('n', '<A-e>', function()
+  require('spear').select(2)
+end)
+vim.keymap.set('n', '<A-i>', function()
+  require('spear').select(3)
+end)
+vim.keymap.set('n', '<A-o>', function()
+  require('spear').select(4)
+end)
