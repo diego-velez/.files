@@ -247,9 +247,6 @@ miniclue.setup {
     { mode = 'n', keys = 'z' },
     { mode = 'x', keys = 'z' },
 
-    -- Tabs
-    { mode = 'n', keys = '<tab>' },
-
     -- Brackets
     { mode = 'n', keys = '[' },
     { mode = 'n', keys = ']' },
@@ -257,14 +254,10 @@ miniclue.setup {
 
   clues = {
     {
-      { mode = 'n', keys = '<leader>s', desc = '[S]earch' },
       { mode = 'n', keys = '<leader>t', desc = '[T]oggle' },
-      { mode = 'n', keys = '<leader>l', desc = '[L]ist' },
-      { mode = 'n', keys = '<leader>u', desc = '[U]I' },
       { mode = 'n', keys = '<leader>c', desc = '[C]ode' },
       { mode = 'n', keys = '<leader>g', desc = '[G]it' },
       { mode = 'x', keys = '<leader>g', desc = '[G]it' },
-      { mode = 'n', keys = '<leader><tab>', desc = '[T]ab' },
     },
     miniclue.gen_clues.builtin_completion(),
     miniclue.gen_clues.g(),
@@ -426,6 +419,8 @@ end, { desc = 'Toggle [H]ighlighting' })
 vim.keymap.set('n', '<leader>/', function()
   MiniPick.registry.buf_lines()
 end, { desc = '[/] Fuzzily search in current buffer' })
+
+vim.keymap.set('n', '<leader>s', '', { desc = '[S]earch' })
 vim.keymap.set('n', '<leader>so', function()
   MiniExtra.pickers.oldfiles()
 end, { desc = '[S]earch [O]ld Files' })
