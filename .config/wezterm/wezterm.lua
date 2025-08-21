@@ -21,11 +21,12 @@ config.inactive_pane_hsb = {
 }
 config.window_background_opacity = 0.85
 
+config.enable_scroll_bar = true
 config.window_padding = {
-	left = 0,
-	right = 0,
-	top = 0,
-	bottom = 0,
+	left = "2px",
+	right = "2px",
+	top = "1px",
+	bottom = "1px",
 }
 
 config.adjust_window_size_when_changing_font_size = false

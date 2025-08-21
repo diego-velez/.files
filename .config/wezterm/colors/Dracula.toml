@@ -6,7 +6,7 @@ cursor_fg = "#282A36"
 cursor_border = "#F8F8F2"
 selection_bg = "#F8F8F2"
 selection_fg = "#282A36"
-scrollbar_thumb = "#BD93F9"
+scrollbar_thumb = "#F8F8F2"
 split = "#BD93F9"
 
 ansi = [
