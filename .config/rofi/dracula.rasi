@@ -23,7 +23,7 @@ configuration {
 // Actual entire window
 #window {
     background-color: @background-color;
-    width:            40%;
+    width:            768px;  // 15% of 5120 and 40% of 1920
     border:           3;
     border-radius:    100;
     border-color:     @bordercolor;
