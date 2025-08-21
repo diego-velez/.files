@@ -1,5 +1,3 @@
-local ns = vim.api.nvim_create_namespace 'DVT MiniPickRanges'
-
 -- NOTE: Start mini.icons configuration
 require('mini.icons').setup()
 
@@ -427,6 +425,8 @@ end, { desc = '[S]earch [O]ld Files' })
 vim.keymap.set('n', '<leader>sr', function()
   MiniPick.builtin.resume()
 end, { desc = '[S]earch [R]esume' })
+
+local ns = vim.api.nvim_create_namespace 'DVT MiniPickRanges'
 vim.keymap.set('n', '<leader>sg', function()
   local show = function(buf_id, items, query)
     local hl_groups = {}
