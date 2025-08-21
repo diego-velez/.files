@@ -1,35 +1,20 @@
-return {
-  'gbprod/yanky.nvim',
-  keys = {
-    {
-      '<leader>p',
-      function()
-        vim.cmd [[YankyRingHistory]]
-      end,
-      mode = { 'n', 'x' },
-      desc = 'Open Yank History',
-    },
-    { 'y', '<Plug>(YankyYank)', mode = { 'n', 'x' }, desc = 'Yank Text' },
-    { 'p', '<Plug>(YankyPutAfter)', mode = { 'n', 'x' }, desc = 'Put Text After Cursor' },
-    { 'P', '<Plug>(YankyPutBefore)', mode = { 'n', 'x' }, desc = 'Put Text Before Cursor' },
-    { 'gp', '<Plug>(YankyGPutAfter)', mode = { 'n', 'x' }, desc = 'Put Text After Selection' },
-    { 'gP', '<Plug>(YankyGPutBefore)', mode = { 'n', 'x' }, desc = 'Put Text Before Selection' },
-    { '[y', '<Plug>(YankyCycleForward)', desc = 'Cycle Forward Through Yank History' },
-    { ']y', '<Plug>(YankyCycleBackward)', desc = 'Cycle Backward Through Yank History' },
-    { ']p', '<Plug>(YankyPutIndentAfterLinewise)', desc = 'Paste after line' },
-    {
-      '[p',
-      '<Plug>(YankyPutIndentBeforeLinewise)',
-      desc = 'Paste before line',
-    },
-    { ']P', '<Plug>(YankyPutIndentAfterLinewise)', desc = 'Paste after line' },
-    {
-      '[P',
-      '<Plug>(YankyPutIndentBeforeLinewise)',
-      desc = 'Paste before line',
-    },
-  },
-  opts = {
-    highlight = { timer = 150 },
+require('yanky').setup {
+  highlight = {
+    timer = 150,
   },
 }
+
+-- stylua: ignore start
+vim.keymap.set({'n','x'}, '<leader>p', vim.cmd.YankyRingHistory, { desc = 'Open Yank History' })
+vim.keymap.set({'n','x'}, 'y', '<Plug>(YankyYank)', { desc = 'Yank Text' })
+vim.keymap.set({'n','x'}, 'p', '<Plug>(YankyPutAfter)', { desc = 'Put Text After Cursor' })
+vim.keymap.set({'n','x'}, 'P', '<Plug>(YankyPutBefore)', { desc = 'Put Text Before Cursor' })
+vim.keymap.set({'n','x'}, 'gp', '<Plug>(YankyGPutAfter)', { desc = 'Put Text After Selection' })
+vim.keymap.set({'n','x'}, 'gP', '<Plug>(YankyGPutBefore)', { desc = 'Put Text Before Selection' })
+vim.keymap.set('n', '[y', '<Plug>(YankyCycleForward)', { desc = 'Cycle Forward Through Yank History' })
+vim.keymap.set('n', ']y', '<Plug>(YankyCycleBackward)', { desc = 'Cycle Backward Through Yank History' })
+vim.keymap.set('n', ']p', '<Plug>(YankyPutIndentAfterLinewise)', { desc = 'Paste after line' })
+vim.keymap.set('n', '[p', '<Plug>(YankyPutIndentBeforeLinewise)', { desc = 'Paste before line' })
+vim.keymap.set('n', ']P', '<Plug>(YankyPutIndentAfterLinewise)', { desc = 'Paste after line' })
+vim.keymap.set('n', '[P', '<Plug>(YankyPutIndentBeforeLinewise)', { desc = 'Paste before line' })
+-- stylua: ignore end
