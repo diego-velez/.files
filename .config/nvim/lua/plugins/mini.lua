@@ -487,12 +487,23 @@ vim.keymap.set('n', '<leader>sg', function()
     )
   end
 
+  local choose = function(item)
+    local path, row, column = string.match(item, '^([^|]*)|([^|]*)|([^|]*)|.*$')
+    local chosen = {
+      path = path,
+      lnum = tonumber(row),
+      col = tonumber(column),
+    }
+    MiniPick.default_choose(chosen)
+  end
+
   MiniPick.start {
     source = {
       name = 'Live Grep',
       items = {},
       match = match,
       show = show,
+      choose = choose,
     },
   }
 end, { desc = '[S]earch [G]rep' })
