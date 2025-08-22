@@ -203,6 +203,7 @@ require('blink.cmp').setup {
     per_filetype = {
       text = { 'dictionary', 'ripgrep' },
       markdown = { 'thesaurus', 'ripgrep' },
+      typst = { 'lsp', 'buffer', 'thesaurus', 'dictionary' },
       lua = { 'lazydev', inherit_defaults = true },
       gitcommit = { 'conventional_commits', 'buffer', 'thesaurus', 'dictionary', 'ripgrep' },
     },
