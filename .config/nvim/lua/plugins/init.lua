@@ -18,6 +18,14 @@ now(function()
 end)
 
 now_if_args(function()
+  add {
+    source = 'nvim-treesitter/nvim-treesitter',
+    hooks = {
+      post_checkout = function()
+        vim.cmd.TSUpdate()
+      end,
+    },
+  }
   add 'nvim-treesitter/nvim-treesitter-context'
   add 'folke/ts-comments.nvim'
 
