@@ -1,3 +1,6 @@
+---@diagnostic disable: missing-fields
+---@module "tree-sitter"
+---@type TSConfig
 require('nvim-treesitter.configs').setup {
   ensure_installed = {
     'bash',
