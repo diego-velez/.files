@@ -73,20 +73,7 @@ vim.keymap.set(
 )
 
 -- Search visual selection
-vim.keymap.set(
-  'x',
-  '/',
-  [[y:let@/='\V'.escape(@",'/\\')<CR>nN]],
-  -- Lua way just in case
-  -- function()
-  --   vim.cmd.normal { '"zy', bang = true }
-  --
-  --   local text = vim.fn.getreg 'z'
-  --
-  --   vim.fn.setreg('/', '\\V' .. vim.fn.escape(text, '/\\'))
-  -- end,
-  { desc = 'Search visual selection' }
-)
+vim.keymap.set('x', '/', '<esc>/\\%V', { desc = 'Search visual selection' })
 
 -- Commenting
 vim.keymap.set(
