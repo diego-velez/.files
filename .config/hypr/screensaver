@@ -6,7 +6,7 @@ import random
 import time
 
 screensavers = [
-    "pipes.sh -r 0 -R -p 5",
+    "~/.local/bin/pipes.sh -r 0 -R -p 5",
     "asciiquarium",
     "cmatrix -r",
     "lavat -k black -c magenta -s 3 -r 1 -b 10",
@@ -15,7 +15,7 @@ screensavers = [
 ]
 
 
-def run_screensaver(screensaver):
+def run_screensaver(screensaver: str):
     # We want different font size for certain screensavers
     if screensaver == screensavers[3]:
         # fmt: off
