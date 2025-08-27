@@ -35,7 +35,6 @@ require('conform').setup {
     terraform = { 'hclfmt' },
     json = { 'jq' },
     jsonc = { 'biome' },
-    typst = { 'tinymist' },
     -- Conform can also run multiple formatters sequentially
     -- python = { "isort", "black" },
     --
