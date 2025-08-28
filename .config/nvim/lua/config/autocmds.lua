@@ -74,19 +74,3 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
   desc = 'Disable focus autoresize for FileType',
 })
-
-vim.api.nvim_create_autocmd('FileType', {
-  desc = 'Typst specific options',
-  pattern = 'typst',
-  callback = function(args)
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
-
-    vim.keymap.set(
-      'n',
-      '<leader>r',
-      '<cmd>TypstPreview<cr>',
-      { buffer = args.buf, desc = '[R]un Preview in Browser' }
-    )
-  end,
-})
