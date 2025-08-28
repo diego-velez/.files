@@ -77,6 +77,11 @@ set laststatus=2
 set showtabline=1
 set guioptions-=e
 
+" Autorelead when the file updates
+set autoread
+
+autocmd FocusGained * checktime
+
 " Set leader
 let mapleader = " "
 
@@ -126,6 +131,20 @@ onoremap <expr> n  'Nn'[v:searchforward]
 nnoremap <expr> N  'nN'[v:searchforward]
 xnoremap <expr> N  'nN'[v:searchforward]
 onoremap <expr> N  'nN'[v:searchforward]
+
+" :make keymaps
+nnoremap <leader>r <cmd>update<cr> <cmd>make<cr>
+
+" :make build commands based on filetype
+autocmd FileType c setlocal makeprg=gcc\ -Wall\ -Werror\ -I./include\ ./src/main.c\ ./src/functions.c\ -o\ ./test/main\ \&\&\ echo\ \"$*\"\ \\\|\ ./test/main
+autocmd FileType sh setlocal makeprg=cd\ \"%:p:h\"\ \&\&\ sh\ \"./%:t\"
+
+" Run university tests
+nnoremap <leader>R <cmd>!clear && cd test && ./test_performance.sh && ./test_style.sh<cr>
+
+" Create command that automatically executes cland-format on all .c and .h files
+command! ClangFormatAll execute '!find . -type f \( -iname "*.c" -o -iname "*.h" \) -exec clang-format -i --style=file --verbose {} +'
+nnoremap <leader>f <cmd>ClangFormatAll<cr>
 
 " Smarter cursorline
 autocmd InsertLeave,WinEnter * set cursorline
