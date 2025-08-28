@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd('FocusGained', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  desc = 'Enable wrap in these filetypes',
+  desc = 'Enable wrap and spell in these filetypes',
   pattern = { 'gitcommit', 'markdown', 'text', 'log', 'typst' },
   callback = function()
     vim.opt_local.wrap = true
