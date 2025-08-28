@@ -4,8 +4,8 @@ require 'config.autocmds'
 require 'config.other'
 
 -- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
-local path_package = vim.fn.stdpath 'data' .. '/site/'
-local mini_path = path_package .. 'pack/deps/start/mini.nvim'
+local path_package = vim.fn.stdpath 'data' .. '/site'
+local mini_path = path_package .. '/pack/deps/start/mini.nvim'
 if not vim.uv.fs_stat(mini_path) then
   vim.notify('Installing mini.nvim', vim.log.levels.INFO)
   vim.cmd.redraw()
@@ -14,7 +14,7 @@ if not vim.uv.fs_stat(mini_path) then
     'git',
     'clone',
     '--filter=blob:none',
-    'https://github.com/echasnovski/mini.nvim',
+    'https://github.com/nvim-mini/mini.nvim',
     mini_path,
   }
   local out = vim.system(clone_cmd, { text = true }):wait()
