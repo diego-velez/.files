@@ -91,3 +91,6 @@ vim.o.shell = '/bin/fish'
 --
 vim.o.splitkeep = 'screen'
 vim.o.laststatus = 3
+
+-- Set spell language to English and Spanish
+vim.o.spelllang = 'en,es'
