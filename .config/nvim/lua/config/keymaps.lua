@@ -131,3 +131,6 @@ vim.keymap.set(
 -- Shift lines without losing selection
 vim.keymap.set('x', '<', '<gv')
 vim.keymap.set('x', '>', '>gv')
+
+-- Use make by default
+vim.keymap.set('n', '<leader>r', '<cmd>update<cr> <cmd>make<cr>')
