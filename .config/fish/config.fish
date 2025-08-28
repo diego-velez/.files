@@ -89,7 +89,7 @@ if test $is_glinux = false
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 end
 
-if test $is_glinux = false
+if test $is_glinux = false && status is-interactive
     # Display a lil something when starting the shell
     set random_num (math (random) % 2)
     switch $random_num
