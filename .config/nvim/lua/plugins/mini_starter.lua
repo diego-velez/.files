@@ -94,3 +94,33 @@ starter.setup {
     starter.gen_hook.aligning('center', 'center'),
   },
 }
+
+local augroup = vim.api.nvim_create_augroup('DVT Starter', { clear = true })
+vim.api.nvim_create_autocmd('TabNewEntered', {
+  desc = 'Open mini.starter on new tab',
+  group = augroup,
+  nested = true,
+  callback = function()
+    MiniStarter.open()
+  end,
+})
+
+vim.api.nvim_create_autocmd('VimEnter', {
+  desc = 'Disable mini.statusline for mini.starter when opening Neovim',
+  group = augroup,
+  callback = function(args)
+    local ft = vim.bo[args.buf].filetype
+    if ft == 'ministarter' then
+      vim.b[args.buf].ministatusline_disable = true
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd('User', {
+  desc = 'Disable mini.statusline for mini.starter when creating a new tab',
+  pattern = 'MiniStarterOpened',
+  group = augroup,
+  callback = function(args)
+    vim.b[args.buf].ministatusline_disable = true
+  end,
+})
