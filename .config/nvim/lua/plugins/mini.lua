@@ -13,7 +13,7 @@ patterns.setup {
   highlighters = {
     hex_color = patterns.gen_highlighter.hex_color { priority = 2000 },
     shorthand = {
-      pattern = '()#%x%x%x()%f[^%x%w]',
+      pattern = '()#%x%x%x()%f[^%x%w_]',
       group = function(_, _, data)
         ---@type string
         local match = data.full_match
@@ -254,6 +254,11 @@ miniclue.setup {
     {
       { mode = 'n', keys = '<leader>t', desc = '[T]oggle' },
       { mode = 'n', keys = '<leader>c', desc = '[C]ode' },
+      { mode = 'n', keys = '<leader>s', desc = '[S]earch' },
+      { mode = 'n', keys = '<leader>l', desc = '[L]ist' },
+      { mode = 'n', keys = '<leader>o', desc = '[O]verseer' },
+      { mode = 'n', keys = '<leader>u', desc = 'UI' },
+      { mode = 'n', keys = '<leader><tab>', desc = 'Tabs' },
       { mode = 'n', keys = '<leader>g', desc = '[G]it' },
       { mode = 'x', keys = '<leader>g', desc = '[G]it' },
     },
@@ -418,7 +423,6 @@ vim.keymap.set('n', '<leader>/', function()
   MiniPick.registry.buf_lines()
 end, { desc = '[/] Fuzzily search in current buffer' })
 
-vim.keymap.set('n', '<leader>s', '', { desc = '[S]earch' })
 vim.keymap.set('n', '<leader>so', function()
   MiniExtra.pickers.oldfiles()
 end, { desc = '[S]earch [O]ld Files' })
@@ -591,3 +595,11 @@ end, { desc = '[N]otification History' })
 vim.keymap.set('n', '<leader>sC', function()
   MiniExtra.pickers.colorschemes(nil, nil)
 end, { desc = '[S]earch [C]olorscheme' })
+
+-- require('mini.completion').setup {
+--   delay = {
+--     completion = 0,
+--     info = 0,
+--     signature = 0,
+--   },
+-- }
