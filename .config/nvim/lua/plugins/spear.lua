@@ -2,7 +2,6 @@ local spear = require 'spear'
 spear.setup()
 
 -- stylua: ignore
-vim.keymap.set('n', '<leader>l', '', { desc = '[L]ist' })
 vim.keymap.set('n', '<leader>la', spear.add, { desc = '[A]dd file to list' })
 vim.keymap.set('n', '<leader>ld', spear.remove, { desc = '[D]elete file from list' })
 vim.keymap.set('n', '<leader>lD', spear.delete, { desc = '[D]elete list' })

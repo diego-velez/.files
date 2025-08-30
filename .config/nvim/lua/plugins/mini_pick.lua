@@ -274,33 +274,6 @@ MiniPick.registry.LspPicker = function(scope, autojump)
 
   ---@param opts vim.lsp.LocationOpts.OnList
   local function on_list(opts)
-    -- MiniPick.start {
-    --   source = {
-    --     name = opts.title,
-    --     items = opts.items,
-    --     choose = function(item)
-    --       vim.schedule(function()
-    --         MiniPick.stop()
-    --         require('overlook.api').peek(item)
-    --       end)
-    --     end,
-    --   },
-    --   window = {
-    --     config = function()
-    --       local height = math.floor(0.618 * vim.o.lines)
-    --       local width = math.floor(0.618 * vim.o.columns)
-    --       return {
-    --         relative = 'cursor',
-    --         anchor = 'NW',
-    --         height = height,
-    --         width = width,
-    --         row = 0,
-    --         col = 0,
-    --       }
-    --     end,
-    --   },
-    -- }
-
     vim.fn.setqflist({}, ' ', opts)
 
     if #opts.items == 1 then
