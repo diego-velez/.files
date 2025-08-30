@@ -523,10 +523,10 @@ vim.keymap.set('n', '<leader>sw', function()
   MiniPick.builtin.grep_live()
 end, { desc = '[S]earch [W]ord' })
 vim.keymap.set('n', '<leader>sf', function()
-  MiniPick.registry.files()
+  MiniPick.registry.fffiles()
 end, { desc = '[S]earch [F]iles' }) -- See https://github.com/echasnovski/mini.nvim/discussions/1873
 vim.keymap.set('n', '<leader><space>', function()
-  MiniPick.registry.files()
+  MiniPick.registry.fffiles()
 end, { desc = 'Search Files' })
 vim.keymap.set('n', '<leader>sF', function()
   vim.ui.input({
@@ -538,7 +538,7 @@ vim.keymap.set('n', '<leader>sF', function()
       return
     end
 
-    MiniPick.registry.files({}, { source = { cwd = input } })
+    MiniPick.registry.fffiles { cwd = input }
   end)
 end, { desc = '[S]earch [F]iles in specific directory' })
 vim.keymap.set('n', '<leader>sc', function()

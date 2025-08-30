@@ -3,6 +3,29 @@ local now_if_args = vim.fn.argc(-1) > 0 and now or later
 
 -- mini
 now(function()
+  ---@param args { path: string, name: string, source: string }
+  local function build_fff(args)
+    local cmd = { 'rustup', 'run', 'nightly', 'cargo', 'build', '--release' }
+    local opts = { cwd = args.path, text = true }
+
+    vim.notify('Building ' .. args.name, vim.log.levels.INFO)
+    local output = vim.system(cmd, opts):wait()
+    if output.code ~= 0 then
+      vim.notify('Failed to build fff.nvim', vim.log.levels.ERROR)
+      vim.notify(output.stderr, vim.log.levels.ERROR)
+    else
+      vim.notify(args.name .. ' Built', vim.log.levels.INFO)
+    end
+  end
+
+  add {
+    source = 'dmtrKovalenko/fff.nvim',
+    hooks = {
+      post_install = build_fff,
+      post_checkout = build_fff,
+    },
+  }
+
   add {
     name = 'mini.nvim',
     depends = {
@@ -10,6 +33,7 @@ now(function()
       'nvim-treesitter/nvim-treesitter',
       'nvim-treesitter/nvim-treesitter-textobjects',
       'JoosepAlviste/nvim-ts-context-commentstring',
+      'dmtrKovalenko/fff.nvim',
     },
   }
 
