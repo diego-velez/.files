@@ -179,13 +179,6 @@ later(function()
   require 'plugins.terminal'
 end)
 
--- Automatically manage windows
-later(function()
-  add 'nvim-focus/focus.nvim'
-
-  require 'plugins.focus'
-end)
-
 -- Search and replace
 later(function()
   add 'MagicDuck/grug-far.nvim'
