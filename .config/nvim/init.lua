@@ -1,7 +1,6 @@
 require 'config.keymaps'
 require 'config.options'
 require 'config.autocmds'
-require 'config.other'
 
 -- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
 local path_package = vim.fn.stdpath 'data' .. '/site'

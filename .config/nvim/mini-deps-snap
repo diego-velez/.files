@@ -44,7 +44,6 @@ return {
   ["smear-cursor.nvim"] = "4b86df8a0c5f46e708616b21a02493bb0e47ecbd",
   ["spear.nvim"] = "17d2418f37eb753314db58eeb42b9e9e6fa5165d",
   ["spring-boot.nvim"] = "a6a61c048238457b6a67ec408f4f4d72213fadca",
-  ["tiny-inline-diagnostic.nvim"] = "f64efd33a51ea89bdb847fb3aaf716e96b83ba1a",
   ["todo-comments.nvim"] = "304a8d204ee787d2544d8bc23cd38d2f929e7cc5",
   ["ts-comments.nvim"] = "1bd9d0ba1d8b336c3db50692ffd0955fe1bb9f0c",
   ["ts-error-translator.nvim"] = "47e5ba89f71b9e6c72eaaaaa519dd59bd6897df4",

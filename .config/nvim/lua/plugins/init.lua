@@ -1,6 +1,12 @@
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 local now_if_args = vim.fn.argc(-1) > 0 and now or later
 
+-- Other Neovim config stuff
+later(function()
+  require 'config.other'
+  require 'config.check_dotfile_cwd'
+end)
+
 -- mini
 now(function()
   ---@param args { path: string, name: string, source: string }
@@ -228,13 +234,6 @@ later(function()
   }
 
   require 'plugins.spear'
-end)
-
--- Better diagnostics
-later(function()
-  add 'rachartier/tiny-inline-diagnostic.nvim'
-
-  require 'plugins.tiny'
 end)
 
 -- Undo tree
