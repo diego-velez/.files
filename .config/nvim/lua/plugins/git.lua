@@ -14,12 +14,18 @@ gitsigns.setup {
     end
 
     -- Hunk Navigation
+    map('n', '[G', function()
+      gitsigns.nav_hunk 'first'
+    end, 'Previous [G]it Change')
     map('n', '[g', function()
       gitsigns.nav_hunk 'prev'
     end, 'Previous [G]it Change')
 
     map('n', ']g', function()
       gitsigns.nav_hunk 'next'
+    end, 'Next [G]it Change')
+    map('n', ']G', function()
+      gitsigns.nav_hunk 'last'
     end, 'Next [G]it Change')
 
     -- Hunk Actions
