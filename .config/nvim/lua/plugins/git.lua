@@ -1,3 +1,4 @@
+---@diagnostic disable: param-type-mismatch
 local gitsigns = require 'gitsigns'
 gitsigns.setup {
   current_line_blame_opts = {
@@ -7,8 +8,6 @@ gitsigns.setup {
     border = 'rounded',
   },
   on_attach = function(bufnr)
-    local gitsigns = require 'gitsigns'
-
     local function map(mode, l, r, desc)
       vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
     end
@@ -29,11 +28,10 @@ gitsigns.setup {
     end, 'Next [G]it Change')
 
     -- Hunk Actions
-    map('n', '<leader>gs', gitsigns.stage_hunk, '[S]tage hunk')
+    map('n', '<leader>gs', gitsigns.stage_hunk, 'Toggle [S]tage hunk')
     map('v', '<leader>gs', function()
       gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
     end, '[S]tage hunk')
-    map('n', '<leader>gu', gitsigns.undo_stage_hunk, '[U]nstage previous staged hunk')
     map('n', '<leader>gr', gitsigns.reset_hunk, '[R]eset hunk')
     map('v', '<leader>gr', function()
       gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
