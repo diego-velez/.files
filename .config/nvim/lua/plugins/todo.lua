@@ -4,4 +4,4 @@ todo.setup {
 }
 
 vim.keymap.set('n', '[t', todo.jump_prev, { desc = 'Previous [t]odo comment' })
-vim.keymap.set('n', '[t', todo.jump_next, { desc = 'Next [t]odo comment' })
+vim.keymap.set('n', ']t', todo.jump_next, { desc = 'Next [t]odo comment' })
