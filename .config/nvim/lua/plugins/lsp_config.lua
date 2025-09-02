@@ -184,13 +184,13 @@ local servers = {
   asm_lsp = {
     single_file_support = true,
   },
-  -- jdtls = {
-  --   handlers = {
-  --     -- By assigning an empty function, you can remove the notifications
-  --     -- printed to the cmd
-  --     ['$/progress'] = function(_, result, ctx) end,
-  --   },
-  -- },
+  jdtls = {
+    handlers = {
+      -- By assigning an empty function, you can remove the notifications
+      -- printed to the cmd
+      ['$/progress'] = function(_, result, ctx) end,
+    },
+  },
   clangd = {},
   tinymist = {
     settings = {
