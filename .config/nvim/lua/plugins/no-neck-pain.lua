@@ -1,7 +1,8 @@
 require('no-neck-pain').setup {
   width = 115,
+  disableOnLastBuffer = true,
   autocmds = {
-    enableOnVimEnter = true,
+    enableOnVimEnter = 'safe',
     skipEnteringNoNeckPainBuffer = true,
   },
 }
