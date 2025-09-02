@@ -299,7 +299,7 @@ end)
 
 -- Focus mode
 later(function()
-  add 'folke/zen-mode.nvim'
+  add 'shortcuts/no-neck-pain.nvim'
 
-  require 'plugins.zen'
+  require 'plugins.no-neck-pain'
 end)
