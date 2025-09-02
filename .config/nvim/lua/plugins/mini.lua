@@ -303,6 +303,7 @@ later(function()
       miniclue.gen_clues.g(),
       miniclue.gen_clues.marks(),
       miniclue.gen_clues.registers(),
+      miniclue.gen_clues.square_brackets(),
       vim.tbl_extend('force', miniclue.gen_clues.windows { submode_resize = true }, {
         { mode = 'n', keys = '<C-w><left>', desc = 'Focus left', postkeys = '<C-w>' },
         { mode = 'n', keys = '<C-w><right>', desc = 'Focus right', postkeys = '<C-w>' },
