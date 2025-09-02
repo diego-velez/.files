@@ -74,10 +74,9 @@ later(function()
     depends = {
       'mason-org/mason.nvim',
       'mason-org/mason-lspconfig.nvim',
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
       'folke/lazydev.nvim',
       'justinsgithub/wezterm-types',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
-      'saghen/blink.cmp',
       'saecki/live-rename.nvim',
       'andrewferrier/debugprint.nvim',
     },
