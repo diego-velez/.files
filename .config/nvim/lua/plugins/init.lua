@@ -1,8 +1,37 @@
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 local now_if_args = vim.fn.argc(-1) > 0 and now or later
 
+-- Other Neovim config stuff
+later(function()
+  require 'config.other'
+  require 'config.check_dotfile_cwd'
+end)
+
 -- mini
 now(function()
+  ---@param args { path: string, name: string, source: string }
+  local function build_fff(args)
+    local cmd = { 'rustup', 'run', 'nightly', 'cargo', 'build', '--release' }
+    local opts = { cwd = args.path, text = true }
+
+    vim.notify('Building ' .. args.name, vim.log.levels.INFO)
+    local output = vim.system(cmd, opts):wait()
+    if output.code ~= 0 then
+      vim.notify('Failed to build fff.nvim', vim.log.levels.ERROR)
+      vim.notify(output.stderr, vim.log.levels.ERROR)
+    else
+      vim.notify(args.name .. ' Built', vim.log.levels.INFO)
+    end
+  end
+
+  add {
+    source = 'diego-velez/fff.nvim',
+    hooks = {
+      post_install = build_fff,
+      post_checkout = build_fff,
+    },
+  }
+
   add {
     name = 'mini.nvim',
     depends = {
@@ -10,6 +39,7 @@ now(function()
       'nvim-treesitter/nvim-treesitter',
       'nvim-treesitter/nvim-treesitter-textobjects',
       'JoosepAlviste/nvim-ts-context-commentstring',
+      'dmtrKovalenko/fff.nvim',
     },
   }
 
@@ -37,24 +67,6 @@ now(function()
   require 'plugins.mini'
 end)
 
--- blink
-later(function()
-  add {
-    source = 'saghen/blink.cmp',
-    depends = {
-      'folke/lazydev.nvim',
-      'justinsgithub/wezterm-types',
-      'xzbdmw/colorful-menu.nvim',
-      'mikavilpas/blink-ripgrep.nvim',
-      'archie-judd/blink-cmp-words',
-      'disrupted/blink-cmp-conventional-commits',
-    },
-    checkout = 'v1.6.0',
-  }
-
-  require 'plugins.blink'
-end)
-
 -- LSP
 later(function()
   add {
@@ -63,7 +75,8 @@ later(function()
       'mason-org/mason.nvim',
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      'saghen/blink.cmp',
+      'folke/lazydev.nvim',
+      'justinsgithub/wezterm-types',
       'saecki/live-rename.nvim',
       'andrewferrier/debugprint.nvim',
     },
@@ -149,13 +162,6 @@ later(function()
   require 'plugins.terminal'
 end)
 
--- Automatically manage windows
-later(function()
-  add 'nvim-focus/focus.nvim'
-
-  require 'plugins.focus'
-end)
-
 -- Search and replace
 later(function()
   add 'MagicDuck/grug-far.nvim'
@@ -204,13 +210,6 @@ later(function()
   }
 
   require 'plugins.spear'
-end)
-
--- Better diagnostics
-later(function()
-  add 'rachartier/tiny-inline-diagnostic.nvim'
-
-  require 'plugins.tiny'
 end)
 
 -- Undo tree
@@ -283,7 +282,7 @@ end)
 
 -- Focus mode
 later(function()
-  add 'folke/zen-mode.nvim'
+  add 'shortcuts/no-neck-pain.nvim'
 
-  require 'plugins.zen'
+  require 'plugins.no-neck-pain'
 end)

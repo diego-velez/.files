@@ -9,7 +9,7 @@ vim.g.maplocalleader = ' '
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
-vim.keymap.set('n', '<ESC>', ':nohlsearch<CR>')
+vim.keymap.set('n', '<ESC>', '<cmd>nohlsearch<CR>')
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -90,7 +90,6 @@ vim.keymap.set(
 )
 
 -- Tabs
-vim.keymap.set('n', '<leader><tab>', '', { desc = '[T]ab' })
 vim.keymap.set('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
 vim.keymap.set('n', '<leader><tab>w', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
 vim.keymap.set('n', '<leader><tab>o', '<cmd>tabonly<cr>', { desc = 'Close [O]ther Tabs' })
@@ -102,7 +101,6 @@ vim.keymap.set('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = '[F]irst Tab
 vim.keymap.set('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = '[L]ast Tab' })
 
 -- [U]I keymaps
-vim.keymap.set('n', '<leader>u', '', { desc = '[U]I' })
 vim.keymap.set('n', '<leader>ui', vim.show_pos, { desc = 'Inspect Pos' })
 vim.keymap.set('n', '<leader>uI', function()
   vim.treesitter.inspect_tree()
@@ -133,4 +131,5 @@ vim.keymap.set('x', '<', '<gv')
 vim.keymap.set('x', '>', '>gv')
 
 -- Use make by default
-vim.keymap.set('n', '<leader>r', '<cmd>update<cr> <cmd>make<cr>')
+-- stylua: ignore
+vim.keymap.set('n', '<leader>r', '<cmd>update<cr> <cmd>make<cr>', { desc = '[R]un file with :make' })

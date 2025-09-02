@@ -8,6 +8,14 @@ require('mason').setup {
   },
 }
 
+require('lazydev').setup {
+  library = {
+    -- Load luvit types when the `vim.uv` word is found
+    { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+    { path = 'wezterm-types', mods = { 'wezterm' } },
+  },
+}
+
 vim.g.was_setup = false
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
@@ -140,9 +148,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-local capabilities = require('blink.cmp').get_lsp_capabilities {
-  textDocument = { completion = { completionItem = { snippetSupport = false } } },
+---@type lsp.ClientCapabilities
+local capabilities_override = {
+  textDocument = {
+    completion = {
+      completionItem = {
+        snippetSupport = false,
+      },
+    },
+  },
 }
+local capabilities =
+  vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_capabilities(), capabilities_override)
 
 local servers = {
   gopls = {
@@ -184,13 +201,13 @@ local servers = {
   asm_lsp = {
     single_file_support = true,
   },
-  -- jdtls = {
-  --   handlers = {
-  --     -- By assigning an empty function, you can remove the notifications
-  --     -- printed to the cmd
-  --     ['$/progress'] = function(_, result, ctx) end,
-  --   },
-  -- },
+  jdtls = {
+    handlers = {
+      -- By assigning an empty function, you can remove the notifications
+      -- printed to the cmd
+      ['$/progress'] = function(_, result, ctx) end,
+    },
+  },
   clangd = {},
   tinymist = {
     settings = {

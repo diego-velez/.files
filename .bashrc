@@ -122,6 +122,7 @@ alias rumad="ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=ssh-rsa
 export PATH=$(go env GOPATH)/bin:$HOME/.local/bin:$PATH
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+eval "$(mise activate bash)"
 
 # Immediately append the commands to the .bash_history file
 # see https://askubuntu.com/questions/67283/is-it-possible-to-make-writing-to-bash-history-immediate

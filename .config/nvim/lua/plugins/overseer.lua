@@ -47,7 +47,6 @@ require('overseer').setup {
   },
 }
 
-vim.keymap.set('n', '<leader>o', '', { desc = '[O]verseer' })
 vim.keymap.set('n', '<leader>ow', '<cmd>OverseerToggle<cr>', { desc = 'Task list' })
 vim.keymap.set('n', '<leader>oo', '<cmd>OverseerRun<cr>', { desc = 'Run task' })
 vim.keymap.set('n', '<leader>oq', '<cmd>OverseerQuickAction<cr>', { desc = 'Action recent task' })
