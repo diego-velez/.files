@@ -1,17 +1,54 @@
 local now, later = MiniDeps.now, MiniDeps.later
+local now_if_args = vim.fn.argc(-1) > 0 and now or later
 
 -- NOTE: Start mini.icons configuration
 now(function()
   require('mini.icons').setup()
+  later(MiniIcons.mock_nvim_web_devicons)
+  later(MiniIcons.tweak_lsp_kind)
+end)
+
+-- NOTE: Start mini.starter configuration
+now(function()
+  require 'plugins.mini_starter'
+end)
+
+-- NOTE: Start mini.notify configuration
+now(function()
+  require('mini.notify').setup {
+    content = {
+      -- Add notifications to the bottom
+      sort = function(notif_arr)
+        table.sort(notif_arr, function(a, b)
+          return a.ts_update < b.ts_update
+        end)
+        return notif_arr
+      end,
+    },
+    window = {
+      winblend = 0,
+    },
+  }
+  vim.notify = MiniNotify.make_notify()
+end)
+
+-- NOTE: Start mini.statusline configuration
+now_if_args(function()
+  require 'plugins.mini_statusline'
+end)
+
+-- NOTE: Start mini.pick configuration
+later(function()
+  require 'plugins.mini_pick'
 end)
 
 -- NOTE: Start mini.git configuration
-now(function()
+later(function()
   require('mini.git').setup()
 end)
 
 -- NOTE: Start mini.extra configuration
-now(function()
+later(function()
   require('mini.extra').setup()
 end)
 
@@ -90,11 +127,6 @@ later(function()
   vim.keymap.set('n', 'yss', 'ys_', { remap = true })
 end)
 
--- NOTE: Start mini.statusline configuration
-later(function()
-  require 'plugins.mini_statusline'
-end)
-
 -- NOTE: Start mini.jump configuration
 later(function()
   require('mini.jump').setup {
@@ -125,7 +157,9 @@ later(function()
 end)
 
 -- NOTE: Start mini.files configuration
-require 'plugins.mini_files'
+later(function()
+  require 'plugins.mini_files'
+end)
 
 -- NOTE: Start mini.indentscope configuration
 later(function()
@@ -140,13 +174,6 @@ later(function()
     symbol = '│',
   }
 end)
-
--- NOTE: Start mini.pick configuration
-require 'plugins.mini_pick'
-
--- NOTE: Start mini.starter configuration
-require 'plugins.mini_starter'
-
 -- NOTE: Start mini.comment configuration
 later(function()
   require('ts_context_commentstring').setup {
@@ -346,25 +373,6 @@ later(function()
       },
     },
   }
-end)
-
--- NOTE: Start mini.notify configuration
-now(function()
-  require('mini.notify').setup {
-    content = {
-      -- Add notifications to the bottom
-      sort = function(notif_arr)
-        table.sort(notif_arr, function(a, b)
-          return a.ts_update < b.ts_update
-        end)
-        return notif_arr
-      end,
-    },
-    window = {
-      winblend = 0,
-    },
-  }
-  vim.notify = MiniNotify.make_notify()
 end)
 
 -- NOTE: Start mini.splitjoin configuration
