@@ -416,7 +416,7 @@ later(function()
     },
     mappings = {
       -- Expand snippet at cursor position. Created globally in Insert mode.
-      expand = '',
+      expand = '<tab>',
 
       -- Interact with default `expand.insert` session.
       -- Created for the duration of active session(s)
@@ -428,6 +428,25 @@ later(function()
       match = function(snips)
         return require('mini.snippets').default_match(snips, { pattern_fuzzy = '%S+' })
       end,
+    },
+  }
+end)
+
+-- NOTE: Start mini.completion configuration
+later(function()
+  require('mini.completion').setup {
+    delay = {
+      completion = 0,
+      info = 0,
+      signature = 0,
+    },
+    window = {
+      info = {
+        border = 'rounded',
+      },
+      signature = {
+        border = 'rounded',
+      },
     },
   }
 end)
@@ -621,11 +640,3 @@ end, { desc = '[N]otification History' })
 vim.keymap.set('n', '<leader>sC', function()
   MiniExtra.pickers.colorschemes(nil, nil)
 end, { desc = '[S]earch [C]olorscheme' })
-
--- require('mini.completion').setup {
---   delay = {
---     completion = 0,
---     info = 0,
---     signature = 0,
---   },
--- }

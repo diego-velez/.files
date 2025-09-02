@@ -67,24 +67,6 @@ now(function()
   require 'plugins.mini'
 end)
 
--- blink
-later(function()
-  add {
-    source = 'saghen/blink.cmp',
-    depends = {
-      'folke/lazydev.nvim',
-      'justinsgithub/wezterm-types',
-      'xzbdmw/colorful-menu.nvim',
-      'mikavilpas/blink-ripgrep.nvim',
-      'archie-judd/blink-cmp-words',
-      'disrupted/blink-cmp-conventional-commits',
-    },
-    checkout = 'v1.6.0',
-  }
-
-  require 'plugins.blink'
-end)
-
 -- LSP
 later(function()
   add {
@@ -92,6 +74,8 @@ later(function()
     depends = {
       'mason-org/mason.nvim',
       'mason-org/mason-lspconfig.nvim',
+      'folke/lazydev.nvim',
+      'justinsgithub/wezterm-types',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       'saghen/blink.cmp',
       'saecki/live-rename.nvim',
