@@ -420,8 +420,8 @@ later(function()
 
       -- Interact with default `expand.insert` session.
       -- Created for the duration of active session(s)
-      jump_next = '',
-      jump_prev = '',
+      jump_next = '<tab>',
+      jump_prev = '<S-tab>',
       stop = '',
     },
     expand = {
