@@ -168,12 +168,13 @@ later(function()
       animation = require('mini.indentscope').gen_animation.cubic { duration = 10 },
     },
     options = {
-      indent_at_cursor = false,
+      indent_at_cursor = true,
       try_as_border = true,
     },
     symbol = '│',
   }
 end)
+
 -- NOTE: Start mini.comment configuration
 later(function()
   require('ts_context_commentstring').setup {
