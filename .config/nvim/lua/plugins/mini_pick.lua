@@ -439,4 +439,4 @@ local function run(local_opts)
   state.current_file_cache = nil -- Reset cache
 end
 
-MiniPick.registry.fffiles = run
+-- MiniPick.registry.fffiles = run

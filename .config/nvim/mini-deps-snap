@@ -3,7 +3,7 @@ return {
   ["debugprint.nvim"] = "2f28d5b0773b350c69587d236d1db475985fac58",
   ["dracula.nvim.git"] = "df528c869b09fbdc7578e6ccc7ff6faf44a2046d",
   ["edgy.nvim"] = "7e8dedc39abebe40c289b8012cc89b11c69aa7a0",
-  ["fff.nvim"] = "a9cac80ea99eeb5882d11bdb3747b7dad8c92040",
+  ["fff.nvim"] = "d08fc82cb85b6c3aa06642bd007987c87146a064",
   floaterm = "ae3de018d20dccd9372bbff7137e8a6d6030f69e",
   ["gitsigns.nvim"] = "6e3c66548035e50db7bd8e360a29aec6620c3641",
   ["grug-far.nvim"] = "385d1949dc21d0c39e7a74b4f4a25da18817bc86",
@@ -48,5 +48,5 @@ return {
   ["vim-suda"] = "9adda7d195222d4e2854efb2a88005a120296c47",
   volt = "7b8c5e790120d9f08c8487dcb80692db6d2087a1",
   ["wezterm-types"] = "3ae049cae5f7c11a7e647642a0a74b7faa64d324",
-  ["yanky.nvim"] = "04775cc6e10ef038c397c407bc17f00a2f52b378",
+  ["yanky.nvim"] = "04775cc6e10ef038c397c407bc17f00a2f52b378"
 }

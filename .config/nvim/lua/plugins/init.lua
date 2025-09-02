@@ -25,7 +25,7 @@ now(function()
   end
 
   add {
-    source = 'dmtrKovalenko/fff.nvim',
+    source = 'diego-velez/fff.nvim',
     hooks = {
       post_install = build_fff,
       post_checkout = build_fff,

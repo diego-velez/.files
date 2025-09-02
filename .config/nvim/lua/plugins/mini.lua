@@ -579,11 +579,13 @@ vim.keymap.set('n', '<leader>sw', function()
   end, 25)
   MiniPick.builtin.grep_live()
 end, { desc = '[S]earch [W]ord' })
+
+require('fff').setup { ui = { picker = 'mini' } }
 vim.keymap.set('n', '<leader>sf', function()
-  MiniPick.registry.fffiles()
+  require('fff').find_files()
 end, { desc = '[S]earch [F]iles' }) -- See https://github.com/echasnovski/mini.nvim/discussions/1873
 vim.keymap.set('n', '<leader><space>', function()
-  MiniPick.registry.fffiles()
+  require('fff').find_files()
 end, { desc = 'Search Files' })
 vim.keymap.set('n', '<leader>sF', function()
   vim.ui.input({
@@ -595,9 +597,11 @@ vim.keymap.set('n', '<leader>sF', function()
       return
     end
 
-    MiniPick.registry.fffiles { cwd = input }
+    require('fff').find_files_in_dir(input)
+    require('fff').change_indexing_directory(vim.uv.cwd())
   end)
 end, { desc = '[S]earch [F]iles in specific directory' })
+
 vim.keymap.set('n', '<leader>sc', function()
   MiniPick.builtin.files(nil, {
     source = {
