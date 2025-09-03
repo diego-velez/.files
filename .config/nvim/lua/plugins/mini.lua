@@ -431,7 +431,7 @@ later(function()
       -- Created for the duration of active session(s)
       jump_next = '<tab>',
       jump_prev = '<S-tab>',
-      stop = '',
+      stop = '<C-e>',
     },
     expand = {
       match = function(snips)
