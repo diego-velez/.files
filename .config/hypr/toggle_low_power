@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+echo "Killing Kanshi"
+sudo killall kanshi
+
+echo "Stopping wallpaper slideshow"
+pkill -f wallpaper_slide
+
+# TODO: Figure out how to properly lower resolution to like 1600x900
+echo "Lowering Refresh Rate to 60Hz"
+hyprctl keyword monitor eDP-1,1920x1080@60,auto,1,vrr,1
+
+echo "Turning off bluetooth"
+sudo systemctl mask bluetooth
+sudo systemctl stop bluetooth
+sudo rfkill block bluetooth
