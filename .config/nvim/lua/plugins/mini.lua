@@ -629,26 +629,8 @@ vim.keymap.set('n', '<leader>sb', function()
   MiniPick.builtin.buffers()
 end, { desc = '[S]earch [B]uffers' })
 vim.keymap.set('n', '<leader>n', function()
+  vim.cmd.tabnew()
   MiniNotify.show_history()
-
-  local buf_id
-  for _, id in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.bo[id].filetype == 'mininotify-history' then
-      buf_id = id
-    end
-  end
-  if buf_id == nil then
-    return
-  end
-
-  -- idk how else to exit than by deleting it lmao
-  -- :q from this buffer just exits Neovim for some reason
-  local exit_buffer = function()
-    MiniBufremove.delete(buf_id, true)
-  end
-
-  vim.keymap.set('n', '<ESC>', exit_buffer, { buffer = buf_id })
-  vim.keymap.set('n', 'q', exit_buffer, { buffer = buf_id })
 end, { desc = '[N]otification History' })
 vim.keymap.set('n', '<leader>sC', function()
   MiniExtra.pickers.colorschemes(nil, nil)
