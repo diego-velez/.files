@@ -31,17 +31,15 @@ vim.keymap.set('n', '<C-u>', function()
 end)
 vim.keymap.set('n', 'n', function()
   local succeeded = pcall(vim.cmd.normal, { 'n', bang = true })
-  if not succeeded then
-    return
+  if succeeded then
+    MiniAnimate.execute_after('scroll', 'normal! zzzv')
   end
-  MiniAnimate.execute_after('scroll', 'normal! zzzv')
 end)
 vim.keymap.set('n', 'N', function()
   local succeeded = pcall(vim.cmd.normal, { 'N', bang = true })
-  if not succeeded then
-    return
+  if succeeded then
+    MiniAnimate.execute_after('scroll', 'normal! zzzv')
   end
-  MiniAnimate.execute_after('scroll', 'normal! zzzv')
 end)
 vim.keymap.set('n', 'G', function()
   vim.cmd.normal { 'G', bang = true }
