@@ -602,14 +602,12 @@ vim.keymap.set('n', '<leader>sF', function()
     require('fff').change_indexing_directory(vim.uv.cwd())
   end)
 end, { desc = '[S]earch [F]iles in specific directory' })
-
 vim.keymap.set('n', '<leader>sc', function()
-  MiniPick.builtin.files(nil, {
-    source = {
-      cwd = vim.fn.stdpath 'config',
-    },
-  })
+  local config_path = vim.fn.stdpath 'config'
+  require('fff').find_files_in_dir(config_path)
+  require('fff').change_indexing_directory(vim.uv.cwd())
 end, { desc = '[S]earch [C]onfig' })
+
 vim.keymap.set('n', '<leader>sh', function()
   MiniPick.builtin.help { default_split = 'vertical' }
 end, { desc = '[S]earch [H]elp' })
