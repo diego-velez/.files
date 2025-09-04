@@ -426,12 +426,12 @@ later(function()
     },
     mappings = {
       -- Expand snippet at cursor position. Created globally in Insert mode.
-      expand = '<tab>',
+      expand = '',
 
       -- Interact with default `expand.insert` session.
       -- Created for the duration of active session(s)
-      jump_next = '<tab>',
-      jump_prev = '<S-tab>',
+      jump_next = '',
+      jump_prev = '',
       stop = '<C-e>',
     },
     expand = {
@@ -440,6 +440,12 @@ later(function()
       end,
     },
   }
+
+  local map_multistep = require('mini.keymap').map_multistep
+
+  local tab_steps = { 'minisnippets_expand', 'minisnippets_next' }
+  map_multistep('i', '<tab>', tab_steps)
+  map_multistep('i', '<S-tab>', { 'minisnippets_prev' })
 end)
 
 -- NOTE: Start mini.completion configuration
