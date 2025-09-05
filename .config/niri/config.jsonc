@@ -1,0 +1,282 @@
+// -*- mode: jsonc -*-
+{
+    "position": "top",
+    "height": 20,
+    // This is equal to 40% of the my monitor, which should be the default mfact in Hyprland
+    // This also accounts for a 2px border size and a 5px gaps in
+    "width": 2034,
+    "reload_style_on_change": true,
+    "spacing": 0,
+    // Choose the order of the modules
+    "modules-left": [
+        "custom/left1",
+        "niri/workspaces",
+        "custom/right1",
+        "niri/window"
+    ],
+    "modules-center": [
+        "custom/left2",
+        "temperature",
+        "custom/left3",
+        "memory",
+        "custom/left4",
+        "cpu#usage",
+        "custom/leftin1",
+        "custom/left5",
+        "custom/center",
+        "custom/right2",
+        "custom/rightin1",
+        "clock#time",
+        "custom/right3",
+        "clock#date",
+        "custom/right4",
+        "network",
+        "custom/right5"
+    ],
+    "modules-right": [
+        "mpris",
+        "custom/left6",
+        "pulseaudio",
+        "custom/left7",
+        "bluetooth",
+        "custom/left8",
+        "custom/notification",
+        "custom/leftin2",
+        "tray"
+    ],
+    "niri/workspaces": {
+        "all-outputs": true,
+        "format": "",
+        "format-icons": {
+            "active": "<span foreground='#50FA7B'></span>",
+            "empty": "<span foreground='#282A36'></span>",
+            "persistent": "<span foreground='#F8F8F2'></span>",
+            "urgent": "<span foreground='#FF5555'></span>"
+        },
+        "persistent-workspaces": {
+            "*": 5
+        }
+    },
+    "niri/window": {
+        "rewrite": {
+            "(.*) — Zen Browser.*": "<span foreground='#8BE9FD'> </span> $1",
+            "Zen Browser.*": "<span foreground='#8BE9FD'> </span> Zen Browser",
+            "(.*)@(.*):(.*) - (.*)": "<span foreground='#BD93F9'></span> $4",
+            "(.*)@(.*):(?!.*-.*)(.*)": "<span foreground='#BD93F9'></span> $1@$2",
+            ".*nvim (.*)": "<span foreground='#6ebf60'></span> $1",
+            ".*nvim": "<span foreground='#6ebf60'></span> Neovim",
+            ".*Discord.*": "<span foreground='#89b4fa'></span> Discord",
+            ".*Webcord.*": "<span foreground='#89b4fa'></span> Webcord",
+            "GNU Image Manipulation Program": "<span foreground='#a6adc8'></span> GNU Image Manipulation Program",
+            "(.*).jpg": "  $1.jpg",
+            "(.*).png": "  $1.png",
+            "(.*).svg": "  $1.svg",
+            "/": "  File Manager",
+            "Yazi: (.*)": "  $1",
+            "": "<span foreground='#cba6f7'></span> DVT on Master 󰅂 Hyprland"
+        }
+    },
+    "temperature": {
+        "hwmon-path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon2/temp1_input",
+        "interval": 5,
+        "min-length": 8,
+        "max-length": 8
+    },
+    "memory": {
+        "states": {
+            "c": 90
+        },
+        "format": "󰘚 {percentage}%",
+        "format-c": "󰀪 {percentage}%",
+        "tooltip": true,
+        "tooltip-format": "{used:0.1f} GB / {total:0.1f} GB",
+        "interval": 5,
+        "min-length": 7,
+        "max-length": 7
+    },
+    "cpu#usage": {
+        "format": "󰻠 {usage}%",
+        "tooltip": false,
+        "interval": 5,
+        "min-length": 6,
+        "max-length": 6
+    },
+    "custom/center": {
+        "format": "<span foreground='#51a2da'></span>",
+        "tooltip": false
+    },
+    "clock#time": {
+        "format": "󱑂 {:%H:%M}",
+        "tooltip": true,
+        "tooltip-format": "{:%I:%M %p}",
+        "min-length": 8,
+        "max-length": 8
+    },
+    "clock#date": {
+        "format": "󱨴 {:%d %b}",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "on-click-right": "mode",
+            "format": {
+                "months": "<span color='#f5e0dc'><b>{}</b></span>",
+                "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+                "today": "<span color='#f38ba8'><b>{}</b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode"
+        },
+        "min-length": 8,
+        "max-length": 8
+    },
+    // WARN: If iwmenu does not work you need to enable DHCP
+    // See https://wiki.archlinux.org/title/Iwd#No_DHCP_in_AP_mode
+    "network": {
+        "format-wifi": "{icon} Wifi",
+        "format-ethernet": "<span color='#50FA7B'>󰈁</span> Cable",
+        "format-disconnected": "<span color='#FF5555'>󰤮</span> Error",
+        "format-icons": [
+            "<span color='#F1FA8C'>󰤟</span>",
+            "<span color='#F1FA8C'>󰤢</span>",
+            "<span color='#50FA7B'>󰤥</span>",
+            "<span color='#50FA7B'>󰤨</span>"
+        ],
+        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) {icon}",
+        "tooltip-format-ethernet": "{ifname} 󰈁",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "~/.local/bin/iwmenu --launcher rofi",
+        "min-length": 7,
+        "max-length": 7
+    },
+    "mpris": {
+        "format": "{status_icon} {artist} - {title}",
+        "artist-len": 23,
+        "title-len": 45,
+        "status-icons": {
+            "playing": "<span color='#50FA7B'>󰎇</span>",
+            "paused": "<span color='#FF5555'>󰎊</span>"
+        },
+        "tooltip-format": "{player} ({status}): {artist} - {album} - {title}"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-source": "{volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "󰋋",
+            "headphone-muted": "󰟎",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""],
+            "default-muted": ["󰝟"]
+        },
+        "on-click": "pavucontrol"
+    },
+    "bluetooth": {
+        // Hides the module when it is disabled
+        "format-disabled": "Off",
+        // See https://github.com/e-tho/bzmenu
+        "on-click": "~/.local/bin/bzmenu --launcher rofi"
+    },
+    "tray": {
+        "spacing": 10,
+        "show-passive-items": true
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{} {icon}",
+        "format-icons": {
+            "notification": "<span foreground='red'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-none": "",
+            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
+    // Left arrows
+    "custom/left1": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/left2": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/left3": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/left4": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/left5": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/left6": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/left7": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/left8": {
+        "format": "",
+        "tooltip": false
+    },
+    // Right arrows
+    "custom/right1": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/right2": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/right3": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/right4": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/right5": {
+        "format": "",
+        "tooltip": false
+    },
+    // Left Inverse
+    "custom/leftin1": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/leftin2": {
+        "format": "",
+        "tooltip": false
+    },
+    // Right Inverse
+    "custom/rightin1": {
+        "format": "",
+        "tooltip": false
+    }
+}
