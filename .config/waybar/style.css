@@ -289,6 +289,7 @@ window#waybar {
 	margin-top: 1px;
 	font-size: 16pt;
 	text-shadow: 1px 0px 2px rgba(0, 0, 0, 1);
+	margin-right: 10px;
 }
 
 #tray {
