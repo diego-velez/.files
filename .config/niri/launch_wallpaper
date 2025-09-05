@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+~/.local/bin/swww-daemon --quiet & sleep 0.1 && ~/.local/bin/swww img "$(find ~/Pictures/Super\ Ultrawide\ Wallpapers/ -type f | shuf -n 1)"

@@ -1,0 +1,30 @@
+#!/usr/bin/python
+
+import os
+import subprocess
+import time
+
+home = os.getenv("HOME")
+assert home is not None
+niri = ".config/niri"
+path_to_config = os.path.join(home, niri)
+
+if __name__ == "__main__":
+    o = subprocess.run(["ps", "cax"], capture_output=True)
+
+    # Show the bar
+    # We want to replace because it'll show this process in the output
+    if b"waybar" in (o.stdout.replace(b"toggle_waybar", b"")):
+        _ = subprocess.Popen(["killall", "waybar"])
+    #     for gap in range(10, -1, -1):
+    #         _ = subprocess.Popen(["hyprctl", f"keyword general:gaps_out {gap}"]).wait()
+    #         time.sleep(0.1)
+    # Hide the bar
+    else:
+        waybar_config = os.path.join(path_to_config, "config.jsonc")
+        waybar_style = os.path.join(path_to_config, "style.css")
+        _ = subprocess.Popen(["waybar", "--config", waybar_config, "--style", waybar_style])
+        # Kinda animate adding the gaps
+        # for gap in range(0, 11):
+        #     _ = subprocess.Popen(["hyprctl", f"keyword general:gaps_out {gap}"]).wait()
+        #     time.sleep(0.1)

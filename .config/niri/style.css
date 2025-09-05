@@ -1,0 +1,332 @@
+@define-color background-darder rgba(30, 31, 41, 230);
+@define-color background #282A36;
+@define-color foreground #F8F8F2;
+@define-color selection #44475A;
+@define-color comment #6272A4;
+@define-color red #FF5555;
+@define-color orange #FFB86C;
+@define-color yellow #F1FA8C;
+@define-color green #50FA7B;
+@define-color purple #BD93F9;
+@define-color cyan #8BE9FD;
+@define-color pink #FF79C6;
+
+* {
+	font-family: "JetBrainsMono Nerd Font Mono";
+	font-weight: bold;
+	font-size: 11px;
+	padding: 0;
+	margin: 0;
+}
+
+window#waybar {
+	background-color: @background;
+	color: @foreground;
+	border-radius: 0 0 10px 10px;
+}
+
+/* General Left Arrow Styling */
+#custom-left1,
+#custom-left2,
+#custom-left3,
+#custom-left4,
+#custom-left5,
+#custom-left6,
+#custom-left7,
+#custom-left8 {
+	color: @selection;
+	font-size: 15.4pt;
+	margin-top: 2px;
+	text-shadow: -1px 0px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* General Right Arrow Styling */
+#custom-right1,
+#custom-right2,
+#custom-right3,
+#custom-right4,
+#custom-right5 {
+	color: @selection;
+	font-size: 15.4pt;
+	margin-top: 2px;
+	text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.8);
+}
+
+#custom-left1 {
+	margin-left: 4px;
+}
+
+#workspaces {
+	background-color: @selection;
+	color: @foreground;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#workspaces * {
+	font-size: 14px;
+}
+
+#workspaces button {
+	color: @foreground;
+}
+
+#workspaces button:hover,
+#workspaces button.empty:hover,
+#workspaces button.active:hover {
+	color: @purple;
+	background: @selection;
+	transition: none;
+}
+
+#workspaces button.empty {
+	color: @background;
+}
+
+#workspaces button.active {
+	color: @green;
+}
+
+#custom-right1 {
+	margin-right: 4px;
+}
+
+
+#window {
+	color: @foreground;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/* CPU Temperature */
+#custom-left2 {
+	color: rgba(68, 71, 90, 0.7);
+	padding-left: 3px;
+}
+
+#temperature {
+	background-color: rgba(68, 71, 90, 0.4);
+	padding-left: 1px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+/* Memory */
+#custom-left3 {
+	color: rgba(68, 71, 90, 0.85);
+	background-color: rgba(68, 71, 90, 0.4);
+	padding-left: 3px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+
+}
+
+#memory {
+	background-color: rgba(68, 71, 90, 0.7);
+	padding-left: 1px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+/* CPU */
+#custom-left4 {
+	color: @selection;
+	background-color: rgba(68, 71, 90, 0.7);
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#cpu {
+	background-color: @selection;
+	opacity: 1;
+	padding-right: 4px;
+	padding-left: 4px;
+	text-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+/* Center */
+#custom-leftin1 {
+	color: @selection;
+	margin-top: 1px;
+	font-size: 16pt;
+	text-shadow: 1px 0px 2px rgba(0, 0, 0, 1);
+}
+
+#custom-left5 {
+	margin-left: 3px;
+	text-shadow: -2px 0px 2px rgba(0, 0, 0, 1);
+}
+
+#custom-center {
+	background-color: @selection;
+	font-size: 20px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#custom-right2 {
+	margin-right: 3px;
+	text-shadow: 2px 0px 2px rgba(0, 0, 0, 1);
+}
+
+#custom-rightin1 {
+	color: @selection;
+	margin-top: 1px;
+	font-size: 16pt;
+	text-shadow: -1px 0px 2px rgba(0, 0, 0, 1);
+}
+
+/* Clock Time */
+#clock.time {
+	background-color: @selection;
+	padding-left: 1px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#custom-right3 {
+	color: @selection;
+	background-color: rgba(68, 71, 90, 0.7);
+	margin-top: 3px;
+	margin-bottom: 3px;
+	padding-right: 2px;
+}
+
+/* Clock Date */
+#clock.date {
+	background-color: rgba(68, 71, 90, 0.7);
+	padding-left: 1px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+#custom-right4 {
+	color: rgba(68, 71, 90, 0.85);
+	background-color: rgba(68, 71, 90, 0.4);
+	padding-right: 3px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+/* Wifi */
+#custom-wi {
+	background-color: rgba(68, 71, 90, 0.4);
+	text-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
+	margin-right: -2px;
+	padding-left: 5px;
+}
+
+#custom-wifi {
+	background-color: rgba(68, 71, 90, 0.4);
+	padding: 0px;
+}
+
+#network {
+	background-color: rgba(68, 71, 90, 0.4);
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#custom-right5 {
+	margin-right: 2px;
+	color: rgba(68, 71, 90, 0.7);
+}
+
+#mpris {
+	color: @foreground;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+#custom-left6 {
+	color: rgba(68, 71, 90, 0.7);
+}
+
+#pulseaudio {
+	background-color: rgba(68, 71, 90, 0.4);
+	padding-left: 10px;
+	padding-right: 15px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#custom-left7 {
+	color: rgba(68, 71, 90, 0.8);
+	background-color: rgba(68, 71, 90, 0.4);
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#bluetooth {
+	background: rgba(68, 71, 90, 0.7);
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#custom-left8 {
+	color: @selection;
+	background-color: rgba(68, 71, 90, 0.7);
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#custom-notification {
+	background-color: @selection;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#custom-leftin2 {
+	color: @selection;
+	margin-top: 1px;
+	font-size: 16pt;
+	text-shadow: 1px 0px 2px rgba(0, 0, 0, 1);
+}
+
+#tray {
+	background-color: @comment;
+	color: @foreground;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin: 4px;
+	margin-right: 10px;
+	border-radius: 5px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#tray menu {
+	background-color: @background;
+	color: @foreground;
+	border-radius: 20px;
+	margin: 0px;
+	padding: 5px;
+}
+
+#tray * {
+	font-size: 16px;
+}
+
+#tray menu>* {
+	border-radius: 20px;
+	margin: 0px;
+	padding: 5px;
+}
+
+#tray window {
+	margin: 0px;
+	padding: 0px;
+	border-radius: 20px;
+}
+
+#tray window decoration {
+	border-radius: 20px;
+}
