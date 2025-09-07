@@ -94,3 +94,8 @@ vim.o.laststatus = 3
 
 -- Set spell language to English and Spanish
 vim.o.spelllang = 'en,es'
+
+-- Show popup even with one item and don't autoselect first
+-- Use fuzzy matching for built-in completion
+vim.o.completeopt = 'menuone,noselect,fuzzy'
+vim.o.complete = '.,w,b,kspell'
