@@ -99,3 +99,4 @@ vim.o.spelllang = 'en,es'
 -- Use fuzzy matching for built-in completion
 vim.o.completeopt = 'menuone,noselect,fuzzy'
 vim.o.complete = '.,w,b,kspell'
+vim.o.shortmess = 'ocFCO'
