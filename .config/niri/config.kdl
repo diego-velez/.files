@@ -210,6 +210,7 @@ window-rule {
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     match app-id=r#"zen$"# title="^Picture-in-Picture$"
+    match app-id=r#"thunar$"#
     open-floating true
 }
 
@@ -250,6 +251,7 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T repeat=false hotkey-overlay-title="Open a Terminal: wezterm" { spawn "wezterm"; }
     Mod+R repeat=false hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
+    Mod+E repeat=false hotkey-overlay-title="Run an Application: Thunar" { spawn "thunar"; }
     Mod+Q repeat=false { spawn-sh "~/.config/rofi/power"; }
     Mod+H repeat=false { spawn-sh "~/.config/niri/toggle_waybar"; }
 
