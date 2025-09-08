@@ -133,4 +133,4 @@ vim.keymap.set('x', '>', '>gv')
 vim.keymap.set('n', '<leader>r', '<cmd>update<cr> <cmd>make<cr>', { desc = '[R]un file with :make' })
 
 -- Delete line but leave an empty line
-vim.keymap.set('n', 'X', '"_D', { desc = 'Delete line but leave an empty line' })
+vim.keymap.set('n', 'X', '"_0D', { desc = 'Delete line but leave an empty line' })
