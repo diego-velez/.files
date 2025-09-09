@@ -207,6 +207,19 @@ window-rule {
     match app-id=r#"zen$"# title="^Picture-in-Picture$"
 
     match app-id=r#"thunar$"#
+    match app-id=r#"qalculate-gtk$"#
+    match app-id=r#"org.gnome.FileRoller$"#
+    match app-id=r#"file-roller$"#
+    match app-id=r#"Sign in.*$/gmi"#
+    match app-id=r#"xdg-desktop-portal-gtk$"#
+    match app-id=r#"nemo$"#
+    match app-id=r#"eom$"#
+    match app-id=r#"About Zen Browser$"#
+    match app-id=r#"Library$"#
+    match app-id=r#"Acceso: Cuentas de Google$"#
+    match app-id=r#"Android Emulator.*$/i"#
+    match app-id=r#"file-jpeg$"#
+    match app-id=r#"file-png$"#
 
     open-floating true
 }
