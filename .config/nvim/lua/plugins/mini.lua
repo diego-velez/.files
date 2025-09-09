@@ -481,6 +481,22 @@ later(function()
       },
     },
   }
+
+  local function simulate_keypress(key)
+    local termcodes = vim.api.nvim_replace_termcodes(key, true, false, true)
+    vim.api.nvim_feedkeys(termcodes, 'm', false)
+  end
+
+  vim.api.nvim_create_autocmd('CompleteDone', {
+    desc = 'Autocompletion for multiple file path components',
+    group = vim.api.nvim_create_augroup('DVT MiniCompletion', { clear = true }),
+    callback = function()
+      if vim.v.event.complete_type == 'files' and vim.v.event.reason == 'accept' then
+        simulate_keypress '<c-x>'
+        simulate_keypress '<c-f>'
+      end
+    end,
+  })
 end)
 
 -- Keymaps
