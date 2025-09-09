@@ -25,6 +25,10 @@ case "$choice" in
         # TODO: add lock behavior, betterlockscreen?
         ;;
     "$logout")
-        hyprctl dispatch exit
+        if pgrep -x "hyprland" > /dev/null; then
+            hyprctl dispatch exit
+        elif pgrep -x "niri" > /dev/null; then
+            niri msg action quit
+        fi
         ;;
 esac
