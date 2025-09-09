@@ -445,6 +445,23 @@ later(function()
   local tab_steps = { 'minisnippets_expand', 'minisnippets_next' }
   map_multistep('i', '<tab>', tab_steps)
   map_multistep('i', '<S-tab>', { 'minisnippets_prev' })
+
+  vim.api.nvim_create_autocmd('User', {
+    desc = 'Automatically stop mini.snippets when exiting insert mode',
+    group = vim.api.nvim_create_augroup('DVT MiniSnippets', { clear = true }),
+    pattern = 'MiniSnippetsSessionStart',
+    callback = function()
+      vim.api.nvim_create_autocmd('ModeChanged', {
+        pattern = '*:n',
+        once = true,
+        callback = function()
+          while MiniSnippets.session.get() do
+            MiniSnippets.session.stop()
+          end
+        end,
+      })
+    end,
+  })
 end)
 
 -- NOTE: Start mini.completion configuration
