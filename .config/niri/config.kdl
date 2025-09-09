@@ -224,6 +224,17 @@ window-rule {
     open-floating true
 }
 
+// Set rules for floating windows
+window-rule {
+    match is-floating=true
+
+    min-width 400
+    max-width 2038
+
+    min-height 400
+    max-height 1380
+}
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
