@@ -480,7 +480,25 @@ later(function()
         border = 'rounded',
       },
     },
+    -- Buffer words completion
+    -- See `:h ins-completion`
+    fallback_action = '<C-n>',
+    mappings = {
+      force_twostep = '',
+      force_fallback = '<C-CR>',
+    },
   }
+
+  -- I want to use Ctrl+n to trigger completion and cycle to next completion too
+  require('mini.keymap').map_multistep('i', '<C-n>', {
+    'pmenu_next',
+    {
+      condition = function()
+        return _G.MiniCompletion ~= nil
+      end,
+      action = MiniCompletion.complete_twostage,
+    },
+  })
 
   local function simulate_keypress(key)
     local termcodes = vim.api.nvim_replace_termcodes(key, true, false, true)
