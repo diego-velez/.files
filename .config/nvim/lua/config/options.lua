@@ -98,5 +98,5 @@ vim.o.spelllang = 'en,es'
 -- Show popup even with one item and don't autoselect first
 -- Use fuzzy matching for built-in completion
 vim.o.completeopt = 'menuone,noselect,fuzzy'
-vim.o.complete = '.,w,b,kspell'
+vim.o.complete = '.,w,b,u,t,kspell'
 vim.o.shortmess = 'ocFCO'
