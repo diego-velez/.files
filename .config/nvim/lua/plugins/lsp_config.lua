@@ -164,6 +164,7 @@ local capabilities = vim.tbl_deep_extend(
   MiniCompletion.get_lsp_capabilities(),
   capabilities_override
 )
+vim.lsp.config('*', { capabilities = capabilities })
 
 local servers = {
   gopls = {
@@ -205,13 +206,6 @@ local servers = {
   asm_lsp = {
     single_file_support = true,
   },
-  jdtls = {
-    handlers = {
-      -- By assigning an empty function, you can remove the notifications
-      -- printed to the cmd
-      ['$/progress'] = function(_, result, ctx) end,
-    },
-  },
   clangd = {},
   tinymist = {
     settings = {
@@ -220,20 +214,20 @@ local servers = {
       semanticTokens = 'disable',
     },
   },
+  kotlin_lsp = {},
 }
 
+-- Configure Java specific stuff separately
 require('java').setup {}
+require('lspconfig').jdtls.setup {
+  handlers = {
+    -- By assigning an empty function, you can remove the notifications
+    -- printed to the cmd
+    ['$/progress'] = function() end,
+  },
+}
 
--- See https://github.com/nvim-lua/kickstart.nvim/pull/1663/files
--- The following loop will configure each server with the capabilities we defined above.
--- This will ensure that all servers have the same base configuration, but also
--- allow for server-specific overrides.
-for server_name, server_config in pairs(servers) do
-  server_config.capabilities =
-    vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
-  require('lspconfig')[server_name].setup(server_config)
-end
-
+-- Make sure all LSPs and mason tools are installed
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
   'ruff',
@@ -247,3 +241,13 @@ vim.list_extend(ensure_installed, {
 })
 require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 vim.cmd.MasonToolsInstall()
+
+-- Configure LSP servers
+for server, config in pairs(servers) do
+  if not vim.tbl_isempty(config) then
+    vim.lsp.config(server, config)
+  end
+end
+
+-- Enable LSP servers
+require('mason-lspconfig').setup { automatic_enable = true }
