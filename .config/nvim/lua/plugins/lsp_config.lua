@@ -18,7 +18,7 @@ require('lazydev').setup {
 
 vim.g.was_setup = false
 vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+  group = vim.api.nvim_create_augroup('DVT LSP Config', { clear = true }),
   callback = function(event)
     if not vim.g.was_setup then
       require('debugprint').setup {
