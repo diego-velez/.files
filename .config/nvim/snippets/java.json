@@ -8,10 +8,26 @@
     ],
     "description": "For i loop"
   },
+  "while": {
+    "prefix": "while",
+    "body": [
+      "while ($1) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "While loop"
+  },
   "println": {
     "prefix": "println",
     "body": [
       "System.out.println($0);"
+    ],
+    "description": "Print to stdout"
+  },
+  "printf": {
+    "prefix": "printf",
+    "body": [
+      "System.out.printf($0);"
     ],
     "description": "Print to stdout"
   }
