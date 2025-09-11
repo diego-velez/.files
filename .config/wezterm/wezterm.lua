@@ -39,4 +39,6 @@ config.keys = require("keymaps")
 config.default_cursor_style = "SteadyBar"
 config.quick_select_alphabet = "tnseriaohdlpufywqcxmgjbz"
 
+config.warn_about_missing_glyphs = false
+
 return config
