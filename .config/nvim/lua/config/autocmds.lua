@@ -47,3 +47,42 @@ vim.api.nvim_create_autocmd('BufReadPre', {
     vim.cmd 'let @/ = ""' -- Clear the search register using Vim command
   end,
 })
+
+vim.api.nvim_create_autocmd('WinResized', {
+  group = vim.api.nvim_create_augroup('Smart scrolloff', { clear = true }),
+  desc = 'Automatically adjust scrolloff based on window size',
+  callback = function()
+    local percentage = 0.16
+    local percentage_lines = math.floor(vim.o.lines * percentage)
+    local max_lines = 10
+    vim.o.scrolloff = math.min(max_lines, percentage_lines)
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('Remap q to close buf for some filetypes', { clear = true }),
+  pattern = { 'checkhealth', 'help', 'lspinfo', 'qf', 'git', 'oil', 'trouble' },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+
+    local close_buffer = vim.schedule_wrap(function()
+      vim.cmd 'close'
+      pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+    end)
+
+    ---@type vim.keymap.set.Opts
+    local keymap_opts = { buffer = event.buf, silent = true, desc = 'Close buffer', nowait = true }
+
+    vim.keymap.set('n', 'q', close_buffer, keymap_opts)
+    vim.keymap.set('n', '<esc>', close_buffer, keymap_opts)
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('Auto close quickfix', { clear = true }),
+  desc = 'Automatically close quickfix list after selecting an entry',
+  pattern = 'qf',
+  callback = function(event)
+    vim.keymap.set('n', '<CR>', '<CR><CMD>cclose<CR>', { buffer = event.buf })
+  end,
+})
