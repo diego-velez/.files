@@ -100,3 +100,5 @@ vim.o.spelllang = 'en,es'
 vim.o.completeopt = 'menuone,noselect,fuzzy'
 vim.o.complete = '.,w,b,u,t,kspell'
 vim.o.shortmess = 'ocFCO'
+
+vim.o.formatoptions = 'croqnljp'

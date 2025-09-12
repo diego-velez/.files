@@ -13,15 +13,6 @@ vim.api.nvim_create_autocmd('InsertEnter', {
   command = 'set nocursorline',
 })
 
-vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('Disable new line comment', { clear = true }),
-  desc = 'Disable new line comment',
-  pattern = '*',
-  callback = function()
-    vim.opt.formatoptions:remove { 'c', 'r', 'o' }
-  end,
-})
-
 vim.api.nvim_create_autocmd('FocusGained', {
   group = vim.api.nvim_create_augroup('Update file on change', { clear = true }),
   desc = 'Update file when it changes',
