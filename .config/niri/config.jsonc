@@ -100,8 +100,8 @@
     },
     "mpris": {
         "format": "{status_icon} {artist} - {title}",
-        "artist-len": 23,
-        "title-len": 45,
+        "artist-len": 30,
+        "title-len": 50,
         "status-icons": {
             "playing": "<span color='#50FA7B'>󰎇</span>",
             "paused": "<span color='#FF5555'>󰎊</span>"
