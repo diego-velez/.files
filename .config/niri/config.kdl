@@ -281,6 +281,7 @@ binds {
     Mod+E repeat=false hotkey-overlay-title="Run an Application: Thunar" { spawn "thunar"; }
     Mod+Q repeat=false { spawn-sh "~/.config/rofi/power"; }
     Mod+H repeat=false { spawn-sh "~/.config/niri/toggle_waybar"; }
+    Mod+L repeat=false { spawn-sh "~/.config/niri/screensaver"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
