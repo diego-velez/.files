@@ -24,17 +24,23 @@ window#waybar {
 	background-color: @transparent;
 }
 
-.modules-left, .modules-center, .modules-right {
+.modules-left,
+.modules-center,
+.modules-right {
 	background-color: @background;
 	color: @foreground;
 
 	margin-top: 5px;
 
 	padding-left: 5px;
-	padding-right: 5px;
 
 	border: 2px solid @foreground;
 	border-radius: 10px;
+}
+
+.modules-left,
+.modules-center {
+	padding-right: 5px;
 }
 
 .modules-center {
@@ -90,30 +96,40 @@ window#waybar.empty #window {
 /* RIGHT MODULES */
 
 #mpris {
-	padding-left: 8px;
-	padding-right: 8px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+#network {
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 #pulseaudio {
-	padding-left: 10px;
-	padding-right: 15px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 #bluetooth {
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+#bluetooth.connected {
+	font-size: 18px;
 }
 
 #custom-notification {
 	padding-left: 5px;
 	padding-right: 5px;
-	border-radius: 0px 10px 10px 0;
+	border-radius: 5px;
 }
 
 #tray {
+	background-color: @selection;
 	padding-left: 5px;
 	padding-right: 5px;
-	border-radius: 5px;
+	border-radius: 10px;
 }
 
 #tray menu {

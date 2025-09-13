@@ -18,7 +18,6 @@
     ],
     "modules-right": [
         "mpris",
-        "battery",
         "network",
         "pulseaudio",
         "bluetooth",
@@ -110,39 +109,37 @@
         "tooltip-format": "{player} ({status}): {artist} - {album} - {title}"
     },
     "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-source": "{volume}%",
-        "format-source-muted": "",
+        "format": "<span color='#8BE9FD'>{icon}</span> {volume}%",
+        "tooltip-format": "{desc} at {format_source}\nPC at {volume}%",
         "format-icons": {
             "headphone": "󰋋",
-            "headphone-muted": "󰟎",
-            "hands-free": "",
-            "headset": "",
+            "headset": "󰋋",
             "phone": "",
             "portable": "",
             "car": "",
             "default": [
-                "<span color='#FF5555'></span>",
+                "<span color='#F1FA8C'></span>",
                 "<span color='#50FA7B'></span>",
                 "<span color='#50FA7B'></span>"
             ],
-            "default-muted": [
-                "󰝟"
-            ]
+            "default-muted": "<span color='#FF5555'>󰝟</span>"
         },
         "on-click": "pavucontrol"
     },
     "bluetooth": {
-        // Hides the module when it is disabled
-        "format-disabled": "Off",
-        // See https://github.com/e-tho/bzmenu
+        "format-on": "<span color='#8BE9FD'>󰂯</span>",
+        "format-connected": "<span color='#50FA7B'>󰂱</span>",
+        "format-off": "<span color='#FF5555'>󰂲</span>",
+        "format-disabled": "<span color='#FF5555'>󰂲</span>",
+        "tooltip-format-off": "The controller ({controller_alias}) is off",
+        "tooltip-format-disabled": "The controller ({controller_alias}) is disabled",
+        "tooltip-format-connected": "Connected to {device_alias}",
+        "tooltip-format-connected-battery": "Connected to {device_alias} (󰥈 {device_battery_percentage}%)",
         "on-click": "~/.local/bin/bzmenu --launcher rofi"
     },
     "custom/notification": {
         "tooltip": false,
-        "format": "{} {icon}",
+        "format": "{icon} {text}",
         "format-icons": {
             "notification": "<span foreground='red'><sup></sup></span>",
             "none": "",
@@ -155,7 +152,7 @@
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
+        "exec": "swaync-client -swb | jq --unbuffered --compact-output",
         "on-click": "swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw",
         "escape": true
