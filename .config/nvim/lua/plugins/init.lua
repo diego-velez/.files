@@ -128,11 +128,19 @@ end)
 -- Autopair stuff
 later(function()
   add 'windwp/nvim-autopairs'
-
   add 'windwp/nvim-ts-autotag'
 
   require('nvim-autopairs').setup()
   require('nvim-ts-autotag').setup()
+
+  local npairs = require 'nvim-autopairs'
+  local Rule = require 'nvim-autopairs.rule'
+  local cond = require 'nvim-autopairs.conds'
+
+  -- `$$` as autopair for Typst
+  npairs.add_rule(
+    Rule('$', '$', 'typst'):with_pair(cond.not_after_text '$'):with_move(cond.after_text '$')
+  )
 end)
 
 -- Support TODO comments
