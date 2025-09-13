@@ -1,0 +1,66 @@
+#!/usr/bin/python
+
+import subprocess
+import sys
+import random
+import time
+import json
+
+screensavers = [
+    "~/.local/bin/pipes.sh -r 0 -R -p 5",
+    "asciiquarium",
+    "cmatrix -r",
+    "lavat -k black -c magenta -s 3 -r 1 -b 10",
+    "conway-screensaver",
+    "c-squares -d 2 -t 3",
+]
+
+
+def run_screensaver(screensaver: str):
+    # We want different font size for certain screensavers
+    if screensaver == screensavers[3]:
+        # fmt: off
+        _ = subprocess.Popen(["wezterm-gui", "--config", "font_size=16", "start", "--", "sh", "-c", f"sleep 0.4 && {screensaver}"])
+    elif screensaver == screensavers[5]:
+        # fmt: off
+        _ = subprocess.Popen(["wezterm-gui", "--config", "font_size=24", "start", "--", "sh", "-c", f"sleep 0.4 && {screensaver}"])
+    else:
+        # fmt: off
+        _ = subprocess.Popen(["wezterm-gui", "--config", "font_size=8", "start", "--", "sh", "-c", f"sleep 0.4 && {screensaver}"])
+
+    time.sleep(0.4)
+    _ = subprocess.Popen(["niri", "msg", "action", "fullscreen-window"]).wait()
+
+
+def can_run():
+    # fmt: off
+    windows = subprocess.run(["niri", "msg", "--json", "windows"], capture_output=True)
+    windows_json = json.loads(windows.stdout)
+
+    # Get currently focused window
+    focused_window = None
+    for window in windows_json:
+        if window['is_focused']:
+            focused_window = window
+            break
+
+    # Occurs when there is no active window (empty workspace)
+    if focused_window is None:
+        return True
+
+    # Determine if window is fullscreen based on its dimensions
+    window_size = focused_window['layout']['window_size']
+    is_fullscreen = window_size[0] == 5120 and window_size[1] == 1440
+
+    return not is_fullscreen
+
+
+if __name__ == "__main__":
+    if not can_run():
+        print("Will not run when current window is in fullscreen")
+        sys.exit(1)
+
+    screensaver_index = random.randint(0, len(screensavers) - 1)
+    screensaver = screensavers[screensaver_index]
+    print(f"Running {screensaver}")
+    run_screensaver(screensaver)
