@@ -1,6 +1,21 @@
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 local now_if_args = vim.fn.argc(-1) > 0 and now or later
 
+---@param args { path: string, name: string, source: string }
+local function build_with_rust(args)
+  local cmd = { 'rustup', 'run', 'nightly', 'cargo', 'build', '--release' }
+  ---@type vim.SystemOpts
+  local opts = { cwd = args.path, text = true }
+
+  vim.notify('Building ' .. args.name, vim.log.levels.INFO)
+  local output = vim.system(cmd, opts):wait()
+  if output.code ~= 0 then
+    vim.notify('Failed to build ' .. args.name .. '\n' .. output.stderr, vim.log.levels.ERROR)
+  else
+    vim.notify('Built ' .. args.name, vim.log.levels.INFO)
+  end
+end
+
 -- Other Neovim config stuff
 later(function()
   require 'config.other'
@@ -9,26 +24,11 @@ end)
 
 -- mini
 now(function()
-  ---@param args { path: string, name: string, source: string }
-  local function build_fff(args)
-    local cmd = { 'rustup', 'run', 'nightly', 'cargo', 'build', '--release' }
-    local opts = { cwd = args.path, text = true }
-
-    vim.notify('Building ' .. args.name, vim.log.levels.INFO)
-    local output = vim.system(cmd, opts):wait()
-    if output.code ~= 0 then
-      vim.notify('Failed to build fff.nvim', vim.log.levels.ERROR)
-      vim.notify(output.stderr, vim.log.levels.ERROR)
-    else
-      vim.notify(args.name .. ' Built', vim.log.levels.INFO)
-    end
-  end
-
   add {
     source = 'diego-velez/fff.nvim',
     hooks = {
-      post_install = build_fff,
-      post_checkout = build_fff,
+      post_install = build_with_rust,
+      post_checkout = build_with_rust,
     },
   }
 
@@ -190,6 +190,17 @@ later(function()
   }
 
   require('render-markdown').setup()
+end)
+
+-- Better LISP like language support
+later(function()
+  add {
+    source = 'eraserhd/parinfer-rust',
+    hooks = {
+      post_install = build_with_rust,
+      post_checkout = build_with_rust,
+    },
+  }
 end)
 
 -- Task runner
