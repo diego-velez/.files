@@ -8,6 +8,7 @@ home = os.getenv("HOME")
 assert home is not None
 niri = ".config/niri"
 path_to_config = os.path.join(home, niri)
+waybar_bin = os.path.join(home, ".local/bin/waybar")
 
 if __name__ == "__main__":
     o = subprocess.run(["ps", "cax"], capture_output=True)
@@ -23,7 +24,9 @@ if __name__ == "__main__":
     else:
         waybar_config = os.path.join(path_to_config, "config.jsonc")
         waybar_style = os.path.join(path_to_config, "style.css")
-        _ = subprocess.Popen(["waybar", "--config", waybar_config, "--style", waybar_style])
+        _ = subprocess.Popen(
+            [waybar_bin, "--config", waybar_config, "--style", waybar_style]
+        )
         # Kinda animate adding the gaps
         # for gap in range(0, 11):
         #     _ = subprocess.Popen(["hyprctl", f"keyword general:gaps_out {gap}"]).wait()
