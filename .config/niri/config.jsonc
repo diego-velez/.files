@@ -138,24 +138,11 @@
         "on-click": "~/.local/bin/bzmenu --launcher rofi"
     },
     "custom/notification": {
-        "tooltip": false,
-        "format": "{icon} {text}",
-        "format-icons": {
-            "notification": "<span foreground='red'><sup></sup></span>",
-            "none": "",
-            "dnd-notification": "<span foreground='red'><sup></sup></span>",
-            "dnd-none": "",
-            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-            "inhibited-none": "",
-            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-            "dnd-inhibited-none": ""
-        },
+        "format": "<span color='#FFB86C'></span> {text}",
+        "interval": 1,
         "return-type": "json",
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb | jq --unbuffered --compact-output",
-        "on-click": "swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
-        "escape": true
+        "exec-if": "which ~/.config/niri/mako_for_waybar",
+        "exec": "makoctl history | ~/.config/niri/mako_for_waybar | jq --unbuffered --compact-output"
     },
     "tray": {
         "spacing": 10,
