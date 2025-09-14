@@ -70,10 +70,6 @@ window#waybar {
 	transition: none;
 }
 
-window#waybar.empty #window {
-	padding: 0px;
-}
-
 #window {
 	padding-left: 5px;
 	border-radius: 0px 10px 10px 0;
