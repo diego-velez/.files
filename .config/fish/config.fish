@@ -1,3 +1,6 @@
+# Activate mise first so that I have access to environment variables immediately
+mise activate fish | source
+
 set os (lsb_release --id --short)
 set is_glinux false
 if string match -q 'Debian' $os
@@ -139,4 +142,3 @@ bind -M insert \co '$HOME/.config/fish/open_project'
 
 zoxide init fish | source
 starship init fish | source
-mise activate fish | source
