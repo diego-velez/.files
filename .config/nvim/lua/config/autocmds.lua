@@ -65,7 +65,6 @@ vim.api.nvim_create_autocmd('FileType', {
     local keymap_opts = { buffer = event.buf, silent = true, desc = 'Close buffer', nowait = true }
 
     vim.keymap.set('n', 'q', close_buffer, keymap_opts)
-    vim.keymap.set('n', '<esc>', close_buffer, keymap_opts)
   end,
 })
 
