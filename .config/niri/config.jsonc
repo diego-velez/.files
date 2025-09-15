@@ -131,8 +131,10 @@
         "format-connected": "<span color='#50FA7B'>󰂱</span>",
         "format-off": "<span color='#FF5555'>󰂲</span>",
         "format-disabled": "<span color='#FF5555'>󰂲</span>",
+        "format-no-controller": "<span color='#FF5555'>󰂯!</span>",
         "tooltip-format-off": "The controller ({controller_alias}) is off",
         "tooltip-format-disabled": "The controller ({controller_alias}) is disabled",
+        "tooltip-format-no-controller": "No controller was found!!",
         "tooltip-format-connected": "Connected to {device_alias}",
         "tooltip-format-connected-battery": "Connected to {device_alias} (󰥈 {device_battery_percentage}%)",
         "on-click": "~/.local/bin/bzmenu --launcher rofi"
