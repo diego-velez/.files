@@ -23,8 +23,8 @@ configuration {
 // Actual entire window
 #window {
     background-color: @background-color;
-    width:            308px;  // 6% of 5120 and 16% of 1920
-    height:           303px;  // 21% of 1440 and 28% of 1080
+    width:            927px;
+    height:           292px;
     border:           3;
     border-radius:    100;
     border-color:     #50FA7B;
@@ -57,11 +57,15 @@ configuration {
 
 // List of programs
 #listview {
-    spacing: 2px;
+    layout: horizontal;
+    align: center;
+    spacing: 20px;
 }
 #element {
+    orientation: vertical;
     border:  0;
     border-radius: 10px;
+    padding: 10px;
 }
 #element.normal.normal {
     background-color: @background-color;
@@ -100,6 +104,12 @@ configuration {
     text-color:       @foreground;
 }
 element-text, element-icon {
+    horizontal-align: 0.5;
     background-color: inherit;
     text-color: inherit;
+}
+
+element-icon {
+    squared: true;
+    size: 128;
 }
