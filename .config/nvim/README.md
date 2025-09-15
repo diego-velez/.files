@@ -19,7 +19,7 @@ I want minimal mental overhead, with as much functionality as possible, for this
 | Picker          | mini.pick              |
 | Startup Screen  | mini.starter           |
 | Statusline      | mini.statusline        |
-| Completion      | blink.cmp              |
+| Completion      | mini.completion       |
 | File Switcher   | spear.nvim             |
 | Colorscheme     | Dracula                |
 | Formatter       | conform                |
