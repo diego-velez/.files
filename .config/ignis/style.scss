@@ -1,0 +1,53 @@
+$background: #282A36;
+$foreground: #F8F8F2;
+$selection: #44475A;
+$comment: #6272A4;
+$red: #FF5555;
+$orange: #FFB86C;
+$yellow: #F1FA8C;
+$green: #50FA7B;
+$purple: #BD93F9;
+$cyan: #8BE9FD;
+$pink: #FF79C6;
+
+* {
+  font-family: JetBrainsMono Nerd Fond;
+  font-size: 18px;
+}
+
+.window {
+  opacity: 1;
+}
+
+.scroller {
+  background-color: $background;
+
+  padding: 10px;
+
+  min-width: 500px;
+  min-height: 1000px;
+
+  border-style: solid;
+  border-width: 2px;
+  border-color: $foreground;
+  border-radius: 10px;
+}
+
+.notification-container {
+  background-color: lighten($background, 5%);
+  border-style: solid;
+  border-width: 2px;
+  border-color: #FFFFFF;
+  border-radius: 10px;
+}
+
+.notification-title {
+  font-weight: bold;
+  text-align: center;
+}
+
+.notification-body {}
+
+.notification-icon {
+  font-size: 30px;
+}
