@@ -173,8 +173,7 @@
         "format": "<span color='#FFB86C'></span> {text}",
         "interval": 1,
         "return-type": "json",
-        "exec-if": "which ~/.config/niri/mako_for_waybar",
-        "exec": "makoctl history | ~/.config/niri/mako_for_waybar | jq --unbuffered --compact-output"
+        "on-click": "source ~/.config/ignis/.venv/bin/activate && ignis toggle DVT_Window"
     },
     "tray": {
         "spacing": 10,
