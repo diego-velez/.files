@@ -237,6 +237,14 @@ window-rule {
     open-floating true
 }
 
+// Change some windows default size
+window-rule {
+    match app-id="org.keepassxc.KeePassXC"
+    match app-id="rhythmbox"
+    match app-id="org.wezfurlong.wezterm"
+    default-column-width { proportion 0.3; }
+}
+
 // Set rules for floating windows
 window-rule {
     match is-floating=true
