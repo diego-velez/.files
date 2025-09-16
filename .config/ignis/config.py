@@ -68,7 +68,7 @@ class Window(Widget.Window):
             namespace="DVT_Window",
             anchor=["top", "right"],
             margin_top=5,
-            margin_right=1543,
+            margin_right=12,
             child=scroller,
             css_classes=["window"],
         )
