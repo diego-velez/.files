@@ -242,7 +242,7 @@ window-rule {
     match app-id="org.keepassxc.KeePassXC"
     match app-id="rhythmbox"
     match app-id="org.wezfurlong.wezterm"
-    default-column-width { proportion 0.3; }
+    default-column-width { proportion 0.5; }
 }
 
 // Set rules for floating windows
