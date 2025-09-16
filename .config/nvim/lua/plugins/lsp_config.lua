@@ -192,7 +192,20 @@ local servers = {
       },
     },
   },
-  basedpyright = {},
+  basedpyright = {
+    settings = {
+      basedpyright = {
+        analysis = {
+          autoSearchPaths = true,
+          diagnosticMode = 'openFilesOnly',
+          useLibraryCodeForTypes = true,
+          diagnosticSeverityOverrides = {
+            reportUnusedCallResult = 'none',
+          },
+        },
+      },
+    },
+  },
   lua_ls = {
     settings = {
       Lua = {
