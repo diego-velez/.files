@@ -17,11 +17,17 @@ class NotificationLayout(Widget.Box):
                 Widget.Label(
                     label=notification.summary,
                     css_classes=["notification-title"],
+                    use_markup=True,
+                    ellipsize="end",
+                    wrap=False,
                 ),
                 Widget.Label(
                     label=notification.body,
                     halign="start",
                     css_classes=["notification-body"],
+                    use_markup=True,
+                    wrap_mode="word_char",
+                    wrap=True,
                 ),
             ],
         )
@@ -61,9 +67,29 @@ class NotificationList(Widget.Box):
         self.prepend(PopupNotification(notification))
 
 
+class NotificationHeader(Widget.Box):
+    def __init__(self):
+        notification_count = Widget.Label(
+            label=str(len(notification_service.notifications)),
+            css_classes=["notification-count"],
+        )
+        super().__init__(child=[notification_count])
+
+
+class NotificationCenter(Widget.Box):
+    def __init__(self):
+        super().__init__(
+            vertical=True, child=[NotificationHeader(), NotificationList()]
+        )
+
+
 class Window(Widget.Window):
     def __init__(self):
-        scroller = Widget.Scroll(child=NotificationList(), css_classes=["scroller"])
+        scroller = Widget.Scroll(
+            child=NotificationCenter(),
+            css_classes=["scroller"],
+            hscrollbar_policy="never",
+        )
         super().__init__(
             namespace="DVT_Window",
             anchor=["top", "right"],
