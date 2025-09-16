@@ -214,9 +214,10 @@ xwayland-satellite {
 
 // Open windows as floating by default
 window-rule {
-    // Open the Firefox picture-in-picture player as floating by default.
+    // Open the Firefox/Zen picture-in-picture player as floating by default.
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     match app-id=r#"zen$"# title="^Picture-in-Picture$"
+    match app-id=r#"zen$"# title="^Library$"
 
     match app-id=r#"thunar$"#
     match app-id=r#"qalculate-gtk$"#
