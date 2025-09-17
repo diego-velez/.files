@@ -76,16 +76,22 @@ class NotificationList(Widget.Box):
 class NotificationHeader(Widget.Box):
     def __init__(self):
         notification_count = Widget.Label(
+            halign="start",
+            hexpand=True,
             label=notification_service.bind(
                 "notifications", lambda notifications: str(len(notifications))
             ),
             css_classes=["notification-count"],
         )
         clear_all_button = Widget.Button(
+            halign="end",
             child=Widget.Label(label="Clear all"),
             on_click=lambda _: notification_service.clear_all(),
         )
-        super().__init__(child=[notification_count, clear_all_button])
+        super().__init__(
+            hexpand=True,
+            child=[notification_count, clear_all_button],
+        )
 
 
 class NotificationCenter(Widget.Box):
