@@ -73,7 +73,6 @@ class NotificationList(Widget.Box):
         self.prepend(PopupNotification(notification))
 
 
-# TODO: Place this outside of scroller
 class NotificationHeader(Widget.Box):
     def __init__(self):
         notification_count = Widget.Label(
@@ -92,23 +91,27 @@ class NotificationHeader(Widget.Box):
 class NotificationCenter(Widget.Box):
     def __init__(self):
         super().__init__(
-            vertical=True, child=[NotificationHeader(), NotificationList()]
+            vertical=True,
+            css_classes=["notification-center"],
+            child=[
+                NotificationHeader(),
+                Widget.Scroll(
+                    vexpand=True,
+                    child=NotificationList(),
+                    hscrollbar_policy="never",
+                ),
+            ],
         )
 
 
 class Window(Widget.Window):
     def __init__(self):
-        scroller = Widget.Scroll(
-            child=NotificationCenter(),
-            css_classes=["scroller"],
-            hscrollbar_policy="never",
-        )
         super().__init__(
             namespace="DVT_Window",
             anchor=["top", "right"],
             margin_top=5,
             margin_right=12,
-            child=scroller,
+            child=NotificationCenter(),
             css_classes=["window"],
         )
 
