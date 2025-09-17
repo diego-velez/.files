@@ -250,6 +250,11 @@ window-rule {
     default-column-width { fixed 324; }
 }
 
+window-rule {
+    match app-id="org.pwmt.zathura"
+    default-column-width { proportion 0.2; }
+}
+
 // Set rules for floating windows
 window-rule {
     match is-floating=true
