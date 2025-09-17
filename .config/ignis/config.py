@@ -1,6 +1,7 @@
 from ignis.widgets import Widget
 from ignis.services.notifications import Notification, NotificationService
 from ignis.app import IgnisApp
+from ignis.utils import Utils
 
 app = IgnisApp.get_default()
 app.apply_css("./style.scss")
@@ -51,6 +52,11 @@ class PopupNotification(Widget.Revealer):
             child=NotificationLayout(notification),
             reveal_child=True,
         )
+        notification.connect("closed", lambda _: self.destroy())
+
+    def destroy(self):
+        self.reveal_child = False
+        Utils.Timeout(self.transition_duration, self.unparent)
 
 
 class NotificationList(Widget.Box):
@@ -60,20 +66,27 @@ class NotificationList(Widget.Box):
             self.add_notification(notification)
         notification_service.connect(
             "notified",
-            lambda service, notification: self.add_notification(notification),
+            lambda _, notification: self.add_notification(notification),
         )
 
     def add_notification(self, notification: Notification):
         self.prepend(PopupNotification(notification))
 
 
+# TODO: Place this outside of scroller
 class NotificationHeader(Widget.Box):
     def __init__(self):
         notification_count = Widget.Label(
-            label=str(len(notification_service.notifications)),
+            label=notification_service.bind(
+                "notifications", lambda notifications: str(len(notifications))
+            ),
             css_classes=["notification-count"],
         )
-        super().__init__(child=[notification_count])
+        clear_all_button = Widget.Button(
+            child=Widget.Label(label="Clear all"),
+            on_click=lambda _: notification_service.clear_all(),
+        )
+        super().__init__(child=[notification_count, clear_all_button])
 
 
 class NotificationCenter(Widget.Box):
