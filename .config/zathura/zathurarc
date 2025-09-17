@@ -1,0 +1,4 @@
+# See https://pwmt.org/projects/zathura/documentation/
+map <Right> navigate next
+map <Left> navigate previous
+map = adjust_window width
