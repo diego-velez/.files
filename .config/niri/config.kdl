@@ -243,6 +243,11 @@ window-rule {
     default-column-width { proportion 0.2; }
 }
 
+window-rule {
+    match app-id="virt-manager" title="Virtual Machine Manager"
+    default-column-width { fixed 324; }
+}
+
 // Set rules for floating windows
 window-rule {
     match is-floating=true
