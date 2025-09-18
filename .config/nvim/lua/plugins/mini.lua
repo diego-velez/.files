@@ -716,3 +716,25 @@ end, { desc = '[N]otification History' })
 vim.keymap.set('n', '<leader>sC', function()
   MiniExtra.pickers.colorschemes(nil, nil)
 end, { desc = '[S]earch [C]olorscheme' })
+vim.keymap.set('n', 'z=', function()
+  -- We 'zt' because picker appears below cursor,
+  -- so if we are to close to bottom it'll appear over <cword>.
+  vim.cmd.normal 'zt'
+  local word = vim.fn.expand '<cword>'
+  MiniExtra.pickers.spellsuggest(nil, {
+    window = {
+      config = function()
+        local height = math.floor(0.2 * vim.o.lines)
+        local width = math.floor(math.max(vim.fn.strdisplaywidth(word) + 2, 20))
+        return {
+          relative = 'cursor',
+          anchor = 'NW',
+          height = height,
+          width = width,
+          row = 1, -- I want to see <cword>
+          col = -1, -- Aligned nicely with <cword>
+        }
+      end,
+    },
+  })
+end, { desc = 'Show spellings suggestions' })
