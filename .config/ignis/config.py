@@ -134,3 +134,4 @@ class Window(Widget.Window):
 
 
 Window()
+app.close_window("DVT_Window")
