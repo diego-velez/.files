@@ -64,6 +64,19 @@ class NotificationList(Widget.Box):
         super().__init__(vertical=True, spacing=10, css_classes=["notification-list"])
         for notification in notification_service.notifications:
             self.add_notification(notification)
+
+        self.append(
+            Widget.Label(
+                label="No notifications",
+                valign="center",
+                vexpand=True,
+                visible=notification_service.bind(
+                    "notifications", lambda value: len(value) == 0
+                ),
+                css_classes=["notification-empty-info"],
+            )
+        )
+
         notification_service.connect(
             "notified",
             lambda _, notification: self.add_notification(notification),
