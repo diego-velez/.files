@@ -87,6 +87,7 @@ class NotificationHeader(Widget.Box):
             halign="end",
             child=Widget.Label(label="Clear all"),
             on_click=lambda _: notification_service.clear_all(),
+            css_classes=["notification-clear-all"],
         )
         super().__init__(
             hexpand=True,
