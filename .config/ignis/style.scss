@@ -34,11 +34,18 @@ $pink: #FF79C6;
 }
 
 .notification-count {
-  font-size: 22px;
   background-color: $red;
   margin: 10px;
   padding: 5px;
   border-radius: 50%;
+  min-width: 2rem;
+}
+
+.notification-clear-all {
+  background-color: lighten($background, 8%);
+  transition: 0.3s;
+  border-radius: 1rem;
+  padding: 0.25rem 1rem;
 }
 
 .notification-container {
