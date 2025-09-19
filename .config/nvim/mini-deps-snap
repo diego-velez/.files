@@ -47,6 +47,6 @@ return {
   undotree = "28f2f54a34baff90ea6f4a735ef1813ad875c743",
   ["vim-suda"] = "9adda7d195222d4e2854efb2a88005a120296c47",
   volt = "7b8c5e790120d9f08c8487dcb80692db6d2087a1",
-  ["wezterm-types"] = "3ae049cae5f7c11a7e647642a0a74b7faa64d324",
+  ["wezterm-types"] = "94a688237b5f142af1b8fbfe3d413a018ca2d828",
   ["yanky.nvim"] = "04775cc6e10ef038c397c407bc17f00a2f52b378"
 }

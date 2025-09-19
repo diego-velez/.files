@@ -4,6 +4,7 @@ local act = wezterm.action
 
 local leader = "CTRL|SHIFT"
 
+---@type Key[]
 local keys = {
 	{
 		key = "t",
