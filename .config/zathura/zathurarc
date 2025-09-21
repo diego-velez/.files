@@ -1,3 +1,5 @@
 # See https://pwmt.org/projects/zathura/documentation/
 map <C-d> navigate next
 map <C-u> navigate previous
+
+set selection-clipboard clipboard
