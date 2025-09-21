@@ -2,3 +2,5 @@
 map <Right> navigate next
 map <Left> navigate previous
 map = adjust_window width
+
+set selection-clipboard clipboard
