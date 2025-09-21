@@ -242,6 +242,7 @@ local servers = {
       JAVA_HOME = java_home_for_lsp,
     },
   },
+  qmlls = {},
 }
 
 -- Configure Java specific stuff separately
