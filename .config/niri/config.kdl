@@ -164,7 +164,6 @@ spawn-sh-at-startup "~/.local/bin/waybar --config ~/.config/niri/config.jsonc --
 spawn-sh-at-startup "~/.config/niri/launch_wallpaper"
 spawn-sh-at-startup "~/.config/hypr/wallpaper_slideshow.sh &"
 spawn-at-startup "swayosd-server"
-spawn-at-startup "swayidle"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.

@@ -7,6 +7,8 @@ PERSISTENT_FILE = "previous_brightness"
 
 
 def idle():
+    print("Running idle function")
+
     current_brightness_output = subprocess.run(
         ["brightnessctl", "get", "--percentage"], capture_output=True
     )
@@ -16,19 +18,22 @@ def idle():
         f.write(current_brightness)
 
     subprocess.run(["brightnessctl", "set", "0"])
+    print("Finished idle function")
 
 
 def resume():
+    print("Running resume function")
     prev = None
 
     try:
         with open(PERSISTENT_FILE, "r") as f:
             prev = f.read()
     except FileNotFoundError:
-        print("File does not exist")
+        print(f"{PERSISTENT_FILE} file does not exist")
         sys.exit(1)
 
     subprocess.run(["brightnessctl", "set", f"{prev}%"])
+    print("Finished resume function")
 
 
 ARGS = {"idle": idle, "resume": resume}
