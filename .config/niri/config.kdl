@@ -164,6 +164,7 @@ spawn-sh-at-startup "~/.local/bin/waybar --config ~/.config/niri/config.jsonc --
 spawn-sh-at-startup "~/.config/niri/launch_wallpaper"
 spawn-sh-at-startup "~/.config/hypr/wallpaper_slideshow.sh &"
 spawn-at-startup "swayosd-server"
+spawn-at-startup "wl-paste" "-t" "text" "--watch" "clipman" "store" "-P" "--histpath=~/.local/share/clipman.json"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
@@ -304,6 +305,7 @@ binds {
     Mod+Q repeat=false { spawn-sh "~/.config/rofi/power"; }
     Mod+H repeat=false { spawn-sh "~/.config/niri/toggle_waybar"; }
     Mod+L repeat=false { spawn-sh "~/.config/niri/screensaver"; }
+    Mod+V repeat=false { spawn "clipman" "pick" "-t" "rofi"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
