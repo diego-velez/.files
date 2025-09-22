@@ -197,10 +197,6 @@ animations {
     }
 }
 
-xwayland-satellite {
-    path "~/.cargo/bin/xwayland-satellite"
-}
-
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
