@@ -5,7 +5,7 @@ dir="$HOME/.config/rofi/power.rasi"
 shutdown="Shutdown"
 shutdown_icon="\0icon\x1fsystem-shutdown"
 
-reboot="Reboot"
+restart="Restart"
 reboot_icon="\0icon\x1fsystem-restart"
 
 suspend="Suspend"
@@ -17,16 +17,16 @@ lock_icon="\0icon\x1flock"
 logout="Logout"
 logout_icon="\0icon\x1fsystem-log-out"
 
-options="$shutdown$shutdown_icon\n$reboot$reboot_icon\n$suspend$suspend_icon\n$lock$lock_icon\n$logout$logout_icon"
+options="$shutdown$shutdown_icon\n$restart$reboot_icon\n$suspend$suspend_icon\n$lock$lock_icon\n$logout$logout_icon"
 
 # Must have ~/.icons/dracula-icons
 # See https://github.com/m4thewz/dracula-icons
-choice=$(echo -e "$options" | rofi -dmenu -theme "$dir" -no-custom -icon-theme dracula-icons)
+choice=$(echo -e "$options" | fuzzel --dmenu --hide-prompt --font=":size=32")
 case "$choice" in
     "$shutdown")
         systemctl poweroff
         ;;
-    "$reboot")
+    "$restart")
         systemctl reboot
         ;;
     "$suspend")

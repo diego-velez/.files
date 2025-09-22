@@ -291,8 +291,8 @@ binds {
     Mod+Ctrl+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T repeat=false hotkey-overlay-title="Open a Terminal: wezterm" { spawn "wezterm"; }
-    Mod+R repeat=false hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
+    Mod+T repeat=false hotkey-overlay-title="Open a Terminal: Wezterm" { spawn "wezterm"; }
+    Mod+R repeat=false hotkey-overlay-title="Run an Application: Fuzzel" { spawn "fuzzel"; }
     Mod+E repeat=false hotkey-overlay-title="Run an Application: Thunar" { spawn "thunar"; }
     Mod+Q repeat=false { spawn-sh "~/.config/rofi/power"; }
     Mod+H repeat=false { spawn-sh "~/.config/niri/toggle_waybar"; }
