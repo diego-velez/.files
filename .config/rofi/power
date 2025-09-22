@@ -39,7 +39,7 @@ case "$choice" in
         if pgrep -x "hyprland" > /dev/null; then
             hyprctl dispatch exit
         elif pgrep -x "niri" > /dev/null; then
-            niri msg action quit
+            niri msg action quit --skip-confirmation
         fi
         ;;
 esac
