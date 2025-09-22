@@ -1,0 +1,2 @@
+# Dim screen after 30 seconds
+timeout 30 './idle idle' resume './idle resume'

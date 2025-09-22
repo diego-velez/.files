@@ -1,0 +1,49 @@
+#!/usr/bin/python
+
+import subprocess
+import sys
+
+PERSISTENT_FILE = "previous_brightness"
+
+
+def idle():
+    current_brightness_output = subprocess.run(
+        ["brightnessctl", "get", "--percentage"], capture_output=True
+    )
+    current_brightness = current_brightness_output.stdout.decode().strip()
+
+    with open(PERSISTENT_FILE, "w") as f:
+        f.write(current_brightness)
+
+    subprocess.run(["brightnessctl", "set", "0"])
+
+
+def resume():
+    prev = None
+
+    try:
+        with open(PERSISTENT_FILE, "r") as f:
+            prev = f.read()
+    except FileNotFoundError:
+        print("File does not exist")
+        sys.exit(1)
+
+    subprocess.run(["brightnessctl", "set", f"{prev}%"])
+
+
+ARGS = {"idle": idle, "resume": resume}
+
+if __name__ == "__main__":
+    if len(sys.argv) == 1:
+        print("Must specify argument, either 'idle' or 'resume'")
+        sys.exit(1)
+
+    mode = sys.argv[1]
+    mode_is_valid = mode in ARGS.keys()
+    if not mode_is_valid:
+        print(f"{mode} is not a valid argument, either 'idle' or 'resume'")
+        sys.exit(1)
+
+    ARGS[mode]()
+
+    sys.exit(0)

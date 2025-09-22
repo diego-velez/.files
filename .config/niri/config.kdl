@@ -166,6 +166,7 @@ spawn-sh-at-startup "~/.config/hypr/wallpaper_slideshow.sh &"
 // Use personal fork https://github.com/diego-velez/mako
 spawn-sh-at-startup "~/.local/bin/mako &"
 spawn-at-startup "swayosd-server"
+spawn-at-startup "swayidle"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
