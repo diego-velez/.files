@@ -33,7 +33,7 @@ case "$choice" in
         systemctl suspend
         ;;
     "$lock")
-        # TODO: add lock behavior, betterlockscreen?
+        swaylock
         ;;
     "$logout")
         if pgrep -x "hyprland" > /dev/null; then
