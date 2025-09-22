@@ -1,3 +1,6 @@
 [submodule ".icons/dracula-icons"]
 	path = .icons/dracula-icons
 	url = https://github.com/m4thewz/dracula-icons
+[submodule ".config/nvim"]
+	path = .config/nvim
+	url = git@github-personal:diego-velez/nvim
