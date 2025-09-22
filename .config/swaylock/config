@@ -1,0 +1,17 @@
+font="JetBrainsMono Nerd Font"
+font-size=32
+indicator-radius=100
+inside-color=282A36
+inside-clear-color=F1FA8C
+inside-ver-color=50FA7B
+inside-wrong-color=FF5555
+key-hl-color=F1FA8C
+ring-color=383A46
+ring-clear-color=F1FA8C
+ring-ver-color=50FA7B
+ring-wrong-color=FF5555
+separator-color=282A36
+text-color=F8F8F2
+text-ver-color=F8F8F2
+text-wrong-color=F8F8F2
+image=~/.config/swaylock/wallpaper

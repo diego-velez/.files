@@ -1,0 +1,25 @@
+#!/usr/bin/python
+
+import subprocess
+import os
+import sys
+
+home_path = os.getenv("HOME")
+assert home_path is not None
+relative_wallpaper_path = ".config/swaylock/wallpaper"
+lock_wallpaper = os.path.join(home_path, relative_wallpaper_path)
+
+
+if __name__ == "__main__":
+    output = subprocess.run(["swww", "query"], capture_output=True)
+    swww_query = output.stdout.decode().strip()
+    current_image_path = swww_query.split(": ")[-1].strip()
+    output = subprocess.run(
+        ["ln", "--symbolic", "--force", current_image_path, lock_wallpaper]
+    )
+    if output.returncode != 0:
+        print(
+            f"Could not set {lock_wallpaper} to {current_image_path}", file=sys.stderr
+        )
+    else:
+        print(f"Set {lock_wallpaper} to {current_image_path}")
