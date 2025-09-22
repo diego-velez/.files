@@ -1,0 +1,12 @@
+[Unit]
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
+Description=Notification service
+Documentation=https://github.com/YaLTeR/niri/wiki/Example-systemd-Setup
+
+[Service]
+Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:%h/.local/bin
+Type=simple
+ExecStart=/usr/bin/sh -c 'exec $$(which mako)'
+Restart=on-failure
