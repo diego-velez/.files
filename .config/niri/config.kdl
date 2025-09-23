@@ -295,6 +295,7 @@ binds {
     Mod+T repeat=false hotkey-overlay-title="Open a Terminal: Wezterm" { spawn "wezterm"; }
     Mod+R repeat=false hotkey-overlay-title="Run an Application: Fuzzel" { spawn "fuzzel"; }
     Mod+E repeat=false hotkey-overlay-title="Run an Application: Thunar" { spawn "thunar"; }
+    Mod+B repeat=false hotkey-overlay-title="Run an Application: Zen" { spawn "~/.local/bin/zen/zen"; }
     Mod+Q repeat=false { spawn-sh "~/.config/rofi/power"; }
     Mod+H repeat=false { spawn-sh "~/.config/niri/toggle_waybar"; }
     Mod+L repeat=false { spawn-sh "~/.config/niri/screensaver"; }
