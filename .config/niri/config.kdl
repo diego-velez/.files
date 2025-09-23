@@ -235,6 +235,7 @@ window-rule {
 
 window-rule {
     match app-id="org.pwmt.zathura"
+    match app-id="org.pulseaudio.pavucontrol"
     default-column-width { proportion 0.2; }
 }
 
