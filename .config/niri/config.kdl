@@ -247,6 +247,7 @@ window-rule {
 }
 
 window-rule {
+    match app-id="org.pulseaudio.pavucontrol"
     match app-id="org.pwmt.zathura"
     default-column-width { fixed 710; }
 }
