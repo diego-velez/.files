@@ -2,7 +2,10 @@
 # Make sure that it's running interactively
 [[ $- != *i* ]] && return
 
+# PATH
+export PATH=$HOME/.local/bin:$PATH
 eval "$(mise activate bash)"
+export PATH=$(go env GOPATH)/bin:$PATH
 
 # Change title of terminal
 case ${TERM} in
@@ -119,9 +122,6 @@ alias config='git --git-dir=$HOME/.files/ --work-tree=$HOME'
 
 # University
 alias rumad="ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=ssh-rsa estudiante@rumad.uprm.edu"
-
-# PATH
-export PATH=$(go env GOPATH)/bin:$HOME/.local/bin:$PATH
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
