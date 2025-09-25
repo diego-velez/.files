@@ -40,5 +40,6 @@ config.default_cursor_style = "SteadyBar"
 config.quick_select_alphabet = "tnseriaohdlpufywqcxmgjbz"
 
 config.warn_about_missing_glyphs = false
+config.enable_kitty_graphics = true
 
 return config
