@@ -4,8 +4,8 @@ timeout 30 '~/.config/swayidle/idle idle' resume '~/.config/swayidle/idle resume
 # Launch screensaver after 5 minutes
 timeout 300 '~/.config/niri/screensaver' resume 'niri msg action close-window'
 
-# Lock PC after 30 minutes
-timeout 1800 'swaylock'
+# Lock PC after 15 minutes
+timeout 900 'swaylock'
 
-# Suspend PC after 45 minutes
-timeout 2700 'systemctl suspend'
+# Suspend PC after 30 minutes
+timeout 1800 'systemctl suspend'

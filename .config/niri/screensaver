@@ -28,7 +28,7 @@ def run_screensaver(screensaver: str):
         # fmt: off
         _ = subprocess.Popen(["wezterm-gui", "--config", "font_size=8", "start", "--", "sh", "-c", f"sleep 0.4 && {screensaver}"])
 
-    time.sleep(0.4)
+    time.sleep(0.6)
     _ = subprocess.Popen(["niri", "msg", "action", "fullscreen-window"]).wait()
 
 
@@ -50,7 +50,7 @@ def can_run():
 
     # Determine if window is fullscreen based on its dimensions
     window_size = focused_window['layout']['window_size']
-    is_fullscreen = window_size[0] == 5120 and window_size[1] == 1440
+    is_fullscreen = window_size[0] == 1920 and window_size[1] == 1080
 
     return not is_fullscreen
 
