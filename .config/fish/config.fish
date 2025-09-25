@@ -142,3 +142,4 @@ bind -M insert \co '$HOME/.config/fish/open_project'
 
 zoxide init fish | source
 starship init fish | source
+atuin init fish | source
