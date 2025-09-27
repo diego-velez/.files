@@ -1,13 +1,26 @@
 #!/usr/bin/python
 
+import os
 import subprocess
 import sys
 
-PERSISTENT_FILE = "previous_brightness"
+PERSISTENT_FILE = "/tmp/previous_brightness"
+BATTERY_STATUS = "/sys/class/power_supply/BAT0/status"
 
 
 def idle():
     print("Running idle function")
+
+    if is_charging():
+        print("No need to dim screen, device is charging!")
+
+        # Since resume is not guarded by is_charging
+        # I need to delete the previous brigthness file
+        # for it not to change brightness when it never dimmed it
+        if os.path.exists(PERSISTENT_FILE):
+            os.remove(PERSISTENT_FILE)
+
+        exit(1)
 
     current_brightness_output = subprocess.run(
         ["brightnessctl", "get", "--percentage"], capture_output=True
@@ -30,10 +43,16 @@ def resume():
             prev = f.read()
     except FileNotFoundError:
         print(f"{PERSISTENT_FILE} file does not exist")
-        sys.exit(1)
+        exit(1)
 
     subprocess.run(["brightnessctl", "set", f"{prev}%"])
     print("Finished resume function")
+
+
+def is_charging():
+    with open(BATTERY_STATUS, "r") as bat_stat:
+        status = bat_stat.read().strip()
+        return status == "Charging"
 
 
 ARGS = {"idle": idle, "resume": resume}
@@ -41,14 +60,12 @@ ARGS = {"idle": idle, "resume": resume}
 if __name__ == "__main__":
     if len(sys.argv) == 1:
         print("Must specify argument, either 'idle' or 'resume'")
-        sys.exit(1)
+        exit(1)
 
     mode = sys.argv[1]
     mode_is_valid = mode in ARGS.keys()
     if not mode_is_valid:
         print(f"{mode} is not a valid argument, either 'idle' or 'resume'")
-        sys.exit(1)
+        exit(1)
 
     ARGS[mode]()
-
-    sys.exit(0)
