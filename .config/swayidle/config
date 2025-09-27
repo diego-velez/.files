@@ -1,5 +1,5 @@
 # Launch screensaver after 5 minutes
-timeout 300 '~/.config/niri/screensaver' resume 'niri msg action close-window'
+timeout 300 '~/.config/niri/screensaver run' resume '~/.config/niri/screensaver close'
 
 # Lock PC after 30 minutes
 timeout 1800 'swaylock'
