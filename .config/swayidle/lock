@@ -23,3 +23,5 @@ if __name__ == "__main__":
         )
     else:
         print(f"Set {lock_wallpaper} to {current_image_path}")
+
+    subprocess.Popen(["swaylock"])
