@@ -1,11 +1,11 @@
 # Dim screen after 30 seconds
-timeout 30 '~/.config/swayidle/idle idle' resume '~/.config/swayidle/idle resume'
+timeout 30 'idle idle' resume 'idle resume'
 
 # Launch screensaver after 5 minutes
-timeout 300 '~/.config/niri/screensaver run' resume '~/.config/niri/screensaver close'
+timeout 300 'screensaver run' resume 'screensaver close'
 
 # Lock PC after 15 minutes
-timeout 900 '~/.config/niri/screensaver close && ~/.config/swayidle/lock'
+timeout 900 'screensaver close && lock'
 
 # Suspend PC after 30 minutes
 timeout 1800 'systemctl suspend'
