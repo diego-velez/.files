@@ -1,8 +1,8 @@
 # Launch screensaver after 5 minutes
 timeout 300 '~/.config/niri/screensaver run' resume '~/.config/niri/screensaver close'
 
-# Lock PC after 30 minutes
-timeout 1800 'swaylock'
+# Lock PC after 15 minutes
+timeout 900 '~/.config/niri/screensaver close && swaylock'
 
-# Suspend PC after 45 minutes
-timeout 2700 'systemctl suspend'
+# Suspend PC after 30 minutes
+timeout 1800 'systemctl suspend'
