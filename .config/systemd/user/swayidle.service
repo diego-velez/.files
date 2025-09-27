@@ -6,7 +6,7 @@ Description=Idle management service
 Documentation=https://github.com/YaLTeR/niri/wiki/Example-systemd-Setup
 
 [Service]
-Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:%h/.local/bin
+Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:%h/.local/bin:%h/.config/swayidle:%h/.config/niri
 Type=simple
 ExecStart=/usr/bin/sh -c 'exec $$(which swayidle)'
 Restart=on-failure
