@@ -5,16 +5,16 @@ import subprocess
 import sys
 
 PERSISTENT_FILE = "/tmp/previous_brightness"
-BATTERY_STATUS = "/sys/class/power_supply/BAT0/status"
+CONNECTED_TO_POWER = "/sys/class/power_supply/AC0/online"
 
 
 def idle():
     print("Running idle function")
 
-    if is_charging():
-        print("No need to dim screen, device is charging!")
+    if is_connected_to_power():
+        print("No need to dim screen, device is connected to power!")
 
-        # Since resume is not guarded by is_charging
+        # Since resume is not guarded
         # I need to delete the previous brigthness file
         # for it not to change brightness when it never dimmed it
         if os.path.exists(PERSISTENT_FILE):
@@ -49,10 +49,10 @@ def resume():
     print("Finished resume function")
 
 
-def is_charging():
-    with open(BATTERY_STATUS, "r") as bat_stat:
-        status = bat_stat.read().strip()
-        return status == "Charging"
+def is_connected_to_power():
+    with open(CONNECTED_TO_POWER, "r") as connected:
+        status = connected.read().strip()
+        return status == "1"
 
 
 ARGS = {"idle": idle, "resume": resume}
