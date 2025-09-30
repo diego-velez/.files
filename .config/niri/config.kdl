@@ -159,7 +159,7 @@ spawn-sh-at-startup "~/.local/bin/waybar --config ~/.config/niri/config.jsonc --
 spawn-sh-at-startup "~/.config/niri/launch_wallpaper"
 spawn-sh-at-startup "swww-daemon --quiet & sleep 0.1 && swww img \"$(find ~/Pictures/Super\\ Ultrawide\\ Wallpapers/ -type f | shuf -n 1)\""
 spawn-sh-at-startup "~/.config/hypr/wallpaper_slideshow.sh &"
-spawn-at-startup "swayosd-server"
+spawn-at-startup "quickshell" "--daemonize"
 spawn-sh-at-startup "wl-paste -t text --watch clipman store --max-items=100 -P --histpath=~/.local/share/clipman.json"
 
 hotkey-overlay {
@@ -308,10 +308,10 @@ binds {
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "raise"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "lower"; }
-    XF86AudioMute        allow-when-locked=true { spawn "swayosd-client" "--output-volume" "mute-toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn "swayosd-client" "--input-volume" "mute-toggle"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "-l" "1.5" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
     XF86AudioPlay        allow-when-locked=true { spawn "swayosd-client" "--playerctl" "play-pause"; }
     XF86AudioNext        allow-when-locked=true { spawn "playerctl" "next"; }
     XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
