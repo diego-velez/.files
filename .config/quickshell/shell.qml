@@ -9,6 +9,9 @@ import Quickshell.Widgets
 Scope {
     id: root
 
+    property bool shouldShowOsd: false
+    property double volumeMax: 1.5
+
     // Bind the pipewire node so its volume will be tracked
     PwObjectTracker {
         objects: [Pipewire.defaultAudioSink]
@@ -27,8 +30,6 @@ Scope {
             hideTimer.restart();
         }
     }
-
-    property bool shouldShowOsd: false
 
     Timer {
         id: hideTimer
@@ -60,7 +61,7 @@ Scope {
             Rectangle {
                 anchors.fill: parent
                 radius: height / 2
-                color: "#80000000"
+                color: "#E0282A36"
 
                 RowLayout {
                     id: hi
@@ -107,7 +108,7 @@ Scope {
 
                         implicitHeight: 10
                         radius: 20
-                        color: "#50ffffff"
+                        color: "#50F8F8F2"
 
                         Rectangle {
                             anchors {
@@ -116,7 +117,8 @@ Scope {
                                 bottom: parent.bottom
                             }
 
-                            implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume / 1.5 ?? 0)
+                            color: "#F8F8F2"
+                            implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume / root.volumeMax ?? 0)
                             radius: parent.radius
                         }
                     }
