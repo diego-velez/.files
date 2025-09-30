@@ -222,6 +222,8 @@ window-rule {
     match app-id=r#"Android Emulator.*$/i"#
     match app-id=r#"file-jpeg$"#
     match app-id=r#"file-png$"#
+    match app-id="org.qbittorrent.qBittorrent"
+    exclude title="qBittorrent"
 
     open-floating true
 }
@@ -237,6 +239,7 @@ window-rule {
 window-rule {
     match app-id="org.pwmt.zathura"
     match app-id="org.pulseaudio.pavucontrol"
+    match app-id="org.qbittorrent.qBittorrent" title="qBittorrent"
     default-column-width { proportion 0.2; }
 }
 
