@@ -159,7 +159,7 @@ layout {
 
     tab-indicator {
         hide-when-single-tab
-        place-within-column
+        gap 3
         position "top"
     }
 }
