@@ -11,6 +11,7 @@ Scope {
 
     property bool shouldShowOsd: false
     property double volumeMax: 1.5
+    property double currentVolume
 
     // Bind the pipewire node so its volume will be tracked
     PwObjectTracker {
@@ -21,6 +22,8 @@ Scope {
         target: Pipewire.defaultAudioSink?.audio
 
         function onVolumeChanged() {
+            // Need to round because otherwise number is too noisy
+            root.currentVolume = Math.round(Pipewire.defaultAudioSink.audio.volume * 100) / 100;
             root.shouldShowOsd = true;
             hideTimer.restart();
         }
@@ -64,8 +67,6 @@ Scope {
                 color: "#E0282A36"
 
                 RowLayout {
-                    id: hi
-
                     anchors {
                         fill: parent
                         leftMargin: 10
@@ -79,30 +80,32 @@ Scope {
                     }
 
                     IconImage {
-                        visible: Pipewire.defaultAudioSink?.audio.volume < 0.35 && !Pipewire.defaultAudioSink?.audio.muted
+                        visible: root.currentVolume < 0.35 && !Pipewire.defaultAudioSink?.audio.muted
                         implicitSize: 30
                         source: Quickshell.iconPath("audio-volume-low-symbolic")
                     }
 
                     IconImage {
-                        visible: Pipewire.defaultAudioSink?.audio.volume >= 0.35 && Pipewire.defaultAudioSink?.audio.volume < 0.7 && !Pipewire.defaultAudioSink?.audio.muted
+                        visible: root.currentVolume >= 0.35 && root.currentVolume < 0.7 && !Pipewire.defaultAudioSink?.audio.muted
                         implicitSize: 30
                         source: Quickshell.iconPath("audio-volume-medium-symbolic")
                     }
 
                     IconImage {
-                        visible: Pipewire.defaultAudioSink?.audio.volume >= 0.7 && Pipewire.defaultAudioSink?.audio.volume < 1 && !Pipewire.defaultAudioSink?.audio.muted
+                        visible: root.currentVolume >= 0.7 && root.currentVolume <= 1 && !Pipewire.defaultAudioSink?.audio.muted
                         implicitSize: 30
                         source: Quickshell.iconPath("audio-volume-high-symbolic")
                     }
 
                     IconImage {
-                        visible: Pipewire.defaultAudioSink?.audio.volume > 1 && !Pipewire.defaultAudioSink?.audio.muted
+                        visible: root.currentVolume > 1 && !Pipewire.defaultAudioSink?.audio.muted
                         implicitSize: 30
                         source: Quickshell.iconPath("audio-volume-overamplified-symbolic")
                     }
 
                     Rectangle {
+                        id: bar
+
                         // Stretches to fill all left-over space
                         Layout.fillWidth: true
 
@@ -118,10 +121,23 @@ Scope {
                             }
 
                             color: "#F8F8F2"
-                            implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume / root.volumeMax ?? 0)
+                            implicitWidth: parent.width * (root.currentVolume / root.volumeMax ?? 0)
                             radius: parent.radius
                         }
                     }
+                }
+
+                // The 100% volume line
+                Rectangle {
+                    anchors {
+                        right: parent.right
+                        top: parent.top
+                        bottom: parent.bottom
+                        rightMargin: bar.parent.anchors.rightMargin + bar.width * (0.5 / root.volumeMax)
+                    }
+
+                    color: "#F8F8F2"
+                    implicitWidth: 1
                 }
             }
         }
