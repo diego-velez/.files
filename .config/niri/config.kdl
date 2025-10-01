@@ -52,6 +52,8 @@ layout {
     center-focused-column "on-overflow"
     always-center-single-column
 
+    empty-workspace-above-first
+
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
     /-preset-column-widths {
         // Proportion sets the width as a fraction of the output width, taking gaps into account.
@@ -64,8 +66,7 @@ layout {
         fixed 3440
     }
 
-    // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
-    // preset-window-heights { }
+    default-column-display "tabbed"
 
     // You can change the default width of the new windows.
     default-column-width { proportion 0.4; }
@@ -149,6 +150,12 @@ layout {
 
     insert-hint {
         color "#A4FFFF80"
+    }
+
+    tab-indicator {
+        hide-when-single-tab
+        place-within-column
+        position "top"
     }
 }
 
@@ -405,8 +412,10 @@ binds {
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
     // If the window is already in a column, they will expel it out.
-    Mod+BracketLeft  { consume-or-expel-window-left; }
-    Mod+BracketRight { consume-or-expel-window-right; }
+    Mod+BracketLeft  { expel-window-from-column; }
+    Mod+BracketRight { consume-window-into-column; }
+    Mod+Alt+N     { focus-window-down-or-top; }
+    Mod+Alt+P     { focus-window-up-or-bottom; }
 
     // Consume one window from the right to the bottom of the focused column.
     // Mod+Period  { consume-window-into-column; }
@@ -434,6 +443,7 @@ binds {
     // Move the focused window between the floating and the tiling layout.
     Mod+F       { toggle-window-floating; }
     Mod+Ctrl+F { fullscreen-window; }
+    Mod+Alt+F { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
