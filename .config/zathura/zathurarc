@@ -1,6 +1,8 @@
 # See https://pwmt.org/projects/zathura/documentation/
-map <Right> navigate next
-map <Left> navigate previous
-map = adjust_window width
+map <C-u> navigate previous
+map <C-d> navigate next
+
+map [index] <Right> navigate_index collapse
+map [index] <Left> navigate_index expand
 
 set selection-clipboard clipboard
