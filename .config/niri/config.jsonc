@@ -94,7 +94,7 @@
         "tooltip-format-wifi": "{essid} ({signalStrength}%) {icon}",
         "tooltip-format-ethernet": "{ifname} 󰈁",
         "tooltip-format-disconnected": "Disconnected",
-        "on-click": "~/.local/bin/iwmenu --launcher rofi",
+        "on-click": "~/.local/bin/iwmenu --launcher fuzzel",
         "min-length": 7,
         "max-length": 7
     },
@@ -137,7 +137,7 @@
         "tooltip-format-no-controller": "No controller was found!!",
         "tooltip-format-connected": "Connected to {device_alias}",
         "tooltip-format-connected-battery": "Connected to {device_alias} (󰥈 {device_battery_percentage}%)",
-        "on-click": "~/.local/bin/bzmenu --launcher rofi"
+        "on-click": "~/.local/bin/bzmenu --launcher fuzzel"
     },
     "custom/notification": {
         "format": "<span color='#FFB86C'></span> {text}",
