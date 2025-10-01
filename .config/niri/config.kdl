@@ -10,6 +10,7 @@
 cursor {
     xcursor-theme "Colloid-Dracula-cursors-light"
     xcursor-size 36
+    hide-when-typing
 }
 
 input {
@@ -20,6 +21,12 @@ input {
     }
     // Uncomment this to make the mouse warp to the center of newly focused windows.
     warp-mouse-to-focus
+}
+
+gestures {
+    hot-corners {
+        off  // Disable going to overview from top-left corner
+    }
 }
 
 // Settings that influence how windows are positioned and sized.
@@ -202,6 +209,10 @@ output "eDP-1" {
     position x=0 y=0
     variable-refresh-rate
     focus-at-startup
+}
+
+overview {
+    backdrop-color "#282A36"
 }
 
 // Window rules let you adjust behavior for individual windows.
