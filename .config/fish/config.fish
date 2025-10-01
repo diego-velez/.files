@@ -140,6 +140,8 @@ end
 bind -M insert \ce 'nvim'
 bind -M insert \co '$HOME/.config/fish/open_project'
 
+source ~/.config/fish/functions/check_python_venv.fish
+
 zoxide init fish | source
 starship init fish | source
 atuin init fish | source
