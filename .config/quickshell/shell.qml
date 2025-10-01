@@ -9,6 +9,7 @@ import Quickshell.Widgets
 Scope {
     id: root
 
+    property bool justStarted: true
     property bool shouldShowOsd: false
     property double volumeMax: 1.5
     property double currentVolume
@@ -22,6 +23,13 @@ Scope {
         target: Pipewire.defaultAudioSink?.audio
 
         function onVolumeChanged() {
+            // This function for some reason triggers when quickshell starts
+            // Thus we need this to not see the volume OSD at startup
+            if (root.justStarted) {
+                root.justStarted = false;
+                return;
+            }
+
             // Need to round because otherwise number is too noisy
             root.currentVolume = Math.round(Pipewire.defaultAudioSink.audio.volume * 100) / 100;
             root.shouldShowOsd = true;
