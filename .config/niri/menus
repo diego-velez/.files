@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+network="Network"
+network_icon="\0icon\x1fnetwork-bluetooth"
+
+bluetooth="Bluetooth"
+bluetooth_icon="\0icon\x1fnetwork-wireless"
+
+options="$network$network_icon\n$bluetooth$bluetooth_icon"
+
+# Must have ~/.icons/dracula-icons
+# See https://github.com/m4thewz/dracula-icons
+choice=$(echo -e "$options" | fuzzel --dmenu --font=":size=16")
+case "$choice" in
+    "$network")
+        ~/.local/bin/iwmenu --launcher fuzzel
+        ;;
+    "$bluetooth")
+        ~/.local/bin/bzmenu --launcher fuzzel
+        ;;
+esac
