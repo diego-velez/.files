@@ -322,6 +322,7 @@ binds {
     Mod+H repeat=false { spawn-sh "~/.config/niri/toggle_waybar"; }
     Mod+L repeat=false { spawn-sh "~/.config/niri/screensaver run"; }
     Mod+V repeat=false { spawn-sh "clipman pick --max-items=100 -t STDOUT | fuzzel --dmenu | wl-copy" ; }
+    Mod+M repeat=false { spawn-sh "~/.config/niri/menus" ; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
