@@ -6,7 +6,10 @@ network_icon="\0icon\x1fnetwork-wireless"
 bluetooth="Bluetooth"
 bluetooth_icon="\0icon\x1fnetwork-bluetooth"
 
-options="$network$network_icon\n$bluetooth$bluetooth_icon"
+alarm="Alarms"
+alarm_icon="\0icon\x1falarm-symbolic"
+
+options="$network$network_icon\n$bluetooth$bluetooth_icon\n$alarm$alarm_icon"
 
 # Must have ~/.icons/dracula-icons
 # See https://github.com/m4thewz/dracula-icons
@@ -17,5 +20,8 @@ case "$choice" in
         ;;
     "$bluetooth")
         ~/.local/bin/bzmenu --launcher fuzzel
+        ;;
+    "$alarm")
+        ~/.config/niri/alarm
         ;;
 esac
