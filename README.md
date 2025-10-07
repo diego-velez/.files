@@ -7,9 +7,10 @@ The repo for my configuration files, all managed using this [guide](https://www.
 
 ## Shortcuts
 
-1. [Installing](#installing)
-2. [Icons and Mouse Cursors](#icons-and-mouse-cursors)
-3. [Themes](#themes)
+- [Installing](#installing)
+- [Icons and Mouse Cursors](#icons-and-mouse-cursors)
+- [Themes](#themes)
+- [BtrFS Snapshot System](.other_dotfiles_stuff/README.md#btrfs-snapshot-system)
 
 ## Installing
 
