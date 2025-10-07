@@ -9,13 +9,13 @@
 For my BtrFS snapshots,
 I like to create a snapshot weekly with a max of 3 snapshots at a time.
 This means that I could go back 3 weeks in time if I wanted to.
-To achieve this, I utilize snapper and systemd services.
+To achieve this, I utilize [Snapper](https://wiki.archlinux.org/title/Snapper) and systemd services.
 
 ### Snapper Config File
 
 This file's fullpath is `/etc/snapper/configs/dvt`.
 
-```
+```snapper
 # subvolume to snapshot
 SUBVOLUME="/"
 
@@ -68,7 +68,7 @@ QGROUP="1/0"
 
 This file's fullpath is `/etc/systemd/system/snapper-weekly@.service`.
 
-```
+```service
 [Unit]
 Description=Weekly Snapper snapshot for %i
 
@@ -80,9 +80,9 @@ ExecStartPost=/usr/bin/snapper -c %i cleanup number
 
 ### SystemD Timer File
 
-This file's fullpath is `/etc/systemd/system/snapper-weekly@.times`.
+This file's fullpath is `/etc/systemd/system/snapper-weekly@.timer`.
 
-```
+```service
 [Unit]
 Description=Weekly Snapper snapshot timer for %i
 
