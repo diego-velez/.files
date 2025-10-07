@@ -2,12 +2,14 @@
 
 from collections import namedtuple
 from datetime import datetime
+import re
 import subprocess
 import sys
 
 
 Alarm = namedtuple("Alarm", ["id", "date"])
 create_alarm_choice = "Create Alarm"
+alarm_re = re.compile(r"^(\d+)\t(\w+ \w+  \d+ \d+:\d+:\d+ \d+) a (\w+)$")
 
 
 def notify_user(title: str, body: str = ""):
@@ -15,13 +17,15 @@ def notify_user(title: str, body: str = ""):
 
 
 def parse_alarm(alarm: str) -> Alarm:
-    split_for_id: list[str] = alarm.split("\t")
+    alarm_match = alarm_re.match(alarm)
+    if alarm_match is None:
+        notify_user(f"Alarm syntax does not match `{alarm}`!")
+        raise RuntimeError("Alarm syntax does not match!!")
 
-    id: int = int(split_for_id[0])
-    date_str: str = split_for_id[1].removesuffix(" a dvt")
-    date = datetime.strptime(date_str, "%a %b %d %H:%M:%S %Y")
-
-    return Alarm(id, date)
+    id: int = int(alarm_match.group(1))
+    date = datetime.strptime(alarm_match.group(2), "%a %b %d %H:%M:%S %Y")
+    user = alarm_match.group(3)
+    return Alarm(id, date, user)
 
 
 def get_alarms() -> list[Alarm]:
