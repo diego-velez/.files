@@ -63,9 +63,37 @@ def get_alarms() -> list[Alarm]:
     return alarms
 
 
-def create_alarm():
-    # TODO: Implemente create alarm feature
-    raise NotImplementedError("Implement create alarm feature")
+def create_alarm(dt: datetime, title: str, body: str):
+    output = subprocess.run(
+        ["at", dt.strftime("%H:%M %m/%d/%Y")],
+        input=f'notify-send -a alarm-symbolic -t 5000 "{title}" "{body}"'.encode(),
+        capture_output=True,
+    )
+    if output.returncode != 0:
+        notify_user("Could not create alarm!", str(output.stderr))
+        raise RuntimeError(f"Could not create alarm!  {output.stderr}")
+    notify_user("Created alarm successfully!")
+
+
+def create_alarm_menu():
+    notify_user("Choose time for alarm!")
+    time = get_menu_input()
+
+    notify_user("Choose date for alarm!")
+    date = get_menu_input(b"Today")
+    if date == "Today":
+        date = datetime.today().strftime("%b %d")
+
+    notify_user("Choose title for alarm!", "Title is required.")
+    title = get_menu_input()
+
+    notify_user("Choose body for alarm!", "Body is optional.")
+    body = get_menu_input(b"None")
+    if body == "None":
+        body = ""
+
+    dt = datetime.strptime(f"{date} {datetime.now().year} {time}", "%b %d %Y %H:%M")
+    create_alarm(dt, title, body)
 
 
 def selected_alarm(alarm: Alarm):
@@ -86,7 +114,7 @@ def run_menu(alarms: list[Alarm]):
 
     choice = get_menu_input("\n".join(options_builder).encode())
     if choice == create_alarm_choice:
-        create_alarm()
+        create_alarm_menu()
         return
 
     choice_id = choice.split("\t")[0]
