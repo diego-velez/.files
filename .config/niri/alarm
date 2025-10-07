@@ -1,0 +1,95 @@
+#!/usr/bin/python
+
+from collections import namedtuple
+from datetime import datetime
+import subprocess
+import sys
+
+
+Alarm = namedtuple("Alarm", ["id", "date"])
+create_alarm_choice = "Create Alarm"
+
+
+def notify_user(title: str, body: str = ""):
+    subprocess.run(["notify-send", "-t", "5000", title, body])
+
+
+def parse_alarm(alarm: str) -> Alarm:
+    split_for_id: list[str] = alarm.split("\t")
+
+    id: int = int(split_for_id[0])
+    date_str: str = split_for_id[1].removesuffix(" a dvt")
+    date = datetime.strptime(date_str, "%a %b %d %H:%M:%S %Y")
+
+    return Alarm(id, date)
+
+
+def get_alarms() -> list[Alarm]:
+    a = subprocess.run(["atq"], capture_output=True)
+    if a.returncode != 0:
+        print("Error fetching current alarms!", file=sys.stderr)
+        raise RuntimeError(f"Error fetching current alarms!  {a.stderr}")
+    alarms_output = a.stdout.decode().strip()
+
+    # Return if there are no alarms
+    if len(alarms_output) == 0:
+        return list()
+
+    alarms: list[Alarm] = list()
+    for alarm in alarms_output.split("\n"):
+        alarms.append(parse_alarm(alarm.strip()))
+
+    return alarms
+
+
+def create_alarm():
+    # TODO: Implemente create alarm feature
+    raise NotImplementedError("Implement create alarm feature")
+
+
+def selected_alarm(alarm: Alarm):
+    output = subprocess.run(["atrm", str(alarm.id)], capture_output=True)
+    if output.returncode != 0:
+        notify_user("Could not delete alarm!", output.stderr.decode())
+        raise RuntimeError(f"Error deleting alarm {alarm.id}!!  {output.stderr}")
+    notify_user(f"Successfully deleted alarm {alarm.id}!", output.stdout.decode())
+
+
+def run_menu(alarms: list[Alarm]):
+    options_builder: list[str] = list()
+    for alarm in alarms:
+        date_format = alarm.date.strftime("%d %b %Y at %H:%M")
+        option = f"{alarm.id}\t{date_format}"
+        options_builder.append(option)
+    options_builder.append(create_alarm_choice)
+
+    choice = subprocess.run(
+        ["fuzzel", "--dmenu", "--font=:size=16"],
+        input="\n".join(options_builder).encode(),
+        capture_output=True,
+    )
+    if choice.returncode != 0:
+        print("Something went wrong with the menu runner!")
+        raise RuntimeError(f"Error with the menu runner!  {choice.stderr}")
+
+    choice = choice.stdout.decode().strip()
+    if choice == create_alarm_choice:
+        create_alarm()
+        return
+
+    choice_id = choice.split("\t")[0]
+    alarm = None
+    for a in alarms:
+        if a.id == int(choice_id):
+            alarm = a
+            break
+    if alarm is None:
+        notify_user(f"Alarm {choice_id} does not exist!!")
+        raise RuntimeError(f"Alarm {choice_id} does not exist!")
+
+    selected_alarm(alarm)
+
+
+if __name__ == "__main__":
+    alarms = get_alarms()
+    run_menu(alarms)
