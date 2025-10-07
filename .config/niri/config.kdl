@@ -248,6 +248,10 @@ window-rule {
     match app-id=r#"Android Emulator.*$/i"#
     match app-id=r#"file-jpeg$"#
     match app-id=r#"file-png$"#
+    match app-id="org.qbittorrent.qBittorrent"
+    exclude title="qBittorrent"
+    match app-id="steam"
+    exclude title="Steam"
 
     open-floating true
 }
