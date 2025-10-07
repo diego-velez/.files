@@ -100,6 +100,12 @@ Persistent=true
 WantedBy=timers.target
 ```
 
+### Reload Daemon to Update Snapper Config
+
+```shell
+sudo systemctl daemon-reload
+```
+
 ### SystemD Enable The Weekly Snapshots
 
 ```shell
