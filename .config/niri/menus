@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 network="Network"
-network_icon="\0icon\x1fnetwork-bluetooth"
+network_icon="\0icon\x1fnetwork-wireless"
 
 bluetooth="Bluetooth"
-bluetooth_icon="\0icon\x1fnetwork-wireless"
+bluetooth_icon="\0icon\x1fnetwork-bluetooth"
 
 options="$network$network_icon\n$bluetooth$bluetooth_icon"
 
