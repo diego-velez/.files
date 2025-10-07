@@ -1,13 +1,18 @@
 #!/usr/bin/python
 
-from collections import namedtuple
 from datetime import datetime
 import re
 import subprocess
 import sys
+from typing import NamedTuple
 
 
-Alarm = namedtuple("Alarm", ["id", "date"])
+class Alarm(NamedTuple):
+    id: int
+    date: datetime
+    user: str
+
+
 create_alarm_choice = "Create Alarm"
 alarm_re = re.compile(r"^(\d+)\t(\w+ \w+  \d+ \d+:\d+:\d+ \d+) a (\w+)$")
 
