@@ -21,6 +21,18 @@ def notify_user(title: str, body: str = ""):
     subprocess.run(["notify-send", "-t", "5000", title, body])
 
 
+def get_menu_input(options: bytes = b"") -> str:
+    choice = subprocess.run(
+        ["fuzzel", "--dmenu", "--font=:size=16"],
+        input=options,
+        capture_output=True,
+    )
+    if choice.returncode != 0:
+        raise RuntimeError(f"Error getting menu response!  `{choice.stderr}`")
+
+    return choice.stdout.decode().strip()
+
+
 def parse_alarm(alarm: str) -> Alarm:
     alarm_match = alarm_re.match(alarm)
     if alarm_match is None:
@@ -72,16 +84,7 @@ def run_menu(alarms: list[Alarm]):
         options_builder.append(option)
     options_builder.append(create_alarm_choice)
 
-    choice = subprocess.run(
-        ["fuzzel", "--dmenu", "--font=:size=16"],
-        input="\n".join(options_builder).encode(),
-        capture_output=True,
-    )
-    if choice.returncode != 0:
-        print("Something went wrong with the menu runner!")
-        raise RuntimeError(f"Error with the menu runner!  {choice.stderr}")
-
-    choice = choice.stdout.decode().strip()
+    choice = get_menu_input("\n".join(options_builder).encode())
     if choice == create_alarm_choice:
         create_alarm()
         return
