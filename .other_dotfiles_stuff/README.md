@@ -11,6 +11,12 @@ I like to create a snapshot weekly with a max of 3 snapshots at a time.
 This means that I could go back 3 weeks in time if I wanted to.
 To achieve this, I utilize [Snapper](https://wiki.archlinux.org/title/Snapper) and systemd services.
 
+### Create Config
+
+```shell
+sudo snapper -c dvt create-config /
+```
+
 ### Snapper Config File
 
 This file's fullpath is `/etc/snapper/configs/dvt`.
