@@ -11,6 +11,15 @@ I like to create a snapshot weekly with a max of 3 snapshots at a time.
 This means that I could go back 3 weeks in time if I wanted to.
 To achieve this, I utilize [Snapper](https://wiki.archlinux.org/title/Snapper) and systemd services.
 
+### Enable BtrFS Quota Groups (QGroup)
+
+BtrFS quota groups (qgroups) are part of their quota system, which tracks how much space subvolumes and snapshots use.
+Without this, snapper won't know how much space each snapshot occupies.
+
+```shell
+sudo btrfs quota enable /
+```
+
 ### Create Config
 
 ```shell
