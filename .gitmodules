@@ -4,6 +4,6 @@
 [submodule ".config/nvim"]
 	path = .config/nvim
 	url = https://github.com/diego-velez/nvim
-[submodule "/home/dvt/.themes/Dracula"]
-	path = /home/dvt/.themes/Dracula
+[submodule ".themes/Dracula"]
+	path = .themes/Dracula
 	url = https://github.com/dracula/gtk
