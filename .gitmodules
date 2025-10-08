@@ -3,4 +3,7 @@
 	url = https://github.com/m4thewz/dracula-icons
 [submodule ".config/nvim"]
 	path = .config/nvim
-	url = git@github-personal:diego-velez/nvim
+	url = https://github.com/diego-velez/nvim
+[submodule "/home/dvt/.themes/Dracula"]
+	path = /home/dvt/.themes/Dracula
+	url = https://github.com/dracula/gtk
