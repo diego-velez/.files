@@ -1,10 +1,10 @@
 # Fonts
 
-- For terminal: [UbuntuMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/UbuntuMono.zip)
+- Main: [JetbrainsMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/JetBrainsMono)
 
 ### Directories
-- System wide font integration: `/usr/share/fonts`
 
+- System wide font integration: `/usr/share/fonts`
 - User wide font integration: `~/.fonts`
 
 ### Reload fonts
