@@ -50,7 +50,7 @@ class NiriReply(TypedDict, total=False):
     Err: str
 
 
-def run_screensaver(screensaver: str):
+def run_screensaver(screensaver: str) -> bool:
     # We want different font size for certain screensavers
     if screensaver == screensavers[3]:
         # fmt: off
@@ -69,8 +69,10 @@ def run_screensaver(screensaver: str):
             f"Something went wrong opening the {screensaver} screensaver",
             file=sys.stderr,
         )
-        exit(1)
+        return False
+
     _ = subprocess.Popen(["niri", "msg", "action", "fullscreen-window"]).wait()
+    return True
 
 
 def screensaver_is_open():
@@ -93,18 +95,23 @@ def screensaver_is_open():
 
 def run():
     if screensaver_is_open():
-        print("Will not run when current window is in fullscreen")
+        print("A screensaver is already running!")
         exit(1)
 
-    screensaver_index = random.randint(0, len(screensavers) - 1)
-    screensaver = screensavers[screensaver_index]
-    print(f"Running {screensaver}")
-    run_screensaver(screensaver)
+    # Run the screensavers in a random order
+    random.shuffle(screensavers)
+
+    # Try running all of the screensavers until one actually runs
+    for screensaver in screensavers:
+        print(f"Attempting to run {screensaver}")
+        if run_screensaver(screensaver):
+            print("Success!")
+            break
 
 
 def close():
     if not screensaver_is_open():
-        print("Screensaver is not open!", file=sys.stderr)
+        print("Attempted to close a screensaver but none is open!", file=sys.stderr)
         exit(1)
 
     output = subprocess.run(

@@ -321,7 +321,7 @@ binds {
     Mod+B repeat=false hotkey-overlay-title="Run an Application: Zen" { spawn "~/.local/bin/zen/zen"; }
     Mod+Q repeat=false { spawn-sh "~/.config/rofi/power"; }
     Mod+H repeat=false { spawn-sh "~/.config/niri/toggle_waybar"; }
-    Mod+L repeat=false { spawn-sh "~/.config/niri/screensaver run"; }
+    Mod+L repeat=false { spawn-sh "~/.config/swayidle/screensaver run"; }
     Mod+V repeat=false { spawn-sh "clipman pick --max-items=100 -t STDOUT | fuzzel --dmenu | wl-copy" ; }
     Mod+M repeat=false { spawn-sh "~/.config/niri/menus" ; }
 
