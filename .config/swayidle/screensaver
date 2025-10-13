@@ -42,7 +42,7 @@ class FocusedWindowResp(TypedDict):
 
 
 class OkResp(TypedDict):
-    FocusedWindow: FocusedWindowResp
+    FocusedWindow: FocusedWindowResp | None
 
 
 class NiriReply(TypedDict, total=False):
@@ -75,7 +75,7 @@ def run_screensaver(screensaver: str) -> bool:
     return True
 
 
-def screensaver_is_open():
+def screensaver_is_open() -> bool:
     # See https://yalter.github.io/niri/niri_ipc/index.html
     sock = socket(AF_UNIX)
     sock.connect(os.environ["NIRI_SOCKET"])
@@ -89,7 +89,11 @@ def screensaver_is_open():
         exit(1)
     assert "Ok" in niri_reply
 
-    app_id = niri_reply["Ok"]["FocusedWindow"]["app_id"].strip()
+    focused_window = niri_reply["Ok"]["FocusedWindow"]
+    if focused_window is None:  # No window is currently open in the current workspace
+        return False
+
+    app_id = focused_window["app_id"].strip()
     return app_id == window_class
 
 
