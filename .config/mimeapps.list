@@ -78,6 +78,7 @@ x-scheme-handler/mailto=chromium-browser.desktop
 inode/directory=thunar.desktop
 x-scheme-handler/terminal=org.wezfurlong.wezterm.desktop
 x-terminal-emulator=org.wezfurlong.wezterm.desktop
+video/mp4=mpv.desktop
 
 [Added Associations]
 image/bmp=eom.desktop;
@@ -153,3 +154,4 @@ application/x-extension-xhtml=zen.desktop;
 application/x-extension-xht=zen.desktop;
 application/x-bat=wine.desktop;org.x.editor.desktop;
 video/x-matroska=mpv.desktop;
+video/mp4=mpv.desktop;
