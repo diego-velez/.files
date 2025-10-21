@@ -85,7 +85,7 @@ if test $is_glinux = true
         source ~/google-cloud-sdk/path.fish.inc
     end
 else
-    set -U fish_user_paths $(go env GOPATH)/bin $HOME/.local/bin $HOME/.cargo/bin
+    set -U fish_user_paths $(go env GOPATH)/bin $HOME/.local/bin $HOME/.cargo/bin $HOME/.local/share/bob/nvim-bin
 end
 
 if test $is_glinux = false
