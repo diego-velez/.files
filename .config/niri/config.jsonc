@@ -78,8 +78,6 @@
         "min-length": 8,
         "max-length": 8
     },
-    // WARN: If iwmenu does not work you need to enable DHCP
-    // See https://wiki.archlinux.org/title/Iwd#No_DHCP_in_AP_mode
     "network": {
         "format-wifi": "{icon} Wifi",
         "format-ethernet": "<span color='#50FA7B'>󰈁</span> Cable",
@@ -94,7 +92,7 @@
         "tooltip-format-wifi": "{essid} ({signalStrength}%) {icon}",
         "tooltip-format-ethernet": "{ifname} 󰈁",
         "tooltip-format-disconnected": "Disconnected",
-        "on-click": "~/.local/bin/iwmenu --launcher fuzzel",
+        "on-click": "wezterm start -e fish -c nmtui",
         "min-length": 7,
         "max-length": 7
     },
