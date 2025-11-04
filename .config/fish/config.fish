@@ -16,12 +16,6 @@ set fish_vi_force_cursor 1
 set fish_cursor_default block
 set fish_cursor_insert line
 
-# Environment variables
-set -gx EDITOR nvim
-set -gx FZF_DEFAULT_OPTS "--layout=reverse"
-set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/ripgrep.conf"
-set -gx TERMINAL wezterm
-
 # Prefered optons for common programs
 alias df 'df --total -h -T'
 alias free 'free -h'
@@ -109,6 +103,12 @@ if test $is_glinux = false && status is-interactive
             fortune wisdom | cowsay
     end
 end
+
+# Environment variables
+set -gx EDITOR "$(which nvim)"
+set -gx FZF_DEFAULT_OPTS "--layout=reverse"
+set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/ripgrep.conf"
+set -gx TERMINAL wezterm
 
 # Config sdkman for fish
 # See https://github.com/sdkman/sdkman-cli/issues/671#issuecomment-1130004319
