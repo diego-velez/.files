@@ -11,7 +11,7 @@ end
 set fish_greeting
 
 # Use the vi key binds
-set -g fish_key_bindings fish_vi_key_bindings
+set -g fish_key_bindings fish_hybrid_key_bindings
 set fish_vi_force_cursor 1
 set fish_cursor_default block
 set fish_cursor_insert line
@@ -141,7 +141,6 @@ if test $is_glinux = true
     source_google_fish_package sut
 end
 
-bind -M insert \ce 'nvim'
 bind -M insert \co '$HOME/.config/fish/open_project'
 
 source ~/.config/fish/functions/check_python_venv.fish
