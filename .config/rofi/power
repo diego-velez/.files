@@ -30,7 +30,6 @@ case "$choice" in
         systemctl reboot
         ;;
     "$suspend")
-        swaylock
         systemctl suspend
         ;;
     "$lock")
