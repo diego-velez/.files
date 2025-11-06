@@ -18,6 +18,7 @@
         "mpris",
         "battery",
         "network",
+        "custom/wireguard",
         "pulseaudio",
         "bluetooth",
         "custom/notification",
@@ -176,5 +177,13 @@
     "tray": {
         "spacing": 10,
         "show-passive-items": true
+    },
+    "custom/wireguard": {
+        "format": "{}",
+        "exec": "~/.config/niri/toggle_wireguard_vpn status",
+        "return-type": "json",
+        "interval": 5,
+        "on-click": "~/.config/niri/toggle_wireguard_vpn toggle",
+        "tooltip": true
     }
 }

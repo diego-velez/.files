@@ -1,0 +1,41 @@
+#!/bin/bash
+
+INTERFACE="wg0"
+
+get_status() {
+    # Check if the WireGuard interface exists (it exists if it's UP)
+    if ip link show dev "$INTERFACE" &> /dev/null; then
+        # VPN is ON
+        echo "{\"text\": \"<span color='#50FA7B'>󰒘</span> On\", \"tooltip\": \"WireGuard ($INTERFACE) is connected.\", \"class\": \"connected\"}"
+    else
+        # VPN is OFF
+        echo "{\"text\": \"<span color='#FF5555'>󰦞</span> Off\", \"tooltip\": \"WireGuard ($INTERFACE) is disconnected.\", \"class\": \"disconnected\"}"
+    fi
+}
+
+toggle_vpn() {
+    # Check the current status
+    if ip link show dev "$INTERFACE" &> /dev/null; then
+        # If UP, run 'down'
+        sudo wg-quick down "$INTERFACE"
+    else
+        # If DOWN, run 'up'
+        sudo wg-quick up "$INTERFACE"
+    fi
+}
+
+# --- Main Logic ---
+case "$1" in
+    status)
+        get_status
+        ;;
+    toggle)
+        toggle_vpn
+        ;;
+    *)
+        # Default action for Waybar 'exec' on startup
+        get_status
+        ;;
+esac
+
+exit 0
