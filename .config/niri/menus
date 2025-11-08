@@ -16,7 +16,7 @@ options="$network$network_icon\n$bluetooth$bluetooth_icon\n$alarm$alarm_icon"
 choice=$(echo -e "$options" | fuzzel --dmenu --font=":size=16")
 case "$choice" in
     "$network")
-        ~/.local/bin/iwmenu --launcher fuzzel
+        wezterm start -e fish -c nmtui
         ;;
     "$bluetooth")
         ~/.local/bin/bzmenu --launcher fuzzel
