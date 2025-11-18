@@ -253,7 +253,7 @@ window-rule {
 // Change some windows default size
 window-rule {
     match app-id="org.keepassxc.KeePassXC"
-    match app-id="rhythmbox"
+    match app-id="org.gnome.Rhythmbox3"
     match app-id="org.wezfurlong.wezterm"
     default-column-width { proportion 0.3; }
 }
