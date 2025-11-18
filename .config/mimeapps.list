@@ -79,6 +79,7 @@ inode/directory=thunar.desktop
 x-scheme-handler/terminal=org.wezfurlong.wezterm.desktop
 x-terminal-emulator=org.wezfurlong.wezterm.desktop
 video/mp4=mpv.desktop
+x-scheme-handler/discord=vesktop.desktop
 
 [Added Associations]
 image/bmp=eom.desktop;
@@ -138,7 +139,7 @@ application/rtf=libreoffice-writer.desktop;xed.desktop;
 application/vnd.ms-works=libreoffice-writer.desktop;xed.desktop;
 application/vnd.oasis.opendocument.text=libreoffice-writer.desktop;xed.desktop;
 application/vnd.oasis.opendocument.text-template=libreoffice-writer.desktop;xed.desktop;
-application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;xed.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=onlyoffice-desktopeditors.desktop;libreoffice-writer.desktop;
 application/vnd.stardivision.writer=libreoffice-writer.desktop;xed.desktop;
 application/vnd.wordperfect=libreoffice-writer.desktop;xed.desktop;
 application/x-abiword=libreoffice-writer.desktop;xed.desktop;
