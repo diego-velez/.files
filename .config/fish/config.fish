@@ -92,7 +92,7 @@ end
 
 if test $is_glinux = false && status is-interactive
     # Display a lil something when starting the shell
-    set random_num (math (random) % 2)
+    set random_num (math (random) % 3)
     switch $random_num
         case 0
             # https://gitlab.com/dwt1/shell-color-scripts
