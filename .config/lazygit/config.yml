@@ -42,9 +42,9 @@ git:
   # If true, parse emoji strings in commit messages e.g. render :rocket: as 🚀
   # (This should really be under 'gui', not 'git')
   parseEmoji: true
+  # If true, do not allow force pushes
+  disableForcePushing: true
 
 # If true, don't display introductory popups upon opening Lazygit.
 disableStartupPopups: true
 
-# If true, do not allow force pushes
-disableForcePushing: true
