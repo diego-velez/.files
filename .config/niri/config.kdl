@@ -240,6 +240,7 @@ window-rule {
     match app-id=r#"thunar$"#
     match app-id=r#"qalculate-gtk$"#
     match app-id=r#"org.gnome.FileRoller$"#
+    match app-id=r#"org.gnome.Nautilus$"#
     match app-id=r#"file-roller$"#
     match app-id=r#"Sign in.*$/gmi"#
     match app-id=r#"xdg-desktop-portal-gtk$"#
@@ -276,6 +277,12 @@ window-rule {
 window-rule {
     match app-id="virt-manager" title="Virtual Machine Manager"
     default-column-width { fixed 324; }
+}
+
+window-rule {
+    match app-id=r#"org.gnome.Nautilus$"#
+    default-column-width { fixed 1000; }
+    default-window-height { fixed 900; }
 }
 
 // Set rules for floating windows
