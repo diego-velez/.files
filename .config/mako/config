@@ -9,3 +9,4 @@ width=500
 text-alignment=center
 anchor=top-center
 max-history=100
+default-timeout=5000
