@@ -12,6 +12,6 @@ function git_uni --description "Setup Git repo for university work"
     git config --local user.email "diego.velez6@upr.edu"
 
     echo "Set Signing Key"
-    git config --local user.signingkey "~/.ssh/github_personal"
+    git config --local user.signingkey "~/.ssh/github"
 end
 
