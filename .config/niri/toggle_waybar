@@ -8,7 +8,8 @@ home = os.getenv("HOME")
 assert home is not None
 niri = ".config/niri"
 path_to_config = os.path.join(home, niri)
-waybar_bin = os.path.join(home, ".local/bin/waybar")
+# waybar_bin = os.path.join(home, ".local/bin/waybar")
+waybar_bin = "waybar"
 
 if __name__ == "__main__":
     o = subprocess.run(["ps", "cax"], capture_output=True)

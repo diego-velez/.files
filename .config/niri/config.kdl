@@ -169,11 +169,11 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 // Use personal fork https://github.com/diego-velez/Waybar
 spawn-at-startup "/usr/libexec/polkit-mate-authentication-agent-1"
-spawn-sh-at-startup "~/.local/bin/waybar --config ~/.config/niri/config.jsonc --style ~/.config/niri/style.css"
+spawn-sh-at-startup "waybar --config ~/.config/niri/config.jsonc --style ~/.config/niri/style.css"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
-spawn-sh-at-startup "swww-daemon --quiet & sleep 0.1 && swww img \"$(find ~/Pictures/Wallpapers/ -type f | shuf -n 1)\""
+spawn-sh-at-startup "awww-daemon --quiet & sleep 0.1 && awww img \"$(find ~/Pictures/Wallpapers/ -type f | shuf -n 1)\""
 spawn-sh-at-startup "~/.config/niri/wallpaper_slideshow.sh &"
 spawn-at-startup "quickshell" "--daemonize"
 spawn-sh-at-startup "wl-paste -t text --watch clipman store --max-items=100 -P --histpath=~/.local/share/clipman.json"
