@@ -50,7 +50,7 @@ sudo dnf copr enable dejan/lazygit
 4. Install DNF programs
 
 ```bash
-sudo dnf install niri wezterm fish starship mise zoxide atuin lsb_release fortune vim eza bat gcc clang fd rhythmbox thunar btop quickshell mako lazygit rustup fastfetch asciiquarium cmatrix
+sudo dnf install niri wezterm fish starship mise zoxide atuin lsb_release fortune vim eza bat gcc clang fd rhythmbox thunar btop quickshell mako lazygit rustup fastfetch asciiquarium cmatrix snapper
 ```
 
 5. Install flatpak programs
