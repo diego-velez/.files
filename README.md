@@ -50,7 +50,7 @@ sudo dnf copr enable dejan/lazygit
 4. Install DNF programs
 
 ```bash
-sudo dnf install niri wezterm fish starship mise zoxide atuin lsb_release fortune vim eza bat gcc clang fd rhythmbox thunar btop quickshell mako lazygit rustup fastfetch asciiquarium cmatrix snapper
+sudo dnf install niri wezterm fish starship mise zoxide atuin lsb_release fortune vim eza bat gcc clang fd rhythmbox thunar btop quickshell mako lazygit rustup fastfetch asciiquarium cmatrix snapper zathura zathura-pdf-mupdf
 ```
 
 5. Install flatpak programs
@@ -63,7 +63,7 @@ flatpak install com.github.tchx84.Flatseal org.keepassxc.KeePassXC org.ferdium.F
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install jesseduffield/lazydocker/lazydocker pipes-sh
+brew install jesseduffield/lazydocker/lazydocker pipes-sh typst
 ```
 
 7. Setups
