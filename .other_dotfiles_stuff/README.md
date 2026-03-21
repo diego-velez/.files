@@ -72,7 +72,7 @@ QGROUP="1/0"
 
 ### SystemD Service File
 
-This file's fullpath is `/etc/systemd/system/snapper-weekly@.service`.
+This file's fullpath is `/etc/systemd/system/snapper-weekly@.service` (system-wide) or `~/.config/systemd/user/snapper-weekly@.service` (user-wide).
 
 ```service
 [Unit]
@@ -86,7 +86,7 @@ ExecStartPost=/usr/bin/snapper -c %i cleanup number
 
 ### SystemD Timer File
 
-This file's fullpath is `/etc/systemd/system/snapper-weekly@.timer`.
+This file's fullpath is `/etc/systemd/system/snapper-weekly@.timer` (system-wide) or `~/.config/systemd/user/snapper-weekly@.timer` (user-wide).
 
 ```service
 [Unit]
@@ -108,6 +108,14 @@ sudo systemctl daemon-reload
 
 ### SystemD Enable The Weekly Snapshots
 
+System-wide:
+
 ```shell
 sudo systemctl enable --now snapper-weekly@dvt.timer
+```
+
+User-wide:
+
+```shell
+systemctl --user enable --now snapper-weekly@dvt.timer
 ```
