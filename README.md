@@ -53,21 +53,30 @@ sudo dnf copr enable dejan/lazygit
 sudo dnf install niri wezterm fish starship mise zoxide atuin lsb_release fortune vim eza bat gcc clang fd rhythmbox thunar btop quickshell mako lazygit rustup fastfetch asciiquarium cmatrix
 ```
 
-5. Install Homebrew and programs
+5. Install flatpak programs
+
+```bash
+flatpak install flathub com.github.tchx84.Flatseal
+flatpak install flathub org.keepassxc.KeePassXC
+flatpak install flathub org.ferdium.Ferdium
+flatpak install flathub it.mijorus.gearlever
+```
+
+6. Install Homebrew and programs
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install jesseduffield/lazydocker/lazydocker pipes-sh
 ```
 
-6. Setups
+7. Setups
 
 ```bash
 mise install  # Install all global mise tools as specified in .config/mise
 rustup-init   # Install rustup and rust toolchains
 ```
 
-7. Install Neovim
+8. Install Neovim
 
 ```bash
 cargo install --git https://github.com/MordechaiHadad/bob.git  # I use bob to manage Neovim installations
