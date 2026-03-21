@@ -2,8 +2,8 @@
 map u navigate previous
 map d navigate next
 
-map [index] <Right> navigate_index collapse
-map [index] <Left> navigate_index expand
+map [index] <Left> navigate_index collapse
+map [index] <Right> navigate_index expand
 
 set selection-clipboard clipboard
 
@@ -58,8 +58,3 @@ set render-loading-bg           rgba(248,248,242,1)   # Foreground
 
 set recolor-lightcolor          rgba(40,42,54,1)      # Background
 set recolor-darkcolor           rgba(248,248,242,1)   # Foreground
-
-#
-# Startup options
-#
-set adjust-open width
