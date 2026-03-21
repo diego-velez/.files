@@ -8,7 +8,7 @@ The repo for my configuration files, all managed using this [guide](https://www.
 ## Index
 
 - [Overview](#overview)
-- [Installing](#installing)
+- [Fedora Post-Install](#fedora-post-install)
 - [Icons and Mouse Cursors](#icons-and-mouse-cursors)
 - [Themes](#themes)
 - [BtrFS Snapshot System](.other_dotfiles_stuff/README.md#btrfs-snapshot-system)
