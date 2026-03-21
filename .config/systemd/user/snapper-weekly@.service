@@ -1,0 +1,7 @@
+[Unit]
+Description=Weekly Snapper snapshot for %i
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/snapper -c %i create --description "weekly auto snapshot" --cleanup-algorithm number
+ExecStartPost=/usr/bin/snapper -c %i cleanup number

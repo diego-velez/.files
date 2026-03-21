@@ -1,0 +1,9 @@
+[Unit]
+Description=Weekly Snapper snapshot timer for %i
+
+[Timer]
+OnCalendar=weekly
+Persistent=true
+
+[Install]
+WantedBy=timers.target
