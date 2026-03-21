@@ -1,0 +1,6 @@
+[tools]
+bun = "latest"
+go = "latest"
+node = "latest"
+ripgrep = "latest"
+uv = "latest"
