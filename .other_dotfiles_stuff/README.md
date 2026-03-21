@@ -1,6 +1,6 @@
 # Other Miscellaneous Dotfiles Stuff
 
-## Shortcuts
+## Index
 
 - [BtrFS Snapshot System](#btrfs-snapshot-system)
 
