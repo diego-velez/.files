@@ -3,7 +3,6 @@
 The repo for my configuration files, all managed using this [guide](https://www.atlassian.com/git/tutorials/dotfiles).
 
 ![Super Ultrawide Hyprland](.config/desktop_1.jpg)
-![Super Ultrawide Hyprland](.config/desktop_2.jpg)
 
 ## Index
 
