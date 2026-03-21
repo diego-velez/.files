@@ -38,19 +38,20 @@ config checkout -f
 config config --local status.showUntrackedFiles no
 ```
 
-3. Add necessary COPR repos
+3. Add repos for programs
 
 ```bash
 sudo dnf copr enable wezfurlong/wezterm-nightly
 sudo dnf copr enable jdxcode/mise
 sudo dnf copr enable atim/starship
 sudo dnf copr enable dejan/lazygit
+sudo dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
 ```
 
 4. Install DNF programs
 
 ```bash
-sudo dnf install niri wezterm fish starship mise zoxide atuin lsb_release fortune vim eza bat gcc clang fd rhythmbox thunar btop quickshell mako lazygit rustup fastfetch asciiquarium cmatrix snapper zathura zathura-pdf-mupdf
+sudo dnf install niri wezterm fish starship mise zoxide atuin lsb_release fortune vim eza bat gcc clang fd rhythmbox thunar btop quickshell mako lazygit rustup fastfetch asciiquarium cmatrix snapper zathura zathura-pdf-mupdf docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 5. Install flatpak programs
@@ -69,15 +70,17 @@ brew install jesseduffield/lazydocker/lazydocker pipes-sh typst
 7. Setups
 
 ```bash
-mise install  # Install all global mise tools as specified in .config/mise
-rustup-init   # Install rustup and rust toolchains
+mise install                       # Install all global mise tools as specified in .config/mise
+rustup-init                        # Install rustup and rust toolchains
+sudo systemctl enable --now docker # Enable the docker engine
+sudo usermod -a -G docker dvt      # You will need to atleast log-out and log back in to see the change
 ```
 
 8. Install Neovim
 
 ```bash
 cargo install --git https://github.com/MordechaiHadad/bob.git  # I use bob to manage Neovim installations
-cargo install --locked tree-sitter-cli  # I use treesitter for Neovim syntax highlighting and parsing
+cargo install --locked tree-sitter-cli                         # I use treesitter for Neovim syntax highlighting and parsing
 bob use latest
 ```
 
