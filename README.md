@@ -1,20 +1,34 @@
 # Configuration files
 
-The repo for my configuration files, all managed using this [guide](https://www.atlassian.com/git/tutorials/dotfiles)
+The repo for my configuration files, all managed using this [guide](https://www.atlassian.com/git/tutorials/dotfiles).
 
 ![Super Ultrawide Hyprland](.config/desktop_1.jpg)
 ![Super Ultrawide Hyprland](.config/desktop_2.jpg)
 
-## Shortcuts
+## Index
 
+- [Overview](#overview)
 - [Installing](#installing)
 - [Icons and Mouse Cursors](#icons-and-mouse-cursors)
 - [Themes](#themes)
 - [BtrFS Snapshot System](.other_dotfiles_stuff/README.md#btrfs-snapshot-system)
 
-## Installing
+## Overview
 
-### On Fedora Hyprland
+I use [Fedora](https://www.fedoraproject.org) as my Linux distro of choice.
+Mainly, I just want something that works, and won't break (ideally ever).
+I use the scrollable-tilling window manager  [Niri](https://github.com/niri-wm/niri).
+My workflow is centered around the terminal, for which [Wezterm](https://wezterm.org/index.html) is my terminal of choice.
+As my general text editor and programming IDE (or PDE), I use [Neovim](https://neovim.io).
+For the web browser, I use [Zen](https://zen-browser.app).
+For university and all documents, I use [Typst](https://typst.app) to write documents, and [Zathura](https://pwmt.org/projects/zathura) as my PDF viewer.
+
+## Fedora Post-Install
+
+1. Follow the [Fedora Post Install Guide](https://github.com/devangshekhawat/Fedora-44-Post-Install-Guide)
+    - This will setup RPM Fusion and Terra repos, firmware, flatpak, appimages, Nvidia (if needed), media codecs and HW acceleration.
+
+2. Install dotfiles
 
 ```bash
 sudo dnf install -y python git
@@ -24,17 +38,41 @@ config checkout -f
 config config --local status.showUntrackedFiles no
 ```
 
-### On Fedora Cinnamon
-
-This setup script was written to work on Fedora Cinnamon, simply copy paste the lines below on a terminal
+3. Add necessary COPR repos
 
 ```bash
-sudo dnf install -y python git
-git clone --bare https://github.com/diego-velez/.files.git $HOME/.files
-alias config='git --git-dir=$HOME/.files/ --work-tree=$HOME'
-config checkout -f
-config config --local status.showUntrackedFiles no
-python .config/setup-scripts/main.py
+sudo dnf copr enable wezfurlong/wezterm-nightly
+sudo dnf copr enable jdxcode/mise
+sudo dnf copr enable atim/starship
+sudo dnf copr enable dejan/lazygit
+```
+
+4. Install DNF programs
+
+```bash
+sudo dnf install niri wezterm fish starship mise zoxide atuin lsb_release fortune vim eza bat gcc clang fd rhythmbox thunar btop quickshell mako lazygit rustup
+```
+
+5. Install Homebrew and programs
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install jesseduffield/lazydocker/lazydocker
+```
+
+6. Setups
+
+```bash
+mise install  # Install all global mise tools as specified in .config/mise
+rustup-init   # Install rustup and rust toolchains
+```
+
+7. Install Neovim
+
+```bash
+cargo install --git https://github.com/MordechaiHadad/bob.git  # I use bob to manage Neovim installations
+cargo install --locked tree-sitter-cli  # I use treesitter for Neovim syntax highlighting and parsing
+bob use latest
 ```
 
 ## Icons and Mouse Cursors
