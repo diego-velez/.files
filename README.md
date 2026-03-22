@@ -56,7 +56,7 @@ sudo dnf install niri wezterm fish starship mise zoxide atuin lsb_release fortun
 5. Install flatpak programs
 
 ```bash
-flatpak install com.github.tchx84.Flatseal org.keepassxc.KeePassXC org.ferdium.Ferdium flathub it.mijorus.gearlever
+flatpak install com.github.tchx84.Flatseal org.keepassxc.KeePassXC org.ferdium.Ferdium it.mijorus.gearlever
 ```
 
 6. Install Homebrew and programs
@@ -75,8 +75,62 @@ sudo systemctl enable --now docker # Enable the docker engine
 sudo usermod -a -G docker dvt # You will need to atleast log-out and log back in to see the change
 
 # These systemd service files are part of the dotfiles, and reside in ~/.config/systemd/user
+sudo systemctl daemon-reload
 systemctl --user add-wants niri.service mako.service # Notification service
 systemctl --user add-wants niri.service swayidle.service # Idle service
+
+# Enable snapper for Btrfs, it automatically creates a snapshot every week, and maintains a max of 3 snapshots at a time
+# Follows https://github.com/diego-velez/.files/blob/main/.other_dotfiles_stuff/README.md#btrfs-snapshot-system
+sudo snapper -c dvt create-config /
+systemctl --user enable --now snapper-weekly@dvt.timer
+cat << 'EOF' | sudo tee /etc/snapper/configs/dvt > /dev/null
+# subvolume to snapshot
+SUBVOLUME="/"
+
+# filesystem type
+FSTYPE="btrfs"
+
+# fraction or absolute size of the filesystems space the snapshots may use
+SPACE_LIMIT="0.2"
+
+# fraction or absolute size of the filesystems space that should be free
+FREE_LIMIT="0.2"
+
+
+# users and groups allowed to work with config
+ALLOW_USERS="dvt"
+ALLOW_GROUPS=""
+
+# sync users and groups from ALLOW_USERS and ALLOW_GROUPS to .snapshots
+# directory
+SYNC_ACL="yes"
+
+
+# start comparing pre- and post-snapshot in background after creating
+# post-snapshot
+BACKGROUND_COMPARISON="yes"
+
+
+# run daily number cleanup
+NUMBER_CLEANUP="yes"
+
+# limit for number cleanup
+NUMBER_MIN_AGE="0"
+NUMBER_LIMIT="3"
+NUMBER_LIMIT_IMPORTANT="1"
+
+
+# create hourly snapshots
+TIMELINE_CREATE="no"
+
+# cleanup hourly snapshots after some time
+TIMELINE_CLEANUP="no"
+
+# cleanup empty pre-post-pairs
+EMPTY_PRE_POST_CLEANUP="yes"
+
+QGROUP="1/0"
+EOF
 ```
 
 8. Install Neovim
