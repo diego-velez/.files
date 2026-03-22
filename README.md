@@ -69,19 +69,25 @@ brew install jesseduffield/lazydocker/lazydocker pipes-sh typst
 7. Setups
 
 ```bash
-mise install                       # Install all global mise tools as specified in .config/mise
-rustup-init                        # Install rustup and rust toolchains
+mise install # Install all global mise tools as specified in .config/mise
+rustup-init # Install rustup and rust toolchains
 sudo systemctl enable --now docker # Enable the docker engine
-sudo usermod -a -G docker dvt      # You will need to atleast log-out and log back in to see the change
+sudo usermod -a -G docker dvt # You will need to atleast log-out and log back in to see the change
+
+# These systemd service files are part of the dotfiles, and reside in ~/.config/systemd/user
+systemctl --user add-wants niri.service mako.service # Notification service
+systemctl --user add-wants niri.service swayidle.service # Idle service
 ```
 
 8. Install Neovim
 
 ```bash
-cargo install --git https://github.com/MordechaiHadad/bob.git  # I use bob to manage Neovim installations
-cargo install --locked tree-sitter-cli                         # I use treesitter for Neovim syntax highlighting and parsing
+cargo install --git https://github.com/MordechaiHadad/bob.git # I use bob to manage Neovim installations
+cargo install --locked tree-sitter-cli # I use treesitter for Neovim syntax highlighting and parsing
 bob use latest
 ```
+
+9. Reboot
 
 ## Icons and Mouse Cursors
 
