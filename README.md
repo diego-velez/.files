@@ -63,7 +63,7 @@ flatpak install com.github.tchx84.Flatseal org.keepassxc.KeePassXC org.ferdium.F
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install jesseduffield/lazydocker/lazydocker pipes-sh typst
+brew install jesseduffield/lazydocker/lazydocker pipes-sh typst lavat
 ```
 
 7. Setups
