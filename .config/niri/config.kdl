@@ -173,7 +173,7 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 // Use personal fork https://github.com/diego-velez/Waybar
 spawn-at-startup "/usr/libexec/polkit-mate-authentication-agent-1"
-spawn-sh-at-startup "waybar --config ~/.config/niri/config.jsonc --style ~/.config/niri/style.css"
+spawn-sh-at-startup "waybar"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -341,11 +341,11 @@ binds {
     Mod+R repeat=false hotkey-overlay-title="Run an Application: Fuzzel" { spawn "fuzzel"; }
     Mod+E repeat=false hotkey-overlay-title="Run an Application: Thunar" { spawn "thunar"; }
     Mod+B repeat=false hotkey-overlay-title="Run an Application: Zen" { spawn "~/.local/bin/zen/zen"; }
-    Mod+Q repeat=false { spawn-sh "~/.config/rofi/power"; }
-    Mod+H repeat=false { spawn-sh "~/.config/niri/toggle_waybar"; }
+    Mod+Q repeat=false { spawn-sh "~/.config/menus/power"; }
+    Mod+H repeat=false { spawn-sh "~/.config/waybar/toggle_waybar"; }
     Mod+L repeat=false { spawn-sh "~/.config/swayidle/screensaver run"; }
     Mod+V repeat=false { spawn-sh "clipman pick --max-items=100 -t STDOUT | fuzzel --dmenu | wl-copy" ; }
-    Mod+M repeat=false { spawn-sh "~/.config/niri/menus" ; }
+    Mod+M repeat=false { spawn-sh "~/.config/menus/menus" ; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.

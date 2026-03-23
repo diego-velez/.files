@@ -9,58 +9,35 @@
     "spacing": 0,
     // Choose the order of the modules
     "modules-left": [
-        "custom/left1",
-        "hyprland/workspaces",
-        "custom/right1",
-        "hyprland/window"
+        "niri/workspaces",
+        "niri/window"
     ],
     "modules-center": [
-        "custom/left2",
-        "temperature",
-        "custom/left3",
-        "memory",
-        "custom/left4",
-        "cpu#usage",
-        "custom/leftin1",
-        "custom/left5",
-        "custom/center",
-        "custom/right2",
-        "custom/rightin1",
         "clock#time",
-        "custom/right3",
-        "clock#date",
-        "custom/right4",
-        "network",
-        "custom/right5"
+        "clock#date"
     ],
     "modules-right": [
         "mpris",
-        "custom/left6",
+        "network",
+        "custom/wireguard",
         "pulseaudio",
-        "custom/left7",
         "bluetooth",
-        "custom/left8",
         "custom/notification",
-        "custom/leftin2",
         "tray"
     ],
-    "hyprland/workspaces": {
+    "niri/workspaces": {
         "all-outputs": true,
-        "format": "",
+        "format": "{icon}",
         "format-icons": {
-            "active": "<span foreground='#50FA7B'></span>",
-            "empty": "<span foreground='#282A36'></span>",
-            "persistent": "<span foreground='#F8F8F2'></span>",
-            "urgent": "<span foreground='#FF5555'></span>"
-        },
-        "persistent-workspaces": {
-            "*": 5
+            "focused": "",
+            "default": ""
         }
     },
-    "hyprland/window": {
+    "niri/window": {
+        "format": "{title}",
         "rewrite": {
-            "(.*) — Zen Browser.*": "<span foreground='#8BE9FD'> </span> $1",
-            "Zen Browser.*": "<span foreground='#8BE9FD'> </span> Zen Browser",
+            "(.*) — Zen Browser.*": "<span foreground='#8BE9FD'></span> $1",
+            "Zen Browser.*": "<span foreground='#8BE9FD'></span> Zen Browser",
             "(.*)@(.*):(.*) - (.*)": "<span foreground='#BD93F9'></span> $4",
             "(.*)@(.*):(?!.*-.*)(.*)": "<span foreground='#BD93F9'></span> $1@$2",
             ".*nvim (.*)": "<span foreground='#6ebf60'></span> $1",
@@ -73,47 +50,18 @@
             "(.*).svg": "  $1.svg",
             "/": "  File Manager",
             "Yazi: (.*)": "  $1",
-            "": "<span foreground='#cba6f7'></span> DVT on Master 󰅂 Hyprland"
+            "": "<span foreground='#cba6f7'></span> DVT on Master 󰅂 Niri"
         }
     },
-    "temperature": {
-        "hwmon-path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon2/temp1_input",
-        "interval": 5,
-        "min-length": 8,
-        "max-length": 8
-    },
-    "memory": {
-        "states": {
-            "c": 90
-        },
-        "format": "󰘚 {percentage}%",
-        "format-c": "󰀪 {percentage}%",
-        "tooltip": true,
-        "tooltip-format": "{used:0.1f} GB / {total:0.1f} GB",
-        "interval": 5,
-        "min-length": 7,
-        "max-length": 7
-    },
-    "cpu#usage": {
-        "format": "󰻠 {usage}%",
-        "tooltip": false,
-        "interval": 5,
-        "min-length": 6,
-        "max-length": 6
-    },
-    "custom/center": {
-        "format": "<span foreground='#51a2da'></span>",
-        "tooltip": false
-    },
     "clock#time": {
-        "format": "󱑂 {:%H:%M}",
+        "format": "<span color='#8BE9FD'>󱑂</span> {:%H:%M}",
         "tooltip": true,
         "tooltip-format": "{:%I:%M %p}",
         "min-length": 8,
         "max-length": 8
     },
     "clock#date": {
-        "format": "󱨴 {:%d %b}",
+        "format": "<span color='#8BE9FD'>󱨴</span> {:%d %b}",
         "tooltip-format": "<tt>{calendar}</tt>",
         "calendar": {
             "mode": "month",
@@ -131,8 +79,6 @@
         "min-length": 8,
         "max-length": 8
     },
-    // WARN: If iwmenu does not work you need to enable DHCP
-    // See https://wiki.archlinux.org/title/Iwd#No_DHCP_in_AP_mode
     "network": {
         "format-wifi": "{icon} Wifi",
         "format-ethernet": "<span color='#50FA7B'>󰈁</span> Cable",
@@ -147,14 +93,14 @@
         "tooltip-format-wifi": "{essid} ({signalStrength}%) {icon}",
         "tooltip-format-ethernet": "{ifname} 󰈁",
         "tooltip-format-disconnected": "Disconnected",
-        "on-click": "~/.local/bin/iwmenu --launcher rofi",
+        "on-click": "wezterm start -e fish -c nmtui",
         "min-length": 7,
         "max-length": 7
     },
     "mpris": {
         "format": "{status_icon} {artist} - {title}",
-        "artist-len": 23,
-        "title-len": 45,
+        "artist-len": 30,
+        "title-len": 50,
         "status-icons": {
             "playing": "<span color='#50FA7B'>󰎇</span>",
             "paused": "<span color='#FF5555'>󰎊</span>"
@@ -162,121 +108,52 @@
         "tooltip-format": "{player} ({status}): {artist} - {album} - {title}"
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-source": "{volume}%",
-        "format-source-muted": "",
+        "format": "<span color='#8BE9FD'>{icon}</span> {volume}%",
+        "tooltip-format": "{desc} at {format_source}\nPC at {volume}%",
         "format-icons": {
             "headphone": "󰋋",
-            "headphone-muted": "󰟎",
-            "hands-free": "",
-            "headset": "",
+            "headset": "󰋋",
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""],
-            "default-muted": ["󰝟"]
+            "default": [
+                "<span color='#F1FA8C'></span>",
+                "<span color='#50FA7B'></span>",
+                "<span color='#50FA7B'></span>"
+            ],
+            "default-muted": "<span color='#FF5555'>󰝟</span>"
         },
         "on-click": "pavucontrol"
     },
     "bluetooth": {
-        // Hides the module when it is disabled
-        "format-disabled": "Off",
-        // See https://github.com/e-tho/bzmenu
-        "on-click": "~/.local/bin/bzmenu --launcher rofi"
+        "format-on": "<span color='#8BE9FD'>󰂯</span>",
+        "format-connected": "<span color='#50FA7B'>󰂱</span>",
+        "format-off": "<span color='#FF5555'>󰂲</span>",
+        "format-disabled": "<span color='#FF5555'>󰂲</span>",
+        "format-no-controller": "<span color='#FF5555'>󰂯!</span>",
+        "tooltip-format-off": "The controller ({controller_alias}) is off",
+        "tooltip-format-disabled": "The controller ({controller_alias}) is disabled",
+        "tooltip-format-no-controller": "No controller was found!!",
+        "tooltip-format-connected": "Connected to {device_alias}",
+        "tooltip-format-connected-battery": "Connected to {device_alias} (󰥈 {device_battery_percentage}%)",
+        "on-click": "~/.local/bin/bzmenu --launcher fuzzel"
+    },
+    "custom/notification": {
+        "format": "<span color='#FFB86C'></span> {text}",
+        "interval": 1,
+        "return-type": "json",
+        "on-click": "source ~/.config/ignis/.venv/bin/activate && ignis toggle DVT_Window"
     },
     "tray": {
         "spacing": 10,
         "show-passive-items": true
     },
-    "custom/notification": {
-        "tooltip": false,
-        "format": "{} {icon}",
-        "format-icons": {
-            "notification": "<span foreground='red'><sup></sup></span>",
-            "none": "",
-            "dnd-notification": "<span foreground='red'><sup></sup></span>",
-            "dnd-none": "",
-            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-            "inhibited-none": "",
-            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-            "dnd-inhibited-none": ""
-        },
+    "custom/wireguard": {
+        "format": "{}",
+        "exec": "~/.config/waybar/toggle_wireguard_vpn status",
         "return-type": "json",
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click": "swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
-        "escape": true
-    },
-    // Left arrows
-    "custom/left1": {
-        "format": "",
-        "tooltip": false
-    },
-    "custom/left2": {
-        "format": "",
-        "tooltip": false
-    },
-    "custom/left3": {
-        "format": "",
-        "tooltip": false
-    },
-    "custom/left4": {
-        "format": "",
-        "tooltip": false
-    },
-    "custom/left5": {
-        "format": "",
-        "tooltip": false
-    },
-    "custom/left6": {
-        "format": "",
-        "tooltip": false
-    },
-    "custom/left7": {
-        "format": "",
-        "tooltip": false
-    },
-    "custom/left8": {
-        "format": "",
-        "tooltip": false
-    },
-    // Right arrows
-    "custom/right1": {
-        "format": "",
-        "tooltip": false
-    },
-    "custom/right2": {
-        "format": "",
-        "tooltip": false
-    },
-    "custom/right3": {
-        "format": "",
-        "tooltip": false
-    },
-    "custom/right4": {
-        "format": "",
-        "tooltip": false
-    },
-    "custom/right5": {
-        "format": "",
-        "tooltip": false
-    },
-    // Left Inverse
-    "custom/leftin1": {
-        "format": "",
-        "tooltip": false
-    },
-    "custom/leftin2": {
-        "format": "",
-        "tooltip": false
-    },
-    // Right Inverse
-    "custom/rightin1": {
-        "format": "",
-        "tooltip": false
+        "interval": 5,
+        "on-click": "~/.config/waybar/toggle_wireguard_vpn toggle",
+        "tooltip": true
     }
 }

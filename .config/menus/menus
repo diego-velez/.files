@@ -22,6 +22,6 @@ case "$choice" in
         ~/.local/bin/bzmenu --launcher fuzzel
         ;;
     "$alarm")
-        ~/.config/niri/alarm
+        ~/.config/menus/alarm
         ;;
 esac

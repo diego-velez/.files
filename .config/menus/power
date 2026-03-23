@@ -1,7 +1,5 @@
 #!/usr/bin/bash
 
-dir="$HOME/.config/rofi/power.rasi"
-
 shutdown="Shutdown"
 shutdown_icon="\0icon\x1fsystem-shutdown"
 
