@@ -1,16 +1,11 @@
-#!/usr/bin/python
+#!/bin/bash
 
-import subprocess
+WAYBAR_BIN="waybar"
 
-waybar_bin = "waybar"
-
-if __name__ == "__main__":
-    o = subprocess.run(["ps", "cax"], capture_output=True)
-
-    # Show the bar
-    # We want to replace because it'll show this process in the output
-    if b"waybar" in (o.stdout.replace(b"toggle_waybar", b"")):
-        _ = subprocess.Popen(["killall", "waybar"])
-    # Hide the bar
-    else:
-        _ = subprocess.Popen([waybar_bin])
+# Hide the bar
+if pgrep -x "$WAYBAR_BIN" > /dev/null; then
+    killall "$WAYBAR_BIN"
+# Show the bar
+else
+    $WAYBAR_BIN &
+fi
