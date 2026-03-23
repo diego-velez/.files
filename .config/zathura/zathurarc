@@ -9,7 +9,7 @@ set selection-clipboard clipboard
 
 ### Load Dracula colorscheme ###
 # See https://draculatheme.com/zathura
-set window-title-basename "true"
+set window-title-basename true
 
 # Dracula color theme for Zathura
 # Swaps Foreground for Background to get a light version if the user prefers
@@ -55,6 +55,10 @@ set render-loading-bg           rgba(248,248,242,1)   # Foreground
 #
 # Recolor mode settings
 #
+
+# Default keymap is <C-r>
+set recolor true
+set recolor-keephue true
 
 set recolor-lightcolor          rgba(40,42,54,1)      # Background
 set recolor-darkcolor           rgba(248,248,242,1)   # Foreground
