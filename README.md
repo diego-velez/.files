@@ -50,7 +50,7 @@ sudo dnf config-manager addrepo --from-repofile https://download.docker.com/linu
 4. Install DNF programs
 
 ```bash
-sudo dnf install niri wezterm fish starship mise zoxide atuin lsb_release fortune vim eza bat gcc clang fd rhythmbox thunar btop quickshell mako lazygit rustup fastfetch asciiquarium cmatrix snapper zathura zathura-pdf-mupdf docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin swayidle chromium wl-clipboard clipman fuzzel
+sudo dnf install niri wezterm fish starship mise zoxide atuin lsb_release fortune vim eza bat gcc clang fd rhythmbox thunar btop quickshell mako lazygit rustup fastfetch asciiquarium cmatrix snapper zathura zathura-pdf-mupdf docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin swayidle chromium wl-clipboard clipman fuzzel gtk3 webkit2gtk4.1 libusb
 ```
 
 5. Install flatpak programs
@@ -149,7 +149,29 @@ tar -xf zen.linux-x86_64.tar.xz -C ~/.local/bin
 rm zen.linux-x86_64.tar.xz
 ```
 
-10. Reboot
+10. Setup ZSA keymapp (I use ZSA keyboards btw)
+
+```bash
+# Follow instructions from https://github.com/zsa/wally/wiki/Linux-install
+sudo touch /etc/udev/rules.d/50-zsa.rules
+cat << 'EOF' | sudo tee /etc/udev/rules.d/50-zsa.rules > /dev/null
+# Keymapp / Wally Flashing rules for the Moonlander and Planck EZ
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", MODE:="0666", SYMLINK+="stm32_dfu"
+# Keymapp Flashing rules for the Voyager
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="3297", MODE:="0666", SYMLINK+="ignition_dfu"
+EOF
+sudo groupadd plugdev
+sudo usermod -aG plugdev $USER
+
+# Install the actual binary
+mkdir ~/.local/bin/keymapp
+wget https://oryx.nyc3.cdn.digitaloceanspaces.com/keymapp/keymapp-latest.tar.gz
+tar -xf keymapp-latest.tar.gz -C ~/.local/bin/keymapp
+chmod +x ~/.local/bin/keymapp/keymapp
+rm keymapp-latest.tar.gz
+```
+
+11. Reboot
 
 ## Icons and Mouse Cursors
 
