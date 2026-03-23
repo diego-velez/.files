@@ -4,19 +4,9 @@ import os
 from socket import AF_UNIX, socket
 import subprocess
 import sys
-import random
 import time
 import json
 from typing import TypedDict, cast
-
-SCREENSAVERS = [
-    "/home/linuxbrew/.linuxbrew/bin/pipes.sh -r 0 -R -p 5",
-    "asciiquarium",
-    "cmatrix -r",
-    "/home/linuxbrew/.linuxbrew/bin/lavat -k black -c magenta -s 3 -r 1 -b 10",
-]
-
-FONT_CONFIGS = {"lavat": 16}
 
 WINDOW_CLASS = "dvt_screensaver"
 
@@ -50,16 +40,24 @@ class NiriReply(TypedDict, total=False):
     Err: str
 
 
-def get_screensaver_font(screensaver: str) -> int:
-    # We want different font size for certain screensavers
-    for key, font in FONT_CONFIGS.items():
-        if key in screensaver:
-            return font
-    return 8
-
-
-def run_screensaver(screensaver: str) -> bool:
-    font_size = get_screensaver_font(screensaver)
+def run_screensaver() -> bool:
+    font_size = 22
+    EXCLUDED = "print colorshift highlight scattered"
+    inner_cmd = f"""
+            while true; do
+                # Clear screen before each effect for a fresh start
+                clear
+                fortune -a | tte \
+                        --anchor-canvas c --anchor-text c --canvas-width 0 --canvas-height 0 \
+                        --random-effect \
+                        --exclude-effects {EXCLUDED} \
+                        --no-eol \
+                        --no-restore-cursor \
+                        --frame-rate 120 \
+                        --terminal-background-color 282A36
+                sleep 5
+            done
+            """
     _ = subprocess.Popen(
         [
             "wezterm-gui",
@@ -71,17 +69,14 @@ def run_screensaver(screensaver: str) -> bool:
             "--",
             "sh",
             "-c",
-            f"sleep 0.4 && {screensaver}",
+            f"sleep 0.4 && {inner_cmd}",
         ]
     )
 
     time.sleep(0.6)
 
     if not screensaver_is_open():
-        print(
-            f"Something went wrong opening the {screensaver} screensaver",
-            file=sys.stderr,
-        )
+        print("Something went wrong opening the screensaver", file=sys.stderr)
         return False
 
     _ = subprocess.Popen(["niri", "msg", "action", "fullscreen-window"]).wait()
@@ -115,15 +110,7 @@ def run():
         print("A screensaver is already running!")
         exit(1)
 
-    # Run the screensavers in a random order
-    random.shuffle(SCREENSAVERS)
-
-    # Try running all of the screensavers until one actually runs
-    for screensaver in SCREENSAVERS:
-        print(f"Attempting to run {screensaver}")
-        if run_screensaver(screensaver):
-            print("Success!")
-            break
+    run_screensaver()
 
 
 def close():
