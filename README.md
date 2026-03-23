@@ -56,7 +56,7 @@ sudo dnf install niri wezterm fish starship mise zoxide atuin lsb_release fortun
 5. Install flatpak programs
 
 ```bash
-flatpak install com.github.tchx84.Flatseal org.keepassxc.KeePassXC org.ferdium.Ferdium it.mijorus.gearlever org.localsend.localsend_app
+flatpak install com.github.tchx84.Flatseal org.keepassxc.KeePassXC org.ferdium.Ferdium it.mijorus.gearlever org.localsend.localsend_app io.github.Qalculate
 ```
 
 6. Install Homebrew and programs
