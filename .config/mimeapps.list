@@ -17,7 +17,6 @@ inode/directory=thunar.desktop
 x-scheme-handler/terminal=org.wezfurlong.wezterm.desktop
 x-terminal-emulator=org.wezfurlong.wezterm.desktop
 video/mp4=mpv.desktop
-x-scheme-handler/discord=vesktop.desktop
 application/vnd.ms-powerpoint=org.onlyoffice.desktopeditors.desktop
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=org.onlyoffice.desktopeditors.desktop
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=org.onlyoffice.desktopeditors.desktop
