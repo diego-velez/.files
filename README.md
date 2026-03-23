@@ -141,7 +141,15 @@ cargo install --locked tree-sitter-cli # I use treesitter for Neovim syntax high
 bob use latest
 ```
 
-9. Reboot
+9. Install Zen browser
+
+```bash
+wget https://github.com/zen-browser/desktop/releases/latest/download/zen.linux-x86_64.tar.xz
+tar -xf zen.linux-x86_64.tar.xz -C ~/.local/bin
+rm zen.linux-x86_64.tar.xz
+```
+
+10. Reboot
 
 ## Icons and Mouse Cursors
 
