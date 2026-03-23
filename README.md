@@ -63,7 +63,7 @@ flatpak install com.github.tchx84.Flatseal org.keepassxc.KeePassXC org.ferdium.F
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install jesseduffield/lazydocker/lazydocker pipes-sh typst lavat
+brew install jesseduffield/lazydocker/lazydocker typst
 ```
 
 7. Setups
@@ -78,6 +78,9 @@ sudo usermod -a -G docker dvt # You will need to atleast log-out and log back in
 sudo systemctl daemon-reload
 systemctl --user add-wants niri.service mako.service # Notification service
 systemctl --user add-wants niri.service swayidle.service # Idle service
+
+# I need this for my terminal screensaver :)
+pip install terminaltexteffects
 
 # Enable snapper for Btrfs, it automatically creates a snapshot every week, and maintains a max of 3 snapshots at a time
 # Follows https://github.com/diego-velez/.files/blob/main/.other_dotfiles_stuff/README.md#btrfs-snapshot-system
