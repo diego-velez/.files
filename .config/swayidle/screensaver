@@ -9,16 +9,16 @@ import time
 import json
 from typing import TypedDict, cast
 
-screensavers = [
+SCREENSAVERS = [
     "/home/linuxbrew/.linuxbrew/bin/pipes.sh -r 0 -R -p 5",
     "asciiquarium",
     "cmatrix -r",
-    "lavat -k black -c magenta -s 3 -r 1 -b 10",
-    "conway-screensaver",
-    "c-squares -d 2 -t 3",
+    "/home/linuxbrew/.linuxbrew/bin/lavat -k black -c magenta -s 3 -r 1 -b 10",
 ]
 
-window_class = "dvt_screensaver"
+FONT_CONFIGS = {"lavat": 16}
+
+WINDOW_CLASS = "dvt_screensaver"
 
 
 class Layout(TypedDict):
@@ -50,17 +50,30 @@ class NiriReply(TypedDict, total=False):
     Err: str
 
 
-def run_screensaver(screensaver: str) -> bool:
+def get_screensaver_font(screensaver: str) -> int:
     # We want different font size for certain screensavers
-    if screensaver == screensavers[3]:
-        # fmt: off
-        _ = subprocess.Popen(["wezterm-gui", "--config", "font_size=16", "start", "--class", window_class, "--", "sh", "-c", f"sleep 0.4 && {screensaver}"])
-    elif screensaver == screensavers[5]:
-        # fmt: off
-        _ = subprocess.Popen(["wezterm-gui", "--config", "font_size=24", "start", "--class", window_class, "--", "sh", "-c", f"sleep 0.4 && {screensaver}"])
-    else:
-        # fmt: off
-        _ = subprocess.Popen(["wezterm-gui", "--config", "font_size=8", "start", "--class", window_class, "--", "sh", "-c", f"sleep 0.4 && {screensaver}"])
+    for key, font in FONT_CONFIGS.items():
+        if key in screensaver:
+            return font
+    return 8
+
+
+def run_screensaver(screensaver: str) -> bool:
+    font_size = get_screensaver_font(screensaver)
+    _ = subprocess.Popen(
+        [
+            "wezterm-gui",
+            "--config",
+            f"font_size={font_size}",
+            "start",
+            "--class",
+            WINDOW_CLASS,
+            "--",
+            "sh",
+            "-c",
+            f"sleep 0.4 && {screensaver}",
+        ]
+    )
 
     time.sleep(0.6)
 
@@ -94,7 +107,7 @@ def screensaver_is_open() -> bool:
         return False
 
     app_id = focused_window["app_id"].strip()
-    return app_id == window_class
+    return app_id == WINDOW_CLASS
 
 
 def run():
@@ -103,10 +116,10 @@ def run():
         exit(1)
 
     # Run the screensavers in a random order
-    random.shuffle(screensavers)
+    random.shuffle(SCREENSAVERS)
 
     # Try running all of the screensavers until one actually runs
-    for screensaver in screensavers:
+    for screensaver in SCREENSAVERS:
         print(f"Attempting to run {screensaver}")
         if run_screensaver(screensaver):
             print("Success!")
