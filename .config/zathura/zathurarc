@@ -5,6 +5,9 @@ map d navigate next
 map [index] <Left> navigate_index collapse
 map [index] <Right> navigate_index expand
 
+# See https://unix.stackexchange.com/a/321932
+map <C-o> feedkeys ":exec thunar $FILE<Return>"
+
 set selection-clipboard clipboard
 
 ### Load Dracula colorscheme ###
