@@ -140,7 +140,6 @@ EOF
 
 ```bash
 cargo install --git https://github.com/MordechaiHadad/bob.git # I use bob to manage Neovim installations
-cargo install --locked tree-sitter-cli # I use treesitter for Neovim syntax highlighting and parsing
 bob use latest
 ```
 
