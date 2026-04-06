@@ -11,7 +11,7 @@ lock_wallpaper = os.path.join(home_path, relative_wallpaper_path)
 
 
 if __name__ == "__main__":
-    output = subprocess.run(["swww", "query"], capture_output=True)
+    output = subprocess.run(["awww", "query"], capture_output=True)
     swww_query = output.stdout.decode().strip()
     current_image_path = swww_query.split(": ")[-1].strip()
     output = subprocess.run(
