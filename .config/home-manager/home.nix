@@ -2,6 +2,13 @@
 
 let
   hostname = import ./host.nix;
+  fuzzelFontSize = if hostname == "desktop" then "32" else "20";
+  powerMenuScript = pkgs.writeShellApplication {
+    name = "power-menu";
+    text = builtins.replaceStrings [ "@fontSize@" ] [ fuzzelFontSize ] (
+      builtins.readFile ./scripts/power-menu
+    );
+  };
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -418,7 +425,7 @@ in
         Mod+R repeat=false hotkey-overlay-title="Run an Application: Fuzzel" { spawn "fuzzel"; }
         Mod+E repeat=false hotkey-overlay-title="Run an Application: Thunar" { spawn "thunar"; }
         Mod+B repeat=false hotkey-overlay-title="Run an Application: Zen" { spawn "~/.local/bin/zen/zen"; }
-        Mod+Q repeat=false { spawn-sh "~/.config/menus/power"; }
+        Mod+Q repeat=false { spawn "${powerMenuScript}/bin/power-menu"; }
         Mod+H repeat=false { spawn-sh "~/.config/waybar/toggle_waybar"; }
         Mod+L repeat=false { spawn-sh "~/.config/swayidle/screensaver run"; }
         Mod+V repeat=false { spawn-sh "clipman pick --max-items=100 -t STDOUT | fuzzel --dmenu | wl-copy" ; }
@@ -586,6 +593,7 @@ in
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    powerMenuScript
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
