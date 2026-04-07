@@ -25,6 +25,10 @@ in
   # release notes.
   home.stateVersion = "25.11"; # Please read the comment before changing.
 
+  xdg.configFile."waybar/config".text = import ./waybar.nix {
+    inherit hostname;
+  };
+
   xdg.configFile."niri/config.kdl".text = ''
     // This config is in the KDL format: https://kdl.dev
     // "/-" comments out the following node.
