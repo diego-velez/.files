@@ -35,6 +35,7 @@ git clone --bare https://github.com/diego-velez/.files.git $HOME/.files
 alias config='git --git-dir=$HOME/.files/ --work-tree=$HOME'
 config checkout -f
 config config --local status.showUntrackedFiles no
+config submodule update --init --recursive
 ```
 
 3. Add repos for programs
