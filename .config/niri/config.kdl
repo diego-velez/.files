@@ -18,6 +18,12 @@ cursor {
 }
 
 input {
+    // FOR LAPTOP
+    // touchpad {
+    //     tap
+    //     dwt // Disable when typing
+    //     natural-scroll
+    // }
     // Uncomment this to make the mouse warp to the center of newly focused windows.
     warp-mouse-to-focus
 }
@@ -63,21 +69,28 @@ layout {
         // Proportion sets the width as a fraction of the output width, taking gaps into account.
         // For example, you can perfectly fit four windows sized "proportion 0.25" on an output.
         // The default preset widths are 1/3, 1/2 and 2/3 of the output.
+
+
         proportion 0.2
         proportion 0.3
         proportion 0.4
         proportion 0.5
 
-        // Fixed sets the width in logical pixels exactly.
-        fixed 3440  // 21:9
+        // FOR LAPTOP
+        // DISABLE 0.2 and 0.3
+        // proportion 0.7
+        // proportion 1.0
+        // AND DISABLE FIXED BELOW
+
+        fixed 3440 // 21:9
     }
 
     default-column-display "tabbed"
 
     // You can change the default width of the new windows.
     default-column-width { proportion 0.4; }
-    // If you leave the brackets empty, the windows themselves will decide their initial width.
-    // default-column-width {}
+    // FOR LAPTOP
+    // default-column-width { proportion 0.5; }
 
     // By default focus ring and border are rendered as a solid background rectangle
     // behind windows. That is, they will show up through semitransparent windows.
@@ -219,6 +232,15 @@ animations {
     }
 }
 
+// FOR LAPTOP
+// output "eDP-1" {
+// 	mode "1920x1080@143.981"
+// 	scale 1.0
+// 	position x=0 y=0
+//     variable-refresh-rate
+//     focus-at-startup
+// }
+
 overview {
     backdrop-color "#282A36"
 }
@@ -271,6 +293,8 @@ window-rule {
     match app-id="org.gnome.Rhythmbox3"
     match app-id="org.wezfurlong.wezterm"
     default-column-width { proportion 0.3; }
+    // FOR LAPTOP
+    // default-column-width { proportion 0.5; }
 }
 
 window-rule {
