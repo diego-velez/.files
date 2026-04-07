@@ -51,7 +51,7 @@ sudo dnf config-manager addrepo --from-repofile https://download.docker.com/linu
 4. Install DNF programs
 
 ```bash
-sudo dnf install niri wezterm fish starship mise zoxide atuin lsb_release fortune vim eza bat gcc clang fd rhythmbox thunar btop quickshell mako lazygit rustup fastfetch asciiquarium cmatrix snapper zathura zathura-pdf-mupdf docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin swayidle chromium wl-clipboard clipman fuzzel gtk3 webkit2gtk4.1 libusb mpv steam python3-pip cowsay
+sudo dnf install -y niri wezterm fish starship mise zoxide atuin lsb_release fortune vim eza bat gcc clang fd rhythmbox thunar btop quickshell mako lazygit rustup fastfetch asciiquarium cmatrix snapper zathura zathura-pdf-mupdf docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin swayidle chromium wl-clipboard clipman fuzzel gtk3 webkit2gtk4.1 libusb mpv steam python3-pip cowsay
 ```
 
 5. Install flatpak programs
@@ -175,7 +175,20 @@ chmod +x ~/.local/bin/keymapp/keymapp
 rm keymapp-latest.tar.gz
 ```
 
-11. Reboot
+11. Install awww (wallpaper manager)
+
+```bash
+git clone --depth 1 https://codeberg.org/LGFae/awww.git ~/awww
+cd ~/awww
+sudo dnf install -y lz4-devel wayland-protocols-devel rust-wayland-client-devel
+cargo build --release
+mv ./target/release/awww ~/.local/bin/awww
+mv ./target/release/awww-daemon ~/.local/bin/awww-daemon
+cd ..
+rm -rf awww
+```
+
+12. Reboot
 
 <details>
     <summary>If Running on Laptop</summary>
