@@ -70,6 +70,7 @@ brew install jesseduffield/lazydocker/lazydocker typst
 7. Setups
 
 ```bash
+chsh --shell $(which fish) # I use fish btw ;)
 mise install # Install all global mise tools as specified in .config/mise
 rustup-init # Install rustup and rust toolchains
 sudo systemctl enable --now docker # Enable the docker engine
