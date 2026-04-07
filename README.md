@@ -85,7 +85,7 @@ nix-channel --add https://github.com/nix-community/home-manager/archive/master.t
 nix-channel --update
 nix-shell '<home-manager>' -A install
 export PATH="$HOME/.nix-profile/bin:$PATH" # Add Nix binaries to path
-home-manager build
+home-manager switch
 sudo dnf remove git
 
 # These systemd service files are part of the dotfiles, and reside in ~/.config/systemd/user
