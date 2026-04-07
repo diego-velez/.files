@@ -147,6 +147,7 @@ bob use latest
 9. Install Zen browser
 
 ```bash
+mkdir -p ~/.local/bin
 wget https://github.com/zen-browser/desktop/releases/latest/download/zen.linux-x86_64.tar.xz
 tar -xf zen.linux-x86_64.tar.xz -C ~/.local/bin
 rm zen.linux-x86_64.tar.xz
@@ -167,7 +168,7 @@ sudo groupadd plugdev
 sudo usermod -aG plugdev $USER
 
 # Install the actual binary
-mkdir ~/.local/bin/keymapp
+mkdir -p ~/.local/bin/keymapp
 wget https://oryx.nyc3.cdn.digitaloceanspaces.com/keymapp/keymapp-latest.tar.gz
 tar -xf keymapp-latest.tar.gz -C ~/.local/bin/keymapp
 chmod +x ~/.local/bin/keymapp/keymapp
