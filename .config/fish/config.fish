@@ -84,6 +84,9 @@ else
         $HOME/.local/bin \
         $HOME/.cargo/bin \
         $HOME/.local/share/bob/nvim-bin
+
+    cat "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" | babelfish | source
+    fish_add_path ~/.nix-profile/bin
 end
 
 if test $is_glinux = false

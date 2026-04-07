@@ -51,7 +51,7 @@ sudo dnf config-manager addrepo --from-repofile https://download.docker.com/linu
 4. Install DNF programs
 
 ```bash
-sudo dnf install -y niri wezterm fish starship mise zoxide atuin lsb_release fortune vim eza bat gcc clang fd rhythmbox thunar btop quickshell mako lazygit rustup fastfetch asciiquarium cmatrix snapper zathura zathura-pdf-mupdf docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin swayidle chromium wl-clipboard clipman fuzzel gtk3 webkit2gtk4.1 libusb mpv steam python3-pip cowsay syncthing
+sudo dnf install -y niri wezterm fish starship mise zoxide atuin lsb_release fortune vim eza bat gcc clang fd rhythmbox thunar btop quickshell mako lazygit rustup fastfetch asciiquarium cmatrix snapper zathura zathura-pdf-mupdf docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin swayidle chromium wl-clipboard clipman fuzzel gtk3 webkit2gtk4.1 libusb mpv steam python3-pip cowsay syncthing nix nix-daemon
 ```
 
 5. Install flatpak programs
@@ -64,7 +64,7 @@ flatpak install com.github.tchx84.Flatseal org.keepassxc.KeePassXC org.ferdium.F
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install jesseduffield/lazydocker/lazydocker typst
+brew install jesseduffield/lazydocker/lazydocker typst babelfish
 ```
 
 7. Setups
@@ -75,6 +75,17 @@ mise install # Install all global mise tools as specified in .config/mise
 rustup-init # Install rustup and rust toolchains
 sudo systemctl enable --now docker # Enable the docker engine
 sudo usermod -a -G docker dvt # You will need to atleast log-out and log back in to see the change
+
+# Enable and setup Nix and home-manager
+# See
+# https://src.fedoraproject.org/rpms/nix
+# https://nix-community.github.io/home-manager/index.xhtml#sec-install-standalone
+sudo systemctl enable --now nix-daemon
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
+nix-shell '<home-manager>' -A install
+export PATH="$HOME/.nix-profile/bin:$PATH" # Add Nix binaries to path
+home-manager build
 
 # These systemd service files are part of the dotfiles, and reside in ~/.config/systemd/user
 sudo systemctl daemon-reload
