@@ -86,7 +86,7 @@
         proportion 0.3
         proportion 0.4
         proportion 0.5
-        fixed 3440 // 21:9
+        fixed 3332 // 21:9 accounting for gaps n shit
       ''
     else
       ''
