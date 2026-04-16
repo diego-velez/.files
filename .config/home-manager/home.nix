@@ -52,6 +52,7 @@ in
       };
       gpg.format = "ssh";
       pull.rebase = true;
+      init.defaultBranch = "main";
     };
   };
 
