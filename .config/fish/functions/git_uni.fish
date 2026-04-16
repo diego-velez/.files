@@ -6,7 +6,7 @@ function git_uni --description "Setup Git repo for university work"
     end
 
     echo "Setting Name"
-    git config --local user.name "Diego A. Velez Torres"
+    git config --local user.name "Diego A. Vélez Torres"
 
     echo "Setting Email"
     git config --local user.email "diego.velez6@upr.edu"
