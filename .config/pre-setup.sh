@@ -47,8 +47,13 @@ if [[ ! -f "$FLAG_PART2_FILE" ]]; then
     if [[ "$useNvidia" != "n" ]]; then
         sudo dnf install -y akmod-nvidia xorg-x11-drv-nvidia-cuda
 
+        touch "$FLAG_PART2_FILE"
+
         echo "Waiting 10 minutes for kernel module to be built..."
         time 10m
+
+        echo "Rebooting..."
+        sleep 3s
         reboot
     fi
 fi
