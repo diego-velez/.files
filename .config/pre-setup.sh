@@ -96,4 +96,4 @@ sudo rm /etc/xdg/autostart/*
 
 echo "Launching DVT setup in 10 seconds"
 sleep 10s
-./setup.sh
+~/.config/setup.sh
