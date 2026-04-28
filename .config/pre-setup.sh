@@ -43,7 +43,7 @@ sudo dnf in fuse-libs
 
 if [[ ! -f "$FLAG_PART2_FILE" ]]; then
     echo "Nvidia Drivers"
-    read -p "Do you need the Nvidia drivers? [y/n]" useNvidia
+    read -p "Do you need the Nvidia drivers? [y/n]: " useNvidia
     if [[ "$useNvidia" != "n" ]]; then
         sudo dnf install -y akmod-nvidia xorg-x11-drv-nvidia-cuda
 
@@ -69,14 +69,14 @@ sudo dnf group install -y sound-and-video # Installs useful Sound and Video comp
 echo "H/W Video Acceleration"
 sudo dnf install ffmpeg-libs libva libva-utils
 
-read -p "Are you on an Intel CPU? [y/n]" intelCPU
+read -p "Are you on an Intel CPU? [y/n]: " intelCPU
 if [[ "$intelCPU" != "n" ]]; then
     echo "Installing Intel Specific Packages"
     sudo dnf swap libva-intel-media-driver intel-media-driver --allowerasing
     sudo dnf install libva-intel-driver
 fi
 
-read -p "Are you on an AMD CPU? [y/n]" amdCPU
+read -p "Are you on an AMD CPU? [y/n]: " amdCPU
 if [[ "$amdCPU" != "n" ]]; then
     echo "Installing AMD Specific Packages"
     sudo dnf install mesa-va-drivers-freeworld
