@@ -50,7 +50,7 @@ if [[ ! -f "$FLAG_PART2_FILE" ]]; then
         touch "$FLAG_PART2_FILE"
 
         echo "Waiting 10 minutes for kernel module to be built..."
-        time 10m
+        sleep 10m
 
         echo "Rebooting..."
         sleep 3s
