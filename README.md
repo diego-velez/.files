@@ -24,6 +24,31 @@ For university and all documents, I use [Typst](https://typst.app) to write docu
 
 ## Fedora Post-Install
 
+<details>
+    <summary>Scripted Setup</summary>
+
+For a scripted install, you can use the provided `~/.config/pre-setup.sh` and `~/.config/setup.sh` setup scripts.
+
+Simply, clone the repo:
+
+```bash
+# Enable and start Kanata
+sudo groupdel uinput 2>/dev/null
+sudo groupadd --system uinput
+sudo usermod -aG input $USER
+sudo usermod -aG uinput $USER
+sudo modprobe uinput
+sudo tee /etc/udev/rules.d/99-input.rules > /dev/null <<EOF
+KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+EOF
+sudo udevadm control --reload-rules && sudo udevadm trigger
+```
+
+and run the pre-setup script if on a fresh install: `~/.config/pre-setup.sh`
+or the setup script if not: `~/.config/setup.sh`
+
+</details>
+
 1. Follow the [Fedora Post Install Guide](https://github.com/devangshekhawat/Fedora-44-Post-Install-Guide)
     - This will setup RPM Fusion and Terra repos, firmware, flatpak, appimages, Nvidia (if needed), media codecs and HW acceleration.
 
