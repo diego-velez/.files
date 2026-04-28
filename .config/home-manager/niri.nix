@@ -375,6 +375,9 @@
   window-rule {
       // Allow windows to have opacity (e.g. Wezterm)
       draw-border-with-background false
+      background-effect {
+        blur true
+      }
       // Enable rounded corners for all windows
       geometry-corner-radius 10
       clip-to-geometry true
