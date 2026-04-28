@@ -31,18 +31,6 @@ rustup-init # Install rustup and rust toolchains
 sudo systemctl enable --now docker # Enable the docker engine
 sudo usermod -a -G docker dvt # You will need to atleast log-out and log back in to see the change
 
-# Enable and setup Nix and home-manager
-# See
-# https://src.fedoraproject.org/rpms/nix
-# https://nix-community.github.io/home-manager/index.xhtml#sec-install-standalone
-sudo systemctl enable --now nix-daemon
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-nix-channel --update
-nix-shell '<home-manager>' -A install
-export PATH="$HOME/.nix-profile/bin:$PATH" # Add Nix binaries to path
-home-manager switch
-sudo dnf remove git # BUG: This breaks things
-
 # These systemd service files are part of the dotfiles, and reside in ~/.config/systemd/user
 sudo systemctl daemon-reload
 systemctl --user add-wants niri.service mako.service # Notification service
@@ -166,6 +154,19 @@ else
     touch ~/.config/home-manager/host.nix
     echo '"desktop"' > ~/.config/home-manager/host.nix
 fi
+
+# Enable and setup Nix and home-manager
+# See
+# https://src.fedoraproject.org/rpms/nix
+# https://nix-community.github.io/home-manager/index.xhtml#sec-install-standalone
+sudo systemctl enable --now nix-daemon
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
+nix-shell '<home-manager>' -A install
+export PATH="$HOME/.nix-profile/bin:$PATH" # Add Nix binaries to path
+
+home-manager switch
+sudo dnf remove git
 
 echo "Configuration complete"
 
