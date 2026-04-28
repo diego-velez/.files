@@ -41,7 +41,7 @@ nix-channel --update
 nix-shell '<home-manager>' -A install
 export PATH="$HOME/.nix-profile/bin:$PATH" # Add Nix binaries to path
 home-manager switch
-sudo dnf remove git
+sudo dnf remove git # BUG: This breaks things
 
 # These systemd service files are part of the dotfiles, and reside in ~/.config/systemd/user
 sudo systemctl daemon-reload
@@ -149,6 +149,9 @@ read -p "Running on laptop? [y/n]: " isLaptop
 if [[ "$isLaptop" != "n" ]]; then
     echo "Applying Laptop Configurations"
 
+    touch ~/.config/home-manager/host.nix
+    echo '"laptop"' > ~/.config/home-manager/host.nix
+
     # Enable and start Kanata
     sudo groupdel uinput 2>/dev/null
     sudo groupadd --system uinput
@@ -159,6 +162,9 @@ if [[ "$isLaptop" != "n" ]]; then
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
     EOF
     sudo udevadm control --reload-rules && sudo udevadm trigger
+else
+    touch ~/.config/home-manager/host.nix
+    echo '"desktop"' > ~/.config/home-manager/host.nix
 fi
 
 echo "Configuration complete"
