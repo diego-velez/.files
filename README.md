@@ -41,6 +41,7 @@ config submodule update --init --recursive
 3. Add repos for programs
 
 ```bash
+sudo dnf copr enable yalter/niri
 sudo dnf copr enable wezfurlong/wezterm-nightly
 sudo dnf copr enable jdxcode/mise
 sudo dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
