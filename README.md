@@ -32,16 +32,12 @@ For a scripted install, you can use the provided `~/.config/pre-setup.sh` and `~
 Simply, clone the repo:
 
 ```bash
-# Enable and start Kanata
-sudo groupdel uinput 2>/dev/null
-sudo groupadd --system uinput
-sudo usermod -aG input $USER
-sudo usermod -aG uinput $USER
-sudo modprobe uinput
-sudo tee /etc/udev/rules.d/99-input.rules > /dev/null <<EOF
-KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
-EOF
-sudo udevadm control --reload-rules && sudo udevadm trigger
+sudo dnf install -y python git
+git clone --bare https://github.com/diego-velez/.files.git $HOME/.files
+alias config='git --git-dir=$HOME/.files/ --work-tree=$HOME'
+config checkout -f
+config config --local status.showUntrackedFiles no
+config submodule update --init --recursive
 ```
 
 and run the pre-setup script if on a fresh install: `~/.config/pre-setup.sh`
