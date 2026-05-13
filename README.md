@@ -4,6 +4,12 @@ The repo for my configuration files, all managed using this [guide](https://www.
 
 ![Super Ultrawide Hyprland](.config/desktop_1.jpg)
 
+> [!Warning]
+> **I do not use Fedora anymore!!**
+> 
+> As of the 13 of may 2026, I will not be updating these dotfiles anymore because I do not use Fedora.
+> I have switched to NixOS, and with that the new repo I use for my system is [diego-velez/nixos](https://github.com/diego-velez/nixos).
+
 ## Index
 
 - [Overview](#overview)
